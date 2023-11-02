@@ -1,0 +1,156 @@
+.sidebar {
+    width: 70px;
+    height: 100%;
+    position: fixed;
+    top: -1px;
+    left: -1px;
+    transition: width 0.3s;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+    background-color: rgb(245, 253, 251);
+}
+
+.main-content {
+    padding: 0;
+    margin-left: 70px;
+}
+
+header {
+    top: 0;
+    left: 0;
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: rgb(245, 253, 251);
+}
+
+.main-content header {
+    display: flex;
+    align-items: center;
+    opacity: 0.75;
+}
+
+#IconSidebar {
+    font-size: 30px;
+    margin: 15px;
+}
+
+#name-content {
+    font-size: 25px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar-link {
+    display: flex;
+    white-space: nowrap;
+}
+
+.sidebar-link:hover span {
+    font-weight: bold;
+}
+
+.link {
+    font-size: 24px;
+    margin-top: 23px
+}
+
+.sidebar-link a {
+    text-decoration: none;
+}
+
+.sidebar-icon {
+    width: 40px;
+    height: 40px;
+    margin: 17px
+}
+
+#IconSidebar {
+    cursor: pointer;
+}
+
+#content {
+    margin-top: 30px;
+    margin-left: 20px;
+}
+
+.add-button:hover {
+    background-color: #0056b3; /* Đổi màu hover thành xanh sáng hơn */
+}
+
+.delete-button {
+    padding: 5px 10px;
+    background-color: #ff0000; /* Đổi màu thành đỏ */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.delete-button:hover {
+    background-color: #de0e0e; /* Đổi màu hover thành đỏ sáng hơn */
+}
+
+#search-input {
+    width: 500px;
+    height: 30px;
+    border-radius: 5px;
+    flex: 1;
+    border: none;
+    outline: none;
+}
+
+.add-button {
+    padding: 5px 10px;
+    background-color: #007bff; /* Đổi màu thành xanh */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.add-button:hover {
+    background-color: #0056b3; /* Đổi màu hover thành xanh sáng hơn */
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f0f0f0;
+}
+
+.search-bar form {
+    display: flex;
+    align-items: center;
+    margin:10px;
+}
+
+.search-bar * {
+    margin-left: 10px
+}
+
+.search-type {
+    border-radius: 5px;
+    height: 25px;
+}
+
+.search-bar label {
+    display: flex;
+    align-items: center;
+}
+#search-button {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+.search-input-wrapper {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 5px;
+}
