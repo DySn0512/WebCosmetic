@@ -6,8 +6,8 @@ public class ProductImage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String strImage;
 
+    private String strImage;
 
     public ProductImage() {
 

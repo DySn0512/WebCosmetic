@@ -2,6 +2,7 @@ package com.example.webcosmetic.ENTITY;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -14,7 +15,7 @@ public class Cart {
     @OneToOne
     private Customer customer;
 
-    @OneToMany(orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.MERGE, orphanRemoval = true)
     private List<LineItem> lineItems;
 
     public Cart(){
@@ -23,6 +24,7 @@ public class Cart {
 
     public Cart(Customer customer) {
         this.customer = customer;
+        lineItems = new ArrayList<>();
     }
 
     public Long getId() {
@@ -43,19 +45,18 @@ public class Cart {
 
     public void addLineItem(LineItem lineItem){
         for (var item :lineItems) {
-            if(item.getDetailProduct().getId() == lineItem.getDetailProduct().getId()){
+            if(item.getDetailProduct().getId().equals(lineItem.getDetailProduct().getId())){
                 int newQuantity = item.getQuantity() + 1;
                 item.setQuantity(newQuantity);
                 return;
             }
         }
-        lineItem.setQuantity(1);
         lineItems.add(lineItem);
     }
 
-    public void removeLineItem(long lineItemId){
+    public void removeLineItem(LineItem lineItem){
         for (int i = 0; i < lineItems.size(); i++) {
-            if(lineItemId == lineItems.get(i).getId()){
+            if(lineItems.get(i).getId().equals(lineItem.getId())){
                 lineItems.remove(i);
                 return;
             }

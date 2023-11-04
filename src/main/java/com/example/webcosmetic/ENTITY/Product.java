@@ -30,10 +30,10 @@ public class Product {
     @ManyToMany
     private List<KeyWord> keyWords;
 
-    @OneToMany(orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductImage> images;
 
-    @OneToMany(orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DetailProduct> detailProducts;
 
     public Product() {
@@ -112,6 +112,15 @@ public class Product {
         images.add(image);
     }
 
+    public void removeImage(ProductImage image) {
+        for (int i = 0; i < images.size(); i++) {
+            if (images.get(i).getId().equals(image.getId())) {
+                images.remove(i);
+                return;
+            }
+        }
+    }
+
     public void addKeyWord(KeyWord keyWord) {
         for (var value : keyWords) {
             if (value.getId().equals(keyWord.getId())) {
@@ -127,13 +136,12 @@ public class Product {
                 keyWords.remove(i);
                 return;
             }
-
         }
     }
 
     public void addDetail(DetailProduct detailProduct) {
         for (var value : detailProducts) {
-            if (value.getId().equals(detailProduct.getId())) {
+            if (value.getUnit().equals(detailProduct.getUnit())) {
                 return;
             }
         }

@@ -14,6 +14,10 @@ public class SubCategory {
     public SubCategory() {
     }
 
+    public SubCategory(String name) {
+        this.name = name;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -22,9 +26,6 @@ public class SubCategory {
         return id;
     }
 
-    public SubCategory(String name) {
-        this.name = name;
-    }
 
     public String getName() {
         return name;

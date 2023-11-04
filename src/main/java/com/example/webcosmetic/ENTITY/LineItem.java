@@ -8,8 +8,16 @@ public class LineItem {
 
     private int quantity;
 
-    @OneToOne
+    @ManyToOne
     private DetailProduct detailProduct;
+
+    public LineItem() {
+    }
+
+    public LineItem(DetailProduct detailProduct) {
+        this.detailProduct = detailProduct;
+        this.quantity = 1;
+    }
 
     public Long getId() {
         return id;
