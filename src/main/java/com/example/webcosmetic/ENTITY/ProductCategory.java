@@ -5,6 +5,11 @@ import java.util.List;
 
 @Entity
 public class ProductCategory {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String name;
 
     @ManyToMany
@@ -13,14 +18,21 @@ public class ProductCategory {
     @OneToMany
     private List<SubCategory> subCategories;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     public ProductCategory() {
-        // Hàm khởi tạo mặc định
+
     }
 
+    public ProductCategory(String name) {
+        this.name = name;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+    }
 
     public String getName() {
         return name;
@@ -38,12 +50,5 @@ public class ProductCategory {
         return subCategories;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
 }
 

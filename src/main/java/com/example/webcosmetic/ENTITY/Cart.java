@@ -14,7 +14,7 @@ public class Cart {
     @OneToOne
     private Customer customer;
 
-    @OneToMany
+    @OneToMany(orphanRemoval = true)
     private List<LineItem> lineItems;
 
     public Cart(){

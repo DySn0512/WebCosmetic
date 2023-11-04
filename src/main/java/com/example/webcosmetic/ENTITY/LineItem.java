@@ -6,10 +6,10 @@ public class LineItem {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private int quantity;
+
     @OneToOne
     private DetailProduct detailProduct;
-
-    private int quantity;
 
     public Long getId() {
         return id;
@@ -17,10 +17,6 @@ public class LineItem {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public DetailProduct getDetailProduct() {
-        return detailProduct;
     }
 
     public int getQuantity() {
@@ -31,7 +27,11 @@ public class LineItem {
         this.quantity = quantity;
     }
 
+    public DetailProduct getDetailProduct() {
+        return detailProduct;
+    }
+
     public Double getTotal(){
-        return detailProduct.getCurrent()*quantity;
+        return detailProduct.getCurrentPrice()*quantity;
     }
 }

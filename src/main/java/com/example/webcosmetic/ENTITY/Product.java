@@ -2,13 +2,20 @@ package com.example.webcosmetic.ENTITY;
 
 import jakarta.persistence.*;
 
+import java.util.DoubleSummaryStatistics;
 import java.util.List;
 
 @Entity
 public class Product {
 
+    @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String name;
+
     private String origin;
+
     private String description;
 
     @ManyToOne
@@ -20,18 +27,25 @@ public class Product {
     @ManyToOne
     private SubCategory subCategory;
 
-    @OneToMany
+    @ManyToMany
+    private List<KeyWord> keyWords;
+
+    @OneToMany(orphanRemoval = true)
     private List<ProductImage> images;
 
-    @ManyToMany
-    private List<KeyWord> keywords;
-
-    @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private Long id;
+    @OneToMany(orphanRemoval = true)
+    private List<DetailProduct> detailProducts;
 
     public Product() {
-        // Hàm khởi tạo mặc định
+
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -86,15 +100,68 @@ public class Product {
         return images;
     }
 
-    public List<KeyWord> getKeywords() {
-        return keywords;
+    public List<KeyWord> getKeyWords() {
+        return keyWords;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public List<DetailProduct> getDetailProducts() {
+        return detailProducts;
     }
 
-    public Long getId() {
-        return id;
+    public void addImage(ProductImage image){
+        images.add(image);
+    }
+
+    public void addKeyWord(KeyWord keyWord) {
+        for (var value : keyWords) {
+            if (value.getId().equals(keyWord.getId())) {
+                return;
+            }
+        }
+        keyWords.add(keyWord);
+    }
+
+    public void removeKeyWord(KeyWord keyWord) {
+        for (int i = 0; i < keyWords.size(); i++) {
+            if (keyWords.get(i).getId().equals(keyWord.getId())) {
+                keyWords.remove(i);
+                return;
+            }
+
+        }
+    }
+
+    public void addDetail(DetailProduct detailProduct) {
+        for (var value : detailProducts) {
+            if (value.getId().equals(detailProduct.getId())) {
+                return;
+            }
+        }
+        detailProducts.add(detailProduct);
+    }
+
+    public void removeDetail(DetailProduct detailProduct) {
+        for (int i = 0; i < detailProducts.size(); i++) {
+            if (detailProducts.get(i).getId().equals(detailProduct.getId())) {
+                detailProducts.remove(i);
+                return;
+            }
+        }
+    }
+
+    public DetailProduct getDefaultDetail(){
+        return detailProducts.get(0);
+    }
+
+    public String getPrice() {
+        if (detailProducts.size() == 1) {
+            return detailProducts.get(0).getCurrentPrice().toString();
+        }
+        DoubleSummaryStatistics stats = detailProducts.stream()
+                .mapToDouble(DetailProduct::getCurrentPrice)
+                .summaryStatistics();
+        double minCurrentPrice = stats.getMin();
+        double maxCurrentPrice = stats.getMax();
+        return minCurrentPrice + " - " + maxCurrentPrice;
     }
 }

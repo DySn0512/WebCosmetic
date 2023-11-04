@@ -4,12 +4,22 @@ import jakarta.persistence.*;
 
 @Entity
 public class SubCategory {
-    private String name;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String name;
+
     public SubCategory() {
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public SubCategory(String name) {
@@ -24,11 +34,4 @@ public class SubCategory {
         this.name = name;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
 }

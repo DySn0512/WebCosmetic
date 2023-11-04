@@ -8,24 +8,16 @@ import jakarta.persistence.Id;
 @Entity
 public class Brand {
 
-    private String name;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String name;
+
     public Brand() {
-        // Hàm khởi tạo mặc định
     }
 
     public Brand(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
         this.name = name;
     }
 
@@ -36,4 +28,14 @@ public class Brand {
     public Long getId() {
         return id;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
 }

@@ -7,25 +7,24 @@ import java.util.List;
 @Entity
 public class KeyWord {
 
-    @ManyToMany
-    private List<Product> products;
-
-    private String word;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String word;
+
+    @ManyToMany
+    private List<Product> products;
+
     public KeyWord() {
-        // Hàm khởi tạo mặc định
     }
 
-    public KeyWord(String word) {
-        this.word = word;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public List<Product> getProducts() {
-        return products;
+    public Long getId() {
+        return id;
     }
 
     public String getWord() {
@@ -36,11 +35,12 @@ public class KeyWord {
         this.word = word;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public KeyWord(String word) {
+        this.word = word;
     }
 
-    public Long getId() {
-        return id;
+    public List<Product> getProducts() {
+        return products;
     }
+
 }
