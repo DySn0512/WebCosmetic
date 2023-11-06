@@ -9,7 +9,7 @@ import java.util.List;
 public class Cart {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToOne
@@ -18,7 +18,7 @@ public class Cart {
     @OneToMany(cascade = CascadeType.MERGE, orphanRemoval = true)
     private List<LineItem> lineItems;
 
-    public Cart(){
+    public Cart() {
 
     }
 
@@ -39,28 +39,22 @@ public class Cart {
         return lineItems;
     }
 
-    public int Count(){
+    public int Count() {
         return lineItems.size();
     }
 
-    public void addLineItem(LineItem lineItem){
-        for (var item :lineItems) {
-            if(item.getDetailProduct().getId().equals(lineItem.getDetailProduct().getId())){
-                int newQuantity = item.getQuantity() + 1;
-                item.setQuantity(newQuantity);
-                return;
-            }
-        }
-        lineItems.add(lineItem);
+    public void addLineItem(LineItem lineItem) {
+        lineItems.stream()
+                .filter(item -> item.getDetailProduct().getId().equals(lineItem.getDetailProduct().getId()))
+                .findFirst()
+                .ifPresentOrElse(
+                        item -> item.setQuantity(item.getQuantity() + 1),
+                        () -> lineItems.add(lineItem)
+                );
     }
 
-    public void removeLineItem(LineItem lineItem){
-        for (int i = 0; i < lineItems.size(); i++) {
-            if(lineItems.get(i).getId().equals(lineItem.getId())){
-                lineItems.remove(i);
-                return;
-            }
-        }
+    public void removeLineItem(LineItem lineItem) {
+        lineItems.removeIf(item -> item.getId().equals(lineItem.getId()));
     }
 
 }

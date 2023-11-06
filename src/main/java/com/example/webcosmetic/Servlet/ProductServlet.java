@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+
 @WebServlet(name = "product", value = "/product")
 public class ProductServlet extends HttpServlet {
     @Override
@@ -17,8 +18,23 @@ public class ProductServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("namecontent","Sản Phẩm");
-        req.setAttribute("page","product.jsp");
-        getServletContext().getRequestDispatcher("/admin.jsp").forward(req, resp);
+        String action = req.getParameter("action");
+        String url = "/product.jsp";
+        if (action == null) {
+
+        }
+        else if (action.equals("find")) {
+
+        }
+        else if (action.equals("add")) {
+            url = "/product_info.jsp";
+        }
+        else if(action.equals("update")){
+
+        }
+        else{
+
+        }
+        getServletContext().getRequestDispatcher(url).forward(req, resp);
     }
 }

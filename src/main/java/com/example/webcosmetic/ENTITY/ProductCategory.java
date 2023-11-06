@@ -51,38 +51,22 @@ public class ProductCategory {
     }
 
     public void addBrand(Brand brand) {
-        for (var value : brands) {
-            if (value.getId().equals(brand.getId())) {
-                return;
-            }
+        if (!brands.contains(brand)){
+            brands.add(brand);
         }
-        brands.add(brand);
     }
 
     public void removeBrand(Brand brand) {
-        for (int i = 0; i < brands.size(); i++) {
-            if (brands.get(i).getId().equals(brand.getId())) {
-                brands.remove(i);
-                return;
-            }
-        }
+        brands.removeIf(b -> b.getId().equals(brand.getId()));
     }
 
     public void addSubCategory(SubCategory subCategory){
-        for (var value : subCategories) {
-            if(value.getName().equalsIgnoreCase(subCategory.getName())) {
-                return;
-            }
+        if (subCategories.stream().noneMatch(sc -> sc.getName().equalsIgnoreCase(subCategory.getName()))) {
+            subCategories.add(subCategory);
         }
-        subCategories.add(subCategory);
     }
     public void removeSubCategory(SubCategory subCategory){
-        for (int i = 0; i < subCategories.size(); i++) {
-            if (subCategories.get(i).getId().equals(subCategory.getId())) {
-                subCategories.remove(i);
-                return;
-            }
-        }
+        subCategories.removeIf(sc -> sc.getId().equals(subCategory.getId()));
     }
 
 }

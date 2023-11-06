@@ -24,6 +24,7 @@ public class ProductImage {
     public Long getId() {
         return id;
     }
+
     public String getImage() {
         return strImage;
     }

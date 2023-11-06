@@ -2,6 +2,7 @@ package com.example.webcosmetic.ENTITY;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.DoubleSummaryStatistics;
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
 public class Product {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
@@ -38,6 +39,18 @@ public class Product {
 
     public Product() {
 
+    }
+
+    public Product(String name, String origin, String description, Brand brand, ProductCategory productCategory, SubCategory subCategory) {
+        this.name = name;
+        this.origin = origin;
+        this.description = description;
+        this.brand = brand;
+        this.productCategory = productCategory;
+        this.subCategory = subCategory;
+        this.images = new ArrayList<>();
+        this.keyWords = new ArrayList<>();
+        this.detailProducts = new ArrayList<>();
     }
 
     public Long getId() {
@@ -108,56 +121,39 @@ public class Product {
         return detailProducts;
     }
 
-    public void addImage(ProductImage image){
+    public void addImage(ProductImage image) {
         images.add(image);
     }
 
     public void removeImage(ProductImage image) {
-        for (int i = 0; i < images.size(); i++) {
-            if (images.get(i).getId().equals(image.getId())) {
-                images.remove(i);
-                return;
-            }
-        }
+        images.removeIf(img -> img.getId().equals(image.getId()));
     }
 
-    public void addKeyWord(KeyWord keyWord) {
-        for (var value : keyWords) {
-            if (value.getId().equals(keyWord.getId())) {
-                return;
-            }
+    public Boolean addKeyWord(KeyWord keyWord) {
+        if (!keyWords.contains(keyWord)) {
+            keyWords.add(keyWord);
+            return true;
         }
-        keyWords.add(keyWord);
+        return false;
     }
 
     public void removeKeyWord(KeyWord keyWord) {
-        for (int i = 0; i < keyWords.size(); i++) {
-            if (keyWords.get(i).getId().equals(keyWord.getId())) {
-                keyWords.remove(i);
-                return;
-            }
-        }
+        keyWords.removeIf(kw -> kw.getId().equals(keyWord.getId()));
     }
 
-    public void addDetail(DetailProduct detailProduct) {
-        for (var value : detailProducts) {
-            if (value.getUnit().equals(detailProduct.getUnit())) {
-                return;
-            }
+    public Boolean addDetail(DetailProduct detailProduct) {
+        if (detailProducts.stream().noneMatch(dp -> dp.getUnit().equals(detailProduct.getUnit()))){
+            detailProducts.add(detailProduct);
+            return true;
         }
-        detailProducts.add(detailProduct);
+        return false;
     }
 
     public void removeDetail(DetailProduct detailProduct) {
-        for (int i = 0; i < detailProducts.size(); i++) {
-            if (detailProducts.get(i).getId().equals(detailProduct.getId())) {
-                detailProducts.remove(i);
-                return;
-            }
-        }
+        detailProducts.removeIf(dp -> dp.getId().equals(detailProduct.getId()));
     }
 
-    public DetailProduct getDefaultDetail(){
+    public DetailProduct getDefaultDetail() {
         return detailProducts.get(0);
     }
 

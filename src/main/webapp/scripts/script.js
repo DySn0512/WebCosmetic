@@ -26,6 +26,12 @@ document.addEventListener('DOMContentLoaded', function () {
 function loadContent(servlet) {
     window.location.href = servlet;
 }
+
+function setAction(value) {
+    document.getElementById("action").value = value;
+    console.log("ại")
+}
+
 function expandSidebar() {
     var sidebar = document.querySelector('.sidebar');
     var header = sidebar.querySelector("header");
@@ -42,3 +48,4 @@ function expandSidebar() {
         isExpanded = false;
     }
 }
+

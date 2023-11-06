@@ -36,10 +36,6 @@ header {
     margin: 15px;
 }
 
-#name-content {
-    font-size: 25px;
-}
-
 body {
     margin: 0;
     padding: 0;
@@ -82,19 +78,6 @@ body {
     background-color: #0056b3; /* Đổi màu hover thành xanh sáng hơn */
 }
 
-.delete-button {
-    padding: 5px 10px;
-    background-color: #ff0000; /* Đổi màu thành đỏ */
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.delete-button:hover {
-    background-color: #de0e0e; /* Đổi màu hover thành đỏ sáng hơn */
-}
-
 #search-input {
     width: 500px;
     height: 30px;
@@ -104,9 +87,21 @@ body {
     outline: none;
 }
 
+.delete-button {
+    padding: 5px 10px;
+    background-color: #ff0000;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.delete-button:hover {
+    background-color: #de0e0e;
+}
 .add-button {
     padding: 5px 10px;
-    background-color: #007bff; /* Đổi màu thành xanh */
+    background-color: #007bff;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -114,26 +109,17 @@ body {
 }
 
 .add-button:hover {
-    background-color: #0056b3; /* Đổi màu hover thành xanh sáng hơn */
+    background-color: #0056b3;
 }
 
 .search-bar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #f0f0f0;
 }
-
-.search-bar form {
-    display: flex;
-    align-items: center;
-    margin:10px;
-}
-
 .search-bar * {
-    margin-left: 10px
+    margin-right:10px
 }
-
 .search-type {
     border-radius: 5px;
     height: 25px;
@@ -151,6 +137,34 @@ body {
 .search-input-wrapper {
     display: flex;
     align-items: center;
-    border: 1px solid #ccc;
-    padding: 5px;
+    padding-bottom:5px;
+    padding-top:5px;
+    padding-left:5px;
+}
+
+.tool-bar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color:rgb(245, 253, 251);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+
+.breadcrumb {
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.breadcrumb-item {
+    display: inline;
+    font-size: 20px;
+}
+.breadcrumb-item a {
+    text-decoration: none;
+    color: #0074d9;
+}
+.breadcrumb-item.active {
+    font-weight: bold;
+    color: #333;
 }
