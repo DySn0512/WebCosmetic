@@ -1,4 +1,4 @@
-package com.example.webcosmetic.ENTITY;
+package com.example.webcosmetic.Entity;
 import jakarta.persistence.*;
 @Entity
 public class LineItem {

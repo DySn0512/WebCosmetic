@@ -9,7 +9,7 @@
 <body>
 <jsp:include page="sidebar.jsp"/>
 <div class="main-content">
-    <header>
+    <header style="height: 70px">
         <div id="IconSidebar" onclick="expandSidebar()">&#9776;</div>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">

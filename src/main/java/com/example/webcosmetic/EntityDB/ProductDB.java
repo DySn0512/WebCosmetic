@@ -1,6 +1,6 @@
 package com.example.webcosmetic.EntityDB;
 
-import com.example.webcosmetic.ENTITY.Product;
+import com.example.webcosmetic.Entity.Product;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 

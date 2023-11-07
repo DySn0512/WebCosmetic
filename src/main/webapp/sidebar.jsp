@@ -31,10 +31,10 @@
              Danh Mục
         </span>
     </div>
-    <div class="sidebar-link" onclick="loadContent('keyword')">
-        <img class="sidebar-icon" src="image/keyword.png" alt="keyword">
-        <span class="link" style="color: rgb(254, 203, 0);">
-             Keyword
+    <div class="sidebar-link" onclick="loadContent('brand')">
+        <img class="sidebar-icon" src="image/brand.png" alt="brand">
+        <span class="link" style="color: rgb(18, 16, 18);">
+             Thương hiệu
         </span>
     </div>
 </div>

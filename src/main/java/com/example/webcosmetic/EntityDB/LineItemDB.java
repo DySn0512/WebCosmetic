@@ -1,9 +1,8 @@
 package com.example.webcosmetic.EntityDB;
 
-import com.example.webcosmetic.ENTITY.Cart;
-import com.example.webcosmetic.ENTITY.DetailProduct;
-import com.example.webcosmetic.ENTITY.LineItem;
-import com.example.webcosmetic.ENTITY.Product;
+import com.example.webcosmetic.Entity.Cart;
+import com.example.webcosmetic.Entity.DetailProduct;
+import com.example.webcosmetic.Entity.LineItem;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;

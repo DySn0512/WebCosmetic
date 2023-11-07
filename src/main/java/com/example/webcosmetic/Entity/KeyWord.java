@@ -1,4 +1,4 @@
-package com.example.webcosmetic.ENTITY;
+package com.example.webcosmetic.Entity;
 
 import jakarta.persistence.*;
 
@@ -13,10 +13,11 @@ public class KeyWord {
 
     private String word;
 
-    @ManyToMany
-    private List<Product> products;
-
     public KeyWord() {
+    }
+
+    public KeyWord(String word) {
+        this.word = word;
     }
 
     public void setId(Long id) {
@@ -35,12 +36,5 @@ public class KeyWord {
         this.word = word;
     }
 
-    public KeyWord(String word) {
-        this.word = word;
-    }
-
-    public List<Product> getProducts() {
-        return products;
-    }
 
 }

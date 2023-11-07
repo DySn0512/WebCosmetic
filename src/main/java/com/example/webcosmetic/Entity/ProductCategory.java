@@ -1,4 +1,4 @@
-package com.example.webcosmetic.ENTITY;
+package com.example.webcosmetic.Entity;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -54,10 +54,6 @@ public class ProductCategory {
         if (!brands.contains(brand)){
             brands.add(brand);
         }
-    }
-
-    public void removeBrand(Brand brand) {
-        brands.removeIf(b -> b.getId().equals(brand.getId()));
     }
 
     public void addSubCategory(SubCategory subCategory){
