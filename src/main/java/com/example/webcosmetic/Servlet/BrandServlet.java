@@ -44,8 +44,14 @@ public class BrandServlet extends HttpServlet {
             String newName = req.getParameter("newName");
             Brand brand = new Brand(newName);
             BrandDB.insert(brand);
+<<<<<<< Updated upstream
         }
         else if (action.equals("Xoá")) {
+=======
+
+
+        } else if (action.equals("Xoá")) {
+>>>>>>> Stashed changes
             Long id = Long.parseLong(req.getParameter("id"));
             Brand brand = BrandDB.select(id);
             BrandDB.delete(brand);
