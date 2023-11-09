@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Order</title>
-  <link rel="stylesheet" href="style/main.css">
+  <link rel="stylesheet" href="style/dysn.css">
 </head>
 <body>
 <jsp:include page="sidebar.jsp"/>
