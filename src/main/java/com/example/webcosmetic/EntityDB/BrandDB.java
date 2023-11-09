@@ -49,7 +49,7 @@ public class BrandDB {
         EntityTransaction trans = em.getTransaction();
         trans.begin();
         try {
-            em.remove(brand);
+            em.remove(em.merge(brand));
             trans.commit();
         } catch (Exception e) {
             trans.rollback();

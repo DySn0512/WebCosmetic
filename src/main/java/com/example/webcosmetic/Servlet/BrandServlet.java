@@ -24,7 +24,7 @@ public class BrandServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doPost(req,resp);
+        doPost(req, resp);
     }
 
     @Override
@@ -34,19 +34,30 @@ public class BrandServlet extends HttpServlet {
 
         if (action == null) {
             // đây là trường hợp servlet được gọi từ trang admin nên action nó là null nè
-        } 
-        else if (action.equals("Thêm")) {
+        } else if (action.equals("Lưu")) {
+            String newName = req.getParameter("newName");
+            Long id = Long.parseLong(req.getParameter("id"));
+            Brand brand = BrandDB.select(id);
+            brand.setName(newName);
+            BrandDB.update(brand);
+        } else if (action.equals("Thêm")) {
             String newName = req.getParameter("newName");
             Brand brand = new Brand(newName);
             BrandDB.insert(brand);
+<<<<<<< Updated upstream
         }
         else if (action.equals("Xoá")) {
+=======
+
+
+        } else if (action.equals("Xoá")) {
+>>>>>>> Stashed changes
             Long id = Long.parseLong(req.getParameter("id"));
             Brand brand = BrandDB.select(id);
             BrandDB.delete(brand);
         }
         List<Brand> brands = BrandDB.selectAll();
-        req.setAttribute("brands",brands) ;
+        req.setAttribute("brands", brands);
         getServletContext().getRequestDispatcher(url).forward(req, resp);
     }
 }
