@@ -1,6 +1,7 @@
 package com.example.webcosmetic.Entity;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,7 +16,7 @@ public class ProductCategory {
     @ManyToMany
     private List<Brand> brands;
 
-    @OneToMany(cascade = CascadeType.MERGE, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.MERGE, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<SubCategory> subCategories;
 
     public ProductCategory() {
@@ -24,6 +25,8 @@ public class ProductCategory {
 
     public ProductCategory(String name) {
         this.name = name;
+        subCategories = new ArrayList<>();
+        brands = new ArrayList<>();
     }
 
     public void setId(Long id) {
