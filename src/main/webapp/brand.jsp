@@ -32,19 +32,22 @@
         <button onclick="callForm('Tên thương hiệu')">Thêm Thương Hiệu</button>
 
         <c:forEach items="${brands}" var="brand">
-            <form action="brand" class="nameForm">
-                <input type="hidden" value="${brand.id}" name="id">
-                <input type="text" value="${brand.name}" name="newName" disabled required
-                       class="name">
-                <div>
-                    <span class="edit-span" onclick="editInput(this)">Chỉnh sửa</span>
-                    <input type="submit" name="action" value="Lưu" class="save-input"
-                           style="display: none">
-                    <input type="submit" name="action" value="Xoá" class="delete-input">
-                    <span class="cancel-span" onclick="cancelEdit(this,'${brand.name}')"
-                          style="display: none">Hủy</span>
-                </div>
-            </form>
+            <div class="brand">
+                <form action="brand" class="nameForm">
+                    <input type="hidden" value="${brand.id}" name="id">
+                    <input type="text" value="${brand.name}" name="newName" disabled required
+                           class="name">
+                    <div>
+                        <span class="edit-span" onclick="editInput(this)">Chỉnh sửa</span>
+                        <input type="submit" name="action" value="Lưu" class="save-input"
+                               style="display: none">
+                        <input type="submit" name="action" value="Xoá" class="delete-input">
+                        <span class="cancel-span" onclick="cancelEdit(this,'${brand.name}')"
+                              style="display: none">Hủy</span>
+                    </div>
+                </form>
+            </div>
+
         </c:forEach>
     </div>
 </div>

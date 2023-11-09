@@ -1,5 +1,12 @@
 package com.example.webcosmetic.Servlet;
 
+
+import com.example.webcosmetic.Entity.Brand;
+import com.example.webcosmetic.Entity.ProductCategory;
+import com.example.webcosmetic.Entity.SubCategory;
+import com.example.webcosmetic.EntityDB.BrandDB;
+import com.example.webcosmetic.EntityDB.ProductCategoryDB;
+import com.example.webcosmetic.EntityDB.SubCategoryDB;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -27,8 +34,21 @@ public class BrandServlet extends HttpServlet {
 
         if (action == null) {
             // đây là trường hợp servlet được gọi từ trang admin nên action nó là null nè
-        }
+        } 
+        else if (action.equals("Thêm")) {
+            String newName = req.getParameter("newName");
+            Brand brand = new Brand(newName);
+            BrandDB.insert(brand);
 
+
+        }
+        else if (action.equals("Xoá")) {
+            Long id = Long.parseLong(req.getParameter("id"));
+            Brand brand = BrandDB.select(id);
+            BrandDB.delete(brand);
+        }
+        List<Brand> brands = BrandDB.selectAll();
+        req.setAttribute("brands",brands) ;
         getServletContext().getRequestDispatcher(url).forward(req, resp);
     }
 }

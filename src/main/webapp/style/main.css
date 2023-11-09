@@ -184,6 +184,15 @@ body {
     align-items: center;
     height: 50px;
 }
+.brand {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    width: 600px;
+    display: flex;
+    align-items: center;
+    height: 50px;
+}
 
 .subcategories {
     list-style-type: none;
