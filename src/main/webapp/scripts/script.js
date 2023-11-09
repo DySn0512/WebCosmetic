@@ -125,25 +125,32 @@ function cancelEdit(clickedElement, name) {
     input.disabled = true;
     input.style.pointerEvents = 'none';
 }
+function addInput(element) {
+    var div = document.createElement("div");
+    div.className = "input-container";
 
-// function addInput(spanElement,name) {
-//     var newInput = document.createElement("input");
-//     newInput.setAttribute("type", "text");
-//     newInput.setAttribute("name", name);
-//     newInput.classList.add("inputadd");
-//     newInput.addEventListener("keydown", function(event) {
-//         if (event.key === "Enter") {
-//             newInput.blur();
-//         }
-//     });
-//     newInput.addEventListener("blur", function() {
-//         if (newInput.value.length===0){
-//             newInput.remove();
-//         }
-//     });
-//     var newBr = document.createElement("br");
-//     spanElement.parentNode.insertBefore(newInput, spanElement.nextSibling);
-//     spanElement.parentNode.insertBefore(newBr, spanElement.nextSibling);
-// }
+    var input = document.createElement("input");
+    input.type = "text";
+    input.name = "keyword";
+    input.className = "input-keyword";
+    input.required = true;
+    input.addEventListener("blur", function() {
+        if (input.value.length===0){
+            this.parentElement.remove();
+        }
+    });
+
+    var span = document.createElement("span");
+    span.className = "delete-keyword";
+    span.textContent = "x";
+    span.onclick = function() {
+        this.parentElement.remove();
+    };
+    div.appendChild(input);
+    div.appendChild(span);
+    var br = document.createElement("span");
+    element.parentNode.insertBefore(br, element.nextSibling);
+    element.parentElement.insertBefore(div, element.nextSibling);
+}
 
 

@@ -49,7 +49,7 @@
                 </select>
             </label><br>
             <label>
-                Danh mục sản phẩm:
+                Danh mục:
                 <select name="ProductCategory">
                     <c:forEach items="${productCategories}" var="productCategory">
                         <option value="${productCategory.id}">${productCategory.name}</option>
@@ -57,7 +57,7 @@
                 </select>
             </label><br>
             <label>
-                Danh mục sản phẩm:
+                Danh mục con:
                 <select name="SubCategory">
                     <c:forEach items="${subCategories}" var="subCategory">
                         <option value="${subCategory.id}">${subCategory.name}</option>
@@ -66,10 +66,17 @@
             </label><br>
             <label>
                 Từ Khoá:
-                <span id="addKeywordButton" class="input-keyword" onclick="addKeywordInput(this,'keyword')">+</span>
-                <c:forEach items="${keyWords}" var="keyWord">
-                    <input type="text" name="keyword" class="input-keyword" value="keyWord.word">
-                </c:forEach>
+                <div>
+                    <span id="add-input" class="input-keyword" onclick="addInput(this)">+</span>
+                    <c:forEach items="${keyWords}" var="keyWord">
+                        <div class="input-container">
+                            <input type="text" name="keyword" class="input-keyword" value="${keyWord.word}" required>
+                            <span class="delete-keyword" onclick="this.parentElement.remove();">x</span>
+                        </div>
+                    </c:forEach>
+
+                </div>
+
             </label>
 
         </form>

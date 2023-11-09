@@ -39,8 +39,6 @@ public class BrandServlet extends HttpServlet {
             String newName = req.getParameter("newName");
             Brand brand = new Brand(newName);
             BrandDB.insert(brand);
-
-
         }
         else if (action.equals("Xoá")) {
             Long id = Long.parseLong(req.getParameter("id"));

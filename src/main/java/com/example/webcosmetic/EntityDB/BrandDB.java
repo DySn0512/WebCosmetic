@@ -62,6 +62,5 @@ public class BrandDB {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         TypedQuery<Brand> query = em.createQuery("SELECT b FROM Brand b", Brand.class);
         return query.getResultList();
-
     }
 }

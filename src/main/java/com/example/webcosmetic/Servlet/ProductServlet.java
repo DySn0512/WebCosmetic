@@ -1,6 +1,12 @@
 package com.example.webcosmetic.Servlet;
 
 
+import com.example.webcosmetic.Entity.Brand;
+import com.example.webcosmetic.Entity.ProductCategory;
+import com.example.webcosmetic.Entity.SubCategory;
+import com.example.webcosmetic.EntityDB.BrandDB;
+import com.example.webcosmetic.EntityDB.ProductCategoryDB;
+import com.example.webcosmetic.EntityDB.SubCategoryDB;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -8,6 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "product", value = "/product")
 public class ProductServlet extends HttpServlet {
@@ -21,21 +28,23 @@ public class ProductServlet extends HttpServlet {
         String action = req.getParameter("action");
         String url = "/product.jsp";
         if (action == null) {
-
         }
-        else if (action.equals("find")) {
+        else if (action.equals("Tìm")) {
 
-        }
-        else if (action.equals("add")) {
-            req.setAttribute("ariacurrent","Thêm Sản Phẩm");
+        } else if (action.equals("Xoá")) {
+
+        } else {
+            List<Brand> brands = BrandDB.selectAll();
+            req.setAttribute("brands",brands);
+            List<ProductCategory> productCategories = ProductCategoryDB.selectAll();
+            req.setAttribute("productCategories",productCategories);
+            if (action.equals("add")) {
+                req.setAttribute("ariacurrent","Thêm Sản Phẩm");
+            }
+            else{
+                req.setAttribute("ariacurrent","Sửa Sản Phẩm");
+            }
             url = "/product_info.jsp";
-        }
-        else if(action.equals("update")){
-            req.setAttribute("ariacurrent","Sửa Sản Phẩm");
-            url = "/product_info.jsp";
-        }
-        else{
-
         }
         getServletContext().getRequestDispatcher(url).forward(req, resp);
     }
