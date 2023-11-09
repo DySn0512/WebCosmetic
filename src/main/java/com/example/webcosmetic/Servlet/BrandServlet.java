@@ -24,9 +24,11 @@ public class BrandServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
         String url = "/brand.jsp";
+
         if (action == null) {
             // đây là trường hợp servlet được gọi từ trang admin nên action nó là null nè
         }
+
         getServletContext().getRequestDispatcher(url).forward(req, resp);
     }
 }
