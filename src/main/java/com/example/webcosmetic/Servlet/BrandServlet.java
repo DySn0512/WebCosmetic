@@ -2,11 +2,7 @@ package com.example.webcosmetic.Servlet;
 
 
 import com.example.webcosmetic.Entity.Brand;
-import com.example.webcosmetic.Entity.ProductCategory;
-import com.example.webcosmetic.Entity.SubCategory;
 import com.example.webcosmetic.EntityDB.BrandDB;
-import com.example.webcosmetic.EntityDB.ProductCategoryDB;
-import com.example.webcosmetic.EntityDB.SubCategoryDB;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -14,10 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @WebServlet(name = "brand", value = "/brand")
 public class BrandServlet extends HttpServlet {
@@ -44,14 +37,8 @@ public class BrandServlet extends HttpServlet {
             String newName = req.getParameter("newName");
             Brand brand = new Brand(newName);
             BrandDB.insert(brand);
-<<<<<<< Updated upstream
         }
         else if (action.equals("Xoá")) {
-=======
-
-
-        } else if (action.equals("Xoá")) {
->>>>>>> Stashed changes
             Long id = Long.parseLong(req.getParameter("id"));
             Brand brand = BrandDB.select(id);
             BrandDB.delete(brand);
