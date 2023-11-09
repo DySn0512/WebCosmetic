@@ -69,6 +69,7 @@ public class Product {
         this.name = name;
     }
 
+
     public String getOrigin() {
         return origin;
     }

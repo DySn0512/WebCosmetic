@@ -8,7 +8,6 @@
 </head>
 <body>
 <jsp:include page="sidebar.jsp"/>
-<script src="scripts/script.js"></script>
 <div class="main-content">
     <header style="height: 70px">
         <div id="IconSidebar" onclick="expandSidebar()">&#9776;</div>
@@ -19,7 +18,8 @@
             </ol>
         </nav>
     </header>
-    <div style="margin: 10px" >
+    <div style="margin: 10px">
+
         <div id="add-form" class="modal">
             <div class="modal-content">
                 <span class="close" onclick="x_function()">&times;</span>
@@ -29,23 +29,23 @@
                 </form>
             </div>
         </div>
+        <button onclick="callForm('Tên thương hiệu')">Thêm Thương Hiệu</button>
 
-        <button onclick="callForm('Tên thương hiệu')">Thêm Danh Mục</button>
-<c:forEach items="${brands}" var="brand">
-        <form action="brand" class="nameForm">
-            <input type="hidden" value="${brand.id}" name="id">
-            <input type="text" value="${brand.name}" name="newName" disabled required
-                   class="name">
-            <div>
-                <span class="edit-span" onclick="editInput(this)">Chỉnh sửa</span>
-                <input type="submit" name="action" value="Lưu" class="save-input"
-                       style="display: none">
-                <input type="submit" name="action" value="Xoá" class="delete-input">
-                <span class="cancel-span" onclick="cancelEdit(this,'${brand.name}')"
-                      style="display: none">Hủy</span>
-            </div>
-        </form>
-</c:forEach>
+        <c:forEach items="${brands}" var="brand">
+            <form action="brand" class="nameForm">
+                <input type="hidden" value="${brand.id}" name="id">
+                <input type="text" value="${brand.name}" name="newName" disabled required
+                       class="name">
+                <div>
+                    <span class="edit-span" onclick="editInput(this)">Chỉnh sửa</span>
+                    <input type="submit" name="action" value="Lưu" class="save-input"
+                           style="display: none">
+                    <input type="submit" name="action" value="Xoá" class="delete-input">
+                    <span class="cancel-span" onclick="cancelEdit(this,'${brand.name}')"
+                          style="display: none">Hủy</span>
+                </div>
+            </form>
+        </c:forEach>
     </div>
 </div>
 </body>

@@ -50,10 +50,10 @@ function expandSidebar() {
 }
 
 function callForm(placeholder, value, idCategory) {
-    document.getElementById('id-category').value = idCategory;
     document.getElementById('add-form').style.display = 'block';
     document.getElementById('name-form').value = value;
     document.getElementById('new-name').placeholder = placeholder;
+    document.getElementById('id-category').value = idCategory;
 }
 
 var modal = document.getElementById('addForm');
