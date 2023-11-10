@@ -125,6 +125,7 @@ function cancelEdit(clickedElement, name) {
     input.disabled = true;
     input.style.pointerEvents = 'none';
 }
+
 function addInput(element) {
     var div = document.createElement("div");
     div.className = "input-container";
@@ -134,8 +135,8 @@ function addInput(element) {
     input.name = "keyword";
     input.className = "input-keyword";
     input.required = true;
-    input.addEventListener("blur", function() {
-        if (input.value.length===0){
+    input.addEventListener("blur", function () {
+        if (input.value.length === 0) {
             this.parentElement.remove();
         }
     });
@@ -143,7 +144,7 @@ function addInput(element) {
     var span = document.createElement("span");
     span.className = "delete-keyword";
     span.textContent = "x";
-    span.onclick = function() {
+    span.onclick = function () {
         this.parentElement.remove();
     };
     div.appendChild(input);
@@ -152,5 +153,13 @@ function addInput(element) {
     element.parentNode.insertBefore(br, element.nextSibling);
     element.parentElement.insertBefore(div, element.nextSibling);
 }
+
+
+
+
+
+
+
+
 
 

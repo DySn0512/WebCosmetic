@@ -15,6 +15,23 @@
 </head>
 <body>
 <jsp:include page="sidebar.jsp"/>
+<script>
+    function updateSubCategories(selectElement) {
+        var id = selectElement.value;
+        var subSelect = document.getElementById("subCategorySelect");
+        <c:forEach items="${productCategories}" var="productCategory">
+        if (id === "${productCategory.id}") {
+            while (subSelect.options.length > 0) {
+                subSelect.remove(0);
+            }
+            <c:forEach items="${productCategory.subCategories}" var="subCategory">
+            var newOption = new Option("${subCategory.name}", "${subCategory.id}");
+            subSelect.add(newOption);
+            </c:forEach>
+        }
+        </c:forEach>
+    }
+</script>
 <div class="main-content">
     <header style="height: 70px">
         <div id="IconSidebar" onclick="expandSidebar()">&#9776;</div>
@@ -50,17 +67,43 @@
             </label><br>
             <label>
                 Danh mục:
-                <select name="ProductCategory">
+                <select name="ProductCategories" id="CategorySelect" onchange="updateSubCategories(this)">
+                    <c:choose>
+                        <c:when test="${empty product.productCategory.id}">
+                            <option>Chọn danh mục</option>
+                        </c:when>
+                        <c:otherwise>
+                            <option value="${product.productCategory.id}">${product.productCategory.name}</option>
+                        </c:otherwise>
+                    </c:choose>
+                    <c:set var="matchedProductCategory" value="${null}"/>
                     <c:forEach items="${productCategories}" var="productCategory">
-                        <option value="${productCategory.id}">${productCategory.name}</option>
+                        <c:choose>
+                            <c:when test="${productCategory.id == product.productCategory.id}">
+                                <c:set var="matchedProductCategory" value="${productCategory}"/>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="${productCategory.id}">${productCategory.name}</option>
+                            </c:otherwise>
+                        </c:choose>
                     </c:forEach>
                 </select>
             </label><br>
             <label>
                 Danh mục con:
-                <select name="SubCategory">
-                    <c:forEach items="${subCategories}" var="subCategory">
-                        <option value="${subCategory.id}">${subCategory.name}</option>
+                <select name="SubCategories" id="subCategorySelect">
+                    <c:choose>
+                        <c:when test="${empty product.subCategory.id}">
+                            <option>Chọn danh mục con</option>
+                        </c:when>
+                        <c:otherwise>
+                            <option value="${product.subCategory.id}">${product.subCategory.name}</option>
+                        </c:otherwise>
+                    </c:choose>
+                    <c:forEach items="${matchedProductCategory.subCategories}" var="subCategory">
+                        <c:if test="${subCategory.id != product.subCategory.id}">
+                            <option value="${subCategory.id}">${subCategory.name}</option>
+                        </c:if>
                     </c:forEach>
                 </select>
             </label><br>
@@ -74,13 +117,10 @@
                             <span class="delete-keyword" onclick="this.parentElement.remove();">x</span>
                         </div>
                     </c:forEach>
-
                 </div>
-
             </label>
-
-        </form>
         <input type="submit" value="Lưu thông tin"/>
+        </form>
     </div>
 </div>
 </body>
