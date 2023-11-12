@@ -112,7 +112,7 @@
                 </label><br>
                 <label>
                     Danh mục con:
-                    <select name="SubCategory" id="subCategorySelect">
+                    <select name="subCategory" id="subCategorySelect">
                         <c:choose>
                             <c:when test="${empty product.subCategory.id}">
                                 <option value="">Chọn danh mục con</option>

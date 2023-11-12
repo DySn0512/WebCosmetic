@@ -153,6 +153,7 @@ function addProductDetails() {
     newDiv.className='detail-item';
     newDiv.innerHTML = `
          <input type="button" onclick="removeParent(this)" value="X">
+          <input type="hidden" name="idDetail" value="" >
          <div>
             <label>
                 Đơn vị sản phẩm:
