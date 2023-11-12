@@ -36,7 +36,6 @@ public class ProductServlet extends HttpServlet {
         } else {
             List<Brand> brands = BrandDB.selectAll();
             req.setAttribute("brands",brands);
-            req.setAttribute("ahih","bỏ");
             List<ProductCategory> productCategories = ProductCategoryDB.selectAll();
             req.setAttribute("productCategories",productCategories);
             if (action.equals("add")) {

@@ -44,82 +44,139 @@
         </nav>
     </header>
     <div style="margin: 10px">
-        <form action="" method="post">
-            <label>
-                Tên sản phẩm:
-                <input type="text"/><br/>
-            </label>
-            <label>
-                Xuất xứ:
-                <input type="text"/><br/>
-            </label>
-            <label>
-                Mô tả:
-                <textarea id="description"></textarea><br/>
-            </label>
-            <label>
-                Thương hiệu:
-                <select name="Brand">
-                    <c:forEach items="${brands}" var="brand">
-                        <option value="${brand.id}">${brand.name}</option>
-                    </c:forEach>
-                </select>
-            </label><br>
-            <label>
-                Danh mục:
-                <select name="ProductCategories" id="CategorySelect" onchange="updateSubCategories(this)">
-                    <c:choose>
-                        <c:when test="${empty product.productCategory.id}">
-                            <option>Chọn danh mục</option>
-                        </c:when>
-                        <c:otherwise>
-                            <option value="${product.productCategory.id}">${product.productCategory.name}</option>
-                        </c:otherwise>
-                    </c:choose>
-                    <c:set var="matchedProductCategory" value="${null}"/>
-                    <c:forEach items="${productCategories}" var="productCategory">
+        <form action="productInfo" method="post" class="info-product-form">
+            <c:choose>
+                <c:when test="${empty product}">
+                    <input type="hidden" name="action" value="add">
+                </c:when>
+                <c:otherwise>
+                    <input type="hidden" name="action" value="update">
+                </c:otherwise>
+            </c:choose>
+            <div id="info-product">
+                <h1>Thông tin sản phẩm</h1>
+                <input type="hidden" value="${product.id}" name="idProduct" required>
+                <label>
+                    Tên sản phẩm:
+                    <input type="text" value="${product.name}" name="name" required><br/>
+                </label>
+                <label>
+                    Xuất xứ:
+                    <input type="text" value="${product.origin}" name="origin" required><br/>
+                </label>
+                <label>
+                    Mô tả:
+                    <textarea name="descriptionProduct" required>${product.description}</textarea><br/>
+                </label>
+                <label>
+                    Thương hiệu:
+                    <select name="brand" required>
                         <c:choose>
-                            <c:when test="${productCategory.id == product.productCategory.id}">
-                                <c:set var="matchedProductCategory" value="${productCategory}"/>
+                            <c:when test="${empty product.brand.id}">
+                                <option value="">Chọn thương hiệu</option>
                             </c:when>
                             <c:otherwise>
-                                <option value="${productCategory.id}">${productCategory.name}</option>
+                                <option value="${product.brand.id}">${product.brand.name}</option>
                             </c:otherwise>
                         </c:choose>
-                    </c:forEach>
-                </select>
-            </label><br>
-            <label>
-                Danh mục con:
-                <select name="SubCategories" id="subCategorySelect">
-                    <c:choose>
-                        <c:when test="${empty product.subCategory.id}">
-                            <option>Chọn danh mục con</option>
-                        </c:when>
-                        <c:otherwise>
-                            <option value="${product.subCategory.id}">${product.subCategory.name}</option>
-                        </c:otherwise>
-                    </c:choose>
-                    <c:forEach items="${matchedProductCategory.subCategories}" var="subCategory">
-                        <c:if test="${subCategory.id != product.subCategory.id}">
-                            <option value="${subCategory.id}">${subCategory.name}</option>
-                        </c:if>
-                    </c:forEach>
-                </select>
-            </label><br>
-            <label>
-                Từ Khoá:
-                <div>
-                    <span id="add-input" class="input-keyword" onclick="addInput(this)">+</span>
-                    <c:forEach items="${keyWords}" var="keyWord">
-                        <div class="input-container">
-                            <input type="text" name="keyword" class="input-keyword" value="${keyWord.word}" required>
-                            <span class="delete-keyword" onclick="this.parentElement.remove();">x</span>
+                        <c:forEach items="${brands}" var="brand">
+                            <c:if test="${brand.id != product.brand.id}">
+                                <option value="${brand.id}">${brand.name}</option>
+                            </c:if>
+                        </c:forEach>
+                    </select>
+                </label><br>
+                <label>
+                    Danh mục:
+                    <select name="productCategory" id="CategorySelect" onchange="updateSubCategories(this)">
+                        <c:choose>
+                            <c:when test="${empty product.productCategory.id}">
+                                <option value="">Chọn danh mục</option>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="${product.productCategory.id}">${product.productCategory.name}</option>
+                            </c:otherwise>
+                        </c:choose>
+                        <c:set var="matchedProductCategory" value="${null}"/>
+                        <c:forEach items="${productCategories}" var="productCategory">
+                            <c:choose>
+                                <c:when test="${productCategory.id == product.productCategory.id}">
+                                    <c:set var="matchedProductCategory" value="${productCategory}"/>
+                                </c:when>
+                                <c:otherwise>
+                                    <option value="${productCategory.id}">${productCategory.name}</option>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:forEach>
+                    </select>
+                </label><br>
+                <label>
+                    Danh mục con:
+                    <select name="SubCategory" id="subCategorySelect">
+                        <c:choose>
+                            <c:when test="${empty product.subCategory.id}">
+                                <option value="">Chọn danh mục con</option>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="${product.subCategory.id}">${product.subCategory.name}</option>
+                            </c:otherwise>
+                        </c:choose>
+                        <c:forEach items="${matchedProductCategory.subCategories}" var="subCategory">
+                            <c:if test="${subCategory.id != product.subCategory.id}">
+                                <option value="${subCategory.id}">${subCategory.name}</option>
+                            </c:if>
+                        </c:forEach>
+                    </select>
+                </label><br>
+                <label for="img-input">
+                    Nhập link ảnh:
+                    <input type="text" id="img-input">
+                    <input type="button" value="Thêm ảnh" onclick="addImage()">
+                </label><br>
+                <input type="submit" value="Lưu thông tin"/>
+            </div>
+            <div id="detail-container">
+                <h1>Chi tiếc sản phẩm</h1>
+                <br>
+                <div onclick="addProductDetails()" id="add-detail">+</div>
+                <c:forEach items="${product.detailProducts}" var="detail">
+                    <div class="detail-item">
+                        <input type="button" onclick="removeParent(this)" value="X">
+                        <input type="hidden" name="idDetail" value="${detail.id}" >
+                        <div>
+                            <label>
+                                Đơn vị sản phẩm:
+                                <input type="text" name="unit" value="${detail.unit}">
+                            </label>
+                            <label class="right">
+                                Giảm giá:
+                                <input type="checkbox" name="isSale" id="is-sale"
+                                       onchange="updateSaleIput(this)"
+                                <c:if test="${detail.isSale}">
+                                       checked
+                                </c:if>
+                                >
+                            </label>
                         </div>
-                    </c:forEach>
-                </div>
-            </label>
-        <input type="submit" value="Lưu thông tin"/>
+                        <div>
+                            <label>
+                                Giá:
+                                <input type="number" name="price" value="${detail.price}" required pattern="d*"
+                                       title="Chỉ được nhập số." id="price">
+                            </label>
+                            <label class="right">
+                                Giá được giảm:
+                                <input type="number" name="salePrice" value="${detail.salePrice}"
+                                       pattern="d*" id="sale-price"
+                                       title="Chỉ được nhập số.">
+                            </label>
+                        </div>
+                    </div>
+                </c:forEach>
+            </div>
+            <div id="image-container">
+                <h1>Ảnh</h1>
+            </div>
         </form>
     </div>
 </div>

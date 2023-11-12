@@ -28,9 +28,6 @@ public class Product {
     @ManyToOne
     private SubCategory subCategory;
 
-    @ManyToMany
-    private List<KeyWord> keyWords;
-
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductImage> images;
 
@@ -49,7 +46,6 @@ public class Product {
         this.productCategory = productCategory;
         this.subCategory = subCategory;
         this.images = new ArrayList<>();
-        this.keyWords = new ArrayList<>();
         this.detailProducts = new ArrayList<>();
     }
 
@@ -114,40 +110,18 @@ public class Product {
         return images;
     }
 
-    public List<KeyWord> getKeyWords() {
-        return keyWords;
+    public void setImages(List<ProductImage> images) {
+        this.images = images;
     }
 
     public List<DetailProduct> getDetailProducts() {
         return detailProducts;
     }
 
-    public void addImage(ProductImage image) {
-        images.add(image);
-    }
-
-    public void removeImage(ProductImage image) {
-        images.removeIf(img -> img.getId().equals(image.getId()));
-    }
-
-    public Boolean addKeyWord(KeyWord keyWord) {
-        if (!keyWords.contains(keyWord)) {
-            keyWords.add(keyWord);
-            return true;
-        }
-        return false;
-    }
-
-    public void removeKeyWord(KeyWord keyWord) {
-        keyWords.removeIf(kw -> kw.getId().equals(keyWord.getId()));
-    }
-
-    public Boolean addDetail(DetailProduct detailProduct) {
+    public void addDetail(DetailProduct detailProduct) {
         if (detailProducts.stream().noneMatch(dp -> dp.getUnit().equals(detailProduct.getUnit()))){
             detailProducts.add(detailProduct);
-            return true;
         }
-        return false;
     }
 
     public void removeDetail(DetailProduct detailProduct) {
