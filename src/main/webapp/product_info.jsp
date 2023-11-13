@@ -55,7 +55,7 @@
             </c:choose>
             <div id="info-product">
                 <h1>Thông tin sản phẩm</h1>
-                <input type="hidden" value="${product.id}" name="idProduct" required>
+                <input type="hidden" value="${product.id}" name="idProduct">
                 <label>
                     Tên sản phẩm:
                     <input type="text" value="${product.name}" name="name" required><br/>
@@ -66,7 +66,7 @@
                 </label>
                 <label>
                     Mô tả:
-                    <textarea name="descriptionProduct" required>${product.description}</textarea><br/>
+                    <textarea name="description" required>${product.description}</textarea><br/>
                 </label>
                 <label>
                     Thương hiệu:
@@ -136,7 +136,7 @@
                 <input type="submit" value="Lưu thông tin"/>
             </div>
             <div id="detail-container">
-                <h1>Chi tiếc sản phẩm</h1>
+                <h1>Chi tiết sản phẩm</h1>
                 <br>
                 <div onclick="addProductDetails()" id="add-detail">+</div>
                 <c:forEach items="${product.detailProducts}" var="detail">

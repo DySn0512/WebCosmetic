@@ -157,7 +157,7 @@ function addProductDetails() {
          <div>
             <label>
                 Đơn vị sản phẩm:
-                <input type="text" name="unit">
+                <input type="text" name="unit" required>
             </label>
              <label class="right">
                 Giảm giá:
