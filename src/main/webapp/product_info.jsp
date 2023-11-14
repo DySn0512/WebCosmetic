@@ -66,7 +66,7 @@
             </label><br>
             <label>
                 Từ Khoá:
-                <span id="addKeywordButton" class="input-keyword" onclick="addKeywordInput(this)">+</span>
+                <span id="addKeywordButton" class="input-keyword" onclick="addKeywordInput(this,'keyword')">+</span>
                 <c:forEach items="${keyWords}" var="keyWord">
                     <input type="text" name="keyword" class="input-keyword" value="keyWord.word">
                 </c:forEach>

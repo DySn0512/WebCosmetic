@@ -19,40 +19,50 @@
     </nav>
   </header>
   <div style="margin: 10px">
-    <div class="admin-container">
-      <h2>Quản lý đơn hàng</h2>
-      <table>
-        <thead>
-        <tr>
-          <th>Số đơn hàng</th>
-          <th>Sản phẩm</th>
-          <th>Số lượng</th>
-          <th>Khách hàng</th>
-          <th>Địa chỉ</th>
-          <th>Trạng thái</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <!-- Đây là nơi bạn có thể thêm dữ liệu từ cơ sở dữ liệu hoặc thông tin đơn hàng -->
-        </tr>
-          <!-- Thêm các dòng khác tương ứng với các đơn hàng -->
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Container cho thông tin chi tiết đơn hàng -->
-    <div class="container">
-      <div class="card cart">
-        <label class="title">Số đơn hàng: </label><br>
-        <label class="title">Sản phẩm: </label><br>
-        <label class="title">Số lượng: </label><br>
-        <label class="title">Khách hàng: </label><br>
-        <label class="title">Địa chỉ: </label><br>
-        <label class="title">Trạng thái: </label><br>
-      </div>
-    </div>
-  </div>
+    <h1>Quản lý đơn hàng</h1>
+    <table>
+      <thead>
+      <tr>
+        <th>Số đơn hàng</th>
+        <th>Tên khách hàng</th>
+        <th>Số Điện Thoại</th>
+        <th>Email</th>
+        <th>Địa chỉ</th>
+        <th>Tên Sản phẩm</th>
+        <th>Số lượng</th>
+        <th>Đơn vị</th>
+        <th>Giá</th>
+        <th>Thành tiền</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>1</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      </tbody>
+    </table>
 </div>
+
 </body>
 </html>
