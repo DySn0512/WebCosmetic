@@ -47,13 +47,8 @@ public class Order {
         return details.size();
     }
 
-    public void addDetailOrder(DetailOrder details){
-        DetailOrder.stream()>
-                .filter(item -> item.getDetailOrder().getId().equals(details.getDetailOrder().getId()))
-                .findFirst()
-                .ifPresentOrElse(
-                        item -> item.setQuantity(item.getQuantity() + 1),
-                        () -> details.add(details)
-                );
+    public Double getTotal(){
+        return details.getCurrentPrice()*quantity;
     }
+
 }

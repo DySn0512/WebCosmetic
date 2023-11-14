@@ -49,11 +49,17 @@ function expandSidebar() {
     }
 }
 
-function callForm(placeholder, value, idCategory) {
+function callForm(placeholder, action, idCategory) {
     document.getElementById('add-form').style.display = 'block';
-    document.getElementById('name-form').value = value;
     document.getElementById('new-name').placeholder = placeholder;
-    document.getElementById('id-category').value = idCategory;
+    var nameForm = document.getElementById('name-form');
+    if (nameForm) {
+        nameForm.action = action;
+    }
+    var idCategoryElement = document.getElementById('id-category');
+    if (idCategoryElement) {
+        idCategoryElement.value = idCategory;
+    }
 }
 
 var modal = document.getElementById('addForm');
@@ -65,19 +71,12 @@ function x_function() {
 // Lấy tất cả các form
 const forms = document.querySelectorAll('.nameForm');
 
-// Duyệt qua từng form
 forms.forEach((form) => {
-    // Trong mỗi form, lấy phần tử input và saveInput
     const input = form.querySelector('.name');
     const saveInput = form.querySelector('.save-input');
-
-    // Thêm sự kiện 'keyup' cho phần tử input
     input.addEventListener('keyup', function (event) {
-        // Number 13 is the "Enter" key on the keyboard
         if (event.keyCode === 13) {
-            // Cancel the default action, if needed
             event.preventDefault();
-            // Trigger the button element with a click
             saveInput.click();
         }
     });
@@ -97,7 +96,7 @@ function editInput(clickedElement) {
     const container = clickedElement.parentNode
     const saveInput = container.querySelector('.save-input');
     const deleteInput = container.querySelector('.delete-input');
-    const cancelSpan = container.querySelector('.cancel-span');
+    const cancelSpan = container.querySelector('.cancel-input');
     clickedElement.style.display = 'none';
     deleteInput.style.display = 'none';
     saveInput.style.display = 'inline';
@@ -114,7 +113,7 @@ function cancelEdit(clickedElement, name) {
     const container = clickedElement.parentNode;
     const saveInput = container.querySelector('.save-input');
     const deleteInput = container.querySelector('.delete-input');
-    const editSpan = container.querySelector('.edit-span');
+    const editSpan = container.querySelector('.edit-input');
     clickedElement.style.display = 'none';
     saveInput.style.display = 'none';
     deleteInput.style.display = 'inline';
@@ -126,24 +125,74 @@ function cancelEdit(clickedElement, name) {
     input.style.pointerEvents = 'none';
 }
 
-// function addInput(spanElement,name) {
-//     var newInput = document.createElement("input");
-//     newInput.setAttribute("type", "text");
-//     newInput.setAttribute("name", name);
-//     newInput.classList.add("inputadd");
-//     newInput.addEventListener("keydown", function(event) {
-//         if (event.key === "Enter") {
-//             newInput.blur();
-//         }
-//     });
-//     newInput.addEventListener("blur", function() {
-//         if (newInput.value.length===0){
-//             newInput.remove();
-//         }
-//     });
-//     var newBr = document.createElement("br");
-//     spanElement.parentNode.insertBefore(newInput, spanElement.nextSibling);
-//     spanElement.parentNode.insertBefore(newBr, spanElement.nextSibling);
-// }
+function removeParent(element) {
+    element.parentNode.remove();
+}
+
+function addImage() {
+    var x = document.getElementById("img-input").value;
+    if (x !== "") {
+        document.getElementById("img-input").value = "";
+
+        const div = document.createElement("div");
+        div.innerHTML = `
+        <input type="button" class="delete-div" onclick="removeParent(this)" value="X">
+        <img class="img-product" src="${x}" alt="">
+        <input type="hidden" name="strImage" value="${x}">
+    `;
+        document.getElementById("image-container").appendChild(div);
+    }
+}
+function updateSaleIput(checkbox) {
+    var div = checkbox.closest('.detail-item');
+    var input = div.querySelector('#sale-price');
+    input.required = checkbox.checked;
+}
+function addProductDetails() {
+    var newDiv = document.createElement('div');
+    newDiv.className='detail-item';
+    newDiv.innerHTML = `
+         <input type="button" onclick="removeParent(this)" value="X">
+          <input type="hidden" name="idDetail" value="" >
+         <div>
+            <label>
+                Đơn vị sản phẩm:
+                <input type="text" name="unit" required>
+            </label>
+             <label class="right">
+                Giảm giá:
+                <input type="checkbox" id="is-sale" name="isSale" onchange="updateSaleIput(this)">
+            </label>
+        </div>
+        <div>
+            <label>
+                Giá:
+                <input type="number" id="price" name="price" required pattern="\d*" title="Chỉ được nhập số.">
+            </label>
+            <label class="right">
+                Giá được giảm:
+                <input type="number" id="sale-price" name="salePrice" pattern="\d*" title="Chỉ được nhập số.">
+            </label>
+        </div>
+        `;
+    document.getElementById('detail-container').appendChild(newDiv);
+}
+
+window.onload = function() {
+    var checkboxes= document.querySelectorAll('#is-sale');
+    checkboxes.forEach(function(checkbox) {
+        if (checkbox.checked) {
+            updateSaleIput(checkbox);
+        }
+    });
+};
+
+
+
+
+
+
+
+
 
 

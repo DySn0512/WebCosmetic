@@ -23,28 +23,30 @@
         <div id="add-form" class="modal">
             <div class="modal-content">
                 <span class="close" onclick="x_function()">&times;</span>
-                <form action="brand" method="post">
+                <form action="brand" method="post" id="">
                     <input type="text" id="new-name" name="newName" value="" required>
                     <input type="submit" name="action" value="Thêm">
                 </form>
             </div>
         </div>
-        <button onclick="callForm('Tên thương hiệu')">Thêm Thương Hiệu</button>
-
+        <button onclick="callForm('Tên thương hiệu','','')">Thêm Thương Hiệu</button>
         <c:forEach items="${brands}" var="brand">
-            <form action="brand" class="nameForm">
-                <input type="hidden" value="${brand.id}" name="id">
-                <input type="text" value="${brand.name}" name="newName" disabled required
-                       class="name">
-                <div>
-                    <span class="edit-span" onclick="editInput(this)">Chỉnh sửa</span>
-                    <input type="submit" name="action" value="Lưu" class="save-input"
-                           style="display: none">
-                    <input type="submit" name="action" value="Xoá" class="delete-input">
-                    <span class="cancel-span" onclick="cancelEdit(this,'${brand.name}')"
-                          style="display: none">Hủy</span>
-                </div>
-            </form>
+            <div class="brand">
+                <form action="brand" class="nameForm">
+                    <input type="hidden" value="${brand.id}" name="id">
+                    <input type="text" value="${brand.name}" name="newName" disabled required
+                           class="name">
+                    <div>
+                        <input type="button" class="edit-input" onclick="editInput(this)" value="Chỉnh sửa">
+                        <input type="submit" name="action" value="Lưu" class="save-input"
+                               style="display: none">
+                        <input type="submit" name="action" value="Xoá" class="delete-input">
+                        <input type="button" class="cancel-input" onclick="cancelEdit(this,'${brand.name}')"
+                              style="display: none" value="Huỷ">
+                    </div>
+                </form>
+            </div>
+
         </c:forEach>
     </div>
 </div>

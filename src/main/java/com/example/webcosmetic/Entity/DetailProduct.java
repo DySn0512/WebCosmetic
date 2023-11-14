@@ -17,8 +17,6 @@ public class DetailProduct {
 
     private Double salePrice;
 
-    private Integer inventory;
-
     @ManyToOne
     private Product product;
 
@@ -30,7 +28,6 @@ public class DetailProduct {
         this.price = price;
         this.isSale = isSale;
         this.salePrice = salePrice;
-        this.inventory = inventory;
         this.product = product;
     }
 
@@ -72,14 +69,6 @@ public class DetailProduct {
 
     public void setSalePrice(Double salePrice) {
         this.salePrice = salePrice;
-    }
-
-    public Integer getInventory() {
-        return inventory;
-    }
-
-    public void setInventory(Integer inventory) {
-        this.inventory = inventory;
     }
 
     public Product getProduct() {

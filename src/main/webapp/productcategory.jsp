@@ -26,41 +26,31 @@
         </nav>
     </header>
     <div>
-
         <div id="add-form" class="modal">
             <div class="modal-content">
                 <span class="close" onclick="x_function()">&times;</span>
-                <form action="category" method="post">
+                <form action="" method="post" id="name-form">
                     <input type="hidden" id="id-category" name="idCategory" value>
-                    <input type="hidden" id="name-form" name="nameForm">
                     <input type="text" id="new-name" name="newName" value="" required>
                     <input type="submit" name="action" value="Thêm">
                 </form>
             </div>
         </div>
-
-        <button onclick="callForm('Tên danh mục','category')">Thêm Danh Mục</button>
-
-        <form style="display: none;" id="insertForm" method="POST" action="category">
-            <input type="hidden" name="action" value="addCategory">
-            <input type="text">
-            <input type="submit" value="Thêm danh mục">
-        </form>
+        <button onclick="callForm('Tên danh mục','category','')">Thêm Danh Mục</button>
         <ul>
             <c:forEach items="${productCategories}" var="productCategory">
                 <div class="category" onclick="toggleSubcategories(this)">
                     <span class="toggle-icon">▶</span>
                     <form action="category" class="nameForm">
-                        <input type="hidden" name="nameForm" value="category">
                         <input type="hidden" value="${productCategory.id}" name="id">
                         <input type="text" value="${productCategory.name}" disabled required
                                style="pointer-events: none;" name="newName" class="name">
                         <div>
-                            <span class="edit-span" onclick="editInput(this)">Chỉnh sửa</span>
+                            <input type="button" class="edit-input" onclick="editInput(this)" value="Chỉnh sửa">
                             <input type="submit" class="save-input" value="Lưu" name="action" style="display: none">
                             <input type="submit" class="delete-input" value="Xoá" name="action">
-                            <span class="cancel-span" onclick="cancelEdit(this,'${productCategory.name}')"
-                                  style="display: none">Hủy</span>
+                            <input type="button" class="cancel-input" onclick="cancelEdit(this,'${productCategory.name}')"
+                                  style="display: none" value="Huỷ">
                         </div>
                     </form>
                 </div>
@@ -71,19 +61,18 @@
                     </div>
                     <c:forEach items="${productCategory.subCategories}" var="subCategory">
                         <div class="subcategory-item">
-                            <form action="category" class="nameForm">
-                                <input type="hidden" name="nameForm" value="subcategory">
+                            <form action="subcategory" class="nameForm">
                                 <input type="hidden" value="${productCategory.id}" name="idCategory">
                                 <input type="hidden" value="${subCategory.id}" name="id">
                                 <input type="text" value="${subCategory.name}" name="newName" disabled required
                                        class="name">
                                 <div>
-                                    <span class="edit-span" onclick="editInput(this)">Chỉnh sửa</span>
+                                    <input type="button" class="edit-input" onclick="editInput(this)" value="Chỉnh sửa">
                                     <input type="submit" name="action" value="Lưu" class="save-input"
                                            style="display: none">
                                     <input type="submit" name="action" value="Xoá" class="delete-input">
-                                    <span class="cancel-span" onclick="cancelEdit(this,'${subCategory.name}')"
-                                          style="display: none">Hủy</span>
+                                    <input type="button" class="cancel-input" onclick="cancelEdit(this,'${subCategory.name}')"
+                                          style="display: none" value="Huỷ">
                                 </div>
                             </form>
                         </div>
