@@ -10,7 +10,7 @@
 <html>
 <head>
     <title>Danh Mục</title>
-    <link rel="stylesheet" href="style/main.css">
+    <link rel="stylesheet" href="../style/main.css">
 </head>
 <body>
 

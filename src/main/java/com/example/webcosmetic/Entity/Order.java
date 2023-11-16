@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
+@Table(name = "\"Order\"")
 public class Order {
 
     @Id
@@ -17,6 +18,7 @@ public class Order {
     private String status;
 
     private Date timeOrder;
+
     @OneToOne
     private User user;
 

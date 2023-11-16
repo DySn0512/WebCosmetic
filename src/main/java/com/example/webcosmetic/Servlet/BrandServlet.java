@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "brand", value = "/brand")
+@WebServlet(name = "brand", value = "/admin/brand")
 public class BrandServlet extends HttpServlet {
 
     @Override
@@ -23,10 +23,9 @@ public class BrandServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
-        String url = "/brand.jsp";
+        String url = "/admin/brand.jsp";
 
         if (action == null) {
-            // đây là trường hợp servlet được gọi từ trang admin nên action nó là null nè
         } else if (action.equals("Lưu")) {
             String newName = req.getParameter("newName");
             Long id = Long.parseLong(req.getParameter("id"));

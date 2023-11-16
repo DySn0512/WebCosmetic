@@ -6,6 +6,7 @@ import java.util.Locale;
 
 @Entity
 public class DetailOrder {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -30,6 +31,14 @@ public class DetailOrder {
         this.unit = unit;
         this.price = price;
         this.product = product;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNameProduct() {

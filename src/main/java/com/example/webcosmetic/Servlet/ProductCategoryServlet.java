@@ -13,7 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "category", value = "/category")
+@WebServlet(name = "category", value = "/admin/category")
 public class ProductCategoryServlet extends HttpServlet {
 
     @Override
@@ -25,7 +25,7 @@ public class ProductCategoryServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String action = req.getParameter("action");
-        String url = "/productcategory.jsp";
+        String url = "/admin/productcategory.jsp";
         if (action == null) {
             //
         } else if (action.equals("Thêm")) {

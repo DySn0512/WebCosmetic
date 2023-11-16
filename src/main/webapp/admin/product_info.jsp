@@ -11,7 +11,7 @@
 <head>
     <title>${ariacurrent}</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="style/main.css">
+    <link rel="stylesheet" href="../style/main.css">
 </head>
 <body>
 <jsp:include page="sidebar.jsp"/>
@@ -128,11 +128,6 @@
                         </c:forEach>
                     </select>
                 </label><br>
-                <label>
-                    Nhập Link Ảnh:
-                    <input type="text" id="link-image"><br>
-                </label>
-                <input type="button" value="Thêm ảnh" onclick="addImage()"><br>
                 <input type="submit" value="Lưu thông tin"/>
             </div>
             <div id="detail-container">
@@ -170,7 +165,7 @@
                     </div>
                 </c:forEach>
             </div>
-            <div id="image-container">
+            <div id="image-container" ondrop="drop(event)" ondragover="allowDrop(event)">
                 <h1>Ảnh</h1>
                 <c:forEach items="${product.images}" var="image">
                     <div class="image-item">
