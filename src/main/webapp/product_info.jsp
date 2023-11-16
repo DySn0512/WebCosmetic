@@ -139,7 +139,7 @@
                 <h1>Chi tiết sản phẩm</h1>
                 <br>
                 <div onclick="addProductDetails()" id="add-detail">+</div>
-                <c:forEach items="${product.detailProducts}" var="detail">
+                <c:forEach items="${product.details}" var="detail">
                     <div class="detail-item">
                         <input type="button" onclick="removeParent(this)" value="X">
                         <input type="hidden" name="idDetail" value="${detail.id}" >

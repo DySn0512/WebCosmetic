@@ -1,6 +1,5 @@
 package com.example.webcosmetic.EntityDB;
 
-import com.example.webcosmetic.Entity.Brand;
 import com.example.webcosmetic.Entity.Product;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
@@ -55,8 +54,7 @@ public class ProductDB {
     public static Product select(Long id) {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         try {
-            Product product = em.find(Product.class, id);
-            return product;
+            return em.find(Product.class, id);
         } finally {
             em.close();
         }

@@ -11,6 +11,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jdk.jfr.Registered;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,6 +27,8 @@ public class ProductServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
+        List<Product> products = ProductDB.selectAll();
+        req.setAttribute("products",products);
         String url = "/product.jsp";
         if (action == null) {
         }
@@ -42,11 +45,12 @@ public class ProductServlet extends HttpServlet {
                 req.setAttribute("ariacurrent","Thêm Sản Phẩm");
             }
             else{
+                Long id = Long.parseLong(req.getParameter("id"));
+                Product product = ProductDB.select(id);
+                req.setAttribute("product",product);
                 req.setAttribute("ariacurrent","Sửa Sản Phẩm");
-                List<Product> products = ProductDB.selectAll();
             }
             url = "/product_info.jsp";
-
         }
         getServletContext().getRequestDispatcher(url).forward(req, resp);
     }
