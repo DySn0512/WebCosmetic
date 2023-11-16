@@ -31,20 +31,10 @@ public class Product {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductImage> images;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<DetailProduct> detailProducts;
 
     public Product() {
-
-    }
-
-    public Product(String name, String origin, String description, Brand brand, ProductCategory productCategory, SubCategory subCategory) {
-        this.name = name;
-        this.origin = origin;
-        this.description = description;
-        this.brand = brand;
-        this.productCategory = productCategory;
-        this.subCategory = subCategory;
         this.images = new ArrayList<>();
         this.detailProducts = new ArrayList<>();
     }

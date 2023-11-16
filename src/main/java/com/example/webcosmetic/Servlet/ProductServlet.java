@@ -1,11 +1,10 @@
 package com.example.webcosmetic.Servlet;
 
 
-import com.example.webcosmetic.Entity.Brand;
-import com.example.webcosmetic.Entity.ProductCategory;
-import com.example.webcosmetic.Entity.SubCategory;
+import com.example.webcosmetic.Entity.*;
 import com.example.webcosmetic.EntityDB.BrandDB;
 import com.example.webcosmetic.EntityDB.ProductCategoryDB;
+import com.example.webcosmetic.EntityDB.ProductDB;
 import com.example.webcosmetic.EntityDB.SubCategoryDB;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -14,6 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "product", value = "/product")
@@ -43,8 +43,10 @@ public class ProductServlet extends HttpServlet {
             }
             else{
                 req.setAttribute("ariacurrent","Sửa Sản Phẩm");
+                List<Product> products = ProductDB.selectAll();
             }
             url = "/product_info.jsp";
+
         }
         getServletContext().getRequestDispatcher(url).forward(req, resp);
     }

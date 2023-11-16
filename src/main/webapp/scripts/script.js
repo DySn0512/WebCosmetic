@@ -130,27 +130,31 @@ function removeParent(element) {
 }
 
 function addImage() {
-    var x = document.getElementById("img-input").value;
-    if (x !== "") {
-        document.getElementById("img-input").value = "";
-
+    var link = document.getElementById("link-image").value;
+    if (link !== "") {
         const div = document.createElement("div");
+        document.getElementById("link-image").value="";
+        div.className = "image-item";
         div.innerHTML = `
-        <input type="button" class="delete-div" onclick="removeParent(this)" value="X">
-        <img class="img-product" src="${x}" alt="">
-        <input type="hidden" name="strImage" value="${x}">
-    `;
+                <input type="hidden" value="${link}" name="strImage">
+                <input type="button" class="delete-div" onclick="removeParent(this)" value="X">
+                <img class="img-product" src="${link}" alt="">`
+        ;
         document.getElementById("image-container").appendChild(div);
     }
 }
+
 function updateSaleIput(checkbox) {
     var div = checkbox.closest('.detail-item');
-    var input = div.querySelector('#sale-price');
-    input.required = checkbox.checked;
+    var inputSalePrice = div.querySelector('#sale-price');
+    var inputIsSale = div.querySelector('#is-sale');
+    inputSalePrice.required = checkbox.checked;
+    inputIsSale.value = checkbox.checked;
 }
+
 function addProductDetails() {
     var newDiv = document.createElement('div');
-    newDiv.className='detail-item';
+    newDiv.className = 'detail-item';
     newDiv.innerHTML = `
          <input type="button" onclick="removeParent(this)" value="X">
           <input type="hidden" name="idDetail" value="" >
@@ -161,7 +165,8 @@ function addProductDetails() {
             </label>
              <label class="right">
                 Giảm giá:
-                <input type="checkbox" id="is-sale" name="isSale" onchange="updateSaleIput(this)">
+                <input type="hidden" name="isSale" value="false" id="is-sale" >
+                <input type="checkbox" id="is-sale" value="false" onclick="updateSaleIput(this)">
             </label>
         </div>
         <div>
@@ -178,16 +183,23 @@ function addProductDetails() {
     document.getElementById('detail-container').appendChild(newDiv);
 }
 
-window.onload = function() {
-    var checkboxes= document.querySelectorAll('#is-sale');
-    checkboxes.forEach(function(checkbox) {
+window.onload = function () {
+    var checkboxes = document.querySelectorAll('#is-sale');
+    checkboxes.forEach(function (checkbox) {
         if (checkbox.checked) {
             updateSaleIput(checkbox);
         }
     });
 };
 
-
+function submitProductForm(form) {
+    var divDetails = form.getElementsByClassName('detail-item');
+    var divImages = form.getElementsByClassName('image-item');
+    if (divDetails.length === 0 || divImages.length === 0) {
+        event.preventDefault();
+        alert('phải có ít nhất 1 chi tiết sản phẩm và 1 hình ảnh ứng với mỗi sản phẩm');
+    }
+}
 
 
 

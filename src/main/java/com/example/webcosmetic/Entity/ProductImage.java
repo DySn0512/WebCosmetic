@@ -7,14 +7,14 @@ public class ProductImage {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String strImage;
+    private String link;
 
     public ProductImage() {
 
     }
 
-    public ProductImage( String image) {
-        this.strImage = image;
+    public ProductImage( String link) {
+        this.link = link;
     }
 
     public void setId(Long id) {
@@ -25,12 +25,12 @@ public class ProductImage {
         return id;
     }
 
-    public String getImage() {
-        return strImage;
+    public String getLink() {
+        return link;
     }
 
-    public void setImage(String image) {
-        this.strImage = image;
+    public void setLink(String image) {
+        this.link = image;
     }
 
 }
