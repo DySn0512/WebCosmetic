@@ -87,7 +87,7 @@ public class DetailProduct {
     }
 
     public Double getCurrentPrice(){
-        return isSale?salePrice:price;
+        return isSale ? salePrice: price;
     }
 
 }

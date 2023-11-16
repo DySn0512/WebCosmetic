@@ -4,32 +4,36 @@ import jakarta.persistence.*;
 import org.eclipse.persistence.jpa.jpql.parser.DateTime;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
 public class Order {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String status;
+
+    private Date timeOrder;
     @OneToOne
-    private Customer customer;
+    private User user;
 
-
-    @OneToMany(cascade = CascadeType.MERGE, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.PERSIST)
     private List<DetailOrder> details;
 
-    public Order(List<DetailOrder> details, DateTime timeOrder) {
-        this.details = details;
-    }
-
-    public Order(Customer customer){
-        this.customer = customer;
-        details = new ArrayList<>();
-    }
 
     public Order() {
 
+    }
+
+    public Order(Date timeOrder, User user, List<LineItem> lineItems) {
+        this.timeOrder = timeOrder;
+        this.user = user;
+        this.status = "Chờ xác nhận";
+        this.details = new ArrayList<>();
+        setDetails(lineItems);
     }
 
     public Long getId(){
@@ -40,24 +44,34 @@ public class Order {
         this.id = id;
     }
 
-    public List<DetailOrder> getdetails(){
+    public Date getTimeOrder() {
+        return timeOrder;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public List<DetailOrder> getDetails() {
         return details;
     }
 
-    public int Count(){
-        return details.size();
+    private void setDetails(List<LineItem> lineItems) {
+        for (var item :lineItems) {
+            String unit = item.getDetailProduct().getUnit();
+            int quantity = item.getQuantity();
+            Double price = item.getDetailProduct().getCurrentPrice();
+            Product product = item.getDetailProduct().getProduct();
+            String nameProduct = product.getName();
+            this.details.add(new DetailOrder(nameProduct,quantity,unit,price,product));
+        }
     }
 
-    public List<DetailOrder> detailOrders = new ArrayList<>();
-
-    public List<DetailOrder> getDetailOrders() {
-        return detailOrders;
+    public String getStatus() {
+        return status;
     }
 
-    public void setDetailOrders(List<DetailOrder> detailOrders) {
-        this.detailOrders = detailOrders;
+    public void setStatus(String status) {
+        this.status = status;
     }
-
-
-
 }

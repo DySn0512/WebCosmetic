@@ -254,15 +254,6 @@ span {
 .close:hover,
 .close:focus {
     color: #000;
-<<<<<<< HEAD
-<<<<<<< HEAD
-    padding: 2px;
-    margin-top: 5px;
-    border: 1px solid #000000;
-    border-radius: 4px;
-    font-size:15px;
-}
-=======
     text-decoration: none;
     cursor: pointer;
 }
@@ -334,7 +325,6 @@ h1 {
 #add-detail:hover {
     background-color: rgb(235, 243, 241);
 }
-
 table {
     border-collapse: collapse;
     width: 100%;
@@ -343,16 +333,10 @@ table {
 th, td {
     border: 1px solid black;
     padding: 10px;
+    font-size: 16px;
+    color: #333;
 }
 
 th {
     background-color: #ccc;
 }
-
-th, td {
-    font-size: 16px;
-    color: #333;
-}
-
-
->>>>>>> f681d1e180d1a1660afb05cbdddde66f61d09131
