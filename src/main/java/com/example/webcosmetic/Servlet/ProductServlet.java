@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(name = "product", value = "/product")
+@WebServlet(name = "product", value = "/admin/product")
 public class ProductServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -28,29 +28,28 @@ public class ProductServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
         List<Product> products = ProductDB.selectAll();
-        req.setAttribute("products",products);
-        String url = "/product.jsp";
+        req.setAttribute("products", products);
+        String url = "/admin/product.jsp";;
         if (action == null) {
-        }
-        else if (action.equals("Tìm")) {
+
+        } else if (action.equals("Tìm")) {
 
         } else if (action.equals("Xoá")) {
 
         } else {
             List<Brand> brands = BrandDB.selectAll();
-            req.setAttribute("brands",brands);
+            req.setAttribute("brands", brands);
             List<ProductCategory> productCategories = ProductCategoryDB.selectAll();
-            req.setAttribute("productCategories",productCategories);
+            req.setAttribute("productCategories", productCategories);
             if (action.equals("add")) {
-                req.setAttribute("ariacurrent","Thêm Sản Phẩm");
-            }
-            else{
+                req.setAttribute("ariacurrent", "Thêm Sản Phẩm");
+            } else {
                 Long id = Long.parseLong(req.getParameter("id"));
                 Product product = ProductDB.select(id);
-                req.setAttribute("product",product);
-                req.setAttribute("ariacurrent","Sửa Sản Phẩm");
+                req.setAttribute("product", product);
+                req.setAttribute("ariacurrent", "Sửa Sản Phẩm");
             }
-            url = "/product_info.jsp";
+            url = "/admin/product_info.jsp";
         }
         getServletContext().getRequestDispatcher(url).forward(req, resp);
     }

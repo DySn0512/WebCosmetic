@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Thương Hiệu</title>
-    <link rel="stylesheet" href="style/main.css">
+    <link rel="stylesheet" href="../style/main.css">
 </head>
 <body>
 <jsp:include page="sidebar.jsp"/>

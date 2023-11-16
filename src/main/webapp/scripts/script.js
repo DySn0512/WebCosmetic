@@ -128,20 +128,24 @@ function cancelEdit(clickedElement, name) {
 function removeParent(element) {
     element.parentNode.remove();
 }
+function allowDrop(ev) {
+    ev.preventDefault();
+}
 
-function addImage() {
-    var link = document.getElementById("link-image").value;
-    if (link !== "") {
-        const div = document.createElement("div");
-        document.getElementById("link-image").value="";
-        div.className = "image-item";
-        div.innerHTML = `
-                <input type="hidden" value="${link}" name="strImage">
-                <input type="button" class="delete-div" onclick="removeParent(this)" value="X">
-                <img class="img-product" src="${link}" alt="">`
-        ;
-        document.getElementById("image-container").appendChild(div);
-    }
+function drop(ev){
+    ev.preventDefault();
+    Array.from(ev.dataTransfer.files).forEach(file => {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const div = document.createElement("div");
+            div.className = "image-item";
+            div.innerHTML = `<input type="hidden" value="${e.target.result}" name="strImage">
+                             <input type="button" class="delete-div" onclick="removeParent(this)" value="X">
+                             <img class="img-product" src="${e.target.result}" alt="">`;
+            document.getElementById("image-container").appendChild(div);
+        };
+        reader.readAsDataURL(file);
+    });
 }
 
 function updateSaleIput(checkbox) {

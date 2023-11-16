@@ -1,10 +1,12 @@
 package com.example.webcosmetic.Servlet;
 
 
+import com.example.webcosmetic.Drive.GoogleDriveUploader;
 import com.example.webcosmetic.EntityDB.BrandDB;
 import com.example.webcosmetic.EntityDB.ProductCategoryDB;
 import com.example.webcosmetic.EntityDB.ProductDB;
 import com.example.webcosmetic.EntityDB.SubCategoryDB;
+import com.google.api.services.drive.model.File;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -14,12 +16,13 @@ import com.example.webcosmetic.Entity.*;
 
 import javax.lang.model.element.ElementKind;
 import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@WebServlet(name = "productInfo", value = "/productInfo")
+@WebServlet(name = "productInfo", value = "/admin/productInfo")
 public class ProductInfoServlet extends HttpServlet {
 
     @Override
@@ -31,7 +34,6 @@ public class ProductInfoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String action = req.getParameter("action");
-
         String[] units = req.getParameterValues("unit");
         String[] isSaleValues = req.getParameterValues("isSale");
         String[] priceValues = req.getParameterValues("price");
@@ -44,12 +46,11 @@ public class ProductInfoServlet extends HttpServlet {
                 Double price = Double.parseDouble(priceValues[i]);
                 Boolean isSale = Boolean.parseBoolean(isSaleValues[i]);
                 double salePrice = isSale ? Double.parseDouble(priceSaleValues[i]) : 0D;
-                DetailProduct detailProduct = new DetailProduct(units[i],price,isSale,salePrice,product);
+                DetailProduct detailProduct = new DetailProduct(units[i], price, isSale, salePrice, product);
                 product.addDetail(detailProduct);
             }
             ProductDB.insert(product);
-        }
-        else {
+        } else {
             String[] idDetails = req.getParameterValues("idDetail");
             Long idProduct = Long.parseLong(req.getParameter("idProduct"));
             product = ProductDB.select(idProduct);
@@ -71,11 +72,15 @@ public class ProductInfoServlet extends HttpServlet {
         SubCategory subCategory = SubCategoryDB.select(idSubCategory);
 
         String[] strImages = req.getParameterValues("strImage");
-
         List<ProductImage> images = Arrays.stream(strImages)
-                .map(ProductImage::new)
+                .map(item -> {
+                    try {
+                        return new ProductImage("https://drive.google.com/uc?id="+GoogleDriveUploader.uploadImage(item).getId());
+                    } catch (IOException | GeneralSecurityException e) {
+                        throw new RuntimeException(e);
+                    }
+                })
                 .collect(Collectors.toList());
-
         product.setName(name);
         product.setOrigin(origin);
         product.setDescription(description);

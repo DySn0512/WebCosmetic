@@ -10,7 +10,7 @@
 <head>
     <title>ADMIN</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="style/main.css">
+    <link rel="stylesheet" type="text/css" href="../style/main.css">
 </head>
 <body>
 <jsp:include page="sidebar.jsp"/>

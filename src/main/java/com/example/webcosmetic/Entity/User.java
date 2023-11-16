@@ -1,6 +1,7 @@
 package com.example.webcosmetic.Entity;
 import jakarta.persistence.*;
 @Entity
+@Table(name = "\"User\"")
 public class User {
 
     @Id

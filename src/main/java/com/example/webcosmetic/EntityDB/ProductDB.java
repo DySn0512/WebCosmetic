@@ -65,4 +65,5 @@ public class ProductDB {
         TypedQuery<Product> query = em.createQuery("SELECT p FROM Product p", Product.class);
         return query.getResultList();
     }
+
 }
