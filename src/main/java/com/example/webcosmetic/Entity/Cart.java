@@ -13,7 +13,7 @@ public class Cart {
     private Long id;
 
     @OneToOne
-    private Customer customer;
+    private User user;
 
     @OneToMany(cascade = CascadeType.MERGE, orphanRemoval = true)
     private List<LineItem> lineItems;
@@ -22,8 +22,8 @@ public class Cart {
 
     }
 
-    public Cart(Customer customer) {
-        this.customer = customer;
+    public Cart(User user) {
+        this.user = user;
         lineItems = new ArrayList<>();
     }
 

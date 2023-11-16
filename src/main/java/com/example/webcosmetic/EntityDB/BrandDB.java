@@ -12,8 +12,7 @@ public class BrandDB {
     public static Brand select(Long id) {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         try {
-            Brand brand = em.find(Brand.class, id);
-            return brand;
+            return em.find(Brand.class, id);
         } finally {
             em.close();
         }

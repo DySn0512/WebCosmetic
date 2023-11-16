@@ -31,12 +31,12 @@ public class Product {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductImage> images;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<DetailProduct> detailProducts;
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<DetailProduct> details;
 
     public Product() {
         this.images = new ArrayList<>();
-        this.detailProducts = new ArrayList<>();
+        this.details = new ArrayList<>();
     }
 
     public Long getId() {
@@ -104,29 +104,21 @@ public class Product {
         this.images = images;
     }
 
-    public List<DetailProduct> getDetailProducts() {
-        return detailProducts;
+    public List<DetailProduct> getDetails() {
+        return details;
     }
 
     public void addDetail(DetailProduct detailProduct) {
-        if (detailProducts.stream().noneMatch(dp -> dp.getUnit().equals(detailProduct.getUnit()))){
-            detailProducts.add(detailProduct);
+        if (details.stream().noneMatch(dp -> dp.getUnit().equals(detailProduct.getUnit()))){
+            details.add(detailProduct);
         }
-    }
-
-    public void removeDetail(DetailProduct detailProduct) {
-        detailProducts.removeIf(dp -> dp.getId().equals(detailProduct.getId()));
-    }
-
-    public DetailProduct getDefaultDetail() {
-        return detailProducts.get(0);
     }
 
     public String getPrice() {
-        if (detailProducts.size() == 1) {
-            return detailProducts.get(0).getCurrentPrice().toString();
+        if (details.size() == 1) {
+            return details.get(0).getCurrentPrice().toString();
         }
-        DoubleSummaryStatistics stats = detailProducts.stream()
+        DoubleSummaryStatistics stats = details.stream()
                 .mapToDouble(DetailProduct::getCurrentPrice)
                 .summaryStatistics();
         double minCurrentPrice = stats.getMin();

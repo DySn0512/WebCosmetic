@@ -1,7 +1,7 @@
 package com.example.webcosmetic.Entity;
 import jakarta.persistence.*;
 @Entity
-public class Customer {
+public class User {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
@@ -15,14 +15,17 @@ public class Customer {
 
     private String address;
 
-    public Customer() {
+    private Boolean isAdmin;
+
+    public User() {
     }
 
-    public Customer(String name, String phone, String email, String address) {
+    public User(String name, String phone, String email, String address) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.isAdmin = false;
     }
 
     public Long getId() {
@@ -64,4 +67,9 @@ public class Customer {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    public Boolean getAdmin() {
+        return isAdmin;
+    }
+
 }

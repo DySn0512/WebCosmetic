@@ -18,7 +18,7 @@
             </ol>
         </nav>
     </header>
-    <div style="margin: 10px" >
+    <div style="margin: 10px">
         <form method="post" action="product">
             <input type="hidden" name="action" id="action" value="">
             <div class="tool-bar">
@@ -49,6 +49,37 @@
                     <input type="submit" class="add-button" value="Thêm mới" onclick="setAction('add')">
                     <input type="submit" class="delete-button" value="Xoá" onclick="setAction('remove')">
                 </div>
+            </div>
+            <div>
+
+                <table>
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>Ảnh</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Xuất xứ</th>
+                        <th>Thương hiệu</th>
+                        <th>Danh mục</th>
+                        <th>Danh mục con</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach items="${products}" var="product">
+                        <tr>
+                            <td><input type="checkbox" name="id"></td>
+                            <th><img src="${product.images[0].link}" alt=""></th>
+                            <th>${product.name}</th>
+                            <th>${product.origin}</th>
+                            <th>${product.brand.name}</th>
+                            <th>${product.productCategory.name}</th>
+                            <th>${product.subCategory.name}</th>
+                            <th><a href="product?action=edit&id=${product.id}">Chỉnh sửa</a></th>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
             </div>
         </form>
     </div>
