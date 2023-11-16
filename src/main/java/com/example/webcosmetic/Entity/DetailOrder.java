@@ -24,7 +24,7 @@ public class DetailOrder {
     }
 
     public DetailOrder(String name, Integer quantity, String unit, Double price, Product product) {
-        this.nameProduct = name;
+        this.name = name;
         this.quantity = quantity;
         this.unit = unit;
         this.price = price;

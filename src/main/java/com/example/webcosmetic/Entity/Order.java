@@ -15,6 +15,7 @@ public class Order {
     @OneToOne
     private Customer customer;
 
+
     @OneToMany(cascade = CascadeType.MERGE, orphanRemoval = true)
     private List<DetailOrder> details;
 
@@ -47,8 +48,16 @@ public class Order {
         return details.size();
     }
 
-    public Double getTotal(){
-        return details.getCurrentPrice()*quantity;
+    public List<DetailOrder> detailOrders = new ArrayList<>();
+
+    public List<DetailOrder> getDetailOrders() {
+        return detailOrders;
     }
+
+    public void setDetailOrders(List<DetailOrder> detailOrders) {
+        this.detailOrders = detailOrders;
+    }
+
+
 
 }

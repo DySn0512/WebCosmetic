@@ -25,7 +25,7 @@ public class OrderServlet extends HttpServlet {
         String action = req.getParameter("action");
         String url = "/order.jsp";
         if (action == null) {
-            // đây là trường hợp servlet được gọi từ trang admin nên action nó là null nè
+
         }
         getServletContext().getRequestDispatcher(url).forward(req, resp);
     }
