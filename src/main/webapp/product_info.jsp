@@ -44,7 +44,7 @@
         </nav>
     </header>
     <div style="margin: 10px">
-        <form action="productInfo" method="post" class="info-product-form">
+        <form action="productInfo" method="post" class="info-product-form" onsubmit="submitProductForm(this)">
             <c:choose>
                 <c:when test="${empty product}">
                     <input type="hidden" name="action" value="add">
@@ -88,7 +88,7 @@
                 </label><br>
                 <label>
                     Danh mục:
-                    <select name="productCategory" id="CategorySelect" onchange="updateSubCategories(this)">
+                    <select name="productCategory" id="CategorySelect" required onchange="updateSubCategories(this)">
                         <c:choose>
                             <c:when test="${empty product.productCategory.id}">
                                 <option value="">Chọn danh mục</option>
@@ -112,7 +112,7 @@
                 </label><br>
                 <label>
                     Danh mục con:
-                    <select name="subCategory" id="subCategorySelect">
+                    <select name="subCategory" id="subCategorySelect" required>
                         <c:choose>
                             <c:when test="${empty product.subCategory.id}">
                                 <option value="">Chọn danh mục con</option>
@@ -128,11 +128,11 @@
                         </c:forEach>
                     </select>
                 </label><br>
-                <label for="img-input">
-                    Nhập link ảnh:
-                    <input type="text" id="img-input">
-                    <input type="button" value="Thêm ảnh" onclick="addImage()">
-                </label><br>
+                <label>
+                    Nhập Link Ảnh:
+                    <input type="text" id="link-image"><br>
+                </label>
+                <input type="button" value="Thêm ảnh" onclick="addImage()"><br>
                 <input type="submit" value="Lưu thông tin"/>
             </div>
             <div id="detail-container">
@@ -151,11 +151,7 @@
                             <label class="right">
                                 Giảm giá:
                                 <input type="checkbox" name="isSale" id="is-sale"
-                                       onchange="updateSaleIput(this)"
-                                <c:if test="${detail.isSale}">
-                                       checked
-                                </c:if>
-                                >
+                                       onchange="updateSaleIput(this)" <c:if test="${detail.sale}">checked</c:if> >
                             </label>
                         </div>
                         <div>
@@ -176,6 +172,13 @@
             </div>
             <div id="image-container">
                 <h1>Ảnh</h1>
+                <c:forEach items="${product.images}" var="image">
+                    <div class="image-item">
+                        <input type="hidden" value="${image.link}" name="strImage">
+                        <input type="button" class="delete-div" onclick="removeParent(this)" value="X">
+                        <img class="img-product" src="${image.link}" alt="">
+                    </div>
+                </c:forEach>
             </div>
         </form>
     </div>

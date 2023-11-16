@@ -17,17 +17,20 @@ public class DetailProduct {
 
     private Double salePrice;
 
+    private Boolean status;
+
     @ManyToOne
     private Product product;
 
     public DetailProduct() {
     }
 
-    public DetailProduct(String unit, Double price, Boolean isSale, Double salePrice, Integer inventory, Product product) {
+    public DetailProduct(String unit, Double price, Boolean isSale, Double salePrice, Product product) {
         this.unit = unit;
         this.price = price;
         this.isSale = isSale;
         this.salePrice = salePrice;
+        this.status = true;
         this.product = product;
     }
 
@@ -69,6 +72,14 @@ public class DetailProduct {
 
     public void setSalePrice(Double salePrice) {
         this.salePrice = salePrice;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 
     public Product getProduct() {
