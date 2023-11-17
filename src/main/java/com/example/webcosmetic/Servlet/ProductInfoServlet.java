@@ -53,11 +53,13 @@ public class ProductInfoServlet extends HttpServlet {
             Long idProduct = Long.parseLong(req.getParameter("idProduct"));
             product = ProductDB.select(idProduct);
             String[] imageRemove = req.getParameterValues("imageRemove");
-            for (var item :imageRemove) {
-                try {
-                    GoogleDrive.removeImage(item);
-                } catch (GeneralSecurityException e) {
-                    throw new RuntimeException(e);
+            if (imageRemove!=null){
+                for (var item :imageRemove) {
+                    try {
+                        GoogleDrive.removeImage(item);
+                    } catch (GeneralSecurityException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
             setProductAttributes(product, req, resp);
