@@ -8,7 +8,7 @@ import jakarta.persistence.TypedQuery;
 import java.util.List;
 
 public class ProductDB {
-    
+
     public static void insert(Product product) {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -59,11 +59,32 @@ public class ProductDB {
             em.close();
         }
     }
-
     public static List<Product> selectAll() {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         TypedQuery<Product> query = em.createQuery("SELECT p FROM Product p", Product.class);
         return query.getResultList();
+    }
+
+    public static List<Product> selectProductsByOffset(int offset, int recordsPerPage) {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        try {
+            TypedQuery<Product> query = em.createQuery("SELECT p FROM Product p", Product.class)
+                    .setFirstResult(offset)
+                    .setMaxResults(recordsPerPage);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    public static int getTotalProducts() {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        try {
+            TypedQuery<Long> query = em.createQuery("SELECT COUNT(p) FROM Product p", Long.class);
+            return query.getSingleResult().intValue();
+        } finally {
+            em.close();
+        }
     }
 
 }

@@ -13,16 +13,30 @@ import java.util.List;
 
 @WebServlet(name = "home", value = "/home")
 public class HomeServlet extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doPost(req, resp);
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doPost(request, response);
     }
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String url = "/Home.jsp";
-        List<Product> products = ProductDB.selectAll();
-        req.setAttribute("products",products);
-        getServletContext().getRequestDispatcher(url).forward(req, resp);
+        int currentPage = 1; // Trang hiện tại
+        int recordsPerPage = 4; // Số lượng sản phẩm trên mỗi trang
+
+        if (request.getParameter("page") != null) {
+            currentPage = Integer.parseInt(request.getParameter("page"));
+        }
+
+        int offset = (currentPage - 1) * recordsPerPage;
+
+        List<Product> products = ProductDB.selectProductsByOffset(offset, recordsPerPage);
+        int totalProducts = ProductDB.getTotalProducts(); // Tổng số sản phẩm
+
+        int totalPages = (int) Math.ceil((double) totalProducts / recordsPerPage);
+
+        request.setAttribute("products", products);
+        request.setAttribute("currentPage", currentPage);
+        request.setAttribute("totalPages", totalPages);
+
+        getServletContext().getRequestDispatcher(url).forward(request, response);
     }
 }
