@@ -9,7 +9,8 @@ import java.security.GeneralSecurityException;
 import java.util.Base64;
 import java.util.Collections;
 
-public class GoogleDriveUploader {
+public class GoogleDrive {
+
     public static File uploadImage(String base64Image) throws IOException, GeneralSecurityException {
         Drive service = GoogleDriveService.getDriveService();
         String base64String = base64Image.split(",")[1];
@@ -24,5 +25,11 @@ public class GoogleDriveUploader {
                 .setFields("id,webContentLink")
                 .execute();
     }
+
+    public static void removeImage(String id) throws GeneralSecurityException, IOException {
+        Drive service = GoogleDriveService.getDriveService();
+        service.files().delete(id).execute();
+    }
+
 }
 

@@ -137,7 +137,7 @@
                 <c:forEach items="${product.details}" var="detail">
                     <div class="detail-item">
                         <input type="button" onclick="removeParent(this)" value="X">
-                        <input type="hidden" name="idDetail" value="${detail.id}" >
+                        <input type="hidden" name="idDetail" value="${detail.id}">
                         <div>
                             <label>
                                 Đơn vị sản phẩm:
@@ -146,7 +146,8 @@
                             <label class="right">
                                 Giảm giá:
                                 <input type="checkbox" name="isSale" id="is-sale"
-                                       onchange="updateSaleIput(this)" <c:if test="${detail.sale}">checked</c:if> >
+                                       onchange="updateSaleIput(this)"
+                                       <c:if test="${detail.sale}">checked</c:if> >
                             </label>
                         </div>
                         <div>
@@ -170,7 +171,7 @@
                 <c:forEach items="${product.images}" var="image">
                     <div class="image-item">
                         <input type="hidden" value="${image.link}" name="strImage">
-                        <input type="button" class="delete-div" onclick="removeParent(this)" value="X">
+                        <input type="button" class="delete-div" onclick="removeImage(this,'${image.link}')" value="X">
                         <img class="img-product" src="${image.link}" alt="">
                     </div>
                 </c:forEach>

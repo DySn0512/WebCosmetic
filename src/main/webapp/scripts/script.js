@@ -128,6 +128,17 @@ function cancelEdit(clickedElement, name) {
 function removeParent(element) {
     element.parentNode.remove();
 }
+function removeImage(element,url) {
+    element.parentNode.remove();
+    if (url!==""){
+        var id = url.split('=')[1];
+        var input = document.createElement("input");
+        input.type = "hidden";
+        input.value=id;
+        input.name = "imageRemove";
+        document.getElementById("image-container").appendChild(input);
+    }
+}
 function allowDrop(ev) {
     ev.preventDefault();
 }
@@ -140,13 +151,31 @@ function drop(ev){
             const div = document.createElement("div");
             div.className = "image-item";
             div.innerHTML = `<input type="hidden" value="${e.target.result}" name="strImage">
-                             <input type="button" class="delete-div" onclick="removeParent(this)" value="X">
+                             <input type="button" class="delete-div" onclick="removeImage(this,'')" value="X">
                              <img class="img-product" src="${e.target.result}" alt="">`;
             document.getElementById("image-container").appendChild(div);
         };
         reader.readAsDataURL(file);
     });
 }
+function addFromUrl(url) {
+    fetch(url)
+        .then(response => response.blob())
+        .then(blob => {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const div = document.createElement("div");
+                div.className = "image-item";
+                div.innerHTML = `<input type="hidden" value="${e.target.result}" name="strImage">
+                                 <input type="button" class="delete-div" onclick="removeParent(this)" value="X">
+                                 <img class="img-product" src="${e.target.result}" alt="">`;
+                document.getElementById("image-container").appendChild(div);
+            };
+            reader.readAsDataURL(blob);
+        })
+        .catch(error => console.error('Error:', error));
+}
+
 
 function updateSaleIput(checkbox) {
     var div = checkbox.closest('.detail-item');

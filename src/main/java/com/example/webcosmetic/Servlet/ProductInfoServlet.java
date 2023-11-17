@@ -1,12 +1,11 @@
 package com.example.webcosmetic.Servlet;
 
 
-import com.example.webcosmetic.Drive.GoogleDriveUploader;
+import com.example.webcosmetic.Drive.GoogleDrive;
 import com.example.webcosmetic.EntityDB.BrandDB;
 import com.example.webcosmetic.EntityDB.ProductCategoryDB;
 import com.example.webcosmetic.EntityDB.ProductDB;
 import com.example.webcosmetic.EntityDB.SubCategoryDB;
-import com.google.api.services.drive.model.File;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -14,7 +13,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import com.example.webcosmetic.Entity.*;
 
-import javax.lang.model.element.ElementKind;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
@@ -54,6 +52,14 @@ public class ProductInfoServlet extends HttpServlet {
             String[] idDetails = req.getParameterValues("idDetail");
             Long idProduct = Long.parseLong(req.getParameter("idProduct"));
             product = ProductDB.select(idProduct);
+            String[] imageRemove = req.getParameterValues("imageRemove");
+            for (var item :imageRemove) {
+                try {
+                    GoogleDrive.removeImage(item);
+                } catch (GeneralSecurityException e) {
+                    throw new RuntimeException(e);
+                }
+            }
             setProductAttributes(product, req, resp);
             ProductDB.update(product);
         }
@@ -72,15 +78,22 @@ public class ProductInfoServlet extends HttpServlet {
         SubCategory subCategory = SubCategoryDB.select(idSubCategory);
 
         String[] strImages = req.getParameterValues("strImage");
-        List<ProductImage> images = Arrays.stream(strImages)
-                .map(item -> {
-                    try {
-                        return new ProductImage("https://drive.google.com/uc?id="+GoogleDriveUploader.uploadImage(item).getId());
-                    } catch (IOException | GeneralSecurityException e) {
-                        throw new RuntimeException(e);
-                    }
-                })
-                .collect(Collectors.toList());
+
+        List<ProductImage> images = new ArrayList<>();
+        for (String item : strImages) {
+            if (item.startsWith("https://drive.google.com/uc?id=")){
+                images.add(new ProductImage(item));
+            }
+            else {
+                try {
+                    String id = GoogleDrive.uploadImage(item).getId();
+                    images.add(new ProductImage("https://drive.google.com/uc?id=" + id));
+                } catch (IOException | GeneralSecurityException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+
         product.setName(name);
         product.setOrigin(origin);
         product.setDescription(description);
