@@ -125,8 +125,15 @@ function cancelEdit(clickedElement, name) {
     input.style.pointerEvents = 'none';
 }
 
-function removeParent(element) {
+function removeDetailProduct(element,id) {
     element.parentNode.remove();
+    if (id!==""){
+        var input = document.createElement("input");
+        input.type = "hidden";
+        input.value = id;
+        input.name = "detailRemove";
+        document.getElementById('detail-container').appendChild(input);
+    }
 }
 function removeImage(element,url) {
     element.parentNode.remove();
@@ -158,23 +165,6 @@ function drop(ev){
         reader.readAsDataURL(file);
     });
 }
-function addFromUrl(url) {
-    fetch(url)
-        .then(response => response.blob())
-        .then(blob => {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const div = document.createElement("div");
-                div.className = "image-item";
-                div.innerHTML = `<input type="hidden" value="${e.target.result}" name="strImage">
-                                 <input type="button" class="delete-div" onclick="removeParent(this)" value="X">
-                                 <img class="img-product" src="${e.target.result}" alt="">`;
-                document.getElementById("image-container").appendChild(div);
-            };
-            reader.readAsDataURL(blob);
-        })
-        .catch(error => console.error('Error:', error));
-}
 
 
 function updateSaleIput(checkbox) {
@@ -185,11 +175,11 @@ function updateSaleIput(checkbox) {
     inputIsSale.value = checkbox.checked;
 }
 
-function addProductDetails() {
+function addDetailProduct() {
     var newDiv = document.createElement('div');
     newDiv.className = 'detail-item';
     newDiv.innerHTML = `
-         <input type="button" onclick="removeParent(this)" value="X">
+         <input type="button" onclick="removeDetailProduct(this,'')" value="X">
           <input type="hidden" name="idDetail" value="" >
          <div>
             <label>

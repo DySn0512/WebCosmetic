@@ -38,7 +38,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="admin.jsp">Trang Chủ</a></li>
-                <li class="breadcrumb-item"><a href="product.jsp">/Sản Phẩm</a></li>
+                <li class="breadcrumb-item"><a href="product">/Sản Phẩm</a></li>
                 <li class="breadcrumb-item active" aria-current="page">/${ariacurrent}</li>
             </ol>
         </nav>
@@ -133,10 +133,10 @@
             <div id="detail-container">
                 <h1>Chi tiết sản phẩm</h1>
                 <br>
-                <div onclick="addProductDetails()" id="add-detail">+</div>
+                <div onclick="addDetailProduct()" id="add-detail">+</div>
                 <c:forEach items="${product.details}" var="detail">
                     <div class="detail-item">
-                        <input type="button" onclick="removeParent(this)" value="X">
+                        <input type="button" onclick="removeDetailProduct(this,'${detail.id}')" value="X">
                         <input type="hidden" name="idDetail" value="${detail.id}">
                         <div>
                             <label>
