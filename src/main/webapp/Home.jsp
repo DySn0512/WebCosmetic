@@ -1,4 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
 <%--
   Created by IntelliJ IDEA.
   User: Admin
@@ -226,5 +228,13 @@
           <p>${product.price}</p>
       </div>
   </c:forEach>
+  <!-- Hiển thị phân trang -->
+  <div>
+
+      <!-- Hiển thị các liên kết chuyển trang -->
+      <c:forEach begin="1" end="${totalPages}" var="i">
+          <a href="home?page=${i}">Trang ${i}</a>
+      </c:forEach>
+  </div>
   </body>
 </html>
