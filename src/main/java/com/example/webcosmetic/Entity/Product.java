@@ -108,6 +108,13 @@ public class Product {
         return details;
     }
 
+    public void setDetails(List<DetailProduct> details) {
+        this.details = new ArrayList<>();
+        for (var item : details) {
+            addDetail(item);
+        }
+    }
+
     public void addDetail(DetailProduct detailProduct) {
         if (details.stream().noneMatch(dp -> dp.getUnit().equals(detailProduct.getUnit()))){
             details.add(detailProduct);
