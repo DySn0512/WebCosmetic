@@ -239,9 +239,7 @@
               <img src="image/cart1.jpeg" alt="Giỏ hàng"/>
           </div>
           <div id="account-icon">
-              <a href="${pageContext.request.contextPath}/admin/login.html">
-                  <img src="image/account.png" alt="Tài khoản cá nhân"/>
-              </a>
+              <img src="image/account.png" alt="Tài khoản cá nhân"/>
           </div>
       </div>
   </div>
