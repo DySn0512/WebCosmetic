@@ -15,9 +15,7 @@ public class GoogleDrive {
         Drive service = null;
         try {
             service = GoogleDriveService.getDriveService();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (GeneralSecurityException e) {
+        } catch (IOException | GeneralSecurityException e) {
             throw new RuntimeException(e);
         }
         String base64String = base64Image.split(",")[1];

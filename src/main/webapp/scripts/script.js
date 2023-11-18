@@ -135,16 +135,8 @@ function removeDetailProduct(element,id) {
         document.getElementById('detail-container').appendChild(input);
     }
 }
-function removeImage(element,url) {
+function removeImage(element) {
     element.parentNode.remove();
-    if (url!==""){
-        var id = url.split('=')[1];
-        var input = document.createElement("input");
-        input.type = "hidden";
-        input.value=id;
-        input.name = "imageRemove";
-        document.getElementById("image-container").appendChild(input);
-    }
 }
 function allowDrop(ev) {
     ev.preventDefault();
@@ -158,7 +150,7 @@ function drop(ev){
             const div = document.createElement("div");
             div.className = "image-item";
             div.innerHTML = `<input type="hidden" value="${e.target.result}" name="strImage">
-                             <input type="button" class="delete-div" onclick="removeImage(this,'')" value="X">
+                             <input type="button" class="delete-div" onclick="removeImage(this)" value="X">
                              <img class="img-product" src="${e.target.result}" alt="">`;
             document.getElementById("image-container").appendChild(div);
         };
@@ -240,7 +232,27 @@ function showSlides() {
 }
 
 showSlides(); // Bắt đầu hiển thị ảnh
+// Hiển thị popup
+// Hàm mở pop-up
+function openModal() {
+    document.getElementById('myModal').style.display = 'block';
+    document.getElementById('overlay').style.display = 'block';
+}
 
+// Hàm đóng pop-up
+function closeModal() {
+    document.getElementById('myModal').style.display = 'none';
+    document.getElementById('overlay').style.display = 'none';
+}
+
+// Đóng pop-up khi click ra ngoài
+window.onclick = function(event) {
+    var modal = document.getElementById('myModal');
+    var overlay = document.getElementById('overlay');
+    if (event.target == modal) {
+        closeModal();
+    }
+};
 
 
 

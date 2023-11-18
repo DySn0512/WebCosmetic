@@ -170,13 +170,56 @@
               max-width: 100%;
               height: auto;
           }
+          /* CSS để tạo pop-up */
+          .modal {
+              display: none;
+              position: fixed;
+              z-index: 1;
+              left: 0;
+              top: 0;
+              width: 100%;
+              height: 100%;
+              overflow: auto;
+          }
+
+          .modal-content {
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              background-color: white;
+              padding: 20px;
+              text-align: center;
+          }
+
+          .close {
+              color: #aaa;
+              float: right;
+              font-size: 28px;
+              font-weight: bold;
+          }
+
+          .close:hover,
+          .close:focus {
+              color: black;
+              text-decoration: none;
+              cursor: pointer;
+          }
+
+          /* Lớp mờ cho phần nền xung quanh pop-up */
+          .overlay {
+              position: fixed;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              background-color: rgba(0, 0, 0, 0.5); /* Màu đen với độ mờ 0.5 */
+              z-index: 0;
+              display: none;
+          }
       </style>
-      <script>
-          loadContent('home');
-      </script>
   </head>
   <body>
-
   <div id="sale">
       <a href="">Sale tháng 11 lên đến 30%</a>
   </div>
@@ -246,6 +289,23 @@
           <a href="home?page=${i}">Trang ${i}</a>
       </c:forEach>
   </div>
+  <!-- Popup -->
+  <!-- Lớp mờ -->
+  <div id="overlay" class="overlay"></div>
+
+  <!-- Modal -->
+  <div id="myModal" class="modal">
+      <div class="modal-content">
+          <span class="close" onclick="closeModal()">&times;</span>
+          <img src="image/popup.gif" alt="Popup Image">
+      </div>
+  </div>
+  <script src="scripts/script.js"></script>
+  <script>
+      window.onload = function() {
+          openModal(); // Gọi hàm mở pop-up khi trang được tải
+      };
+  </script>
   <script src="scripts/script.js"></script>
   </body>
 </html>
