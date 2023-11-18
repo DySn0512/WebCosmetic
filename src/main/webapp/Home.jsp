@@ -218,12 +218,8 @@
               display: none;
           }
       </style>
-      <script>
-          loadContent('home');
-      </script>
   </head>
   <body>
-
   <div id="sale">
       <a href="">Sale tháng 11 lên đến 30%</a>
   </div>
@@ -308,5 +304,6 @@
           openModal(); // Gọi hàm mở pop-up khi trang được tải
       };
   </script>
+  <script src="scripts/script.js"></script>
   </body>
 </html>
