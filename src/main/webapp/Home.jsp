@@ -202,62 +202,17 @@
   </div>
   <nav>
       <a href="#">Home</a>
-      <div class="dropdown">
-          <a href="#">Brands</a>
-          <div class="dropdown-content">
-              <a href="#">Brand 1</a>
-              <a href="#">Brand 2</a>
-              <a href="#">Brand 3</a>
+      <c:forEach items="${productCategories}" var="productCategory">
+          <div class="dropdown">
+              <a href="#">${productCategory.name}</a>
+              <div class="dropdown-content">
+                  <c:forEach items="${productCategory.subCategories}" var="subCategory">
+                      <a href="#">${subCategory.name}</a>
+                  </c:forEach>
+              </div>
           </div>
-      </div>
-      <div class="dropdown">
-          <a href="#">Trang điểm</a>
-          <div class="dropdown-content">
-              <a href="#">Mặt</a>
-              <a href="#">Mắt</a>
-              <a href="#">Môi</a>
-              <a href="#">Má</a>
-          </div>
-      </div>
-      <div class="dropdown">
-          <a href="#">Chăm sóc da</a>
-          <div class="dropdown-content">
-              <a href="#">Làm sạch</a>
-              <a href="#">Mặt nạ</a>
-              <a href="#">Tinh chất</a>
-              <a href="#">Cấp ẩm</a>
-          </div>
-      </div>
-      <div class="dropdown">
-          <a href="#">Chăm sóc mắt</a>
-          <div class="dropdown-content">
-              <a href="#">Dưỡng môi và chống nắng</a>
-          </div>
-      </div>
-      <div class="dropdown">
-          <a href="#">Chăm sóc tóc</a>
-          <div class="dropdown-content">
-              <a href="#">Dầu gội</a>
-              <a href="#">Dầu xả</a>
-              <a href="#">Tẩy tế bào chết da đầu</a>
-              <a href="#">Dầu dưỡng</a>
-          </div>
-      </div>
-      <div class="dropdown">
-          <a href="#">Nước hoa</a>
-          <div class="dropdown-content">
-              <a href="#">Nước hoa nam</a>
-              <a href="#">Nước hoa nữ</a>
-          </div>
-      </div>
-      <div class="dropdown">
-          <a href="#">Dưỡng thể</a>
-          <div class="dropdown-content">
-              <a href="#">Sữa tắm</a>
-              <a href="#">Sữa dưỡng thể</a>
-              <a href="#">Kem chống nắng body</a>
-          </div>
-      </div>
+      </c:forEach>
+
   </nav>
   <div class="slideshow-container">
       <div class="mySlides fade">

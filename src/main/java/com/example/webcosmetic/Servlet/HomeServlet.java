@@ -1,6 +1,8 @@
 package com.example.webcosmetic.Servlet;
 
 import com.example.webcosmetic.Entity.Product;
+import com.example.webcosmetic.Entity.ProductCategory;
+import com.example.webcosmetic.EntityDB.ProductCategoryDB;
 import com.example.webcosmetic.EntityDB.ProductDB;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -36,6 +38,9 @@ public class HomeServlet extends HttpServlet {
         request.setAttribute("products", products);
         request.setAttribute("currentPage", currentPage);
         request.setAttribute("totalPages", totalPages);
+
+        List<ProductCategory> productCategories = ProductCategoryDB.selectAll();
+        request.setAttribute("productCategories", productCategories);
 
         getServletContext().getRequestDispatcher(url).forward(request, response);
     }
