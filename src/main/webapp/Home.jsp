@@ -171,12 +171,8 @@
               height: auto;
           }
       </style>
-      <script>
-          loadContent('home');
-      </script>
   </head>
   <body>
-
   <div id="sale">
       <a href="">Sale tháng 11 lên đến 30%</a>
   </div>
@@ -244,6 +240,6 @@
           <a href="home?page=${i}">Trang ${i}</a>
       </c:forEach>
   </div>
-  <script src="scripts/script.js"></>
+  <script src="scripts/script.js"></script>
   </body>
 </html>

@@ -43,8 +43,9 @@ public class ProductInfoServlet extends HttpServlet {
             setProductImages(product, req);
             editDetailProduct(product, req);
             ProductDB.update(product);
-            removeImagesFromGoogleDrive(req);
         }
+        String url = "/admin/product?action=null";
+        getServletContext().getRequestDispatcher(url).forward(req, resp);
     }
 
     private void editDetailProduct(Product product, HttpServletRequest req) {
@@ -88,15 +89,6 @@ public class ProductInfoServlet extends HttpServlet {
             details.add(detailProduct);
         }
         product.setDetails(details);
-    }
-
-    public void removeImagesFromGoogleDrive(HttpServletRequest req) throws IOException {
-
-        String[] imageRemove = req.getParameterValues("imageRemove");
-
-        if (imageRemove != null) {
-            GoogleDrive.removeListImage(imageRemove);
-        }
     }
 
     private void addDetailProduct(Product product, HttpServletRequest req) {

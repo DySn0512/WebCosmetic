@@ -172,7 +172,7 @@
                 <c:forEach items="${product.images}" var="image">
                     <div class="image-item">
                         <input type="hidden" value="${image.link}" name="strImage">
-                        <input type="button" class="delete-div" onclick="removeImage(this,'${image.link}')" value="X">
+                        <input type="button" class="delete-div" onclick="removeImage(this)" value="X">
                         <img class="img-product" src="${image.link}" alt="">
                     </div>
                 </c:forEach>

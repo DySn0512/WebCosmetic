@@ -27,11 +27,10 @@ public class ProductServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
-        List<Product> products = ProductDB.selectAll();
-        req.setAttribute("products", products);
-        String url = "/admin/product.jsp";;
-        if (action == null) {
-
+        String url = "/admin/product.jsp";
+        if (action == null || action.equals("null")) {
+            List<Product> products = ProductDB.selectAll();
+            req.setAttribute("products", products);
         } else if (action.equals("Tìm")) {
 
         } else if (action.equals("Xoá")) {
