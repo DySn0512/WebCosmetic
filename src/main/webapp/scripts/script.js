@@ -240,7 +240,27 @@ function showSlides() {
 }
 
 showSlides(); // Bắt đầu hiển thị ảnh
+// Hiển thị popup
+// Hàm mở pop-up
+function openModal() {
+    document.getElementById('myModal').style.display = 'block';
+    document.getElementById('overlay').style.display = 'block';
+}
 
+// Hàm đóng pop-up
+function closeModal() {
+    document.getElementById('myModal').style.display = 'none';
+    document.getElementById('overlay').style.display = 'none';
+}
+
+// Đóng pop-up khi click ra ngoài
+window.onclick = function(event) {
+    var modal = document.getElementById('myModal');
+    var overlay = document.getElementById('overlay');
+    if (event.target == modal) {
+        closeModal();
+    }
+};
 
 
 
