@@ -17,7 +17,7 @@ public class DetailOrder {
 
     private String unit;
 
-    private Double price;
+    private Long price;
 
     @ManyToOne
     private Product product;
@@ -25,7 +25,7 @@ public class DetailOrder {
     public DetailOrder() {
     }
 
-    public DetailOrder(String nameProduct, int quantity, String unit, Double price, Product product) {
+    public DetailOrder(String nameProduct, int quantity, String unit, Long price, Product product) {
         this.nameProduct = nameProduct;
         this.quantity = quantity;
         this.unit = unit;
@@ -53,7 +53,7 @@ public class DetailOrder {
         return unit;
     }
 
-    public Double getPrice() {
+    public Long getPrice() {
         return price;
     }
 

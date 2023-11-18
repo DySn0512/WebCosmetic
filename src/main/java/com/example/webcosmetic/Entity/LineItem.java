@@ -40,7 +40,7 @@ public class LineItem {
         return detailProduct;
     }
 
-    public Double getTotal(){
+    public Long getTotal(){
         return detailProduct.getCurrentPrice()*quantity;
     }
 }

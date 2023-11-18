@@ -46,7 +46,6 @@
                     </div>
                 </form>
             </div>
-
         </c:forEach>
     </div>
 </div>

@@ -69,7 +69,7 @@
                     <c:forEach items="${products}" var="product">
                         <tr>
                             <td><input type="checkbox" name="id"></td>
-                            <th><img src="${product.images[0].link}" alt=""></th>
+                            <th style="width:200px"><img src="${product.images[0].link}" alt="" style=" max-width: 100%; height: auto;"></th>
                             <th>${product.name}</th>
                             <th>${product.origin}</th>
                             <th>${product.brand.name}</th>

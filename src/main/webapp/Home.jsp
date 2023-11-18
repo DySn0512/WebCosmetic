@@ -1,4 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
 <%--
   Created by IntelliJ IDEA.
   User: Admin
@@ -130,6 +132,44 @@
           .dropdown:hover .dropdown-content {
               display: block;
           }
+          .slideshow-container {
+              position: relative;
+              width: 100%;
+              height: 400px;
+              overflow: hidden;
+          }
+
+          .mySlides {
+              position: absolute;
+              width: 100%;
+              height: 100%;
+              transition: opacity 1.5s ease-in-out; /* Sử dụng transition để tạo hiệu ứng chuyển đổi */
+          }
+
+          .fade {
+              opacity: 0; /* Bắt đầu ảnh ở trạng thái ẩn */
+          }
+
+          .product-container {
+              display: flex;
+              flex-wrap: wrap;
+              justify-content: center; /* Căn giữa theo chiều ngang */
+          }
+
+          /* Khung của mỗi sản phẩm */
+          .product {
+              width: calc(25% - 20px);
+              padding: 10px;
+              border: 1px solid #FFC0CB;
+              text-align: center;
+              margin: 10px; /* Khoảng cách giữa các sản phẩm */
+          }
+
+          /* Ảnh sản phẩm */
+          .product img {
+              max-width: 100%;
+              height: auto;
+          }
       </style>
       <script>
           loadContent('home');
@@ -162,69 +202,48 @@
   </div>
   <nav>
       <a href="#">Home</a>
-      <div class="dropdown">
-          <a href="#">Brands</a>
-          <div class="dropdown-content">
-              <a href="#">Brand 1</a>
-              <a href="#">Brand 2</a>
-              <a href="#">Brand 3</a>
+      <c:forEach items="${productCategories}" var="productCategory">
+          <div class="dropdown">
+              <a href="#">${productCategory.name}</a>
+              <div class="dropdown-content">
+                  <c:forEach items="${productCategory.subCategories}" var="subCategory">
+                      <a href="#">${subCategory.name}</a>
+                  </c:forEach>
+              </div>
           </div>
-      </div>
-      <div class="dropdown">
-          <a href="#">Trang điểm</a>
-          <div class="dropdown-content">
-              <a href="#">Mặt</a>
-              <a href="#">Mắt</a>
-              <a href="#">Môi</a>
-              <a href="#">Má</a>
-          </div>
-      </div>
-      <div class="dropdown">
-          <a href="#">Chăm sóc da</a>
-          <div class="dropdown-content">
-              <a href="#">Làm sạch</a>
-              <a href="#">Mặt nạ</a>
-              <a href="#">Tinh chất</a>
-              <a href="#">Cấp ẩm</a>
-          </div>
-      </div>
-      <div class="dropdown">
-          <a href="#">Chăm sóc mắt</a>
-          <div class="dropdown-content">
-              <a href="#">Dưỡng môi và chống nắng</a>
-          </div>
-      </div>
-      <div class="dropdown">
-          <a href="#">Chăm sóc tóc</a>
-          <div class="dropdown-content">
-              <a href="#">Dầu gội</a>
-              <a href="#">Dầu xả</a>
-              <a href="#">Tẩy tế bào chết da đầu</a>
-              <a href="#">Dầu dưỡng</a>
-          </div>
-      </div>
-      <div class="dropdown">
-          <a href="#">Nước hoa</a>
-          <div class="dropdown-content">
-              <a href="#">Nước hoa nam</a>
-              <a href="#">Nước hoa nữ</a>
-          </div>
-      </div>
-      <div class="dropdown">
-          <a href="#">Dưỡng thể</a>
-          <div class="dropdown-content">
-              <a href="#">Sữa tắm</a>
-              <a href="#">Sữa dưỡng thể</a>
-              <a href="#">Kem chống nắng body</a>
-          </div>
-      </div>
+      </c:forEach>
+
   </nav>
-  <c:forEach items="${products}" var="product">
-      <div>
-          <img src="${product.images[0].link}" alt="">
-          <p>${product.name}</p>
-          <p>${product.price}</p>
+  <div class="slideshow-container">
+      <div class="mySlides fade">
+          <img src="image/slide1.png" style="width:100%">
       </div>
-  </c:forEach>
+
+      <div class="mySlides fade">
+          <img src="image/slide2.jpg" style="width:100%">
+      </div>
+      <div class="mySlides fade">
+          <img src="image/slide3.jpg" style="width:100%">
+      </div>
+  </div>
+  <div class="product-container">
+      <c:forEach items="${products}" var="product">
+          <div class="product">
+              <img src="${product.images[0].link}" alt="">
+              <p>${product.name}</p>
+              <p>${product.price}</p>
+          </div>
+      </c:forEach>
+
+  </div>
+  <!-- Hiển thị phân trang -->
+  <div>
+
+      <!-- Hiển thị các liên kết chuyển trang -->
+      <c:forEach begin="1" end="${totalPages}" var="i">
+          <a href="home?page=${i}">Trang ${i}</a>
+      </c:forEach>
+  </div>
+  <script src="scripts/script.js"></script>
   </body>
 </html>

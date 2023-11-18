@@ -125,8 +125,26 @@ function cancelEdit(clickedElement, name) {
     input.style.pointerEvents = 'none';
 }
 
-function removeParent(element) {
+function removeDetailProduct(element,id) {
     element.parentNode.remove();
+    if (id!==""){
+        var input = document.createElement("input");
+        input.type = "hidden";
+        input.value = id;
+        input.name = "detailRemove";
+        document.getElementById('detail-container').appendChild(input);
+    }
+}
+function removeImage(element,url) {
+    element.parentNode.remove();
+    if (url!==""){
+        var id = url.split('=')[1];
+        var input = document.createElement("input");
+        input.type = "hidden";
+        input.value=id;
+        input.name = "imageRemove";
+        document.getElementById("image-container").appendChild(input);
+    }
 }
 function allowDrop(ev) {
     ev.preventDefault();
@@ -140,13 +158,14 @@ function drop(ev){
             const div = document.createElement("div");
             div.className = "image-item";
             div.innerHTML = `<input type="hidden" value="${e.target.result}" name="strImage">
-                             <input type="button" class="delete-div" onclick="removeParent(this)" value="X">
+                             <input type="button" class="delete-div" onclick="removeImage(this,'')" value="X">
                              <img class="img-product" src="${e.target.result}" alt="">`;
             document.getElementById("image-container").appendChild(div);
         };
         reader.readAsDataURL(file);
     });
 }
+
 
 function updateSaleIput(checkbox) {
     var div = checkbox.closest('.detail-item');
@@ -156,11 +175,11 @@ function updateSaleIput(checkbox) {
     inputIsSale.value = checkbox.checked;
 }
 
-function addProductDetails() {
+function addDetailProduct() {
     var newDiv = document.createElement('div');
     newDiv.className = 'detail-item';
     newDiv.innerHTML = `
-         <input type="button" onclick="removeParent(this)" value="X">
+         <input type="button" onclick="removeDetailProduct(this,'')" value="X">
           <input type="hidden" name="idDetail" value="" >
          <div>
             <label>
@@ -170,7 +189,7 @@ function addProductDetails() {
              <label class="right">
                 Giảm giá:
                 <input type="hidden" name="isSale" value="false" id="is-sale" >
-                <input type="checkbox" id="is-sale" value="false" onclick="updateSaleIput(this)">
+                <input type="checkbox" value="false" onclick="updateSaleIput(this)">
             </label>
         </div>
         <div>
@@ -204,6 +223,24 @@ function submitProductForm(form) {
         alert('phải có ít nhất 1 chi tiết sản phẩm và 1 hình ảnh ứng với mỗi sản phẩm');
     }
 }
+let slideIndex = 0;
+const slides = document.querySelectorAll('.mySlides');
+
+function showSlides() {
+    for (let i = 0; i < slides.length; i++) {
+        slides[i].style.opacity = '0'; // Ẩn tất cả ảnh
+    }
+    slideIndex++;
+    if (slideIndex > slides.length) {
+        slideIndex = 1;
+    }
+    slides[slideIndex - 1].style.opacity = '1'; // Hiển thị ảnh tiếp theo
+
+    setTimeout(showSlides, 4000); // Chuyển đổi ảnh sau 4 giây
+}
+
+showSlides(); // Bắt đầu hiển thị ảnh
+
 
 
 

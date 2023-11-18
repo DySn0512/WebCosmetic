@@ -11,13 +11,12 @@ public class DetailProduct {
 
     private String unit;
 
-    private Double price;
+    private Long price;
 
     private Boolean isSale;
 
-    private Double salePrice;
+    private Long salePrice;
 
-    private Boolean status;
 
     @ManyToOne
     private Product product;
@@ -25,12 +24,11 @@ public class DetailProduct {
     public DetailProduct() {
     }
 
-    public DetailProduct(String unit, Double price, Boolean isSale, Double salePrice, Product product) {
+    public DetailProduct(String unit, Long price, Boolean isSale, Long salePrice, Product product) {
         this.unit = unit;
         this.price = price;
         this.isSale = isSale;
         this.salePrice = salePrice;
-        this.status = true;
         this.product = product;
     }
 
@@ -50,11 +48,11 @@ public class DetailProduct {
         this.unit = unit;
     }
 
-    public Double getPrice() {
+    public Long getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(Long price) {
         this.price = price;
     }
 
@@ -66,27 +64,19 @@ public class DetailProduct {
         isSale = sale;
     }
 
-    public Double getSalePrice() {
+    public Long getSalePrice() {
         return salePrice;
     }
 
-    public void setSalePrice(Double salePrice) {
+    public void setSalePrice(Long salePrice) {
         this.salePrice = salePrice;
-    }
-
-    public Boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(Boolean status) {
-        this.status = status;
     }
 
     public Product getProduct() {
         return product;
     }
 
-    public Double getCurrentPrice(){
+    public Long getCurrentPrice(){
         return isSale ? salePrice: price;
     }
 

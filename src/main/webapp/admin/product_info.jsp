@@ -38,7 +38,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="admin.jsp">Trang Chủ</a></li>
-                <li class="breadcrumb-item"><a href="product.jsp">/Sản Phẩm</a></li>
+                <li class="breadcrumb-item"><a href="product">/Sản Phẩm</a></li>
                 <li class="breadcrumb-item active" aria-current="page">/${ariacurrent}</li>
             </ol>
         </nav>
@@ -133,11 +133,11 @@
             <div id="detail-container">
                 <h1>Chi tiết sản phẩm</h1>
                 <br>
-                <div onclick="addProductDetails()" id="add-detail">+</div>
+                <div onclick="addDetailProduct()" id="add-detail">+</div>
                 <c:forEach items="${product.details}" var="detail">
                     <div class="detail-item">
-                        <input type="button" onclick="removeParent(this)" value="X">
-                        <input type="hidden" name="idDetail" value="${detail.id}" >
+                        <input type="button" onclick="removeDetailProduct(this,'${detail.id}')" value="X">
+                        <input type="hidden" name="idDetail" value="${detail.id}">
                         <div>
                             <label>
                                 Đơn vị sản phẩm:
@@ -145,8 +145,10 @@
                             </label>
                             <label class="right">
                                 Giảm giá:
-                                <input type="checkbox" name="isSale" id="is-sale"
-                                       onchange="updateSaleIput(this)" <c:if test="${detail.sale}">checked</c:if> >
+                                <input type="hidden" name="isSale" value="${detail.sale}" id="is-sale" >
+                                <input type="checkbox"
+                                       onchange="updateSaleIput(this)"
+                                       <c:if test="${detail.sale}">checked</c:if> >
                             </label>
                         </div>
                         <div>
@@ -170,7 +172,7 @@
                 <c:forEach items="${product.images}" var="image">
                     <div class="image-item">
                         <input type="hidden" value="${image.link}" name="strImage">
-                        <input type="button" class="delete-div" onclick="removeParent(this)" value="X">
+                        <input type="button" class="delete-div" onclick="removeImage(this,'${image.link}')" value="X">
                         <img class="img-product" src="${image.link}" alt="">
                     </div>
                 </c:forEach>
