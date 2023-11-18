@@ -254,6 +254,15 @@ window.onclick = function(event) {
     }
 };
 
+    function selectPage(element) {
+        // Loại bỏ lớp 'selected' từ tất cả các liên kết trang
+        const pages = document.querySelectorAll("#pagination a");
+        pages.forEach(page => page.classList.remove("selected"));
+
+        // Thêm lớp 'selected' cho trang được chọn
+        element.classList.add("selected");
+    }
+
 
 
 
