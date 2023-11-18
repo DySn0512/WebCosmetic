@@ -146,6 +146,8 @@ public class ProductInfoServlet extends HttpServlet {
         Long idSubCategory = Long.parseLong(req.getParameter("subCategory"));
         SubCategory subCategory = SubCategoryDB.select(idSubCategory);
 
+        productCategory.addBrand(brand);
+
         product.setName(name);
         product.setOrigin(origin);
         product.setDescription(description);
