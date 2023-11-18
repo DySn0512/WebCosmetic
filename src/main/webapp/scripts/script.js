@@ -189,7 +189,7 @@ function addDetailProduct() {
              <label class="right">
                 Giảm giá:
                 <input type="hidden" name="isSale" value="false" id="is-sale" >
-                <input type="checkbox" id="is-sale" value="false" onclick="updateSaleIput(this)">
+                <input type="checkbox" value="false" onclick="updateSaleIput(this)">
             </label>
         </div>
         <div>

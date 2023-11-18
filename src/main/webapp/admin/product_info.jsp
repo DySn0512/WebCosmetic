@@ -145,7 +145,8 @@
                             </label>
                             <label class="right">
                                 Giảm giá:
-                                <input type="checkbox" name="isSale" id="is-sale"
+                                <input type="hidden" name="isSale" value="${detail.sale}" id="is-sale" >
+                                <input type="checkbox"
                                        onchange="updateSaleIput(this)"
                                        <c:if test="${detail.sale}">checked</c:if> >
                             </label>

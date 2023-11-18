@@ -35,12 +35,12 @@ public class Cart {
         this.id = id;
     }
 
-    public List<LineItem> getLineItems() {
-        return lineItems;
-    }
-
     public int Count() {
         return lineItems.size();
+    }
+
+    public List<LineItem> getLineItems() {
+        return lineItems;
     }
 
     public void addLineItem(LineItem lineItem) {

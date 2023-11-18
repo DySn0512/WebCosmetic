@@ -11,8 +11,15 @@ import java.util.Collections;
 
 public class GoogleDrive {
 
-    public static File uploadImage(String base64Image) throws IOException, GeneralSecurityException {
-        Drive service = GoogleDriveService.getDriveService();
+    public static File uploadImage(String base64Image)  {
+        Drive service = null;
+        try {
+            service = GoogleDriveService.getDriveService();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (GeneralSecurityException e) {
+            throw new RuntimeException(e);
+        }
         String base64String = base64Image.split(",")[1];
         byte[] imageBytes = Base64.getDecoder().decode(base64String);
 
@@ -21,14 +28,29 @@ public class GoogleDrive {
         fileMetadata.setParents(Collections.singletonList("1EKGJgQD3EpzRPnsZMCz3J2DWAg5yN4P5"));
         ByteArrayContent mediaContent = new ByteArrayContent("image/jpeg", imageBytes);
 
-        return service.files().create(fileMetadata, mediaContent)
-                .setFields("id,webContentLink")
-                .execute();
+        try {
+            return service.files().create(fileMetadata, mediaContent)
+                    .setFields("id,webContentLink")
+                    .execute();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public static void removeImage(String id) throws GeneralSecurityException, IOException {
-        Drive service = GoogleDriveService.getDriveService();
+    public static void removeImage(String id) throws IOException {
+        Drive service = null;
+        try {
+            service = GoogleDriveService.getDriveService();
+        } catch (IOException | GeneralSecurityException e) {
+            throw new RuntimeException(e);
+        }
         service.files().delete(id).execute();
+    }
+
+    public static void removeListImage(String[] ids) throws IOException {
+        for (var item : ids) {
+            removeImage(item);
+        }
     }
 
 }

@@ -31,7 +31,7 @@ public class Product {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductImage> images;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     private List<DetailProduct> details;
 
     public Product() {
@@ -106,6 +106,13 @@ public class Product {
 
     public List<DetailProduct> getDetails() {
         return details;
+    }
+
+    public void setDetails(List<DetailProduct> details) {
+        this.details = new ArrayList<>();
+        for (var item : details) {
+            addDetail(item);
+        }
     }
 
     public void addDetail(DetailProduct detailProduct) {
