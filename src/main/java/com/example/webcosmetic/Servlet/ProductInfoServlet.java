@@ -41,16 +41,23 @@ public class ProductInfoServlet extends HttpServlet {
             product = ProductDB.select(idProduct);
             setProductAttributes(product, req);
             setProductImages(product, req);
-            removeImagesFromGoogleDrive(req);
             editDetailProduct(product, req);
             ProductDB.update(product);
+            removeImagesFromGoogleDrive(req);
         }
     }
 
     private void editDetailProduct(Product product, HttpServletRequest req) {
+
         // những detail đã bị xoá sẽ được lấy để xoá
         String[] detailRemove = req.getParameterValues("detailRemove");
-
+        if (detailRemove!=null){
+            for (var item : detailRemove) {
+                Long idDetail = Long.parseLong(item);
+                DetailProduct detailProduct = DetailProductDB.select(idDetail);
+                DetailProductDB.delete(detailProduct);
+            }
+        }
         //lấy các detail sau khi được chỉnh sửa
         String[] idDetails = req.getParameterValues("idDetail");
         String[] units = req.getParameterValues("unit");
@@ -60,12 +67,12 @@ public class ProductInfoServlet extends HttpServlet {
 
         List<DetailProduct> details = new ArrayList<>();
         for (int i = 0; i < idDetails.length; i++) {
-            Double price = Double.parseDouble(priceValues[i]);
+            Long price = Long.parseLong(priceValues[i]);
             Boolean isSale = Boolean.parseBoolean(isSaleValues[i]);
-            double salePrice = isSale ? Double.parseDouble(priceSaleValues[i]) : 0D;
+            Long salePrice = isSale ? Long.parseLong(priceSaleValues[i]) : 0L;
             DetailProduct detailProduct;
             if (!idDetails[i].isEmpty()) {
-                // nếu detail này kh bị xoá mà chỉ bị sửa thì truy vấn nó lên sửa nó lại
+                // nếu detail này kh bị xoá mà chỉ bị sửa thì, truy vấn nó lên sửa nó lại
                 Long idDetail = Long.parseLong(idDetails[i]);
                 detailProduct = DetailProductDB.select(idDetail);
 
@@ -100,9 +107,9 @@ public class ProductInfoServlet extends HttpServlet {
         String[] priceSaleValues = req.getParameterValues("salePrice");
 
         for (int i = 0; i < priceValues.length; i++) {
-            Double price = Double.parseDouble(priceValues[i]);
+            Long price = Long.parseLong(priceValues[i]);
             Boolean isSale = Boolean.parseBoolean(isSaleValues[i]);
-            double salePrice = isSale ? Double.parseDouble(priceSaleValues[i]) : 0D;
+            Long salePrice = isSale ? Long.parseLong(priceSaleValues[i]) : 0L;
             DetailProduct detailProduct = new DetailProduct(units[i], price, isSale, salePrice, product);
             product.addDetail(detailProduct);
         }

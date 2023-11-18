@@ -62,7 +62,7 @@ public class Order {
         for (var item :lineItems) {
             String unit = item.getDetailProduct().getUnit();
             int quantity = item.getQuantity();
-            Double price = item.getDetailProduct().getCurrentPrice();
+            Long price = item.getDetailProduct().getCurrentPrice();
             Product product = item.getDetailProduct().getProduct();
             String nameProduct = product.getName();
             this.details.add(new DetailOrder(nameProduct,quantity,unit,price,product));

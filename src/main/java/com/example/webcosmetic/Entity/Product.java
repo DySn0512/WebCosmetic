@@ -31,7 +31,7 @@ public class Product {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductImage> images;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     private List<DetailProduct> details;
 
     public Product() {
