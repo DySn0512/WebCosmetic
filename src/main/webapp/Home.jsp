@@ -132,6 +132,44 @@
           .dropdown:hover .dropdown-content {
               display: block;
           }
+          .slideshow-container {
+              position: relative;
+              width: 100%;
+              height: 400px;
+              overflow: hidden;
+          }
+
+          .mySlides {
+              position: absolute;
+              width: 100%;
+              height: 100%;
+              transition: opacity 1.5s ease-in-out; /* Sử dụng transition để tạo hiệu ứng chuyển đổi */
+          }
+
+          .fade {
+              opacity: 0; /* Bắt đầu ảnh ở trạng thái ẩn */
+          }
+
+          .product-container {
+              display: flex;
+              flex-wrap: wrap;
+              justify-content: center; /* Căn giữa theo chiều ngang */
+          }
+
+          /* Khung của mỗi sản phẩm */
+          .product {
+              width: calc(25% - 20px);
+              padding: 10px;
+              border: 1px solid #FFC0CB;
+              text-align: center;
+              margin: 10px; /* Khoảng cách giữa các sản phẩm */
+          }
+
+          /* Ảnh sản phẩm */
+          .product img {
+              max-width: 100%;
+              height: auto;
+          }
       </style>
       <script>
           loadContent('home');
@@ -221,13 +259,28 @@
           </div>
       </div>
   </nav>
-  <c:forEach items="${products}" var="product">
-      <div>
-          <img src="${product.images[0].link}" alt="">
-          <p>${product.name}</p>
-          <p>${product.price}</p>
+  <div class="slideshow-container">
+      <div class="mySlides fade">
+          <img src="image/slide1.png" style="width:100%">
       </div>
-  </c:forEach>
+
+      <div class="mySlides fade">
+          <img src="image/slide2.jpg" style="width:100%">
+      </div>
+      <div class="mySlides fade">
+          <img src="image/slide3.jpg" style="width:100%">
+      </div>
+  </div>
+  <div class="product-container">
+      <c:forEach items="${products}" var="product">
+          <div class="product">
+              <img src="${product.images[0].link}" alt="">
+              <p>${product.name}</p>
+              <p>${product.price}</p>
+          </div>
+      </c:forEach>
+
+  </div>
   <!-- Hiển thị phân trang -->
   <div>
 
@@ -236,5 +289,6 @@
           <a href="home?page=${i}">Trang ${i}</a>
       </c:forEach>
   </div>
+  <script src="scripts/script.js"></script>
   </body>
 </html>

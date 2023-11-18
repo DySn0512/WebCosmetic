@@ -223,6 +223,24 @@ function submitProductForm(form) {
         alert('phải có ít nhất 1 chi tiết sản phẩm và 1 hình ảnh ứng với mỗi sản phẩm');
     }
 }
+let slideIndex = 0;
+const slides = document.querySelectorAll('.mySlides');
+
+function showSlides() {
+    for (let i = 0; i < slides.length; i++) {
+        slides[i].style.opacity = '0'; // Ẩn tất cả ảnh
+    }
+    slideIndex++;
+    if (slideIndex > slides.length) {
+        slideIndex = 1;
+    }
+    slides[slideIndex - 1].style.opacity = '1'; // Hiển thị ảnh tiếp theo
+
+    setTimeout(showSlides, 4000); // Chuyển đổi ảnh sau 4 giây
+}
+
+showSlides(); // Bắt đầu hiển thị ảnh
+
 
 
 
