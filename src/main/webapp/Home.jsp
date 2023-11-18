@@ -244,6 +244,6 @@
           <a href="home?page=${i}">Trang ${i}</a>
       </c:forEach>
   </div>
-  <script src="scripts/script.js"></script>
+  <script src="scripts/script.js"></>
   </body>
 </html>

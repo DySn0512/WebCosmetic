@@ -3,8 +3,8 @@ package com.example.webcosmetic.Entity;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
-import java.util.DoubleSummaryStatistics;
 import java.util.List;
+import java.util.LongSummaryStatistics;
 
 @Entity
 public class Product {
@@ -17,6 +17,7 @@ public class Product {
 
     private String origin;
 
+    @Column(length = 100000)
     private String description;
 
     @ManyToOne
@@ -125,11 +126,11 @@ public class Product {
         if (details.size() == 1) {
             return details.get(0).getCurrentPrice().toString();
         }
-        DoubleSummaryStatistics stats = details.stream()
-                .mapToDouble(DetailProduct::getCurrentPrice)
+        LongSummaryStatistics stats = details.stream()
+                .mapToLong(DetailProduct::getCurrentPrice)
                 .summaryStatistics();
-        double minCurrentPrice = stats.getMin();
-        double maxCurrentPrice = stats.getMax();
+        Long minCurrentPrice = stats.getMin();
+        Long maxCurrentPrice = stats.getMax();
         return minCurrentPrice + " - " + maxCurrentPrice;
     }
 }
