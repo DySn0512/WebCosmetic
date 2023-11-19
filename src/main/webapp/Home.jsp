@@ -166,9 +166,18 @@
           }
 
           /* Ảnh sản phẩm */
-          .product img {
-              max-width: 100%;
-              height: auto;
+          .product-image {
+              height: 250px; /* Độ cao mong muốn cho ảnh */
+              overflow: hidden; /* Ảnh vượt quá kích thước sẽ bị ẩn đi */
+          }
+
+          .product-image img {
+              width: 100%; /* Đảm bảo ảnh vừa với div cha */
+              height: auto; /* Đảm bảo tỷ lệ khung hình không bị thay đổi */
+          }
+          .product a {
+              text-decoration: none; /* Ẩn gạch chân */
+              color: inherit; /* Giữ màu chữ mặc định */
           }
 
           /* CSS để tạo pop-up */
@@ -188,7 +197,6 @@
               top: 50%;
               left: 50%;
               transform: translate(-50%, -50%);
-              background-color: white;
               padding: 20px;
               text-align: center;
           }
@@ -237,6 +245,11 @@
           #pagination a.selected {
               /* Định dạng cho trang được chọn */
               background-color: pink;
+          }
+          .banner-perfume {
+              margin-top: 50px ;
+              margin-bottom: 50px;
+              margin-left: 70px;
           }
 
       </style>
@@ -291,15 +304,23 @@
           <img src="image/slide3.jpg" style="width:100%">
       </div>
   </div>
+  <div class="banner-perfume">
+      <img src="image/banner_perfumeGirl.jpg" alt="Banner Nước Hoa" width="1350px" >
+  </div>
   <div class="product-container">
       <c:forEach items="${products}" var="product">
           <div class="product">
-              <img src="${product.images[0].link}" alt="">
-              <p>${product.name}</p>
+              <div class="product-image">
+                  <a href="detail.jsp?">
+                      <img src="${product.images[0].link}" alt="">
+                  </a>
+              </div>
+              <a href="detail.jsp?">
+                  <p>${product.name}</p>
+              </a>
               <p>${product.price}</p>
           </div>
       </c:forEach>
-
   </div>
   <!-- Hiển thị phân trang -->
   <div id="pagination-container">
@@ -319,7 +340,7 @@
   <div id="myModal" class="modal">
       <div class="modal-content">
           <span class="close" onclick="closeModal()">&times;</span>
-          <img src="image/popup.gif" alt="Popup Image">
+          <img src="image/popup.jpeg" alt="Popup Image" width="350px">
       </div>
   </div>
   <script src="scripts/script.js"></script>
