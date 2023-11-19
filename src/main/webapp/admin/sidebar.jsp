@@ -36,14 +36,14 @@
 
     <div class="sidebar-link" onclick="loadContent('brand')">
         <img class="sidebar-icon" src="../image/brand.png" alt="brand">
-        <span class="link" style="color: rgb(18, 16, 18);">
+        <span class="link" style="color: rgb(251,179,15);">
              Thương hiệu
         </span>
     </div>
 
     <div class="sidebar-link" onclick="loadContent('order')">
-        <img class="sidebar-icon" src="../image/order.jpg" alt="order">
-        <span class="link" style="color: rgb(18, 16, 18);">
+        <img class="sidebar-icon" src="../image/order.png" alt="order">
+        <span class="link" style="color: rgb(136,219,126);">
              Order
         </span>
     </div>
