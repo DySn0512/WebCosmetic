@@ -1,14 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<%--
+  Created by IntelliJ IDEA.
+  User: ASUS
+  Date: 11/19/2023
+  Time: 7:02 PM
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" href="../style/login.css">
-    <title>Trang Đăng Nhập </title>
+    <title>Trang Đăng Nhập</title>
+    <link rel="stylesheet" type="text/css" href="./style/login.css">
 </head>
-
 <body>
     <div class="container" id="container">
         <div class="form-container sign-up">
@@ -53,9 +58,6 @@
         </div>
     </div>
 
-    <script src="../scripts/login.js"></script>
+    <script src="./scripts/login.js"></script>
 </body>
-
 </html>
-
-
