@@ -144,6 +144,7 @@ public class ProductInfoServlet extends HttpServlet {
         SubCategory subCategory = SubCategoryDB.select(idSubCategory);
 
         productCategory.addBrand(brand);
+        ProductCategoryDB.update(productCategory);
 
         product.setName(name);
         product.setOrigin(origin);
