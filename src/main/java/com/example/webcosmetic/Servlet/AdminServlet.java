@@ -8,17 +8,13 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-@WebServlet(name = "order", value = "/order")
-public class OrderServlet extends HttpServlet {
+@WebServlet(name = "admin", value = "/admin")
+public class AdminServlet  extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doPost(req,resp);
+        doPost(req, resp);
     }
 
     @Override
@@ -26,13 +22,10 @@ public class OrderServlet extends HttpServlet {
         HttpSession session = req.getSession();
         if (session == null || session.getAttribute("admin") == null) {
             resp.sendRedirect("login.jsp");
-            return;
         }
-        String action = req.getParameter("action");
-        String url = "/order.jsp";
-        if (action == null) {
-
+        else{
+            req.setAttribute("ahihi","ahihi");
+            getServletContext().getRequestDispatcher("/admin.jsp").forward(req, resp);
         }
-        getServletContext().getRequestDispatcher(url).forward(req, resp);
     }
 }

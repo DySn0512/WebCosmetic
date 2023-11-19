@@ -10,10 +10,10 @@
 <head>
     <title>ADMIN</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="../style/main.css">
+    <link rel="stylesheet" type="text/css" href="style/main.css">
 </head>
 <body>
-<jsp:include page="/admin/sidebar.jsp"/>
+<jsp:include page="/sidebar.jsp"/>
 <div class="main-content">
     <header style="height: 70px">
         <div id="IconSidebar" onclick="expandSidebar()">&#9776;</div>
@@ -23,6 +23,7 @@
             </ol>
         </nav>
     </header>
+    ${ahihi}
 </div>
 </body>
 </html>

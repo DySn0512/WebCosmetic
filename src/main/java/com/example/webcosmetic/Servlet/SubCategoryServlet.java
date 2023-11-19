@@ -9,11 +9,12 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "subcategory", value = "/admin/subcategory")
+@WebServlet(name = "subcategory", value = "/subcategory")
 public class SubCategoryServlet extends HttpServlet {
 
     @Override
@@ -23,6 +24,11 @@ public class SubCategoryServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        if (session == null || session.getAttribute("admin") == null) {
+            resp.sendRedirect("login.jsp");
+            return;
+        }
         String action = req.getParameter("action");
         if (action.equals("Lưu")) {
             String newName = req.getParameter("newName");
