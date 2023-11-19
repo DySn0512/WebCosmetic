@@ -26,6 +26,10 @@ public class ProductDB {
     public static void delete(Product product) {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
+        for (var detail : product.getDetails()) {
+            detail.setNullProduct();
+            DetailProductDB.delete(detail);
+        }
         trans.begin();
         try {
             em.remove(em.merge(product));

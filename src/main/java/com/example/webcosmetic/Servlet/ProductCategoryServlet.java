@@ -25,9 +25,12 @@ public class ProductCategoryServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String action = req.getParameter("action");
-        String url = "/admin/productcategory.jsp";
+        String url;
         if (action == null) {
-            //
+            List<ProductCategory> productCategories = ProductCategoryDB.selectAll();
+            req.setAttribute("productCategories", productCategories);
+            url = "/admin/productcategory.jsp";
+            getServletContext().getRequestDispatcher(url).forward(req, resp);
         } else if (action.equals("Thêm")) {
             String newName = req.getParameter("newName");
             ProductCategory productCategory = new ProductCategory(newName);
@@ -43,9 +46,8 @@ public class ProductCategoryServlet extends HttpServlet {
             ProductCategory productCategory = ProductCategoryDB.select(id);
             ProductCategoryDB.delete(productCategory);
         }
-        List<ProductCategory> productCategories = ProductCategoryDB.selectAll();
-        req.setAttribute("productCategories", productCategories);
-        getServletContext().getRequestDispatcher(url).forward(req, resp);
+        url = "category";
+        resp.sendRedirect(url);
     }
 
 }
