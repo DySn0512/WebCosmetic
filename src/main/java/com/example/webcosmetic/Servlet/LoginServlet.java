@@ -40,6 +40,9 @@ public class LoginServlet extends HttpServlet {
             }
 
         }
+        else{
+            // của người dùng nè
+        }
     }
 
 }
