@@ -3,6 +3,7 @@ package com.example.webcosmetic.EntityDB;
 import com.example.webcosmetic.Entity.Product;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 
 import java.util.List;
@@ -86,6 +87,18 @@ public class ProductDB {
         try {
             TypedQuery<Long> query = em.createQuery("SELECT COUNT(p) FROM Product p", Long.class);
             return query.getSingleResult().intValue();
+        } finally {
+            em.close();
+        }
+    }
+    public static Product selectProductByName(String productName) {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        try {
+            TypedQuery<Product> query = em.createQuery("SELECT p FROM Product p WHERE p.name = :productName", Product.class)
+                    .setParameter("productName", productName);
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null; // Trả về null nếu không tìm thấy sản phẩm có tên tương ứng
         } finally {
             em.close();
         }

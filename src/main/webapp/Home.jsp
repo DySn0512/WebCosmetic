@@ -138,7 +138,11 @@
               height: 400px;
               overflow: hidden;
           }
-
+          .mySlides img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover; /* Để ảnh đạt kích thước mà không bị thay đổi tỷ lệ khung hình */
+          }
           .mySlides {
               position: absolute;
               width: 100%;
@@ -294,15 +298,18 @@
   </nav>
   <div class="slideshow-container">
       <div class="mySlides fade">
-          <img src="image/slide1.png" style="width:100%">
+          <img src="image/slide1.jpg" style="width:100%">
       </div>
-
       <div class="mySlides fade">
-          <img src="image/slide2.jpg" style="width:100%">
+          <img src="image/slide4.jpg" style="width:100%">
       </div>
       <div class="mySlides fade">
           <img src="image/slide3.jpg" style="width:100%">
       </div>
+      <div class="mySlides fade">
+          <img src="image/slide5.jpg" style="width:100%">
+      </div>
+
   </div>
   <div class="banner-perfume">
       <img src="image/banner_perfumeGirl.jpg" alt="Banner Nước Hoa" width="1350px" >
@@ -311,11 +318,11 @@
       <c:forEach items="${products}" var="product">
           <div class="product">
               <div class="product-image">
-                  <a href="detail.jsp?">
+                  <a href="detail?name=${product.name}">
                       <img src="${product.images[0].link}" alt="">
                   </a>
               </div>
-              <a href="detail.jsp?">
+              <a href="detail?name=${product.name}">
                   <p>${product.name}</p>
               </a>
               <p>${product.price}</p>
