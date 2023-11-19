@@ -21,7 +21,11 @@ public class AdminServlet  extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         if (session == null || session.getAttribute("admin") == null) {
-            resp.sendRedirect("admin/login.html");
+            resp.sendRedirect("login.jsp");
+        }
+        else{
+            req.setAttribute("ahihi","ahihi");
+            getServletContext().getRequestDispatcher("/admin.jsp").forward(req, resp);
         }
     }
 }

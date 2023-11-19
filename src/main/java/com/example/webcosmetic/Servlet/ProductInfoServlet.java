@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import com.example.webcosmetic.Entity.*;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -17,7 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@WebServlet(name = "productInfo", value = "/admin/productInfo")
+@WebServlet(name = "productInfo", value = "/productInfo")
 public class ProductInfoServlet extends HttpServlet {
 
     @Override
@@ -27,7 +28,11 @@ public class ProductInfoServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        HttpSession session = req.getSession();
+        if (session == null || session.getAttribute("admin") == null) {
+            resp.sendRedirect("login.jsp");
+            return;
+        }
         String action = req.getParameter("action");
         Product product;
         if (action.equals("add")) {
