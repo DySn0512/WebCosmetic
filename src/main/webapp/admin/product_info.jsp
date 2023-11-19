@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="../style/main.css">
 </head>
 <body>
-<jsp:include page="sidebar.jsp"/>
+<jsp:include page="/admin/sidebar.jsp"/>
 <script>
     function updateSubCategories(selectElement) {
         var id = selectElement.value;

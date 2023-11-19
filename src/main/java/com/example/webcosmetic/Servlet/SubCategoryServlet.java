@@ -24,10 +24,7 @@ public class SubCategoryServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
-        String url = "/admin/productcategory.jsp";
-        if (action == null) {
-
-        } else if (action.equals("Lưu")) {
+        if (action.equals("Lưu")) {
             String newName = req.getParameter("newName");
             Long id = Long.parseLong(req.getParameter("id"));
             SubCategory subCategory = SubCategoryDB.select(id);
@@ -47,9 +44,7 @@ public class SubCategoryServlet extends HttpServlet {
             }
             ProductCategoryDB.update(productCategory);
         }
-        List<ProductCategory> productCategories = ProductCategoryDB.selectAll();
-        req.setAttribute("productCategories", productCategories);
-        getServletContext().getRequestDispatcher(url).forward(req, resp);
-
+        String url = "category";
+        resp.sendRedirect(url);
     }
 }

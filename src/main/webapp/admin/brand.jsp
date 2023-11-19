@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../style/main.css">
 </head>
 <body>
-<jsp:include page="sidebar.jsp"/>
+<jsp:include page="/admin/sidebar.jsp"/>
 <div class="main-content">
     <header style="height: 70px">
         <div id="IconSidebar" onclick="expandSidebar()">&#9776;</div>

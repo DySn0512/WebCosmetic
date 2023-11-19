@@ -24,8 +24,10 @@ public class BrandServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
         String url = "/admin/brand.jsp";
-
         if (action == null) {
+            List<Brand> brands = BrandDB.selectAll();
+            req.setAttribute("brands", brands);
+            getServletContext().getRequestDispatcher(url).forward(req, resp);
         } else if (action.equals("Lưu")) {
             String newName = req.getParameter("newName");
             Long id = Long.parseLong(req.getParameter("id"));
@@ -42,8 +44,7 @@ public class BrandServlet extends HttpServlet {
             Brand brand = BrandDB.select(id);
             BrandDB.delete(brand);
         }
-        List<Brand> brands = BrandDB.selectAll();
-        req.setAttribute("brands", brands);
-        getServletContext().getRequestDispatcher(url).forward(req, resp);
+        url = "brand";
+        resp.sendRedirect(url);
     }
 }

@@ -80,4 +80,7 @@ public class DetailProduct {
         return isSale ? salePrice: price;
     }
 
+    public void setNullProduct() {
+        this.product=null;
+    }
 }

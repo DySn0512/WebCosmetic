@@ -44,8 +44,8 @@ public class ProductInfoServlet extends HttpServlet {
             editDetailProduct(product, req);
             ProductDB.update(product);
         }
-        String url = "/admin/product?action=null";
-        getServletContext().getRequestDispatcher(url).forward(req, resp);
+        String url = "product";
+        resp.sendRedirect(url);
     }
 
     private void editDetailProduct(Product product, HttpServletRequest req) {
