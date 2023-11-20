@@ -1,7 +1,6 @@
 package com.example.webcosmetic.EntityDB;
 
 import com.example.webcosmetic.Entity.Account;
-import com.example.webcosmetic.Entity.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
@@ -20,4 +19,5 @@ public class AccountDB {
             return null;
         }
     }
+
 }

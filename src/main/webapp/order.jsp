@@ -20,48 +20,54 @@
   </header>
   <div style="margin: 10px">
     <h1>Quản lý đơn hàng</h1>
-    <table>
-      <thead>
-      <tr>
-        <th>Số đơn hàng</th>
-        <th>Tên khách hàng</th>
-        <th>Số Điện Thoại</th>
-        <th>Email</th>
-        <th>Địa chỉ</th>
-        <th>Tên Sản phẩm</th>
-        <th>Số lượng</th>
-        <th>Đơn vị</th>
-        <th>Giá</th>
-        <th>Thành tiền</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr>
-        <td>1</td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      </tbody>
-    </table>
+    <div class="header">
+      <table>
+        <thead>
+        <tr>
+          <th>Số đơn hàng</th>
+          <th>Tên khách hàng</th>
+          <th>Số Điện Thoại</th>
+          <th>Email</th>
+          <th>Địa chỉ</th>
+          <th>Tên Sản phẩm</th>
+          <th>Số lượng</th>
+          <th>Đơn vị</th>
+          <th>Giá</th>
+          <th>Thành tiền</th>
+        </tr>
+        </thead>
+      </table>
+    </div>
+    <div class="content">
+      <table>
+        <tbody>
+        <tr>
+          <td>1</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tbody>
+      </table>
+    </div>
+
 </div>
 
 </body>

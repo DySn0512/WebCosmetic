@@ -14,7 +14,10 @@ public class Account {
     private String password;
 
     private String role;
+<<<<<<< HEAD
 
+=======
+>>>>>>> da3fa85312d503526c757fe3b6723406cfe55f38
      @OneToOne
     private User user;
 
@@ -59,4 +62,5 @@ public class Account {
     public User getUser() {
         return user;
     }
+
 }

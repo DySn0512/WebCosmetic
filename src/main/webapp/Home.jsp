@@ -278,7 +278,9 @@
               <img src="image/cart1.jpeg" alt="Giỏ hàng"/>
           </div>
           <div id="account-icon">
-              <img src="image/account.png" alt="Tài khoản cá nhân"/>
+              <a href="./login_customer.jsp">
+                  <img src="image/account.png" alt="Tài khoản cá nhân"/>
+              </a>
           </div>
       </div>
   </div>
