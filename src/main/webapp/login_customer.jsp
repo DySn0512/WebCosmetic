@@ -41,9 +41,6 @@
                 <div class="input-wrapper">
                     <input autocomplete="off" type="text" class="inputs" name="phone" placeholder="Please enter your Phone">
                     <input type="password" name="password" placeholder="Please enter your Password" autocomplete="off">
-                    <div class="remember-sign-in">
-                        <label><input type="checkbox" name=""> Nhớ mật khẩu</label>
-                    </div>
                 </div>
                 <a href="toForgetPassword">Quên mật khẩu?</a>
                 <button type="submit">Đăng nhập</button>

@@ -30,11 +30,24 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("admin", user);
                 getServletContext().getRequestDispatcher("/admin").forward(req, resp);
             } else {
-                req.setAttribute("message", "tài khoản không hợp lệ");
+                req.setAttribute("message", "Tài khoản không hợp lệ");
                 getServletContext().getRequestDispatcher("/login.jsp").forward(req, resp);
             }
 
         } else {
+            String phone = req.getParameter("phone");
+            String password = req.getParameter("password");
+            User user = UserDB.select(phone, password);
+            if (user != null && user.getRole().equals("customer")) {
+                HttpSession session = req.getSession();
+                session.setAttribute("customer", user);
+                getServletContext().getRequestDispatcher("/customer").forward(req, resp);
+            } else {
+                req.setAttribute("message", "Tài khoản không hợp lệ");
+                getServletContext().getRequestDispatcher("/login_customer.jsp").forward(req, resp);
+
+            }
+
             // của người dùng nè
         }
     }
