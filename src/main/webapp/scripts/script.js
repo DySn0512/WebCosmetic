@@ -263,6 +263,9 @@ window.onclick = function(event) {
         element.classList.add("selected");
     }
 
+    function showPrice(price) {
+        document.getElementById('price-display').innerText = price;
+    }
 
 
 
