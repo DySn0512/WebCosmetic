@@ -19,7 +19,6 @@
                 <input type="email" name="email" placeholder="Email" required/>
                 <input type="text" name="address" placeholder="Address" required/>
                 <h2>Thông tin tài khoản</h2>
-                <input type="text" name="userName" placeholder="UserName" required/>
                 <div>
                     <input type="password" name="password" placeholder="Password" required/>
                     <div class="indicator">
