@@ -69,22 +69,4 @@ public class User {
         this.address = address;
     }
 
-<<<<<<< HEAD
-=======
-    public Boolean getAdmin() {
-        return isAdmin;
-    }
-
-    public void setRoles(int i) {
-    }
-
-    public void setUserStatus(int i) {
-    }
-
-    public void setPassword(String password) {
-    }
-
-    public void setCreatedDate(Date date) {
-    }
->>>>>>> da3fa85312d503526c757fe3b6723406cfe55f38
 }

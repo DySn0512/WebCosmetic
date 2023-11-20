@@ -14,11 +14,8 @@ public class Account {
     private String password;
 
     private String role;
-<<<<<<< HEAD
 
-=======
->>>>>>> da3fa85312d503526c757fe3b6723406cfe55f38
-     @OneToOne
+    @OneToOne
     private User user;
 
     public Account() {
