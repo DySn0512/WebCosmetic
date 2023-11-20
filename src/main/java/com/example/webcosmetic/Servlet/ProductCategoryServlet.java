@@ -9,11 +9,12 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "category", value = "/admin/category")
+@WebServlet(name = "category", value = "/category")
 public class ProductCategoryServlet extends HttpServlet {
 
     @Override
@@ -23,11 +24,19 @@ public class ProductCategoryServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        HttpSession session = req.getSession();
+        if (session == null || session.getAttribute("admin") == null) {
+            resp.sendRedirect("login.jsp");
+            return;
+        }
         String action = req.getParameter("action");
-        String url = "/admin/productcategory.jsp";
+        String url;
         if (action == null) {
-            //
+            List<ProductCategory> productCategories = ProductCategoryDB.selectAll();
+            req.setAttribute("productCategories", productCategories);
+            url = "/productcategory.jsp";
+            getServletContext().getRequestDispatcher(url).forward(req, resp);
+            return;
         } else if (action.equals("Thêm")) {
             String newName = req.getParameter("newName");
             ProductCategory productCategory = new ProductCategory(newName);
@@ -43,9 +52,8 @@ public class ProductCategoryServlet extends HttpServlet {
             ProductCategory productCategory = ProductCategoryDB.select(id);
             ProductCategoryDB.delete(productCategory);
         }
-        List<ProductCategory> productCategories = ProductCategoryDB.selectAll();
-        req.setAttribute("productCategories", productCategories);
-        getServletContext().getRequestDispatcher(url).forward(req, resp);
+        url = "category";
+        resp.sendRedirect(url);
     }
 
 }

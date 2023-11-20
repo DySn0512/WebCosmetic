@@ -10,17 +10,16 @@
 <html>
 <head>
     <title>Danh Mục</title>
-    <link rel="stylesheet" href="../style/main.css">
+    <link rel="stylesheet" href="style/main.css">
 </head>
 <body>
-
-<jsp:include page="sidebar.jsp"/>
+<jsp:include page="/sidebar.jsp"/>
 <div class="main-content">
     <header style="height: 70px">
         <div id="IconSidebar" onclick="expandSidebar()">&#9776;</div>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="admin.jsp">Trang Chủ</a></li>
+                <li class="breadcrumb-item"><a href="admin">Trang Chủ</a></li>
                 <li class="breadcrumb-item active" aria-current="page">/Danh Mục</li>
             </ol>
         </nav>
@@ -49,8 +48,9 @@
                             <input type="button" class="edit-input" onclick="editInput(this)" value="Chỉnh sửa">
                             <input type="submit" class="save-input" value="Lưu" name="action" style="display: none">
                             <input type="submit" class="delete-input" value="Xoá" name="action">
-                            <input type="button" class="cancel-input" onclick="cancelEdit(this,'${productCategory.name}')"
-                                  style="display: none" value="Huỷ">
+                            <input type="button" class="cancel-input"
+                                   onclick="cancelEdit(this,'${productCategory.name}')"
+                                   style="display: none" value="Huỷ">
                         </div>
                     </form>
                 </div>
@@ -71,8 +71,9 @@
                                     <input type="submit" name="action" value="Lưu" class="save-input"
                                            style="display: none">
                                     <input type="submit" name="action" value="Xoá" class="delete-input">
-                                    <input type="button" class="cancel-input" onclick="cancelEdit(this,'${subCategory.name}')"
-                                          style="display: none" value="Huỷ">
+                                    <input type="button" class="cancel-input"
+                                           onclick="cancelEdit(this,'${subCategory.name}')"
+                                           style="display: none" value="Huỷ">
                                 </div>
                             </form>
                         </div>

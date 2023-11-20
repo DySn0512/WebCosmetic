@@ -2,22 +2,20 @@ package com.example.webcosmetic.Servlet;
 
 
 import com.example.webcosmetic.Entity.*;
-import com.example.webcosmetic.EntityDB.BrandDB;
-import com.example.webcosmetic.EntityDB.ProductCategoryDB;
-import com.example.webcosmetic.EntityDB.ProductDB;
-import com.example.webcosmetic.EntityDB.SubCategoryDB;
+import com.example.webcosmetic.EntityDB.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import jdk.jfr.Registered;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(name = "product", value = "/admin/product")
+@WebServlet(name = "product", value = "/product")
 public class ProductServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -26,15 +24,29 @@ public class ProductServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        if (session == null || session.getAttribute("admin") == null) {
+            resp.sendRedirect("login.jsp");
+            return;
+        }
         String action = req.getParameter("action");
-        String url = "/admin/product.jsp";
+        String url;
         if (action == null || action.equals("null")) {
             List<Product> products = ProductDB.selectAll();
             req.setAttribute("products", products);
+            url = "/product.jsp";
+            getServletContext().getRequestDispatcher(url).forward(req, resp);
         } else if (action.equals("Tìm")) {
 
-        } else if (action.equals("Xoá")) {
-
+        } else if (action.equals("remove")) {
+            String[] ids = req.getParameterValues("id");
+            for (var item : ids) {
+                Long id = Long.parseLong(item);
+                Product product = ProductDB.select(id);
+                ProductDB.delete(product);
+            }
+            url = "product";
+            resp.sendRedirect(url);
         } else {
             List<Brand> brands = BrandDB.selectAll();
             req.setAttribute("brands", brands);
@@ -48,8 +60,9 @@ public class ProductServlet extends HttpServlet {
                 req.setAttribute("product", product);
                 req.setAttribute("ariacurrent", "Sửa Sản Phẩm");
             }
-            url = "/admin/product_info.jsp";
+            url = "/product_info.jsp";
+            getServletContext().getRequestDispatcher(url).forward(req, resp);
         }
-        getServletContext().getRequestDispatcher(url).forward(req, resp);
+
     }
 }

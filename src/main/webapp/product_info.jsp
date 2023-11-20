@@ -11,10 +11,10 @@
 <head>
     <title>${ariacurrent}</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../style/main.css">
+    <link rel="stylesheet" href="style/main.css">
 </head>
 <body>
-<jsp:include page="sidebar.jsp"/>
+<jsp:include page="/sidebar.jsp"/>
 <script>
     function updateSubCategories(selectElement) {
         var id = selectElement.value;
@@ -37,7 +37,7 @@
         <div id="IconSidebar" onclick="expandSidebar()">&#9776;</div>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="admin.jsp">Trang Chủ</a></li>
+                <li class="breadcrumb-item"><a href="admin">Trang Chủ</a></li>
                 <li class="breadcrumb-item"><a href="product">/Sản Phẩm</a></li>
                 <li class="breadcrumb-item active" aria-current="page">/${ariacurrent}</li>
             </ol>

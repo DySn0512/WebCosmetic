@@ -12,6 +12,8 @@ public class Account {
     private String userName;
 
     private String password;
+
+    private String role;
      @OneToOne
     private User user;
 
@@ -42,4 +44,5 @@ public class Account {
     public User getUser() {
         return user;
     }
+
 }

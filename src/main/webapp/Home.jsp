@@ -158,18 +158,28 @@
 
           /* Khung của mỗi sản phẩm */
           .product {
-              width: calc(25% - 20px);
+              width: 150px; /* Kích thước khung sản phẩm */
               padding: 10px;
               border: 1px solid #FFC0CB;
               text-align: center;
-              margin: 10px; /* Khoảng cách giữa các sản phẩm */
+              margin: 10px;
           }
 
           /* Ảnh sản phẩm */
-          .product img {
-              max-width: 100%;
-              height: auto;
+          .product-image {
+              height: 250px; /* Độ cao mong muốn cho ảnh */
+              overflow: hidden; /* Ảnh vượt quá kích thước sẽ bị ẩn đi */
           }
+
+          .product-image img {
+              width: 100%; /* Đảm bảo ảnh vừa với div cha */
+              height: auto; /* Đảm bảo tỷ lệ khung hình không bị thay đổi */
+          }
+          .product a {
+              text-decoration: none; /* Ẩn gạch chân */
+              color: inherit; /* Giữ màu chữ mặc định */
+          }
+
           /* CSS để tạo pop-up */
           .modal {
               display: none;
@@ -187,7 +197,6 @@
               top: 50%;
               left: 50%;
               transform: translate(-50%, -50%);
-              background-color: white;
               padding: 20px;
               text-align: center;
           }
@@ -217,6 +226,32 @@
               z-index: 0;
               display: none;
           }
+          #pagination-container {
+              display: flex;
+              justify-content: center;
+              margin-top: 20px;
+          }
+
+          #pagination a {
+              /* Định dạng cho các trang chưa được chọn */
+              background-color: white;
+              padding: 5px 10px;
+              margin: 0 5px;
+              text-decoration: none;
+              border: 1px solid #ccc;
+              border-radius: 5px;
+          }
+
+          #pagination a.selected {
+              /* Định dạng cho trang được chọn */
+              background-color: pink;
+          }
+          .banner-perfume {
+              margin-top: 50px ;
+              margin-bottom: 50px;
+              margin-left: 70px;
+          }
+
       </style>
   </head>
   <body>
@@ -239,7 +274,9 @@
               <img src="image/cart1.jpeg" alt="Giỏ hàng"/>
           </div>
           <div id="account-icon">
-              <img src="image/account.png" alt="Tài khoản cá nhân"/>
+              <a href="./login_customer.jsp">
+                  <img src="image/account.png" alt="Tài khoản cá nhân"/>
+              </a>
           </div>
       </div>
   </div>
@@ -269,24 +306,34 @@
           <img src="image/slide3.jpg" style="width:100%">
       </div>
   </div>
+  <div class="banner-perfume">
+      <img src="image/banner_perfumeGirl.jpg" alt="Banner Nước Hoa" width="1350px" >
+  </div>
   <div class="product-container">
       <c:forEach items="${products}" var="product">
           <div class="product">
-              <img src="${product.images[0].link}" alt="">
-              <p>${product.name}</p>
+              <div class="product-image">
+                  <a href="detail.jsp?">
+                      <img src="${product.images[0].link}" alt="">
+                  </a>
+              </div>
+              <a href="detail.jsp?">
+                  <p>${product.name}</p>
+              </a>
               <p>${product.price}</p>
           </div>
       </c:forEach>
-
   </div>
   <!-- Hiển thị phân trang -->
-  <div>
-
-      <!-- Hiển thị các liên kết chuyển trang -->
-      <c:forEach begin="1" end="${totalPages}" var="i">
-          <a href="home?page=${i}">Trang ${i}</a>
-      </c:forEach>
+  <div id="pagination-container">
+      <div id="pagination">
+          <!-- Hiển thị các liên kết chuyển trang -->
+          <c:forEach begin="1" end="${totalPages}" var="i">
+              <a href="home?page=${i}" onclick="selectPage(this)">${i}</a>
+          </c:forEach>
+      </div>
   </div>
+
   <!-- Popup -->
   <!-- Lớp mờ -->
   <div id="overlay" class="overlay"></div>
@@ -295,7 +342,7 @@
   <div id="myModal" class="modal">
       <div class="modal-content">
           <span class="close" onclick="closeModal()">&times;</span>
-          <img src="image/popup.gif" alt="Popup Image">
+          <img src="image/popup.jpeg" alt="Popup Image" width="350px">
       </div>
   </div>
   <script src="scripts/script.js"></script>
