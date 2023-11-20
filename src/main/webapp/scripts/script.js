@@ -125,9 +125,9 @@ function cancelEdit(clickedElement, name) {
     input.style.pointerEvents = 'none';
 }
 
-function removeDetailProduct(element,id) {
+function removeDetailProduct(element, id) {
     element.parentNode.remove();
-    if (id!==""){
+    if (id !== "") {
         var input = document.createElement("input");
         input.type = "hidden";
         input.value = id;
@@ -135,18 +135,20 @@ function removeDetailProduct(element,id) {
         document.getElementById('detail-container').appendChild(input);
     }
 }
+
 function removeImage(element) {
     element.parentNode.remove();
 }
+
 function allowDrop(ev) {
     ev.preventDefault();
 }
 
-function drop(ev){
+function drop(ev) {
     ev.preventDefault();
     Array.from(ev.dataTransfer.files).forEach(file => {
         const reader = new FileReader();
-        reader.onload = function(e) {
+        reader.onload = function (e) {
             const div = document.createElement("div");
             div.className = "image-item";
             div.innerHTML = `<input type="hidden" value="${e.target.result}" name="strImage">
@@ -215,6 +217,7 @@ function submitProductForm(form) {
         alert('phải có ít nhất 1 chi tiết sản phẩm và 1 hình ảnh ứng với mỗi sản phẩm');
     }
 }
+
 let slideIndex = 0;
 const slides = document.querySelectorAll('.mySlides');
 
@@ -246,7 +249,7 @@ function closeModal() {
 }
 
 // Đóng pop-up khi click ra ngoài
-window.onclick = function(event) {
+window.onclick = function (event) {
     var modal = document.getElementById('myModal');
     var overlay = document.getElementById('overlay');
     if (event.target == modal) {
@@ -254,18 +257,15 @@ window.onclick = function(event) {
     }
 };
 
-    function selectPage(element) {
-        // Loại bỏ lớp 'selected' từ tất cả các liên kết trang
-        const pages = document.querySelectorAll("#pagination a");
-        pages.forEach(page => page.classList.remove("selected"));
+function selectPage(element) {
+    // Loại bỏ lớp 'selected' từ tất cả các liên kết trang
+    const pages = document.querySelectorAll("#pagination a");
+    pages.forEach(page => page.classList.remove("selected"));
 
-        // Thêm lớp 'selected' cho trang được chọn
-        element.classList.add("selected");
-    }
+    // Thêm lớp 'selected' cho trang được chọn
+    element.classList.add("selected");
+}
 
-    function showPrice(price) {
-        document.getElementById('price-display').innerText = price;
-    }
 
 
 

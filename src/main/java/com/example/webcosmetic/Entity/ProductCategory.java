@@ -54,7 +54,7 @@ public class ProductCategory {
     }
 
     public void addBrand(Brand brand) {
-        if (!brands.contains(brand)){
+        if (brands.stream().noneMatch(sc -> sc.getName().equals(brand.getName()))) {
             brands.add(brand);
         }
     }

@@ -2,6 +2,7 @@ package com.example.webcosmetic.Entity;
 
 import jakarta.persistence.*;
 
+
 @Entity
 @Table(name = "\"User\"")
 public class User {
@@ -12,20 +13,27 @@ public class User {
 
     private String name;
 
+    @Column(unique = true)
     private String phone;
 
     private String email;
 
     private String address;
 
+    private String password;
+
+    private String role;
+
     public User() {
     }
 
-    public User(String name, String phone, String email, String address) {
+    public User(String name, String phone, String email, String address, String password) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.password = password;
+        this.role = "customer";
     }
 
     public Long getId() {
@@ -68,4 +76,14 @@ public class User {
         this.address = address;
     }
 
+    public String getPassword(){
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    public String getRole() {
+        return role;
+    }
 }

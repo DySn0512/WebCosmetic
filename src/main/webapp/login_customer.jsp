@@ -13,23 +13,14 @@
     <div class="container" id="container">
         <div class="form-container sign-up" id="register-form-id">
             <form action="register" method="post">
-                <input type="hidden" name="action" value="customer">
                 <h2>Thông tin người dùng</h2>
-                <input type="text" class="inputs" name="name" placeholder="Name"/>
-                <input type="text" name="phone" placeholder="Phone"/>
-                <input type="email" name="email" placeholder="Email"/>
-                <input type="text" name="address" placeholder="Address"/>
+                <input type="text" class="inputs" name="name" placeholder="Name" required/>
+                <input type="number" name="phone" placeholder="Phone" required/>
+                <input type="email" name="email" placeholder="Email" required/>
+                <input type="text" name="address" placeholder="Address" required/>
                 <h2>Thông tin tài khoản</h2>
-                <input type="text" name="userName" placeholder="UserName"/>
-                <div>
-                    <input type="password" name="password" placeholder="Password" />
-                    <div class="indicator">
-                        <span class="weak"></span>
-                        <span class="medium"></span>
-                        <span class="strong"></span>
-                    </div>
-                    <div class="text"></div>
-                </div>
+                <input type="userName" name="username" placeholder="UserName" required/>
+                <input type="password" name="password" placeholder="Password" required/>
                 <input type="password" placeholder="EnterPassword" required>
                 <input type="submit" value="Register"/>
                 <div id="message">${message}</div>
@@ -43,9 +34,6 @@
                 <div class="input-wrapper">
                     <input autocomplete="off" type="text" class="inputs" name="phone" placeholder="Please enter your Phone">
                     <input type="password" name="password" placeholder="Please enter your Password" autocomplete="off">
-                    <div class="remember-sign-in">
-                        <label><input type="checkbox" name=""> Nhớ mật khẩu</label>
-                    </div>
                 </div>
                 <a href="toForgetPassword">Quên mật khẩu?</a>
                 <button type="submit">Đăng nhập</button>

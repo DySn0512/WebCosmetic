@@ -4,19 +4,20 @@ package com.example.webcosmetic.EntityDB;
 import com.example.webcosmetic.Entity.LineItem;
 import jakarta.persistence.EntityManager;
 import com.example.webcosmetic.Entity.Cart;
+import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
 
 public class CartDB {
 
-    public static Cart select(LineItem lineItem) {
+    public static void insert(Cart cart){
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityTransaction trans = em.getTransaction();
+        trans.begin();
         try {
-            String jpql = "SELECT c FROM Cart c JOIN FETCH c.lineItems l WHERE l.id = :lineItemId";
-            TypedQuery<Cart> query = em.createQuery(jpql, Cart.class);
-            query.setParameter("lineItemId", lineItem.getId());
-            return query.getSingleResult();
+            em.persist(cart);
+            trans.commit();
         } catch (Exception e) {
-            return null;
+            trans.rollback();
         } finally {
             em.close();
         }
