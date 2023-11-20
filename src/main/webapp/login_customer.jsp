@@ -11,17 +11,16 @@
 </head>
 <body>
     <div class="container" id="container">
-        <div class="form-container sign-up" action="register"
-             method="post" name="form" id="register-form-id">
-            <form>
+        <div class="form-container sign-up" id="register-form-id">
+            <form action="register" method="post">
                 <input type="hidden" name="action" value="customer">
                 <h2>Thông tin người dùng</h2>
-                <input type="name" class="inputs" name="name" placeholder="Name" value="${user.getName()}"/>
-                <input type="phone" name="phone" placeholder="Phone" value="${user.getPhone()}"/>
-                <input type="email" name="email" placeholder="Email" value="${user.getEmail()}"/>
-                <input type="address" name="address" placeholder="Address" ${user.getAddress()}"/>
+                <input type="text" class="inputs" name="name" placeholder="Name"/>
+                <input type="text" name="phone" placeholder="Phone"/>
+                <input type="email" name="email" placeholder="Email"/>
+                <input type="text" name="address" placeholder="Address"/>
                 <h2>Thông tin tài khoản</h2>
-                <input type=userName name="userName" placeholder="UserName" value="${user.getUserName()}"/>
+                <input type="text" name="userName" placeholder="UserName"/>
                 <div>
                     <input type="password" name="password" placeholder="Password" />
                     <div class="indicator">

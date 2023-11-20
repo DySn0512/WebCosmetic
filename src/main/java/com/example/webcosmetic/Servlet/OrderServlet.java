@@ -26,13 +26,15 @@ public class OrderServlet extends HttpServlet {
         HttpSession session = req.getSession();
         if (session == null || session.getAttribute("admin") == null) {
             resp.sendRedirect("login.jsp");
-            return;
-        }
-        String action = req.getParameter("action");
-        String url = "/order.jsp";
-        if (action == null) {
 
+        }else{
+            String action = req.getParameter("action");
+            String url = "/order.jsp";
+            if (action == null) {
+
+            }
+            getServletContext().getRequestDispatcher(url).forward(req, resp);
         }
-        getServletContext().getRequestDispatcher(url).forward(req, resp);
+
     }
 }

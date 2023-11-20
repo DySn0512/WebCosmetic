@@ -32,25 +32,26 @@ public class ProductInfoServlet extends HttpServlet {
         if (session == null || session.getAttribute("admin") == null) {
             resp.sendRedirect("login.jsp");
             return;
+        }else {
+            String action = req.getParameter("action");
+            Product product;
+            if (action.equals("add")) {
+                product = new Product();
+                setProductAttributes(product, req);
+                setProductImages(product, req);
+                addDetailProduct(product, req);
+                ProductDB.insert(product);
+            } else {
+                Long idProduct = Long.parseLong(req.getParameter("idProduct"));
+                product = ProductDB.select(idProduct);
+                setProductAttributes(product, req);
+                setProductImages(product, req);
+                editDetailProduct(product, req);
+                ProductDB.update(product);
+            }
+            String url = "product";
+            resp.sendRedirect(url);
         }
-        String action = req.getParameter("action");
-        Product product;
-        if (action.equals("add")) {
-            product = new Product();
-            setProductAttributes(product, req);
-            setProductImages(product, req);
-            addDetailProduct(product, req);
-            ProductDB.insert(product);
-        } else {
-            Long idProduct = Long.parseLong(req.getParameter("idProduct"));
-            product = ProductDB.select(idProduct);
-            setProductAttributes(product, req);
-            setProductImages(product, req);
-            editDetailProduct(product, req);
-            ProductDB.update(product);
-        }
-        String url = "product";
-        resp.sendRedirect(url);
     }
 
     private void editDetailProduct(Product product, HttpServletRequest req) {

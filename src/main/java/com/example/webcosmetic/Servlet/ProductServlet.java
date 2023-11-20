@@ -27,42 +27,44 @@ public class ProductServlet extends HttpServlet {
         HttpSession session = req.getSession();
         if (session == null || session.getAttribute("admin") == null) {
             resp.sendRedirect("login.jsp");
-            return;
-        }
-        String action = req.getParameter("action");
-        String url;
-        if (action == null || action.equals("null")) {
-            List<Product> products = ProductDB.selectAll();
-            req.setAttribute("products", products);
-            url = "/product.jsp";
-            getServletContext().getRequestDispatcher(url).forward(req, resp);
-        } else if (action.equals("Tìm")) {
 
-        } else if (action.equals("remove")) {
-            String[] ids = req.getParameterValues("id");
-            for (var item : ids) {
-                Long id = Long.parseLong(item);
-                Product product = ProductDB.select(id);
-                ProductDB.delete(product);
-            }
-            url = "product";
-            resp.sendRedirect(url);
-        } else {
-            List<Brand> brands = BrandDB.selectAll();
-            req.setAttribute("brands", brands);
-            List<ProductCategory> productCategories = ProductCategoryDB.selectAll();
-            req.setAttribute("productCategories", productCategories);
-            if (action.equals("add")) {
-                req.setAttribute("ariacurrent", "Thêm Sản Phẩm");
+        }else{
+            String action = req.getParameter("action");
+            String url;
+            if (action == null || action.equals("null")) {
+                List<Product> products = ProductDB.selectAll();
+                req.setAttribute("products", products);
+                url = "/product.jsp";
+                getServletContext().getRequestDispatcher(url).forward(req, resp);
+            } else if (action.equals("Tìm")) {
+
+            } else if (action.equals("remove")) {
+                String[] ids = req.getParameterValues("id");
+                for (var item : ids) {
+                    Long id = Long.parseLong(item);
+                    Product product = ProductDB.select(id);
+                    ProductDB.delete(product);
+                }
+                url = "product";
+                resp.sendRedirect(url);
             } else {
-                Long id = Long.parseLong(req.getParameter("id"));
-                Product product = ProductDB.select(id);
-                req.setAttribute("product", product);
-                req.setAttribute("ariacurrent", "Sửa Sản Phẩm");
+                List<Brand> brands = BrandDB.selectAll();
+                req.setAttribute("brands", brands);
+                List<ProductCategory> productCategories = ProductCategoryDB.selectAll();
+                req.setAttribute("productCategories", productCategories);
+                if (action.equals("add")) {
+                    req.setAttribute("ariacurrent", "Thêm Sản Phẩm");
+                } else {
+                    Long id = Long.parseLong(req.getParameter("id"));
+                    Product product = ProductDB.select(id);
+                    req.setAttribute("product", product);
+                    req.setAttribute("ariacurrent", "Sửa Sản Phẩm");
+                }
+                url = "/product_info.jsp";
+                getServletContext().getRequestDispatcher(url).forward(req, resp);
             }
-            url = "/product_info.jsp";
-            getServletContext().getRequestDispatcher(url).forward(req, resp);
         }
+
 
     }
 }
