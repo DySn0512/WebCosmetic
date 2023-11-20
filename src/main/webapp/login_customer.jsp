@@ -13,16 +13,15 @@
     <div class="container" id="container">
         <div class="form-container sign-up" id="register-form-id">
             <form action="register" method="post">
-                <input type="hidden" name="action" value="customer">
                 <h2>Thông tin người dùng</h2>
-                <input type="text" class="inputs" name="name" placeholder="Name"/>
-                <input type="text" name="phone" placeholder="Phone"/>
-                <input type="email" name="email" placeholder="Email"/>
-                <input type="text" name="address" placeholder="Address"/>
+                <input type="text" class="inputs" name="name" placeholder="Name" required/>
+                <input type="number" name="phone" placeholder="Phone" required/>
+                <input type="email" name="email" placeholder="Email" required/>
+                <input type="text" name="address" placeholder="Address" required/>
                 <h2>Thông tin tài khoản</h2>
-                <input type="text" name="userName" placeholder="UserName"/>
+                <input type="text" name="userName" placeholder="UserName" required/>
                 <div>
-                    <input type="password" name="password" placeholder="Password" />
+                    <input type="password" name="password" placeholder="Password" required/>
                     <div class="indicator">
                         <span class="weak"></span>
                         <span class="medium"></span>

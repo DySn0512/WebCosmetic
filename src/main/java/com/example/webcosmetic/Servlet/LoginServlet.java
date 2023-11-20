@@ -1,7 +1,5 @@
 package com.example.webcosmetic.Servlet;
 
-import com.example.webcosmetic.Entity.Account;
-import com.example.webcosmetic.Entity.User;
 import com.example.webcosmetic.EntityDB.AccountDB;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

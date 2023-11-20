@@ -25,23 +25,7 @@ public class LineItemDB {
         }
     }
 
-    public static void delete(LineItem lineItem) {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        EntityTransaction trans = em.getTransaction();
-        Cart cart = CartDB.select(lineItem);
-        trans.begin();
-        try {
-            if (cart != null) {
-                cart.removeLineItem(lineItem);
-                em.merge(cart);
-            }
-            trans.commit();
-        } catch (Exception e) {
-            trans.rollback();
-        } finally {
-            em.close();
-        }
-    }
+
 
     public List<LineItem> find(DetailProduct detailProduct) {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();

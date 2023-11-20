@@ -1,7 +1,7 @@
 package com.example.webcosmetic.EntityDB;
 
-import com.example.webcosmetic.Entity.Account;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 
@@ -18,6 +18,20 @@ public class AccountDB {
         } catch (NoResultException e) {
             return null;
         }
+    }
+    public static void insert(Account account){
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityTransaction trans = em.getTransaction();
+        trans.begin();
+        try {
+            em.persist(account);
+            trans.commit();
+        } catch (Exception e) {
+            trans.rollback();
+        } finally {
+            em.close();
+        }
+
     }
 
 }
