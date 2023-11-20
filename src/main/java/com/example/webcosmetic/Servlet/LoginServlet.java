@@ -22,9 +22,9 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
         if (action.equals("admin")) {
-            String userName = req.getParameter("userName");
+            String phone = req.getParameter("phone");
             String password = req.getParameter("password");
-            User user = UserDB.select(userName, password);
+            User user = UserDB.select(phone, password);
             if (user != null && user.getRole().equals("admin")) {
                 HttpSession session = req.getSession();
                 session.setAttribute("admin", user);
