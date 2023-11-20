@@ -1,7 +1,10 @@
 package com.example.webcosmetic.Servlet;
 
+<<<<<<< HEAD
 import com.example.webcosmetic.Entity.User;
 import com.example.webcosmetic.EntityDB.UserDB;
+=======
+>>>>>>> 30bbcea4968c8b66603a6c5abdddd532ed50caf0
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
