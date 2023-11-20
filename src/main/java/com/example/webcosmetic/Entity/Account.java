@@ -12,8 +12,21 @@ public class Account {
     private String userName;
 
     private String password;
+
+    private String role;
+
      @OneToOne
     private User user;
+
+    public Account() {
+    }
+
+    public Account(String userName, String password, User user) {
+        this.userName = userName;
+        this.password = password;
+        this.user = user;
+        this.role = "customer";
+    }
 
     public void setId(Long id) {
         this.id = id;
@@ -37,6 +50,10 @@ public class Account {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRole() {
+        return role;
     }
 
     public User getUser() {

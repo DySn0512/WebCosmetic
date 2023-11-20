@@ -27,30 +27,32 @@ public class SubCategoryServlet extends HttpServlet {
         HttpSession session = req.getSession();
         if (session == null || session.getAttribute("admin") == null) {
             resp.sendRedirect("login.jsp");
-            return;
-        }
-        String action = req.getParameter("action");
-        if (action.equals("Lưu")) {
-            String newName = req.getParameter("newName");
-            Long id = Long.parseLong(req.getParameter("id"));
-            SubCategory subCategory = SubCategoryDB.select(id);
-            subCategory.setName(newName);
-            SubCategoryDB.update(subCategory);
-        } else {
-            Long idCategory = Long.parseLong(req.getParameter("idCategory"));
-            ProductCategory productCategory = ProductCategoryDB.select(idCategory);
-            if (action.equals("Thêm")) {
+
+        }else{
+            String action = req.getParameter("action");
+            if (action.equals("Lưu")) {
                 String newName = req.getParameter("newName");
-                SubCategory subCategory = new SubCategory(newName);
-                productCategory.addSubCategory(subCategory);
-            } else {
                 Long id = Long.parseLong(req.getParameter("id"));
                 SubCategory subCategory = SubCategoryDB.select(id);
-                productCategory.removeSubCategory(subCategory);
+                subCategory.setName(newName);
+                SubCategoryDB.update(subCategory);
+            } else {
+                Long idCategory = Long.parseLong(req.getParameter("idCategory"));
+                ProductCategory productCategory = ProductCategoryDB.select(idCategory);
+                if (action.equals("Thêm")) {
+                    String newName = req.getParameter("newName");
+                    SubCategory subCategory = new SubCategory(newName);
+                    productCategory.addSubCategory(subCategory);
+                } else {
+                    Long id = Long.parseLong(req.getParameter("id"));
+                    SubCategory subCategory = SubCategoryDB.select(id);
+                    productCategory.removeSubCategory(subCategory);
+                }
+                ProductCategoryDB.update(productCategory);
             }
-            ProductCategoryDB.update(productCategory);
+            String url = "category";
+            resp.sendRedirect(url);
         }
-        String url = "category";
-        resp.sendRedirect(url);
+
     }
 }

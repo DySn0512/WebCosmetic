@@ -16,8 +16,6 @@ public class User {
 
     private String address;
 
-    private Boolean isAdmin;
-
     public User() {
     }
 
@@ -26,7 +24,6 @@ public class User {
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.isAdmin = false;
     }
 
     public Long getId() {
@@ -67,10 +64,6 @@ public class User {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public Boolean getAdmin() {
-        return isAdmin;
     }
 
 }
