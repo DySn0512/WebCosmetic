@@ -19,8 +19,8 @@
             <a class="login">Đăng nhập</a>
             <p>${message}</p>
             <div class="inputBox">
-                <input type="text" name="userName" required>
-                <span class="user">Username</span>
+                <input type="text" name="phone" required>
+                <span class="user">Phone</span>
             </div>
 
             <div class="inputBox">
