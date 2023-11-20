@@ -38,7 +38,9 @@
                 <span>Password</span>
             </div>
             <button class="enter">Đăng nhập</button>
+        </form>
     </div>
+
 </div>
 </body>
 </html>

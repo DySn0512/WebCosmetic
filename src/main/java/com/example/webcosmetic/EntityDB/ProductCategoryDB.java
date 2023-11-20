@@ -65,4 +65,16 @@ public class ProductCategoryDB {
             em.close();
         }
     }
+    public static List<ProductCategory> getBreadcrumbCategoriesForProduct(String productName) {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        try {
+            TypedQuery<ProductCategory> query = em.createQuery(
+                    "SELECT pc FROM ProductCategory pc JOIN pc.subCategories sc JOIN sc.products p WHERE p.name = :productName",
+                    ProductCategory.class);
+            query.setParameter("productName", productName);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
 }
