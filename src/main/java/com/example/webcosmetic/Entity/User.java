@@ -1,7 +1,6 @@
 package com.example.webcosmetic.Entity;
-import jakarta.persistence.*;
 
-import java.util.Date;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "\"User\"")
@@ -72,19 +71,4 @@ public class User {
         this.address = address;
     }
 
-    public Boolean getAdmin() {
-        return isAdmin;
-    }
-
-    public void setRoles(int i) {
-    }
-
-    public void setUserStatus(int i) {
-    }
-
-    public void setPassword(String password) {
-    }
-
-    public void setCreatedDate(Date date) {
-    }
 }
