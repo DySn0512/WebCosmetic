@@ -31,7 +31,7 @@ public class RegisterServlet extends HttpServlet {
         Cart cart = new Cart(user);
         UserDB.insert(user);
         CartDB.insert(cart);
-
+        getServletContext().getRequestDispatcher("/login_customer.jsp").forward(req, resp);
 
     }
 }

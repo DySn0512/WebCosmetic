@@ -12,19 +12,20 @@
             } else {
                 priceDisplay.textContent = price;
             }
-            document.getElementById('price-display').value=id;
+            document.getElementById('price-display').value = id;
         }
-        document.addEventListener("DOMContentLoaded", function() {
+
+        document.addEventListener("DOMContentLoaded", function () {
             var breadcrumbLinks = document.querySelectorAll(".breadcrumb a:not(:last-child)");
 
-            breadcrumbLinks.forEach(function(link) {
+            breadcrumbLinks.forEach(function (link) {
                 link.style.opacity = "0.7"; // Làm mờ các mục ngoại trừ mục cuối cùng
 
-                link.addEventListener("mouseenter", function() {
+                link.addEventListener("mouseenter", function () {
                     this.style.opacity = "1"; // Loại bỏ hiệu ứng làm mờ khi rê chuột vào
                 });
 
-                link.addEventListener("mouseleave", function() {
+                link.addEventListener("mouseleave", function () {
                     this.style.opacity = "0.7"; // Áp dụng hiệu ứng làm mờ lại khi rời chuột ra
                 });
             });
@@ -80,9 +81,12 @@
     </c:if>
     </span>
     </p>
-    <form>
+    <form action="cart" method="post">
         <input type="hidden" name="idDetail" id="id-detail">
-        <input type="submit">
+        <input type="button" value="-" onclick="decrementValue()" />
+        <input type="number" id="number" value="0" />
+        <input type="button" value="+" onclick="incrementValue()" />
+        <button value="add" name="action">Thêm vào giỏ hàng</button>
     </form>
     <!-- Hiển thị các nút ứng với từng unit -->
     <c:forEach items="${product.details}" var="detail">

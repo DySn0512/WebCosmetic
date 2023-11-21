@@ -1,5 +1,6 @@
 package com.example.webcosmetic.EntityDB;
 
+import com.example.webcosmetic.Entity.Product;
 import com.example.webcosmetic.Entity.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
@@ -32,6 +33,15 @@ public class UserDB {
             return query.getSingleResult();
         } catch (NoResultException e) {
             return null;
+        }
+    }
+
+    public static User select(long id) {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        try {
+            return em.find(User.class, id);
+        } finally {
+            em.close();
         }
     }
 }

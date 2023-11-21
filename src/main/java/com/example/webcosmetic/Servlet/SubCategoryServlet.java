@@ -30,7 +30,7 @@ public class SubCategoryServlet extends HttpServlet {
 
         }else{
             String action = req.getParameter("action");
-            if (action.equals("Lưu")) {
+            if (action.equals("update")) {
                 String newName = req.getParameter("newName");
                 Long id = Long.parseLong(req.getParameter("id"));
                 SubCategory subCategory = SubCategoryDB.select(id);
@@ -39,11 +39,11 @@ public class SubCategoryServlet extends HttpServlet {
             } else {
                 Long idCategory = Long.parseLong(req.getParameter("idCategory"));
                 ProductCategory productCategory = ProductCategoryDB.select(idCategory);
-                if (action.equals("Thêm")) {
+                if (action.equals("add")) {
                     String newName = req.getParameter("newName");
                     SubCategory subCategory = new SubCategory(newName);
                     productCategory.addSubCategory(subCategory);
-                } else {
+                } else if(action.equals("remove")) {
                     Long id = Long.parseLong(req.getParameter("id"));
                     SubCategory subCategory = SubCategoryDB.select(id);
                     productCategory.removeSubCategory(subCategory);

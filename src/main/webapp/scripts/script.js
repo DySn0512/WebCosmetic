@@ -28,9 +28,6 @@ function loadContent(servlet) {
     window.location.href = servlet;
 }
 
-function setAction(value) {
-    document.getElementById("action").value = value;
-}
 
 function expandSidebar() {
     var sidebar = document.querySelector('.sidebar');

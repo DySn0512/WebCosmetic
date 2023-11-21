@@ -2,13 +2,12 @@ package com.example.webcosmetic.Entity;
 
 import jakarta.persistence.*;
 
-
 @Entity
 @Table(name = "\"User\"")
 public class User {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
@@ -76,13 +75,14 @@ public class User {
         this.address = address;
     }
 
-    public String getPassword(){
+    public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
     }
+
     public String getRole() {
         return role;
     }

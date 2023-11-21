@@ -34,18 +34,18 @@ public class BrandServlet extends HttpServlet {
                 List<Brand> brands = BrandDB.selectAll();
                 req.setAttribute("brands", brands);
                 getServletContext().getRequestDispatcher(url).forward(req, resp);
-            } else if (action.equals("Lưu")) {
+            } else if (action.equals("update")) {
                 String newName = req.getParameter("newName");
                 Long id = Long.parseLong(req.getParameter("id"));
                 Brand brand = BrandDB.select(id);
                 brand.setName(newName);
                 BrandDB.update(brand);
-            } else if (action.equals("Thêm")) {
+            } else if (action.equals("add")) {
                 String newName = req.getParameter("newName");
                 Brand brand = new Brand(newName);
                 BrandDB.insert(brand);
             }
-            else if (action.equals("Xoá")) {
+            else if (action.equals("remove")) {
                 Long id = Long.parseLong(req.getParameter("id"));
                 Brand brand = BrandDB.select(id);
                 BrandDB.delete(brand);
