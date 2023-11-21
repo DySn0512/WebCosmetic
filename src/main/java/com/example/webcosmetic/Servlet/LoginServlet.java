@@ -38,13 +38,13 @@ public class LoginServlet extends HttpServlet {
             if (user != null && user.getRole().equals("customer")) {
                 HttpSession session = req.getSession();
                 session.setAttribute("customer", user);
-                getServletContext().getRequestDispatcher("/customer").forward(req, resp);
+                getServletContext().getRequestDispatcher("/home").forward(req, resp);
             } else {
                 req.setAttribute("message", "Tài khoản không hợp lệ");
                 getServletContext().getRequestDispatcher("/login_customer.jsp").forward(req, resp);
 
             }
-            
+
         }
     }
 
