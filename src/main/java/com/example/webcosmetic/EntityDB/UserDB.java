@@ -35,4 +35,13 @@ public class UserDB {
             return null;
         }
     }
+
+    public static User select(long id) {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        try {
+            return em.find(User.class, id);
+        } finally {
+            em.close();
+        }
+    }
 }

@@ -26,7 +26,6 @@
                         <span class="medium"></span>
                         <span class="strong"></span>
                     </div>
-                    <div class="text"></div>
                 </div>
                 <input type="password" placeholder="EnterPassword" required>
                 <input type="submit" value="Register"/>

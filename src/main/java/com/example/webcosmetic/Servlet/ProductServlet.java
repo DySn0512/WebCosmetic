@@ -36,7 +36,7 @@ public class ProductServlet extends HttpServlet {
                 req.setAttribute("products", products);
                 url = "/product.jsp";
                 getServletContext().getRequestDispatcher(url).forward(req, resp);
-            } else if (action.equals("Tìm")) {
+            } else if (action.equals("find")) {
 
             } else if (action.equals("remove")) {
                 String[] ids = req.getParameterValues("id");
@@ -54,7 +54,7 @@ public class ProductServlet extends HttpServlet {
                 req.setAttribute("productCategories", productCategories);
                 if (action.equals("add")) {
                     req.setAttribute("ariacurrent", "Thêm Sản Phẩm");
-                } else {
+                } else if (action.equals("update")){
                     Long id = Long.parseLong(req.getParameter("id"));
                     Product product = ProductDB.select(id);
                     req.setAttribute("product", product);

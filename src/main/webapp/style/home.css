@@ -1,0 +1,280 @@
+body {
+    font-family: 'Inconsolata', monospace;
+}
+
+#sale {
+    width: 6280px;
+    height: 60px;
+    background-image: url('../image/nen_sale1.jpg');
+    background-size: contain;
+}
+
+body {
+    margin: 0;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff; /* Màu nền của header */
+    color: #333; /* Màu chữ trắng */
+    padding: 10px 100px; /* Khoảng cách giữa nội dung và biên của header */
+}
+
+.logo img {
+    width: 100px; /* Điều chỉnh kích thước của logo theo ý muốn */
+}
+
+.search-bar {
+    display: flex; /* Sử dụng Flexbox để căn chỉnh nút và thanh tìm kiếm cùng hàng */
+    flex-grow: 0.75; /* Thanh tìm kiếm sẽ mở rộng để điền hết phần còn lại của header */
+    margin: 0 20px; /* Khoảng cách giữa các phần tử con */
+    align-items: center;
+    border: 2px solid pink; /* Điều chỉnh màu và độ dày của viền thành màu hồng */
+    border-radius: 30px; /* Bo góc thanh tìm kiếm */
+}
+
+.search-bar input {
+    border-radius: 30px; /* Bo góc thanh tìm kiếm */
+    height: 40px;
+    width: 100%;
+    border: none;
+    outline: none;
+    margin-left: 10px;
+}
+
+
+.search-bar button {
+    background-color: #fff; /* Màu nền của nút tìm kiếm */
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    margin-right: 20px;
+}
+
+.icons {
+    display: flex;
+    align-items: center;
+}
+
+.icons .cart-icon
+{
+    margin: 10px; /* Khoảng cách giữa biểu tượng tin nhắn và giỏ hàng */
+}
+
+.icons img {
+    width: 30px; /* Điều chỉnh kích thước của biểu tượng theo ý muốn */
+}
+
+nav {
+    background-color: #FFB6C1; /* Màu hồng pastel */
+    padding: 10px;
+    text-align: center; /* Căn giữa */
+}
+
+/* Style for the navigation links */
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    display: inline-block;
+    font-family: 'Inconsolata', monospace;
+    font-size: 20px; /* Kích thước chữ */
+}
+
+/* Style for the dropdown container */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin-right: 10px; /* Khoảng cách bên phải */
+    margin-left: 10px; /* Khoảng cách bên trái */
+}
+
+/* Style for the dropdown content (hidden by default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #FFB6C1; /* Màu hồng */
+    min-width: 160px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    text-align: left; /* Căn trái */
+    padding: 10px; /* Khoảng cách bên trong */
+}
+
+/* Style for the dropdown links */
+.dropdown-content a {
+    color: white; /* Chữ trắng */
+    padding: 12px 16px;
+    display: block;
+    text-decoration: none;
+    font-family: 'Helvetica Neue', sans-serif; /* Font family */
+    font-size: 14px; /* Kích thước chữ */
+}
+
+/* Change color on hover */
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+#login-button {
+    background-color: transparent;
+    border: none;
+}
+
+#login-button img {
+    transition: transform 0.3s ease;
+}
+
+#login-button:hover img {
+    transform: scale(1.3);
+}
+
+#login-button:active img {
+    transform: scale(0.9);
+}
+
+.cart-number {
+    position: absolute;
+    background-color: red;
+    border-radius: 5px;
+    padding: 2px 4px;
+    font-size:15px;
+    margin-left:0;
+}
+
+
+.slideshow-container {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+}
+
+.mySlides img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Để ảnh đạt kích thước mà không bị thay đổi tỷ lệ khung hình */
+}
+
+.mySlides {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: opacity 1.5s ease-in-out; /* Sử dụng transition để tạo hiệu ứng chuyển đổi */
+}
+
+.fade {
+    opacity: 0; /* Bắt đầu ảnh ở trạng thái ẩn */
+}
+
+.product-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Căn giữa theo chiều ngang */
+}
+
+/* Khung của mỗi sản phẩm */
+.product {
+    width: 150px; /* Kích thước khung sản phẩm */
+    padding: 10px;
+    border: 1px solid #FFC0CB;
+    text-align: center;
+    margin: 10px;
+}
+
+/* Ảnh sản phẩm */
+.product-image {
+    height: 250px; /* Độ cao mong muốn cho ảnh */
+    overflow: hidden; /* Ảnh vượt quá kích thước sẽ bị ẩn đi */
+}
+
+.product-image img {
+    width: 100%; /* Đảm bảo ảnh vừa với div cha */
+    height: auto; /* Đảm bảo tỷ lệ khung hình không bị thay đổi */
+}
+
+.product a {
+    text-decoration: none; /* Ẩn gạch chân */
+    color: inherit; /* Giữ màu chữ mặc định */
+}
+
+/* CSS để tạo pop-up */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    text-align: center;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Lớp mờ cho phần nền xung quanh pop-up */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Màu đen với độ mờ 0.5 */
+    z-index: 0;
+    display: none;
+}
+
+#pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+#pagination a {
+    /* Định dạng cho các trang chưa được chọn */
+    background-color: white;
+    padding: 5px 10px;
+    margin: 0 5px;
+    text-decoration: none;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/*#pagination a.selected {*/
+/*    !* Định dạng cho trang được chọn *!*/
+/*    background-color: pink;*/
+/*}*/
+/*đứa này có tồn tại đâu mà có css hả*/
+.banner-perfume {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    margin-left: 70px;
+}

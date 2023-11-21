@@ -25,7 +25,7 @@
                 <span class="close" onclick="x_function()">&times;</span>
                 <form action="brand" method="post" id="">
                     <input type="text" id="new-name" name="newName" value="" required>
-                    <input type="submit" name="action" value="Thêm">
+                    <button value="add" name="action">Thêm</button>
                 </form>
             </div>
         </div>
@@ -38,9 +38,9 @@
                            class="name">
                     <div>
                         <input type="button" class="edit-input" onclick="editInput(this)" value="Chỉnh sửa">
-                        <input type="submit" name="action" value="Lưu" class="save-input"
-                               style="display: none">
-                        <input type="submit" name="action" value="Xoá" class="delete-input">
+                        <button value="update" name="action" class="save-input"
+                                style="display: none">Lưu</button>
+                        <button value="remove" name="action" class="delete-input">Xoá</button>
                         <input type="button" class="cancel-input" onclick="cancelEdit(this,'${brand.name}')"
                               style="display: none" value="Huỷ">
                     </div>

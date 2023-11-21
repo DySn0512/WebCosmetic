@@ -20,12 +20,11 @@
     </header>
     <div style="margin: 10px">
         <form method="post" action="product">
-            <input type="hidden" name="action" id="action" value="pp">
             <div class="tool-bar">
                 <div class="search-bar">
                     <div class="search-input-wrapper">
                         <input type="text" id="search-input" name="search-input" placeholder="Nhập từ khóa tìm kiếm">
-                        <input type="submit" value="🔍" onclick="setAction('find')">
+                        <button value="find" name="action">🔍</button>
                     </div>
                     <select class="search-type">
                         <option value="">Tìm theo...</option>
@@ -46,8 +45,8 @@
                     </label>
                 </div>
                 <div>
-                    <input type="submit" class="add-button" value="Thêm mới" onclick="setAction('add')">
-                    <input type="submit" class="delete-button" value="Xoá" onclick="setAction('remove')">
+                    <button value="add" name="action" class="add-button">Thêm mới</button>
+                    <button value="remove" name="action" class="delete-button">Xoá</button>
                 </div>
             </div>
             <div>
@@ -76,7 +75,7 @@
                             <th>${product.brand.name}</th>
                             <th>${product.productCategory.name}</th>
                             <th>${product.subCategory.name}</th>
-                            <th><a href="product?action=edit&id=${product.id}">Chỉnh sửa</a></th>
+                            <th><a href="product?action=update&id=${product.id}">Chỉnh sửa</a></th>
                         </tr>
                     </c:forEach>
                     </tbody>

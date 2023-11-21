@@ -14,11 +14,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/detail")
+@WebServlet(name = "detail", value = "/detail")
 public class DetailServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Nhận thông tin sản phẩm từ URL
         doPost(request, response);
     }
     @Override

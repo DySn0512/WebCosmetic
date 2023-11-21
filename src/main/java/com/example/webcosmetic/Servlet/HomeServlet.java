@@ -1,14 +1,17 @@
 package com.example.webcosmetic.Servlet;
 
+import com.example.webcosmetic.Entity.Cart;
 import com.example.webcosmetic.Entity.Product;
 import com.example.webcosmetic.Entity.ProductCategory;
+import com.example.webcosmetic.Entity.User;
+import com.example.webcosmetic.EntityDB.CartDB;
 import com.example.webcosmetic.EntityDB.ProductCategoryDB;
 import com.example.webcosmetic.EntityDB.ProductDB;
+import com.example.webcosmetic.EntityDB.UserDB;
+import com.example.webcosmetic.Util.CookieUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.*;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -20,13 +23,13 @@ public class HomeServlet extends HttpServlet {
         doPost(request, response);
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String url = "/Home.jsp";
         int currentPage = 1; // Trang hiện tại
         int recordsPerPage = 4; // Số lượng sản phẩm trên mỗi trang
 
-        if (request.getParameter("page") != null) {
-            currentPage = Integer.parseInt(request.getParameter("page"));
+        if (req.getParameter("page") != null) {
+            currentPage = Integer.parseInt(req.getParameter("page"));
         }
 
         int offset = (currentPage - 1) * recordsPerPage;
@@ -36,15 +39,24 @@ public class HomeServlet extends HttpServlet {
 
         int totalPages = (int) Math.ceil((double) totalProducts / recordsPerPage);
 
-        request.setAttribute("products", products);
-        request.setAttribute("currentPage", currentPage);
-        request.setAttribute("totalPages", totalPages);
-
-
+        req.setAttribute("products", products);
+        req.setAttribute("currentPage", currentPage);
+        req.setAttribute("totalPages", totalPages);
 
         List<ProductCategory> productCategories = ProductCategoryDB.selectAll();
-        request.setAttribute("productCategories", productCategories);
+        req.setAttribute("productCategories", productCategories);
 
-        getServletContext().getRequestDispatcher(url).forward(request, response);
+        Cookie[] cookies = req.getCookies();
+        String userId = CookieUtil.getCookieValue(cookies, "userIdWebCosmetic");
+
+        if (userId!=null && !userId.isEmpty()){
+            HttpSession session = req.getSession();
+            User customer = UserDB.select(Long.parseLong(userId));
+            session.setAttribute("customer", customer);
+            Cart cart = CartDB.select(customer);
+            session.setAttribute("cart",cart);
+        }
+
+        getServletContext().getRequestDispatcher(url).forward(req, resp);
     }
 }

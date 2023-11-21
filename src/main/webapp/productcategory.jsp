@@ -46,8 +46,9 @@
                                style="pointer-events: none;" name="newName" class="name">
                         <div>
                             <input type="button" class="edit-input" onclick="editInput(this)" value="Chỉnh sửa">
-                            <input type="submit" class="save-input" value="Lưu" name="action" style="display: none">
-                            <input type="submit" class="delete-input" value="Xoá" name="action">
+                            <button value="update" name="action" class="save-input"
+                                    style="display: none">Lưu</button>
+                            <button value="remove" name="action" class="delete-input">Xoá</button>
                             <input type="button" class="cancel-input"
                                    onclick="cancelEdit(this,'${productCategory.name}')"
                                    style="display: none" value="Huỷ">
@@ -68,9 +69,9 @@
                                        class="name">
                                 <div>
                                     <input type="button" class="edit-input" onclick="editInput(this)" value="Chỉnh sửa">
-                                    <input type="submit" name="action" value="Lưu" class="save-input"
-                                           style="display: none">
-                                    <input type="submit" name="action" value="Xoá" class="delete-input">
+                                    <button value="update" name="action" class="save-input"
+                                            style="display: none">Lưu</button>
+                                    <button value="remove" name="action" class="delete-input">Xoá</button>
                                     <input type="button" class="cancel-input"
                                            onclick="cancelEdit(this,'${subCategory.name}')"
                                            style="display: none" value="Huỷ">
