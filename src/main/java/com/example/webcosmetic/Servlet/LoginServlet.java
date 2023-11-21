@@ -1,8 +1,6 @@
 package com.example.webcosmetic.Servlet;
 
-import com.example.webcosmetic.Entity.Cart;
 import com.example.webcosmetic.Entity.User;
-import com.example.webcosmetic.EntityDB.CartDB;
 import com.example.webcosmetic.EntityDB.UserDB;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -21,7 +19,7 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
         String phone = req.getParameter("phone");
-        String password = req.getParameter("password");git
+        String password = req.getParameter("password");
         User user = UserDB.select(phone, password);
         if (action.equals("admin")) {
             if (user != null && user.getRole().equals("admin")) {
