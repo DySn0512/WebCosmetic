@@ -41,10 +41,6 @@ public class LoginServlet extends HttpServlet {
                 resp.addCookie(c);
                 resp.sendRedirect("home");
 
-                HttpSession session = req.getSession();
-                session.setAttribute("customer", user);
-                getServletContext().getRequestDispatcher("/home").forward(req, resp);
-
             } else {
                 req.setAttribute("message", "Tài khoản không hợp lệ");
                 getServletContext().getRequestDispatcher("/login_customer.jsp").forward(req, resp);
