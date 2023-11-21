@@ -29,7 +29,6 @@ public class ProductCategoryServlet extends HttpServlet {
             resp.sendRedirect("login.jsp");
         } else {
             String action = req.getParameter("action");
-            String url;
             if (action == null) {
                 showProductCategories(req);
                 getServletContext().getRequestDispatcher("/productcategory.jsp").forward(req, resp);
@@ -45,8 +44,7 @@ public class ProductCategoryServlet extends HttpServlet {
                         removeProductCategory(productCategory);
                     }
                 }
-                url = "category";
-                resp.sendRedirect(url);
+                resp.sendRedirect("category");
             }
         }
 
