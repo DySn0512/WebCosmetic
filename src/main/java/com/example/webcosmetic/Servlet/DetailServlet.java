@@ -36,7 +36,7 @@ public class DetailServlet extends HttpServlet {
 
 
         // Gọi phương thức để lấy thông tin sản phẩm dựa trên tên
-        Product productBread = ProductDB.selectProductByNameToGetBread(productName);
+        Product productBread = ProductDB.selectProductByName(productName);
 
         // Truy cập ProductCategory và SubCategories của sản phẩm
         ProductCategory productCategoryBread = productBread.getProductCategory();

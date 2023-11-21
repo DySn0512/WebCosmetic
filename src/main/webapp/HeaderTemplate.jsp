@@ -29,6 +29,7 @@
         </button>
     </div>
     <div class="icons">
+<<<<<<< HEAD
         <div class="cart-icon">
             <div class="cart-number">${cart.Count()}</div>
             <img src="image/cart1.jpeg" alt="Giỏ hàng"/>
@@ -38,6 +39,17 @@
                 <img src="image/account.png" alt="Tài khoản cá nhân"/>
             </button>
         </div>
+=======
+
+      <div class="cart-icon">
+        <img src="image/cart1.jpeg" alt="Giỏ hàng"/>
+      </div>
+      <div id="account-icon">
+        <button onclick="forward(${customer.name})">
+          <img src="image/account.png" alt="Tài khoản cá nhân"/>
+        </button>
+      </div>
+>>>>>>> a965ed2300166aaac3f9618ef65e0b77756a19a7
     </div>
 </div>
 <nav>
