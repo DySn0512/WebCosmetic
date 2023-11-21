@@ -2,8 +2,6 @@ package com.example.webcosmetic.Entity;
 
 import jakarta.persistence.*;
 
-import java.util.Date;
-
 @Entity
 @Table(name = "\"User\"")
 public class User {
