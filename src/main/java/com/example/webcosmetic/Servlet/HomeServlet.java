@@ -49,7 +49,7 @@ public class HomeServlet extends HttpServlet {
         Cookie[] cookies = req.getCookies();
         String userId = CookieUtil.getCookieValue(cookies, "userIdWebCosmetic");
 
-        if (userId!=null && !userId.isEmpty()){
+        if (!userId.isEmpty()){
             HttpSession session = req.getSession();
             User customer = UserDB.select(Long.parseLong(userId));
             session.setAttribute("customer", customer);
