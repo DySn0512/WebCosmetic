@@ -20,7 +20,7 @@ public class LoginServlet extends HttpServlet {
         String action = req.getParameter("action");
         String phone = req.getParameter("phone");
         String password = req.getParameter("password");
-        User user = UserDB.select(phone, password);
+        User user = UserDB.select(phone,password);
         if (action.equals("admin")) {
             if (user != null && user.getRole().equals("admin")) {
                 HttpSession session = req.getSession();
@@ -32,11 +32,13 @@ public class LoginServlet extends HttpServlet {
             }
         } else {
             if (user != null && user.getRole().equals("customer")) {
+
                 Cookie c = new Cookie("userIdWebCosmetic", user.getId().toString());
                 c.setMaxAge(60);
                 c.setPath("/");
                 resp.addCookie(c);
                 resp.sendRedirect("home");
+
             } else {
                 req.setAttribute("message", "Tài khoản không hợp lệ");
                 getServletContext().getRequestDispatcher("/login_customer.jsp").forward(req, resp);
