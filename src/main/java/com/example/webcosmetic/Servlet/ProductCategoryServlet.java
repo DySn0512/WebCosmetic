@@ -1,9 +1,7 @@
 package com.example.webcosmetic.Servlet;
 
 import com.example.webcosmetic.Entity.ProductCategory;
-import com.example.webcosmetic.Entity.SubCategory;
 import com.example.webcosmetic.EntityDB.ProductCategoryDB;
-import com.example.webcosmetic.EntityDB.SubCategoryDB;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
