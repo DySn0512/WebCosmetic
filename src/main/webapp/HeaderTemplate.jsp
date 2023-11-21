@@ -152,9 +152,9 @@
         <img src="image/cart1.jpeg" alt="Giỏ hàng"/>
       </div>
       <div id="account-icon">
-        <a href="./login_customer.jsp">
+        <button onclick="forward(${customer.name})">
           <img src="image/account.png" alt="Tài khoản cá nhân"/>
-        </a>
+        </button>
       </div>
     </div>
   </div>
