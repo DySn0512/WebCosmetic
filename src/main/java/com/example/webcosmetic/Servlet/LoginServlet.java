@@ -44,8 +44,7 @@ public class LoginServlet extends HttpServlet {
                 getServletContext().getRequestDispatcher("/login_customer.jsp").forward(req, resp);
 
             }
-
-            // của người dùng nè
+            
         }
     }
 
