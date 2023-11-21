@@ -10,7 +10,6 @@
     <link rel="stylesheet" type="text/css" href="./style/login.css">
 </head>
 <body>
-<<<<<<< HEAD
 <div class="container" id="container">
     <div class="form-container sign-up" id="register-form-id">
         <form action="register" method="post">
@@ -26,26 +25,7 @@
                     <span class="weak"></span>
                     <span class="medium"></span>
                     <span class="strong"></span>
-=======
-    <div class="container" id="container">
-        <div class="form-container sign-up" id="register-form-id">
-            <form action="register" method="post">
-                <h2>Thông tin người dùng</h2>
-                <input type="text" class="inputs" name="name" placeholder="Name" required/>
-                <input type="number" name="phone" placeholder="Phone" required/>
-                <input type="email" name="email" placeholder="Email" required/>
-                <input type="text" name="address" placeholder="Address" required/>
-                <h2>Thông tin tài khoản</h2>
-                <div>
-                    <input type="password" name="password" placeholder="Password" required/>
-                    <div class="indicator">
-                        <span class="weak"></span>
-                        <span class="medium"></span>
-                        <span class="strong"></span>
-                    </div>
->>>>>>> 64771ab388a7f8c6f08e3176359438b8aa4e6c34
                 </div>
-                <div class="text"></div>
             </div>
             <input type="password" placeholder="EnterPassword" required>
             <input type="submit" value="Register"/>
@@ -57,14 +37,13 @@
         <form class="login_form" action="login" method="post" name="form">
             <input type="hidden" name="action" value="customer">
             <h1>Đăng nhập </h1>
-            <p>${message}</p>
             <div class="input-wrapper">
-                <input type="text" class="inputs" name="phone" placeholder="Please enter your Phone"required>
-                <input type="password" name="password" placeholder="Please enter your Password" autocomplete="off" required>
+                <input autocomplete="off" type="text" class="inputs" name="phone" placeholder="Please enter your Phone">
+                <input type="password" name="password" placeholder="Please enter your Password" autocomplete="off">
             </div>
             <a href="toForgetPassword">Quên mật khẩu?</a>
             <button type="submit">Đăng nhập</button>
-
+            <p>${message}</p>
         </form>
     </div>
 
