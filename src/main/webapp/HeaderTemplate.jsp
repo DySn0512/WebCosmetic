@@ -31,7 +31,10 @@
     <div class="icons">
         <div class="cart-icon">
             <div class="cart-number">${cart.Count()}</div>
-            <img src="image/cart1.jpeg" alt="Giỏ hàng"/>
+            <button onclick="isLogin('${cart.lineItems}')" id="login-button">
+                <img src="image/cart1.jpeg" alt="Giỏ hàng"/>
+            </button>
+
         </div>
         <div id="account-icon">
             <button onclick="isLogin('${customer.name}')" id="login-button">

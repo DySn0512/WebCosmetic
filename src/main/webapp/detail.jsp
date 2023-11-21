@@ -83,9 +83,9 @@
     </p>
     <form action="cart" method="post">
         <input type="hidden" name="idDetail" id="id-detail">
-        <input type="button" value="-" onclick="decrementValue()" />
-        <input type="number" id="number" value="0" />
-        <input type="button" value="+" onclick="incrementValue()" />
+        <input type="button" value="-"/>
+        <input type="number" id="number" value="1" />
+        <input type="button" value="+"/>
         <button value="add" name="action">Thêm vào giỏ hàng</button>
     </form>
     <!-- Hiển thị các nút ứng với từng unit -->

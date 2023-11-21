@@ -1,13 +1,14 @@
 package com.example.webcosmetic.EntityDB;
 
 
-import com.example.webcosmetic.Entity.LineItem;
+import com.example.webcosmetic.Entity.Cart;
 import com.example.webcosmetic.Entity.User;
 import jakarta.persistence.EntityManager;
-import com.example.webcosmetic.Entity.Cart;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
+
+import java.util.List;
 
 public class CartDB {
 
@@ -34,6 +35,35 @@ public class CartDB {
             return query.getSingleResult();
         } catch (NoResultException e) {
             return null;
+        }
+    }
+
+    public static Cart select(Long id) {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        try {
+            return em.find(Cart.class, id);
+        } finally {
+            em.close();
+        }
+    }
+
+    public static List<Cart> selectAll() {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        TypedQuery<Cart> query = em.createQuery("SELECT b FROM Cart b", Cart.class);
+        return query.getResultList();
+    }
+
+    public static void delete(Cart cart) {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityTransaction trans = em.getTransaction();
+        trans.begin();
+        try {
+            em.remove(em.merge(cart));
+            trans.commit();
+        } catch (Exception e) {
+            trans.rollback();
+        } finally {
+            em.close();
         }
     }
 }
