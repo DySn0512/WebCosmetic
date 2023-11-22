@@ -1,8 +1,6 @@
 package com.example.webcosmetic.Servlet;
 
-import com.example.webcosmetic.Entity.Cart;
 import com.example.webcosmetic.Entity.User;
-import com.example.webcosmetic.EntityDB.CartDB;
 import com.example.webcosmetic.EntityDB.UserDB;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -39,6 +37,7 @@ public class LoginServlet extends HttpServlet {
                 c.setPath("/");
                 resp.addCookie(c);
                 resp.sendRedirect("home");
+
             } else {
                 req.setAttribute("message", "Tài khoản không hợp lệ");
                 getServletContext().getRequestDispatcher("/login_customer.jsp").forward(req, resp);

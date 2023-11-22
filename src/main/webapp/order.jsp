@@ -31,9 +31,8 @@
           <th>Địa chỉ</th>
           <th>Tên Sản phẩm</th>
           <th>Số lượng</th>
-          <th>Đơn vị</th>
-          <th>Giá</th>
-          <th>Thành tiền</th>
+          <th>Đơn giá</th>
+          <th>Số tiền</th>
         </tr>
         </thead>
       </table>
@@ -51,19 +50,7 @@
           <td></td>
           <td></td>
           <td></td>
-          <td></td>
         </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
         </tbody>
       </table>
     </div>

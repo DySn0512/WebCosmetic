@@ -10,13 +10,12 @@ loginBtn.addEventListener('click', () => {
     container.classList.remove('active');
 });
 
-function isLogin(name){
+function isLogin(name,page){
     if (name!==""){
-        console.log("đăng nhập rồi")
+        window.location.href = page;
     }
     else{
         window.location.href = 'login_customer.jsp';
     }
-
 }
 
