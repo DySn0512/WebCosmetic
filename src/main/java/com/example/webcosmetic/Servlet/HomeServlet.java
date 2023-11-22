@@ -14,7 +14,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.List;
 
 @WebServlet(name = "home", value = "/home")
@@ -25,29 +24,54 @@ public class HomeServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String url = "/Home.jsp";
-        int currentPage = 1; // Trang hiện tại
-        int recordsPerPage = 4; // Số lượng sản phẩm trên mỗi trang
 
-        if (req.getParameter("page") != null) {
-            currentPage = Integer.parseInt(req.getParameter("page"));
-        }
+        int currentPage = getCurrentPage(req);
+        int recordsPerPage = 4;
 
-        int offset = (currentPage - 1) * recordsPerPage;
-
+        int offset = calculateOffset(currentPage, recordsPerPage);
         List<Product> products = ProductDB.selectProductsByOffset(offset, recordsPerPage);
-        int totalProducts = ProductDB.getTotalProducts(); // Tổng số sản phẩm
+        int totalProducts = ProductDB.getTotalProducts();
 
-        int totalPages = (int) Math.ceil((double) totalProducts / recordsPerPage);
+        int totalPages = calculateTotalPages(totalProducts, recordsPerPage);
+        setRequestAttributes(req, products, currentPage, totalPages);
+        setProductCategories(req);
 
+        checkUser(req);
+
+        getServletContext().getRequestDispatcher(url).forward(req, resp);
+    }
+
+    private void setRequestAttributes(HttpServletRequest req, List<Product> products, int currentPage, int totalPages) {
         req.setAttribute("products", products);
         req.setAttribute("currentPage", currentPage);
         req.setAttribute("totalPages", totalPages);
+    }
 
+    private void setProductCategories(HttpServletRequest req) {
         List<ProductCategory> productCategories = ProductCategoryDB.selectAll();
         req.setAttribute("productCategories", productCategories);
+    }
+
+    private int calculateTotalPages(int totalProducts, int recordsPerPage) {
+        return (int) Math.ceil((double) totalProducts / recordsPerPage);
+    }
+
+    private int getCurrentPage(HttpServletRequest req) {
+        int currentPage = 1;
+        if (req.getParameter("page") != null) {
+            currentPage = Integer.parseInt(req.getParameter("page"));
+        }
+        return currentPage;
+    }
+
+    private int calculateOffset(int currentPage, int recordsPerPage) {
+        return (currentPage - 1) * recordsPerPage;
+    }
+
+    private void checkUser(HttpServletRequest req) {
         HttpSession session = req.getSession();
 
-        if (session.getAttribute("customer")==null){
+        if (session.getAttribute("customer") == null) {
             Cookie[] cookies = req.getCookies();
             String userId = CookieUtil.getCookieValue(cookies, "userIdWebCosmetic");
             if (!userId.isEmpty()) {
@@ -57,8 +81,5 @@ public class HomeServlet extends HttpServlet {
                 session.setAttribute("cart", cart);
             }
         }
-
-
-        getServletContext().getRequestDispatcher(url).forward(req, resp);
     }
 }

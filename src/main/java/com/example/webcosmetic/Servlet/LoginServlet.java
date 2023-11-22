@@ -37,7 +37,7 @@ public class LoginServlet extends HttpServlet {
                 String savedPassword = req.getParameter("savedPassword");
                 if (savedPassword != null) {
                     Cookie c = new Cookie("userIdWebCosmetic", user.getId().toString());
-                    c.setMaxAge(60);
+                    c.setMaxAge(60000);
                     c.setPath("/");
                     resp.addCookie(c);
                 } else {

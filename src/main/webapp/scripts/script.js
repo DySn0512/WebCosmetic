@@ -286,6 +286,20 @@ function checkSelect(){
         alert('Vui lòng chọn 1 phân loại sản phẩm');
     }
 }
+function removeLineItem(event, button) {
+
+    var form = button.form; // Tìm form chứa button
+    var formData = new FormData(form); // Thu thập dữ liệu từ form nhỏ
+
+    $.ajax({
+        type: 'POST',
+        url: '/cart',
+        data: formData,
+        processData: false,
+        contentType: false,
+    });
+}
+
 
 
 

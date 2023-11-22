@@ -50,7 +50,11 @@
                     </c:if>
                 </td>
                 <td>${lineItem.getTotal()} </td>
-                <td><a href="cart?action=remove&idLineItem=${lineItem.id}">Xoá sản phẩm</a></td>
+                <td>
+                    <form>
+                        <button type="button" onclick="removeLineItem(this)"> xoá</button>
+                    </form>
+                </td>
             </tr>
         </c:forEach>
         </tbody>
@@ -62,5 +66,6 @@
     <input type="hidden" name="action" value="checkout">
     <input type="submit" value="Mua Hàng">
 </form>
+<script src="scripts/script.js"></script>
 </body>
 </html>

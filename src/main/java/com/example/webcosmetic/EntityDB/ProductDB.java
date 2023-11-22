@@ -1,8 +1,6 @@
 package com.example.webcosmetic.EntityDB;
 
 import com.example.webcosmetic.Entity.Product;
-import com.example.webcosmetic.Entity.ProductCategory;
-import com.example.webcosmetic.Entity.SubCategory;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.NoResultException;
@@ -66,6 +64,7 @@ public class ProductDB {
             em.close();
         }
     }
+
     public static List<Product> selectAll() {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         TypedQuery<Product> query = em.createQuery("SELECT p FROM Product p", Product.class);
@@ -93,33 +92,13 @@ public class ProductDB {
             em.close();
         }
     }
+
     public static Product selectProductByName(String productName) {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         try {
             TypedQuery<Product> query = em.createQuery("SELECT p FROM Product p WHERE p.name = :productName", Product.class)
                     .setParameter("productName", productName);
             return query.getSingleResult();
-        } catch (NoResultException e) {
-            return null; // Trả về null nếu không tìm thấy sản phẩm có tên tương ứng
-        } finally {
-            em.close();
-        }
-    }
-    public static Product selectProductByNameToGetBread(String productName) {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        try {
-            TypedQuery<Product> query = em.createQuery("SELECT p FROM Product p WHERE p.name = :productName", Product.class)
-                    .setParameter("productName", productName);
-            Product product = query.getSingleResult();
-
-            // Truy cập thông tin về ProductCategory và SubCategory của sản phẩm
-            ProductCategory productCategory = product.getProductCategory();
-            SubCategory productSub = product.getSubCategory();
-
-            // Sử dụng thông tin này để xây dựng breadcrumb hoặc làm việc khác cần thiết
-            // ...
-
-            return product;
         } catch (NoResultException e) {
             return null; // Trả về null nếu không tìm thấy sản phẩm có tên tương ứng
         } finally {
