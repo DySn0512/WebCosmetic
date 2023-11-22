@@ -21,7 +21,7 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
         String phone = req.getParameter("phone");
-        String password = req.getParameter("password");git
+        String password = req.getParameter("password");
         User user = UserDB.select(phone, password);
         if (action.equals("admin")) {
             if (user != null && user.getRole().equals("admin")) {
