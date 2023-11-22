@@ -45,17 +45,19 @@ public class HomeServlet extends HttpServlet {
 
         List<ProductCategory> productCategories = ProductCategoryDB.selectAll();
         req.setAttribute("productCategories", productCategories);
+        HttpSession session = req.getSession();
 
-        Cookie[] cookies = req.getCookies();
-        String userId = CookieUtil.getCookieValue(cookies, "userIdWebCosmetic");
-
-        if (!userId.isEmpty()){
-            HttpSession session = req.getSession();
-            User customer = UserDB.select(Long.parseLong(userId));
-            session.setAttribute("customer", customer);
-            Cart cart = CartDB.select(customer);
-            session.setAttribute("cart",cart);
+        if (session.getAttribute("customer")==null){
+            Cookie[] cookies = req.getCookies();
+            String userId = CookieUtil.getCookieValue(cookies, "userIdWebCosmetic");
+            if (!userId.isEmpty()) {
+                User customer = UserDB.select(Long.parseLong(userId));
+                session.setAttribute("customer", customer);
+                Cart cart = CartDB.select(customer);
+                session.setAttribute("cart", cart);
+            }
         }
+
 
         getServletContext().getRequestDispatcher(url).forward(req, resp);
     }
