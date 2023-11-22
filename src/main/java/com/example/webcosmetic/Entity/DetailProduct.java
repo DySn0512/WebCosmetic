@@ -17,7 +17,6 @@ public class DetailProduct {
 
     private Long salePrice;
 
-
     @ManyToOne
     private Product product;
 

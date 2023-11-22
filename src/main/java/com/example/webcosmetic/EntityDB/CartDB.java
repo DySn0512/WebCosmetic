@@ -1,6 +1,7 @@
 package com.example.webcosmetic.EntityDB;
 
 
+import com.example.webcosmetic.Entity.Brand;
 import com.example.webcosmetic.Entity.Cart;
 import com.example.webcosmetic.Entity.User;
 import jakarta.persistence.EntityManager;
@@ -42,6 +43,19 @@ public class CartDB {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         try {
             return em.find(Cart.class, id);
+        } finally {
+            em.close();
+        }
+    }
+    public static void update(Cart cart) {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityTransaction trans = em.getTransaction();
+        trans.begin();
+        try {
+            em.merge(cart);
+            trans.commit();
+        } catch (Exception e) {
+            trans.rollback();
         } finally {
             em.close();
         }

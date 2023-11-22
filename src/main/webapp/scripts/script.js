@@ -262,8 +262,30 @@ function selectPage(element) {
     // Thêm lớp 'selected' cho trang được chọn
     element.classList.add("selected");
 }
+function decreaseNumber() {
+    var numberField = document.getElementById('number');
+    var currentValue = parseInt(numberField.value);
 
+    // Giảm giá trị số lượng không dưới 1
+    if (currentValue > 1) {
+        numberField.value = currentValue - 1;
+    }
+}
 
+function increaseNumber() {
+    var numberField = document.getElementById('number');
+    var currentValue = parseInt(numberField.value);
+
+    // Tăng giá trị số lượng
+    numberField.value = currentValue + 1;
+}
+function checkSelect(){
+    var id= document.getElementById('id-detail').value ;
+    if (id === null || id ===""){
+        event.preventDefault();
+        alert('Vui lòng chọn 1 phân loại sản phẩm');
+    }
+}
 
 
 

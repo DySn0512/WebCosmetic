@@ -18,6 +18,7 @@
                     <th>Checkbox</th>
                     <th>Tên sản phẩm</th>
                     <th>Số lượng</th>
+                    <th>Phân loại</th>
                     <th>Đơn giá</th>
                     <th>Số tiền</th>
                     <th>Thao tác</th>
@@ -29,15 +30,23 @@
     <div class="content">
         <table>
             <tbody>
-            <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-            <c:forEach var="lineItems" items="${cart.lineItems}">
+            <c:forEach items="${cart.lineItems}" var ="lineItem">
                 <tr>
-                    <td><input type="checkbox" name="id" value="${cart.id}"</td>
-                    <td>${cart.lineItem.detailProduct.product.name} </td>
-                    <td>${cart.size} </td>
-                    <td>${cart.lineItem.detailProduct.price} </td>
-                    <td>${cart.lineItem.total} </td>
-                    <td><a href="cart?action=delete&id=${cart.id}">Xoá sản phẩm</a> </td>
+                    <td><input type="checkbox" value="${lineItem.id}" name ="idLineItem"></td>
+                    <td>${lineItem.detailProduct.product.name} </td>
+                    <td>${lineItem.quantity}} </td>
+                    <td>${lineItem.detailProduct.unit}</td>
+                    <td>
+                        <c:if test="${lineItem.detailProduct.sale}">
+                        <s>${lineItem.detailProduct.price}</s>
+                        ${lineItem.detailProduct.price}
+                        </c:if>
+                        <c:if test="${!lineItem.detailProduct.sale}">
+                        ${lineItem.detailProduct.price}
+                        </c:if>
+                    </td>
+                    <td>${lineItem.getTotal()} </td>
+                    <td><a href="cart?action=remove&idLineItem=${lineItem.id}">Xoá sản phẩm</a> </td>
                 </tr>
             </c:forEach>
             </tbody>

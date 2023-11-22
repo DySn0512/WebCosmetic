@@ -32,7 +32,6 @@ public class LoginServlet extends HttpServlet {
             }
         } else {
             if (user != null && user.getRole().equals("customer")) {
-
                 Cookie c = new Cookie("userIdWebCosmetic", user.getId().toString());
                 c.setMaxAge(60);
                 c.setPath("/");

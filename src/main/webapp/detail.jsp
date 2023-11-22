@@ -12,7 +12,7 @@
             } else {
                 priceDisplay.textContent = price;
             }
-            document.getElementById('price-display').value = id;
+            document.getElementById('id-detail').value = id;
         }
 
         document.addEventListener("DOMContentLoaded", function () {
@@ -83,10 +83,10 @@
     </p>
     <form action="cart" method="post">
         <input type="hidden" name="idDetail" id="id-detail">
-        <input type="button" value="-"/>
-        <input type="number" id="number" value="1" />
-        <input type="button" value="+"/>
-        <button value="add" name="action">Thêm vào giỏ hàng</button>
+        <input type="button" onclick="decreaseNumber()" value="-"/>
+        <input type="number" id="number" name="quantity" value="1" />
+        <input type="button" onclick="increaseNumber()" value="+"/>
+        <button value="add" name="action" onclick="checkSelect()">Thêm vào giỏ hàng</button>
     </form>
     <!-- Hiển thị các nút ứng với từng unit -->
     <c:forEach items="${product.details}" var="detail">
@@ -94,6 +94,8 @@
     </c:forEach>
     <!-- Hiển thị hình ảnh sản phẩm -->
     <!-- <img src="${product.images[0].link}" alt="${product.name} Image"> -->
+
 </div>
+<script src="scripts/script.js"></script>
 </body>
 </html>

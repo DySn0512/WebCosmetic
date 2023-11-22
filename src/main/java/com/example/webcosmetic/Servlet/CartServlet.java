@@ -1,7 +1,11 @@
 package com.example.webcosmetic.Servlet;
 
 import com.example.webcosmetic.Entity.Cart;
+import com.example.webcosmetic.Entity.DetailProduct;
+import com.example.webcosmetic.Entity.LineItem;
 import com.example.webcosmetic.EntityDB.CartDB;
+import com.example.webcosmetic.EntityDB.DetailProductDB;
+import com.example.webcosmetic.EntityDB.LineItemDB;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -25,21 +29,25 @@ public class CartServlet extends HttpServlet {
         HttpSession session = req.getSession();
         if (session == null || session.getAttribute("customer") == null) {
             resp.sendRedirect("login_customer.jsp");
-
         } else {
             String action = req.getParameter("action");
-            String url = "/cart.jsp";
-            if (action == null) {
-                List<Cart> lineItems = CartDB.selectAll();
-                req.setAttribute("lineItems", lineItems);
-                getServletContext().getRequestDispatcher(url).forward(req, resp);
+            Cart cart = (Cart) session.getAttribute("cart");
+            if (action.equals("add")) {
+                Long idDetail = Long.parseLong(req.getParameter("idDetail"));
+                int quantity = Integer.parseInt(req.getParameter("quantity"));
+                DetailProduct detailProduct = DetailProductDB.select(idDetail);
+                LineItem lineItem = new LineItem(detailProduct, quantity);
+                cart.addLineItem(lineItem);
+                CartDB.update(cart);
             } else if (action.equals("remove")) {
-                Long id = Long.parseLong(req.getParameter("id"));
-                Cart cart = CartDB.select(id);
-                CartDB.delete(cart);
+                String[] idLineItems = req.getParameterValues("idLineItem");
+                for (var id : idLineItems) {
+                    Long idLineItem = Long.parseLong(id);
+                    LineItem lineItem = LineItemDB.select(idLineItem);
+                    cart.removeLineItem(lineItem);
+                }
+                CartDB.update(cart);
             }
-            url = "cart";
-            resp.sendRedirect(url);
         }
     }
 }

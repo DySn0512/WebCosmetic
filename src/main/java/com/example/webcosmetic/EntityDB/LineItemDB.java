@@ -1,5 +1,6 @@
 package com.example.webcosmetic.EntityDB;
 
+import com.example.webcosmetic.Entity.Brand;
 import com.example.webcosmetic.Entity.Cart;
 import com.example.webcosmetic.Entity.DetailProduct;
 import com.example.webcosmetic.Entity.LineItem;
@@ -7,6 +8,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
 
+import javax.sound.sampled.Line;
 import java.util.List;
 
 public class LineItemDB {
@@ -27,16 +29,13 @@ public class LineItemDB {
 
 
 
-    public List<LineItem> find(DetailProduct detailProduct) {
+
+    public static LineItem select(long id){
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         try {
-            String jpql = "SELECT li FROM LineItem li WHERE li.detailProduct.id = :detailProductId";
-            TypedQuery<LineItem> query = em.createQuery(jpql, LineItem.class);
-            query.setParameter("detailProductId", detailProduct.getId());
-            return query.getResultList();
+            return em.find(LineItem.class, id);
         } finally {
             em.close();
         }
     }
-
 }

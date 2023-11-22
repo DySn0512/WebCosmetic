@@ -3,6 +3,7 @@ import jakarta.persistence.*;
 
 @Entity
 public class LineItem {
+
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
@@ -15,9 +16,9 @@ public class LineItem {
     public LineItem() {
     }
 
-    public LineItem(DetailProduct detailProduct) {
+    public LineItem(DetailProduct detailProduct, int quantity) {
         this.detailProduct = detailProduct;
-        this.quantity = 1;
+        this.quantity = quantity;
     }
 
     public Long getId() {

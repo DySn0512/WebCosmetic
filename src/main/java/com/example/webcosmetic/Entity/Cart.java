@@ -48,7 +48,7 @@ public class Cart {
                 .filter(item -> item.getDetailProduct().getId().equals(lineItem.getDetailProduct().getId()))
                 .findFirst()
                 .ifPresentOrElse(
-                        item -> item.setQuantity(item.getQuantity() + 1),
+                        item -> item.setQuantity(item.getQuantity() + lineItem.getQuantity()),
                         () -> lineItems.add(lineItem)
                 );
     }
