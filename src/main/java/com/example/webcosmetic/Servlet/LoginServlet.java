@@ -23,10 +23,7 @@ public class LoginServlet extends HttpServlet {
         String phone = req.getParameter("phone");
         String password = req.getParameter("password");
         User user = UserDB.select(phone, password);
-<<<<<<< HEAD
         HttpSession session = req.getSession();
-=======
->>>>>>> e2605833722672ac44fdd13960f3e1a8cc615551
         if (action.equals("admin")) {
             if (user != null && user.getRole().equals("admin")) {
                 session.setAttribute("admin", user);

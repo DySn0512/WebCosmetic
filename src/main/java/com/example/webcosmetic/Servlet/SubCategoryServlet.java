@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.checkerframework.checker.units.qual.A;
 
 import java.io.IOException;
 import java.util.List;
@@ -27,8 +28,7 @@ public class SubCategoryServlet extends HttpServlet {
         HttpSession session = req.getSession();
         if (session == null || session.getAttribute("admin") == null) {
             resp.sendRedirect("login.jsp");
-
-        }else{
+        } else {
             String action = req.getParameter("action");
             if (action.equals("update")) {
                 String newName = req.getParameter("newName");
@@ -43,7 +43,7 @@ public class SubCategoryServlet extends HttpServlet {
                     String newName = req.getParameter("newName");
                     SubCategory subCategory = new SubCategory(newName);
                     productCategory.addSubCategory(subCategory);
-                } else if(action.equals("remove")) {
+                } else if (action.equals("remove")) {
                     Long id = Long.parseLong(req.getParameter("id"));
                     SubCategory subCategory = SubCategoryDB.select(id);
                     productCategory.removeSubCategory(subCategory);
@@ -53,6 +53,6 @@ public class SubCategoryServlet extends HttpServlet {
             String url = "category";
             resp.sendRedirect(url);
         }
-
     }
+
 }

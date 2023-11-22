@@ -2,21 +2,18 @@ package com.example.webcosmetic.Servlet;
 
 
 import com.example.webcosmetic.Drive.GoogleDrive;
+import com.example.webcosmetic.Entity.*;
 import com.example.webcosmetic.EntityDB.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import com.example.webcosmetic.Entity.*;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.security.GeneralSecurityException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @WebServlet(name = "productInfo", value = "/productInfo")
 public class ProductInfoServlet extends HttpServlet {
@@ -31,7 +28,6 @@ public class ProductInfoServlet extends HttpServlet {
         HttpSession session = req.getSession();
         if (session == null || session.getAttribute("admin") == null) {
             resp.sendRedirect("login.jsp");
-            return;
         }else {
             String action = req.getParameter("action");
             Product product;
@@ -49,8 +45,7 @@ public class ProductInfoServlet extends HttpServlet {
                 editDetailProduct(product, req);
                 ProductDB.update(product);
             }
-            String url = "product";
-            resp.sendRedirect(url);
+            resp.sendRedirect("product");
         }
     }
 

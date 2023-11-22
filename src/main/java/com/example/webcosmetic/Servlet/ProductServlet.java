@@ -1,18 +1,20 @@
 package com.example.webcosmetic.Servlet;
 
 
-import com.example.webcosmetic.Entity.*;
-import com.example.webcosmetic.EntityDB.*;
+import com.example.webcosmetic.Entity.Brand;
+import com.example.webcosmetic.Entity.Product;
+import com.example.webcosmetic.Entity.ProductCategory;
+import com.example.webcosmetic.EntityDB.BrandDB;
+import com.example.webcosmetic.EntityDB.ProductCategoryDB;
+import com.example.webcosmetic.EntityDB.ProductDB;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import jdk.jfr.Registered;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "product", value = "/product")
@@ -27,44 +29,50 @@ public class ProductServlet extends HttpServlet {
         HttpSession session = req.getSession();
         if (session == null || session.getAttribute("admin") == null) {
             resp.sendRedirect("login.jsp");
-
-        }else{
+        } else {
             String action = req.getParameter("action");
-            String url;
             if (action == null || action.equals("null")) {
-                List<Product> products = ProductDB.selectAll();
-                req.setAttribute("products", products);
-                url = "/product.jsp";
-                getServletContext().getRequestDispatcher(url).forward(req, resp);
+                showProduct(req);
+                getServletContext().getRequestDispatcher("/product.jsp").forward(req, resp);
             } else if (action.equals("find")) {
 
             } else if (action.equals("remove")) {
-                String[] ids = req.getParameterValues("id");
-                for (var item : ids) {
-                    Long id = Long.parseLong(item);
-                    Product product = ProductDB.select(id);
-                    ProductDB.delete(product);
-                }
-                url = "product";
-                resp.sendRedirect(url);
+                deleteProducts(req);
+                resp.sendRedirect("product");
             } else {
+
                 List<Brand> brands = BrandDB.selectAll();
                 req.setAttribute("brands", brands);
                 List<ProductCategory> productCategories = ProductCategoryDB.selectAll();
                 req.setAttribute("productCategories", productCategories);
+
                 if (action.equals("add")) {
                     req.setAttribute("ariacurrent", "Thêm Sản Phẩm");
-                } else if (action.equals("update")){
+                } else {
                     Long id = Long.parseLong(req.getParameter("id"));
                     Product product = ProductDB.select(id);
                     req.setAttribute("product", product);
                     req.setAttribute("ariacurrent", "Sửa Sản Phẩm");
                 }
-                url = "/product_info.jsp";
-                getServletContext().getRequestDispatcher(url).forward(req, resp);
+                getServletContext().getRequestDispatcher("/product_info.jsp").forward(req, resp);
             }
         }
-
-
     }
+
+    private void showProduct(HttpServletRequest req) {
+        List<Product> products = ProductDB.selectAll();
+        req.setAttribute("products", products);
+    }
+
+    private void deleteProducts(HttpServletRequest req) {
+        String[] ids = req.getParameterValues("id");
+        if (ids != null) {
+            for (var item : ids) {
+                Long id = Long.parseLong(item);
+                Product product = ProductDB.select(id);
+                ProductDB.delete(product);
+            }
+        }
+    }
+
 }
