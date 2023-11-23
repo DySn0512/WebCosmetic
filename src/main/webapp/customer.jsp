@@ -140,8 +140,13 @@
             </div>
             Đổi password
         </button>
+        <button class="Btn">
+            <div class="sign">
+                <img src="image/output.png">
+            </div>
+            <div class="text">Logout</div>
+        </button>
     </div>
-
 </div>
 
 <script src="./scripts/customer.js"></script>
