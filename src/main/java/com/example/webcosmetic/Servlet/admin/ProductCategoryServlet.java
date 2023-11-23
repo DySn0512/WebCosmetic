@@ -1,4 +1,4 @@
-package com.example.webcosmetic.Servlet;
+package com.example.webcosmetic.Servlet.admin;
 
 import com.example.webcosmetic.Entity.ProductCategory;
 import com.example.webcosmetic.EntityDB.ProductCategoryDB;
@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "category", value = "/category")
+@WebServlet(name = "category", value = "/admin/category")
 public class ProductCategoryServlet extends HttpServlet {
 
     @Override
@@ -22,30 +22,24 @@ public class ProductCategoryServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-        if (session == null || session.getAttribute("admin") == null) {
-            resp.sendRedirect("login.jsp");
+        String action = req.getParameter("action");
+        if (action == null) {
+            showProductCategories(req);
+            getServletContext().getRequestDispatcher("/admin/productcategory.jsp").forward(req, resp);
         } else {
-            String action = req.getParameter("action");
-            if (action == null) {
-                showProductCategories(req);
-                getServletContext().getRequestDispatcher("/productcategory.jsp").forward(req, resp);
+            if (action.equals("add")) {
+                addProductCategory(req);
             } else {
-                if (action.equals("add")) {
-                    addProductCategory(req);
+                Long id = Long.parseLong(req.getParameter("id"));
+                ProductCategory productCategory = ProductCategoryDB.select(id);
+                if (action.equals("update")) {
+                    updateProductCategory(req, productCategory);
                 } else {
-                    Long id = Long.parseLong(req.getParameter("id"));
-                    ProductCategory productCategory = ProductCategoryDB.select(id);
-                    if (action.equals("update")) {
-                        updateProductCategory(req, productCategory);
-                    } else {
-                        removeProductCategory(productCategory);
-                    }
+                    removeProductCategory(productCategory);
                 }
-                resp.sendRedirect("category");
             }
+            resp.sendRedirect("category");
         }
-
     }
 
     private void showProductCategories(HttpServletRequest req) {

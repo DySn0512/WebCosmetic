@@ -4,22 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Thương Hiệu</title>
-    <link rel="stylesheet" href="style/main.css">
+    <link rel="stylesheet" href="../style/main.css">
 </head>
 <body>
-<jsp:include page="/sidebar.jsp"/>
+<jsp:include page="/admin/sidebar.jsp"/>
 <div class="main-content">
     <header style="height: 70px">
         <div id="IconSidebar" onclick="expandSidebar()">&#9776;</div>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="admin">Trang Chủ</a></li>
+                <li class="breadcrumb-item"><a href="">Trang Chủ</a></li>
                 <li class="breadcrumb-item active" aria-current="page">/Thương Hiệu</li>
             </ol>
         </nav>
     </header>
     <div style="margin: 10px">
-
         <div id="add-form" class="modal">
             <div class="modal-content">
                 <span class="close" onclick="x_function()">&times;</span>
@@ -49,6 +48,8 @@
         </c:forEach>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="../scripts/script.js"></script>
 </body>
 </html>
 

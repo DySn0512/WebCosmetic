@@ -10,16 +10,16 @@
 <html>
 <head>
     <title>Danh Mục</title>
-    <link rel="stylesheet" href="style/main.css">
+    <link rel="stylesheet" href="../style/main.css">
 </head>
 <body>
-<jsp:include page="/sidebar.jsp"/>
+<jsp:include page="/admin/sidebar.jsp"/>
 <div class="main-content">
     <header style="height: 70px">
         <div id="IconSidebar" onclick="expandSidebar()">&#9776;</div>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="admin">Trang Chủ</a></li>
+                <li class="breadcrumb-item"><a href="">Trang Chủ</a></li>
                 <li class="breadcrumb-item active" aria-current="page">/Danh Mục</li>
             </ol>
         </nav>
@@ -31,7 +31,7 @@
                 <form action="" method="post" id="name-form">
                     <input type="hidden" id="id-category" name="idCategory" value>
                     <input type="text" id="new-name" name="newName" value="" required>
-                    <input type="submit" name="action" value="Thêm">
+                    <button name="action" value="add">Thêm</button>
                 </form>
             </div>
         </div>
@@ -84,5 +84,7 @@
         </ul>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="../scripts/script.js"></script>
 </body>
 </html>

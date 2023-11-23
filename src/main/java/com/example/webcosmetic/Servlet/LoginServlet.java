@@ -27,10 +27,10 @@ public class LoginServlet extends HttpServlet {
         if (action.equals("admin")) {
             if (user != null && user.getRole().equals("admin")) {
                 session.setAttribute("admin", user);
-                getServletContext().getRequestDispatcher("/admin").forward(req, resp);
+                resp.sendRedirect("admin/admin");
             } else {
                 req.setAttribute("message", "Tài khoản không hợp lệ");
-                getServletContext().getRequestDispatcher("/login.jsp").forward(req, resp);
+                getServletContext().getRequestDispatcher("/login_customer.jsp").forward(req, resp);
             }
         } else {
             if (user != null && user.getRole().equals("customer")) {

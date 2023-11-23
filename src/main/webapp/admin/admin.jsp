@@ -10,10 +10,10 @@
 <head>
     <title>ADMIN</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="style/main.css">
+    <link rel="stylesheet" href="../style/main.css">
 </head>
 <body>
-<jsp:include page="/sidebar.jsp"/>
+<jsp:include page="/admin/sidebar.jsp"/>
 <div class="main-content">
     <header style="height: 70px">
         <div id="IconSidebar" onclick="expandSidebar()">&#9776;</div>
@@ -25,5 +25,7 @@
     </header>
     ${ahihi}
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="../scripts/script.js"></script>
 </body>
 </html>

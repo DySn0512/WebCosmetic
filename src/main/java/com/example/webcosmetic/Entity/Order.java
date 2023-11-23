@@ -18,12 +18,11 @@ public class Order {
 
     private Date timeOrder;
 
-    @OneToOne
+    @ManyToOne
     private User user;
 
     @OneToMany(cascade = CascadeType.PERSIST)
     private List<DetailOrder> details;
-
 
     public Order() {
 

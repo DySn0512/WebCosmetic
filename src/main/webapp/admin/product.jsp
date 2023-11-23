@@ -4,16 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Sản Phẩm</title>
-    <link rel="stylesheet" href="style/main.css">
+    <link rel="stylesheet" href="../style/main.css">
 </head>
 <body>
-<jsp:include page="/sidebar.jsp"/>
+<jsp:include page="/admin/sidebar.jsp"/>
 <div class="main-content">
     <header style="height: 70px">
         <div id="IconSidebar" onclick="expandSidebar()">&#9776;</div>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="admin">Trang Chủ</a></li>
+                <li class="breadcrumb-item"><a href="">Trang Chủ</a></li>
                 <li class="breadcrumb-item active" aria-current="page">/Sản Phẩm</li>
             </ol>
         </nav>
@@ -84,6 +84,8 @@
         </form>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="../scripts/script.js"></script>
 </body>
 </html>
 
