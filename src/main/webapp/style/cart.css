@@ -12,6 +12,7 @@
     background-color: rgb(245, 253, 251);
 }
 
+
 .sidebar-link {
     display: flex;
     white-space: nowrap;
@@ -435,7 +436,9 @@ h6 span{
     border: 1px solid #ffffff4d;
     overflow-x: auto;
 }
-
+.content table tbody tr td:nth-child(2) a.noUnderline {
+    text-decoration: none;
+}
 table{
     width: 100%;
     table-layout: fixed;
