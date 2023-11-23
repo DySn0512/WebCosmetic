@@ -1,6 +1,8 @@
 package com.example.webcosmetic.Servlet;
 
+import com.example.webcosmetic.Entity.Cart;
 import com.example.webcosmetic.Entity.User;
+import com.example.webcosmetic.EntityDB.CartDB;
 import com.example.webcosmetic.EntityDB.UserDB;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -21,21 +23,28 @@ public class LoginServlet extends HttpServlet {
         String phone = req.getParameter("phone");
         String password = req.getParameter("password");
         User user = UserDB.select(phone, password);
+        HttpSession session = req.getSession();
         if (action.equals("admin")) {
             if (user != null && user.getRole().equals("admin")) {
-                HttpSession session = req.getSession();
                 session.setAttribute("admin", user);
-                getServletContext().getRequestDispatcher("/admin").forward(req, resp);
+                resp.sendRedirect("admin/admin");
             } else {
                 req.setAttribute("message", "Tài khoản không hợp lệ");
-                getServletContext().getRequestDispatcher("/login.jsp").forward(req, resp);
+                getServletContext().getRequestDispatcher("/login_customer.jsp").forward(req, resp);
             }
         } else {
             if (user != null && user.getRole().equals("customer")) {
-                Cookie c = new Cookie("userIdWebCosmetic", user.getId().toString());
-                c.setMaxAge(60);
-                c.setPath("/");
-                resp.addCookie(c);
+                String savedPassword = req.getParameter("savedPassword");
+                if (savedPassword != null) {
+                    Cookie c = new Cookie("userIdWebCosmetic", user.getId().toString());
+                    c.setMaxAge(60000);
+                    c.setPath("/");
+                    resp.addCookie(c);
+                } else {
+                    session.setAttribute("customer", user);
+                    Cart cart = CartDB.select(user);
+                    session.setAttribute("cart", cart);
+                }
                 resp.sendRedirect("home");
 
             } else {

@@ -3,7 +3,7 @@
 <%@ include file="HeaderTemplate.jsp" %>
 <html>
 <head>
-    <title>Product Detail</title>
+    <title>Thông tin sản phẩm</title>
     <script>
         function selectDetail(sale, price, salePrice, id) {
             var priceDisplay = document.getElementById('price-display');

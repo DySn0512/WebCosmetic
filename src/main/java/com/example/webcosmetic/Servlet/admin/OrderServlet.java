@@ -1,4 +1,4 @@
-package com.example.webcosmetic.Servlet;
+package com.example.webcosmetic.Servlet.admin;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -8,9 +8,13 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-@WebServlet(name = "admin", value = "/admin")
-public class AdminServlet  extends HttpServlet {
+@WebServlet(name = "order", value = "/admin/order")
+public class OrderServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -19,13 +23,14 @@ public class AdminServlet  extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-        if (session == null || session.getAttribute("admin") == null) {
-            resp.sendRedirect("login.jsp");
+
+        String action = req.getParameter("action");
+        String url = "/admin/order.jsp";
+        if (action == null) {
+
         }
-        else{
-            req.setAttribute("ahihi","ahihi");
-            getServletContext().getRequestDispatcher("/admin.jsp").forward(req, resp);
-        }
+        getServletContext().getRequestDispatcher(url).forward(req, resp);
+
+
     }
 }

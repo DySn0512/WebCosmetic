@@ -29,9 +29,6 @@
                 <input type="file" name="" id="form_file">
             </div>
 
-            <div class="info">
-                <p class="name">//Tên</p>
-            </div>
 
             <label for="form_file" class="edit">
                 <i class="fa-solid fa-pen-to-square"></i>
@@ -52,7 +49,7 @@
                             </div>
 
                             <div class="notify">
-                                //Thông tin tên
+                                ${customer.name}
                             </div>
                         </div>
 
@@ -65,7 +62,7 @@
                             </div>
 
                             <div class="notify">
-                                //03735986
+                                ${customer.phone}
                             </div>
                         </div>
 
@@ -78,7 +75,7 @@
                             </div>
 
                             <div class="notify">
-                                //..@gmail.com
+                                ${customer.email}
                             </div>
                         </div>
 
@@ -89,24 +86,11 @@
                                 </div>
                                 <span>Addres</span>
                             </div>
-
                             <div class="notify">
-                                //7/1
+                                ${customer.address}
                             </div>
                         </div>
 
-                        <div class="menu">
-                            <div class="circle">
-                                <div class="cursor">
-                                    <i class="bi bi-shield-check"></i>
-                                </div>
-                                <span>Password</span>
-                            </div>
-
-                            <div class="notify">
-                                //0373586
-                            </div>
-                        </div>
                     </div>
                 </nav>
             </div>

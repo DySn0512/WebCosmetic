@@ -1,24 +1,21 @@
-package com.example.webcosmetic.Servlet;
+package com.example.webcosmetic.Servlet.admin;
 
 
 import com.example.webcosmetic.Drive.GoogleDrive;
+import com.example.webcosmetic.Entity.*;
 import com.example.webcosmetic.EntityDB.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import com.example.webcosmetic.Entity.*;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.security.GeneralSecurityException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
-@WebServlet(name = "productInfo", value = "/productInfo")
+@WebServlet(name = "productInfo", value = "/admin/productInfo")
 public class ProductInfoServlet extends HttpServlet {
 
     @Override
@@ -28,37 +25,31 @@ public class ProductInfoServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-        if (session == null || session.getAttribute("admin") == null) {
-            resp.sendRedirect("login.jsp");
-            return;
-        }else {
-            String action = req.getParameter("action");
-            Product product;
-            if (action.equals("add")) {
-                product = new Product();
-                setProductAttributes(product, req);
-                setProductImages(product, req);
-                addDetailProduct(product, req);
-                ProductDB.insert(product);
-            } else {
-                Long idProduct = Long.parseLong(req.getParameter("idProduct"));
-                product = ProductDB.select(idProduct);
-                setProductAttributes(product, req);
-                setProductImages(product, req);
-                editDetailProduct(product, req);
-                ProductDB.update(product);
-            }
-            String url = "product";
-            resp.sendRedirect(url);
+        String action = req.getParameter("action");
+        Product product;
+        if (action.equals("add")) {
+            product = new Product();
+            setProductAttributes(product, req);
+            setProductImages(product, req);
+            addDetailProduct(product, req);
+            ProductDB.insert(product);
+        } else {
+            Long idProduct = Long.parseLong(req.getParameter("idProduct"));
+            product = ProductDB.select(idProduct);
+            setProductAttributes(product, req);
+            setProductImages(product, req);
+            editDetailProduct(product, req);
+            ProductDB.update(product);
         }
+        resp.sendRedirect("product");
     }
+
 
     private void editDetailProduct(Product product, HttpServletRequest req) {
 
         // những detail đã bị xoá sẽ được lấy để xoá
         String[] detailRemove = req.getParameterValues("detailRemove");
-        if (detailRemove!=null){
+        if (detailRemove != null) {
             for (var item : detailRemove) {
                 Long idDetail = Long.parseLong(item);
                 DetailProduct detailProduct = DetailProductDB.select(idDetail);
@@ -87,8 +78,7 @@ public class ProductInfoServlet extends HttpServlet {
                 detailProduct.setPrice(price);
                 detailProduct.setSale(isSale);
                 detailProduct.setSalePrice(salePrice);
-            }
-            else {
+            } else {
                 // detail vừa được thêm vào
                 detailProduct = new DetailProduct(units[i], price, isSale, salePrice, product);
             }

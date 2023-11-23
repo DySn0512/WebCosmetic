@@ -286,6 +286,29 @@ function checkSelect(){
         alert('Vui lòng chọn 1 phân loại sản phẩm');
     }
 }
+function removeLineItem(id,button) {
+    $.ajax({
+        type: 'POST',
+        url: 'cart',
+        data: {
+            action: 'remove',
+            idLineItem:id,
+        },
+        success: function(response) {
+            // Xử lý phản hồi từ servlet tại đây
+            console.log(response);
+        },
+        error: function(error) {
+            // Xử lý lỗi tại đây
+            console.log(error);
+        }
+    });
+    var row = button.parentNode.parentNode;
+    row.parentNode.removeChild(row);
+
+}
+
+
 
 
 

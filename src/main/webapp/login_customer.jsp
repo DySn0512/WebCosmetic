@@ -42,7 +42,7 @@
                 <input type="password" name="password" placeholder="Please enter your Password" autocomplete="off">
             </div>
             <div>
-                <label><input type="checkbox" name=" "> Nhớ mật khẩu</label>
+                <label><input type="checkbox" name="savedPassword" > Nhớ mật khẩu</label>
             </div>
             <a href="toForgetPassword">Quên mật khẩu?</a>
             <button type="submit">Đăng nhập</button>

@@ -61,12 +61,6 @@ public class CartDB {
         }
     }
 
-    public static List<Cart> selectAll() {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        TypedQuery<Cart> query = em.createQuery("SELECT b FROM Cart b", Cart.class);
-        return query.getResultList();
-    }
-
     public static void delete(Cart cart) {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
