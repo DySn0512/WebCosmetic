@@ -32,33 +32,34 @@
 </div>
 
 <div class="content">
-    <table>
-        <tbody>
-        <c:forEach items="${cart.lineItems}" var="lineItem">
-            <tr>
-                <td><input type="checkbox" value="${lineItem.id}" name="idLineItem"></td>
-                <td>${lineItem.detailProduct.product.name} </td>
-                <td>${lineItem.quantity}</td>
-                <td>${lineItem.detailProduct.unit}</td>
-                <td>
-                    <c:if test="${lineItem.detailProduct.sale}">
-                        <s>${lineItem.detailProduct.price}</s>
-                        ${lineItem.detailProduct.price}
-                    </c:if>
-                    <c:if test="${!lineItem.detailProduct.sale}">
-                        ${lineItem.detailProduct.price}
-                    </c:if>
-                </td>
-                <td>${lineItem.getTotal()} </td>
-                <td>
-                    <form>
-                        <button type="button" onclick="removeLineItem(this)"> xoá</button>
-                    </form>
-                </td>
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
+    <form>
+        <table>
+            <tbody>
+            <c:forEach items="${cart.lineItems}" var="lineItem">
+                <tr>
+                    <td><input type="checkbox" value="${lineItem.id}" name="idLineItem"></td>
+                    <td>${lineItem.detailProduct.product.name} </td>
+                    <td>${lineItem.quantity}</td>
+                    <td>${lineItem.detailProduct.unit}</td>
+                    <td>
+                        <c:if test="${lineItem.detailProduct.sale}">
+                            <s>${lineItem.detailProduct.price}</s>
+                            ${lineItem.detailProduct.price}
+                        </c:if>
+                        <c:if test="${!lineItem.detailProduct.sale}">
+                            ${lineItem.detailProduct.price}
+                        </c:if>
+                    </td>
+                    <td>${lineItem.getTotal()} </td>
+                    <td>
+                        <button type="button" onclick="removeLineItem('${lineItem.id}',this)"> xoá</button>
+                    </td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+        <button name = "action" value="remove">Xoá</button>
+    </form>
 </div>
 
 <lable>Tổng thanh toán</lable>
@@ -66,6 +67,7 @@
     <input type="hidden" name="action" value="checkout">
     <input type="submit" value="Mua Hàng">
 </form>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="scripts/script.js"></script>
 </body>
 </html>

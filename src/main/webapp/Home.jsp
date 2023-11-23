@@ -12,7 +12,6 @@
 <%@ include file="HeaderTemplate.jsp" %>
 <html>
   <head>
-
       <title>Banana Cosmetic</title>
   </head>
   <body>

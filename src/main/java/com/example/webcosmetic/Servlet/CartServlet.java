@@ -38,16 +38,20 @@ public class CartServlet extends HttpServlet {
                 DetailProduct detailProduct = DetailProductDB.select(idDetail);
                 LineItem lineItem = new LineItem(detailProduct, quantity);
                 cart.addLineItem(lineItem);
-                CartDB.update(cart);
+                String referer = req.getHeader("referer");
+                session.setAttribute("successMessage", "true");
+                resp.sendRedirect(referer);
             } else if (action.equals("remove")) {
                 String[] idLineItems = req.getParameterValues("idLineItem");
                 for (var id : idLineItems) {
-                    Long idLineItem = Long.parseLong(id);
+                    long idLineItem = Long.parseLong(id);
                     LineItem lineItem = LineItemDB.select(idLineItem);
                     cart.removeLineItem(lineItem);
                 }
-                CartDB.update(cart);
             }
+            CartDB.update(cart);
+            cart = CartDB.select(cart.getId());
+            session.setAttribute("cart",cart);
         }
     }
 }
