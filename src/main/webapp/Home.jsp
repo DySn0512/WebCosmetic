@@ -25,13 +25,10 @@
       <div class="mySlides fade">
           <img src="image/slide3.jpg" width="100%" alt="">
       </div>
-      <div class="mySlides fade">
-          <img src="image/slide5.jpg" width="100%" alt="">
-      </div>
 
   </div>
-  <div class="banner-perfume">
-      <img src="image/banner_perfumeGirl.jpg" alt="Banner Nước Hoa" width="1350px" >
+  <div class="black-friday-banner">
+      <p>GET THE BEST DEAL THIS BLACK FRIDAY - SALE OFF UP TO 40% </p>
   </div>
   <div class="product-container">
       <c:forEach items="${products}" var="product">
@@ -41,10 +38,10 @@
                       <img src="${product.images[0].link}" alt="">
                   </a>
               </div>
-              <a href="detail?name=${product.name}">
+              <a class="product-name" href="detail?name=${product.name}">
                   <p>${product.name}</p>
               </a>
-              <p>${product.price}</p>
+              <p class="product-price">${product.price}</p>
           </div>
       </c:forEach>
   </div>

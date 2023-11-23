@@ -68,7 +68,7 @@ body {
 }
 
 nav {
-    background-color: #FFB6C1; /* Màu hồng pastel */
+    background-color: rgb(242, 190, 209); /* Màu hồng pastel */
     padding: 10px;
     text-align: center; /* Căn giữa */
 }
@@ -95,7 +95,7 @@ nav a {
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #FFB6C1; /* Màu hồng */
+    background-color: rgb(242, 190, 209); /* Màu hồng */
     min-width: 160px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     z-index: 1;
@@ -204,6 +204,16 @@ nav a {
     text-decoration: none; /* Ẩn gạch chân */
     color: inherit; /* Giữ màu chữ mặc định */
 }
+.product-name {
+    font-weight: bold;
+    color: black; /* Màu chữ đen */
+}
+
+.product-price {
+    font-weight: bold;
+    color: red; /* Màu chữ đỏ */
+}
+
 
 /* CSS để tạo pop-up */
 .modal {
@@ -268,13 +278,21 @@ nav a {
     border-radius: 5px;
 }
 
-/*#pagination a.selected {*/
-/*    !* Định dạng cho trang được chọn *!*/
-/*    background-color: pink;*/
-/*}*/
-/*đứa này có tồn tại đâu mà có css hả*/
-.banner-perfume {
-    margin-top: 50px;
-    margin-bottom: 50px;
-    margin-left: 70px;
+#pagination a.selected {
+    /*    !* Định dạng cho trang được chọn */
+    background-color: pink;
 }
+
+.black-friday-banner {
+    width: 70%; /* Chiều dài của block là 70% chiều dài của trang */
+    margin-left: auto; /* Canh giữa bên trái */
+    margin-right: auto; /* Canh giữa bên phải */
+    height: 60px; /* Chiều cao cụ thể */
+    font-weight: bold;
+    background-color: rgb(242, 190, 209); /* Màu nền của block */
+    color: white; /* Màu chữ */
+    text-align: center; /* Căn giữa nội dung */
+    line-height: 60px; /* Độ cao của dòng chữ */
+    font-size: 20px; /* Kích thước chữ */
+}
+
