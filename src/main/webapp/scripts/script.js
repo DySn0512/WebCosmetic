@@ -293,14 +293,6 @@ function removeLineItem(id,button) {
         data: {
             action: 'remove',
             idLineItem:id,
-        },
-        success: function(response) {
-            // Xử lý phản hồi từ servlet tại đây
-            console.log(response);
-        },
-        error: function(error) {
-            // Xử lý lỗi tại đây
-            console.log(error);
         }
     });
     var row = button.parentNode.parentNode;

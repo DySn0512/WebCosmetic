@@ -24,34 +24,51 @@ public class LoginServlet extends HttpServlet {
         String password = req.getParameter("password");
         User user = UserDB.select(phone, password);
         HttpSession session = req.getSession();
-        if (action.equals("admin")) {
-            if (user != null && user.getRole().equals("admin")) {
-                session.setAttribute("admin", user);
-                resp.sendRedirect("admin/admin");
-            } else {
-                req.setAttribute("message", "Tài khoản không hợp lệ");
-                getServletContext().getRequestDispatcher("/login_customer.jsp").forward(req, resp);
-            }
-        } else {
-            if (user != null && user.getRole().equals("customer")) {
-                String savedPassword = req.getParameter("savedPassword");
-                if (savedPassword != null) {
-                    Cookie c = new Cookie("userIdWebCosmetic", user.getId().toString());
-                    c.setMaxAge(60000);
-                    c.setPath("/");
-                    resp.addCookie(c);
-                } else {
-                    session.setAttribute("customer", user);
-                    Cart cart = CartDB.select(user);
-                    session.setAttribute("cart", cart);
-                }
-                resp.sendRedirect("home");
 
-            } else {
-                req.setAttribute("message", "Tài khoản không hợp lệ");
-                getServletContext().getRequestDispatcher("/login_customer.jsp").forward(req, resp);
-            }
+        if ("admin".equals(action)) {
+            AdminLogin(user, phone, password, session, resp, req);
+        } else {
+            CustomerLogin(user, phone, password, session, resp, req);
         }
+    }
+
+    private void AdminLogin(User user, String phone, String password, HttpSession session, HttpServletResponse resp, HttpServletRequest req) throws ServletException, IOException {
+        if (user != null && "admin".equals(user.getRole())) {
+            session.setAttribute("admin", user);
+            resp.sendRedirect("admin/admin");
+        } else {
+            setLoginErrorAttributes(req, phone, password);
+            getServletContext().getRequestDispatcher("/login.jsp").forward(req, resp);
+        }
+    }
+
+    private void CustomerLogin(User user, String phone, String password, HttpSession session, HttpServletResponse resp, HttpServletRequest req) throws ServletException, IOException {
+        if (user != null && "customer".equals(user.getRole())) {
+            String savedPassword = req.getParameter("savedPassword");
+            if (savedPassword != null) {
+                addUserIdCookie(user, resp);
+            }
+            session.setAttribute("customer", user);
+            Cart cart = CartDB.select(user);
+            session.setAttribute("cart", cart);
+            resp.sendRedirect("home");
+        } else {
+            setLoginErrorAttributes(req, phone, password);
+            getServletContext().getRequestDispatcher("/login_customer.jsp").forward(req, resp);
+        }
+    }
+
+    private void setLoginErrorAttributes(HttpServletRequest req, String phone, String password) {
+        req.setAttribute("message", "Tài Khoảng Không Hợp Lệ");
+        req.setAttribute("phone", phone);
+        req.setAttribute("password", password);
+    }
+
+    private void addUserIdCookie(User user, HttpServletResponse resp) {
+        Cookie userIdCookie = new Cookie("userIdWebCosmetic", user.getId().toString());
+        userIdCookie.setMaxAge(60000);
+        userIdCookie.setPath("/");
+        resp.addCookie(userIdCookie);
     }
 
 }
