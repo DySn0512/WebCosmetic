@@ -74,8 +74,5 @@ function registerServlet() {
             ]
         });
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> c4817c8af47a80377c38270e717a1368996c7384
+
