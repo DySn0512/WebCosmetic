@@ -18,6 +18,8 @@ public class Order {
 
     private Date timeOrder;
 
+    private String address;
+
     @ManyToOne
     private User user;
 
@@ -28,8 +30,9 @@ public class Order {
 
     }
 
-    public Order(Date timeOrder, User user, List<LineItem> lineItems) {
+    public Order(Date timeOrder,String address ,User user, List<LineItem> lineItems) {
         this.timeOrder = timeOrder;
+        this.address = address;
         this.user = user;
         this.status = "Chờ xác nhận";
         this.details = new ArrayList<>();
@@ -46,6 +49,10 @@ public class Order {
 
     public Date getTimeOrder() {
         return timeOrder;
+    }
+
+    public String getAddress() {
+        return address;
     }
 
     public User getUser() {

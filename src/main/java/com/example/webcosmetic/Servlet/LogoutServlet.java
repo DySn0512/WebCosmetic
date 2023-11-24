@@ -28,7 +28,7 @@ public class LogoutServlet extends HttpServlet {
             resp.addCookie(cookie);
         }
         if (session != null && session.getAttribute("customer") != null) {
-            session.invalidate(); // Xoá phiên (session)
+            session.invalidate();
         }
         resp.sendRedirect("home");
     }
