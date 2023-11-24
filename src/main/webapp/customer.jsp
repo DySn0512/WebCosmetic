@@ -124,7 +124,7 @@
             </div>
             Đổi password
         </button>
-        <button class="Btn">
+        <button class="Btn" id="logout" onclick="logout()">
             <div class="sign">
                 <img src="image/output.png" alt="">
             </div>
@@ -135,6 +135,7 @@
         </button>
     </div>
 </div>
+<div id="message"></div>
 
 <script src="./scripts/customer.js"></script>
 </body>
