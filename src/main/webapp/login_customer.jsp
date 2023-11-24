@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trang Đăng Nhập</title>
     <link rel="stylesheet" type="text/css" href="./style/login.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
 </head>
 <body>
 <div class="container" id="container">
@@ -18,11 +19,15 @@
             <input type="text" name="address" placeholder="Address" required/>
 
             <h2>Thông tin tài khoản</h2>
-            <input type="password" name="password" placeholder="Password" required/>
-            <input type="password" placeholder="EnterPassword" name="confirmPassword" required>
+            <input type="password" name="password" placeholder="Password" id="password" required/>
+            <span class="toggle-password" onclick="togglePassword()">👁️</span>
+
+            <input type="password" name="confirmPassword" placeholder="Enter Password" id="confirmPassword" required/>
+            <span class="toggle-confirm-password" onclick="toggleConfirmPassword()">👁️</span>
+
             <h2>Check OTP </h2>
-            <input type="text" placeholder="EnterOTP" name="otp" required>
             <button type="button" onclick="sendOtp()">Gửi OTP</button>
+            <input type="text" placeholder="EnterOTP" name="otp" id="otpInput" required>
             <button type="button" onclick="registerServlet()">Đăng kí</button>
             <div id="message"></div>
         </form>
@@ -34,7 +39,8 @@
             <h1>Đăng nhập </h1>
             <div class="input-wrapper">
                 <input type="text" class="inputs" name="phone" placeholder="Please enter your Phone" value="${phone}">
-                <input type="password" name="password" placeholder="Please enter your Password" value="${password}">
+                <input type="password" name="password" placeholder="Please enter your Password" id="signInPassword"  value="${password}">
+                <span class="toggle-sign-in-password" onclick="toggleSignInPassword()">👁️</span>
             </div>
 
             <div class="checkbox-container">

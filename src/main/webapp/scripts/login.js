@@ -76,3 +76,41 @@ function registerServlet() {
     }
 }
 
+function togglePassword() {
+    var passwordInput = document.getElementById("password");
+    var eyeIcon = document.querySelector(".toggle-password");
+
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        eyeIcon.textContent = "👁️‍🗨️";
+    } else {
+        passwordInput.type = "password";
+        eyeIcon.textContent = "👁️";
+    }
+}
+
+function toggleConfirmPassword() {
+    var confirmPasswordInput = document.getElementById("confirmPassword");
+    var eyeIcon = document.querySelector(".toggle-confirm-password");
+
+    if (confirmPasswordInput.type === "password") {
+        confirmPasswordInput.type = "text";
+        eyeIcon.textContent = "👁️‍🗨️";
+    } else {
+        confirmPasswordInput.type = "password";
+        eyeIcon.textContent = "👁️";
+    }
+}
+
+function toggleSignInPassword() {
+    var signInPasswordInput = document.getElementById("signInPassword");
+    var eyeIcon = document.querySelector(".toggle-sign-in-password");
+
+    if (signInPasswordInput.type === "password") {
+        signInPasswordInput.type = "text";
+        eyeIcon.textContent = "👁️‍🗨️";
+    } else {
+        signInPasswordInput.type = "password";
+        eyeIcon.textContent = "👁️";
+    }
+}

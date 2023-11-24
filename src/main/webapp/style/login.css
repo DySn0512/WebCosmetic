@@ -337,3 +337,32 @@ body {
 .checkbox-text {
     cursor: pointer;
 }
+
+.toggle-password {
+    position: relative;
+    display: inline-block;
+    position: absolute;
+    right: 55px;
+    top: 53%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    user-select: none;
+}
+
+.toggle-confirm-password {
+    position: absolute;
+    right: 55px;
+    top: 61%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    user-select: none;
+}
+
+.toggle-sign-in-password{
+    position: absolute;
+    right: 15px;
+    top: 75%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    user-select: none;
+}
