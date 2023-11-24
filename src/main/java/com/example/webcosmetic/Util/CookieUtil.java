@@ -16,17 +16,20 @@ public class CookieUtil {
         return cookieValue;
     }
 
-    public static void removeCookie(Cookie[] cookies, String cookieName) {
+    public static Cookie selectCookie(Cookie[] cookies, String cookieName) {
         if (cookies != null) {
             for (Cookie cookie : cookies) {
                 if (cookieName.equals(cookie.getName())) {
-                    cookie.setValue("");
-                    cookie.setPath("/");
-                    cookie.setMaxAge(0);
-                    return;
+                    return cookie;
                 }
             }
         }
+        return null;
     }
 
+    public static void removeCookie(Cookie cookie) {
+        cookie.setValue("");
+        cookie.setPath("/");
+        cookie.setMaxAge(0);
+    }
 }

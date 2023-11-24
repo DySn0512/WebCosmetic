@@ -20,9 +20,13 @@ public class LogoutServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession(false); // Lấy phiên hiện tại, nếu không tồn tại thì trả về null
+        HttpSession session = req.getSession();
         Cookie[] cookies = req.getCookies();
-        CookieUtil.removeCookie(cookies, "userIdWebCosmetic");
+        Cookie cookie=  CookieUtil.selectCookie(cookies, "userIdWebCosmetic");
+        if (cookie!=null){
+            CookieUtil.removeCookie(cookie);
+            resp.addCookie(cookie);
+        }
         if (session != null && session.getAttribute("customer") != null) {
             session.invalidate(); // Xoá phiên (session)
         }
