@@ -60,9 +60,17 @@ body {
     cursor: pointer;
 }
 
+button:hover {
+    background-color: rgb(167, 22, 121);* Màu sáng khi rê chuột vào */
+}
+
 .container button.hidden {
     background-color: transparent;
     border-color: #fff;
+}
+
+button.hidden:hover {
+    background-color: rgb(228, 27, 214); /* Màu sáng khi rê chuột vào */
 }
 
 .container form{
@@ -366,3 +374,4 @@ body {
     cursor: pointer;
     user-select: none;
 }
+
