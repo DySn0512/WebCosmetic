@@ -28,7 +28,7 @@
                 </div>
             </div>
             <input type="password" placeholder="EnterPassword" required>
-            <input type="submit" value="Register"/>
+            <input type="submit" value="Đăng Kí"/>
             <div id="message">${message}</div>
         </form>
     </div>
