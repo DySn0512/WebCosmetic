@@ -1,15 +1,14 @@
 package com.example.webcosmetic.Servlet.admin;
 
 
-import com.example.webcosmetic.Drive.GoogleDrive;
 import com.example.webcosmetic.Entity.*;
 import com.example.webcosmetic.EntityDB.*;
+import com.example.webcosmetic.Util.CloudinaryUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -47,15 +46,8 @@ public class ProductInfoServlet extends HttpServlet {
 
     private void editDetailProduct(Product product, HttpServletRequest req) {
 
-        // những detail đã bị xoá sẽ được lấy để xoá
-        String[] detailRemove = req.getParameterValues("detailRemove");
-        if (detailRemove != null) {
-            for (var item : detailRemove) {
-                Long idDetail = Long.parseLong(item);
-                DetailProduct detailProduct = DetailProductDB.select(idDetail);
-                DetailProductDB.delete(detailProduct);
-            }
-        }
+        removeDetails(req);
+
         //lấy các detail sau khi được chỉnh sửa
         String[] idDetails = req.getParameterValues("idDetail");
         String[] units = req.getParameterValues("unit");
@@ -70,7 +62,7 @@ public class ProductInfoServlet extends HttpServlet {
             Long salePrice = isSale ? Long.parseLong(priceSaleValues[i]) : 0L;
             DetailProduct detailProduct;
             if (!idDetails[i].isEmpty()) {
-                // nếu detail này kh bị xoá mà chỉ bị sửa thì, truy vấn nó lên sửa nó lại
+
                 Long idDetail = Long.parseLong(idDetails[i]);
                 detailProduct = DetailProductDB.select(idDetail);
 
@@ -79,12 +71,26 @@ public class ProductInfoServlet extends HttpServlet {
                 detailProduct.setSale(isSale);
                 detailProduct.setSalePrice(salePrice);
             } else {
-                // detail vừa được thêm vào
                 detailProduct = new DetailProduct(units[i], price, isSale, salePrice, product);
             }
             details.add(detailProduct);
         }
         product.setDetails(details);
+    }
+
+    private void removeDetails(HttpServletRequest req) {
+        String[] detailRemove = req.getParameterValues("detailRemove");
+
+        if (detailRemove != null) {
+            for (String detailId : detailRemove) {
+                Long idDetail = Long.parseLong(detailId);
+                DetailProduct detailProduct = DetailProductDB.select(idDetail);
+
+                if (detailProduct != null) {
+                    DetailProductDB.delete(detailProduct);
+                }
+            }
+        }
     }
 
     private void addDetailProduct(Product product, HttpServletRequest req) {
@@ -109,11 +115,11 @@ public class ProductInfoServlet extends HttpServlet {
 
         List<ProductImage> images = new ArrayList<>();
         for (String item : strImages) {
-            if (item.startsWith("https://drive.google.com/uc?id=")) {
+            if (item.startsWith("http")) {
                 images.add(new ProductImage(item));
             } else {
-                String id = GoogleDrive.uploadImage(item).getId();
-                images.add(new ProductImage("https://drive.google.com/uc?id=" + id));
+                String url = CloudinaryUtil.uploadImageToCloudinary(item);
+                images.add(new ProductImage(url));
             }
         }
         product.setImages(images);
