@@ -23,7 +23,7 @@ public class ConfirmOtpServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String from = "bananacosmeticweb@gmail.com";
-        String subject = "Xác nhận đăng ký - Banana Cosmetic";
+        String subject = "Banana Cosmetic";
         String to = req.getParameter("email");
         String name = req.getParameter("name");
         String otp = generateOtp();

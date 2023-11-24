@@ -19,12 +19,12 @@
             <a class="login">Đăng nhập</a>
             <p>${message}</p>
             <div class="inputBox">
-                <input type="text" name="phone" required>
+                <input type="text" name="phone" value="${phone}" required>
                 <span class="user">Phone</span>
             </div>
 
             <div class="inputBox">
-                <input type="text" name="password" required>
+                <input type="password" name="password" value="${password}" required>
                 <span>Password</span>
             </div>
             <button class="enter">Đăng nhập</button>
