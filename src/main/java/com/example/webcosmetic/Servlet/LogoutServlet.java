@@ -22,17 +22,10 @@ public class LogoutServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession(false); // Lấy phiên hiện tại, nếu không tồn tại thì trả về null
         Cookie[] cookies = req.getCookies();
-        CookieUtil.removeCookie(cookies,"userIdWebCosmetic");
-        if (session != null) {
+        CookieUtil.removeCookie(cookies, "userIdWebCosmetic");
+        if (session != null && session.getAttribute("customer") != null) {
             session.invalidate(); // Xoá phiên (session)
         }
-        // Gửi phản hồi về cho JavaScript
-        resp.setContentType("text/plain");
-        resp.setCharacterEncoding("UTF-8");
-        try {
-            resp.getWriter().write("Đăng xuất thành công!"); // Phản hồi về cho JavaScript
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        resp.sendRedirect("home");
     }
-    }
+}
