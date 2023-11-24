@@ -25,7 +25,7 @@ body {
     overflow: hidden;
     width: 768px;
     max-width: 100%;
-    min-height: 480px;
+    min-height: 650px;
 }
 
 .container p {
@@ -258,7 +258,6 @@ body {
     justify-content: space-between;
     display: none;
 }
-
 .indicator span {
     position: relative;
     height: 100%;
@@ -266,11 +265,9 @@ body {
     background: lightgrey;
     border-radius: 5px;
 }
-
 .indicator span:nth-child(2) {
     margin: 0 3px;
 }
-
 .indicator span.active:before {
     position: absolute;
     content: "";
@@ -280,7 +277,6 @@ body {
     width: 100%;
     border-radius: 5px;
 }
-
 .indicator span.weak:before {
     background-color: #ff4757;
 }
