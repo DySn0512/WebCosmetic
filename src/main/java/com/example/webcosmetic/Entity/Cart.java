@@ -57,4 +57,13 @@ public class Cart {
         lineItems.removeIf(item -> item.getId().equals(lineItem.getId()));
     }
 
+    public void updateLineItem(LineItem lineItem){
+        lineItems.stream()
+                .filter(item -> item.getId().equals(lineItem.getId()))
+                .findFirst()
+                .ifPresent(item -> {
+                    item.setQuantity(lineItem.getQuantity());
+                });
+    }
+
 }

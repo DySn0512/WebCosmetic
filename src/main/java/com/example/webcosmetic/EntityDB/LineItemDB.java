@@ -27,9 +27,6 @@ public class LineItemDB {
         }
     }
 
-
-
-
     public static LineItem select(long id){
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         try {

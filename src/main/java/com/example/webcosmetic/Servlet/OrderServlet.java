@@ -26,13 +26,19 @@ public class OrderServlet extends HttpServlet {
         if (action.equals("create")) {
             List<LineItem> lineItems = new ArrayList<>();
             String[] idLineItems = req.getParameterValues("idLineItem");
-            for (var id : idLineItems) {
-                long idLineItem = Long.parseLong(id);
-                LineItem lineItem = LineItemDB.select(idLineItem);
-                lineItems.add(lineItem);
+            if (idLineItems != null) {
+                for (var id : idLineItems) {
+                    long idLineItem = Long.parseLong(id);
+                    LineItem lineItem = LineItemDB.select(idLineItem);
+                    lineItems.add(lineItem);
+                }
+                req.setAttribute("lineItems", lineItems);
+                getServletContext().getRequestDispatcher("/order.jsp").forward(req, resp);
             }
-            req.setAttribute("lineItems", lineItems);
-            getServletContext().getRequestDispatcher("/order.jsp").forward(req, resp);
+            else{
+                String referer = req.getHeader("referer");
+                resp.sendRedirect(referer);
+            }
 
         }
     }

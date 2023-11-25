@@ -14,7 +14,7 @@
         <form action="register" method="post">
             <h2>Thông tin người dùng</h2>
             <input type="text" class="inputs" name="name" placeholder="Name" required/>
-            <input type="number" name="phone" placeholder="Phone" required/>
+            <input type="text" name="phone" placeholder="Phone" required oninput="inputChange(this)"/>
             <input type="email" name="email" placeholder="Email" required/>
             <input type="text" name="address" placeholder="Address" required/>
 

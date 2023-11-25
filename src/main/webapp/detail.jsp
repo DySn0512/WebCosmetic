@@ -141,7 +141,8 @@
             <form action="cart" method="post">
                 <input type="hidden" name="idDetail" id="id-detail">
                 <input type="button" onclick="decreaseNumber()" value="-"/>
-                <input type="number" id="number" name="quantity" value="1" />
+                <input type="text" id="number" name="quantity" value="1" oninput="inputChange(this)"
+                       onblur="if (this.value==='0'){this.value=1;}"/>
                 <input type="button" onclick="increaseNumber()" value="+"/>
                 <button value="add" name="action" onclick="checkSelect()">Thêm vào giỏ hàng</button>
             </form>
@@ -150,8 +151,6 @@
             <c:forEach items="${product.details}" var="detail">
                 <button onclick="selectDetail(${detail.sale}, ${detail.price}, ${detail.salePrice}, ${detail.id}) ">${detail.unit} </button>
             </c:forEach>
-
-
 
 
             <!-- Hiển thị hình ảnh sản phẩm -->

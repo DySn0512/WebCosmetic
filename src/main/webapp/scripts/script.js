@@ -300,7 +300,6 @@ function removeLineItem(id, button) {
     });
     var row = button.parentNode.parentNode;
     row.parentNode.removeChild(row);
-
 }
 
 function setAction(action) {
@@ -309,27 +308,45 @@ function setAction(action) {
 
 }
 
-function InputChange(element) {
+function inputChange(element) {
     let value = element.value;
     element.value = value.replace(/[^0-9]/g, '');
 }
 
-function decreaseQuanity(button) {
+function decreaseQuanity(button,id) {
     let input = button.parentElement.querySelector('input[type="text"]');
     let numericValue = parseInt(input.value);
     if (numericValue > 1) {
         input.value = numericValue - 1;
+        updateLineItem(id, input.value);
     }
 }
 
-function increaseQuanity(button) {
+function increaseQuanity(button,id) {
     let input = button.parentElement.querySelector('input[type="text"]');
     let numericValue = parseInt(input.value);
     input.value = numericValue + 1;
-
+    updateLineItem(id, input.value);
 }
 
+function handleBlur(element,id) {
+    if (element.value==="" || parseInt(element.value)<1){
+        element.value=1;
+    }
+    updateLineItem(id, element.value);
+}
 
+function updateLineItem(id, quantity) {
+    $.ajax({
+        type: 'POST',
+        url: 'cart',
+        data: {
+            action: 'update',
+            idLineItem: id,
+            quantity:quantity
+        }
+    });
+}
 
 
 
