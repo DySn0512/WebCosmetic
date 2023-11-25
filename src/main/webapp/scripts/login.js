@@ -42,7 +42,6 @@ function sendOtp() {
                 function (response) {
                     var messageElement = document.getElementById('message');
                     messageElement.innerHTML = response;
-                    // Ẩn vòng tròn quay vòng khi thành công
                     $('#spinner').css('display', 'none');
                 }
             ]
@@ -64,6 +63,7 @@ function registerServlet() {
     } else if (passwordValue !== confirmPasswordValue) {
         alert("Mật khẩu và xác nhận mật khẩu không khớp!");
     } else {
+        $('#spinner').css('display', 'inline-block');
         $.ajax({
             type: 'POST',
             url: 'register',
@@ -83,6 +83,7 @@ function registerServlet() {
                         var messageElement = document.getElementById('message');
                         messageElement.innerHTML = response;
                     }
+                    $('#spinner').css('display', 'none');
                 }
             ]
         });

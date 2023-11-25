@@ -37,9 +37,13 @@ public class RegisterServlet extends HttpServlet {
             String password = req.getParameter("password");
             User user = new User(name, phone, email, address, password);
             Cart cart = new Cart(user);
-            UserDB.insert(user);
-            CartDB.insert(cart);
-            resp.getWriter().write("login_customer.jsp");
+            try {
+                UserDB.insert(user);
+                CartDB.insert(cart);
+                resp.getWriter().write("login_customer.jsp");
+            } catch (Exception e) {
+                resp.getWriter().write("Mail hoặc số điện thoại của bạn đã được sử dụng.");
+            }
         }else{
             resp.getWriter().write("OTP Không Hợp Lệ");
         }

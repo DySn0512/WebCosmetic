@@ -100,7 +100,7 @@ public class ConfirmOtpServlet extends HttpServlet {
         try {
             MailUtil.sendMail(to, from, subject, body, true);
             session.setMaxInactiveInterval(300);
-            resp.getWriter().write("Đã gửi");
+            resp.getWriter().write("Đã gửi, Vui lòng check mail của bạn");
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
