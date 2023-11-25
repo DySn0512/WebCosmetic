@@ -48,7 +48,7 @@ function registerServlet() {
     var otpValue = document.querySelector('input[name="otp"]').value;
     if (nameValue === "" || phoneValue === "" || emailValue === "" || addressValue === "" || passwordValue === "" || confirmPasswordValue === "") {
         alert("Vui lòng điền đầy đủ thông tin vào các trường!");
-    } else {
+    } else {it
         $.ajax({
             type: 'POST',
             url: 'register',
