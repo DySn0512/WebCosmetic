@@ -30,6 +30,7 @@ function sendOtp() {
     } else if (passwordValue !== confirmPasswordValue) {
         alert("Mật khẩu và xác nhận mật khẩu không khớp!");
     } else {
+        $('#spinner').css('display', 'inline-block');
         $.ajax({
             type: 'POST',
             url: 'otp',
@@ -41,7 +42,8 @@ function sendOtp() {
                 function (response) {
                     var messageElement = document.getElementById('message');
                     messageElement.innerHTML = response;
-
+                    // Ẩn vòng tròn quay vòng khi thành công
+                    $('#spinner').css('display', 'none');
                 }
             ]
         });
