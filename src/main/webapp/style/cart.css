@@ -406,3 +406,6 @@ table{
     background: transparent;
     box-shadow: inset 0 0 6px #0000004d;
 }
+#quantity{
+    width: 30px;
+}
