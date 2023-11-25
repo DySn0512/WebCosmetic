@@ -32,7 +32,7 @@
 </div>
 
 <div class="content">
-    <form>
+    <form id="deleteForm" action="cart" method="post">
         <table>
             <tbody>
             <c:forEach items="${cart.lineItems}" var="lineItem">
@@ -62,7 +62,8 @@
             </c:forEach>
             </tbody>
         </table>
-        <button name = "action" value="remove">Xoá</button>
+
+        <button name="action" value="remove">Xoá tất cả</button>
     </form>
 </div>
 
