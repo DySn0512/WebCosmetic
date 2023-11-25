@@ -44,7 +44,12 @@
                         </a>
                     </td>
 
-                    <td><button type = "button" onclick="decreaseQuanity(this)">-</button><input id="quantity" type="text" value="${lineItem.quantity}" oninput="InputChange(this)"><button type="button" onclick="increaseQuanity(this)">+</button> </td>
+                    <td>
+                        <button type="button" onclick="decreaseQuanity(this,'${lineItem.id}')">-</button>
+                        <input id="quantity" type="text" value="${lineItem.quantity}" oninput="inputChange(this)"
+                               onblur="handleBlur(this,'${lineItem.id}')">
+                        <button type="button" onclick="increaseQuanity(this,'${lineItem.id}')">+</button>
+                    </td>
                     <td>${lineItem.detailProduct.unit}</td>
                     <td>
                         <c:if test="${lineItem.detailProduct.sale}">

@@ -154,13 +154,13 @@
                         <div>
                             <label>
                                 Giá:
-                                <input type="number" name="price" value="${detail.price}" required pattern="d*"
+                                <input type="text" name="price" value="${detail.price}" required oninput="inputChange(this)"
                                        title="Chỉ được nhập số." id="price">
                             </label>
                             <label class="right">
                                 Giá được giảm:
-                                <input type="number" name="salePrice" value="${detail.salePrice}"
-                                       pattern="d*" id="sale-price"
+                                <input type="text" name="salePrice" value="${detail.salePrice}"
+                                      oninput="inputChange(this)" id="sale-price"
                                        title="Chỉ được nhập số.">
                             </label>
                         </div>
