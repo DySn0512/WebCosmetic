@@ -1,5 +1,6 @@
 body {
     font-family: 'Inconsolata', monospace;
+    margin: 0;
 }
 
 #sale {
@@ -9,9 +10,6 @@ body {
     background-size: contain;
 }
 
-body {
-    margin: 0;
-}
 
 .header {
     display: flex;
