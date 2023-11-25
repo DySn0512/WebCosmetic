@@ -262,6 +262,7 @@ function selectPage(element) {
     // Thêm lớp 'selected' cho trang được chọn
     element.classList.add("selected");
 }
+
 function decreaseNumber() {
     var numberField = document.getElementById('number');
     var currentValue = parseInt(numberField.value);
@@ -279,26 +280,56 @@ function increaseNumber() {
     // Tăng giá trị số lượng
     numberField.value = currentValue + 1;
 }
-function checkSelect(){
-    var id= document.getElementById('id-detail').value ;
-    if (id === null || id ===""){
+
+function checkSelect() {
+    var id = document.getElementById('id-detail').value;
+    if (id === null || id === "") {
         event.preventDefault();
         alert('Vui lòng chọn 1 phân loại sản phẩm');
     }
 }
-function removeLineItem(id,button) {
+
+function removeLineItem(id, button) {
     $.ajax({
         type: 'POST',
         url: 'cart',
         data: {
             action: 'remove',
-            idLineItem:id,
+            idLineItem: id,
         }
     });
     var row = button.parentNode.parentNode;
     row.parentNode.removeChild(row);
 
 }
+
+function setAction(action) {
+    const form = document.getElementById('cart-form');
+    form.action = action;
+
+}
+
+function InputChange(element) {
+    let value = element.value;
+    element.value = value.replace(/[^0-9]/g, '');
+}
+
+function decreaseQuanity(button) {
+    let input = button.parentElement.querySelector('input[type="text"]');
+    let numericValue = parseInt(input.value);
+    if (numericValue > 1) {
+        input.value = numericValue - 1;
+    }
+}
+
+function increaseQuanity(button) {
+    let input = button.parentElement.querySelector('input[type="text"]');
+    let numericValue = parseInt(input.value);
+    input.value = numericValue + 1;
+
+}
+
+
 
 
 

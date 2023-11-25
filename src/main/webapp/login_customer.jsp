@@ -26,6 +26,7 @@
             <span class="toggle-confirm-password" onclick="toggleConfirmPassword()">👁️</span>
 
             <h2>Check OTP </h2>
+            <div id="spinner"></div>
             <button type="button" onclick="sendOtp()">Gửi OTP</button>
             <input type="text" placeholder="EnterOTP" name="otp" id="otpInput" required>
             <button type="button" onclick="registerServlet()">Đăng kí</button>

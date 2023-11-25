@@ -32,7 +32,7 @@
 </div>
 
 <div class="content">
-    <form>
+    <form id="cart-form" method="post">
         <table>
             <tbody>
             <c:forEach items="${cart.lineItems}" var="lineItem">
@@ -43,12 +43,13 @@
                                 ${lineItem.detailProduct.product.name}
                         </a>
                     </td>
-                    <td>${lineItem.quantity}</td>
+
+                    <td><button type = "button" onclick="decreaseQuanity(this)">-</button><input id="quantity" type="text" value="${lineItem.quantity}" oninput="InputChange(this)"><button type="button" onclick="increaseQuanity(this)">+</button> </td>
                     <td>${lineItem.detailProduct.unit}</td>
                     <td>
                         <c:if test="${lineItem.detailProduct.sale}">
                             <s>${lineItem.detailProduct.price}</s>
-                            ${lineItem.detailProduct.price}
+                            ${lineItem.detailProduct.salePrice}
                         </c:if>
                         <c:if test="${!lineItem.detailProduct.sale}">
                             ${lineItem.detailProduct.price}
@@ -62,15 +63,10 @@
             </c:forEach>
             </tbody>
         </table>
-        <button name = "action" value="remove">Xoá</button>
+        <button name="action" value="remove" onclick="setAction('cart')">Xoá tất cả</button>
+        <button name="action" value="create" onclick="setAction('order')">Mua hàng</button>
     </form>
 </div>
-
-<lable>Tổng thanh toán</lable>
-<form action="" method="post">
-    <input type="hidden" name="action" value="checkout">
-    <input type="submit" value="Mua Hàng">
-</form>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="scripts/script.js"></script>
 </body>

@@ -59,7 +59,7 @@ public class LoginServlet extends HttpServlet {
     }
 
     private void setLoginErrorAttributes(HttpServletRequest req, String phone, String password) {
-        req.setAttribute("message", "Tài Khoảng Không Hợp Lệ");
+        req.setAttribute("message", "Tài Khoản Không Hợp Lệ");
         req.setAttribute("phone", phone);
         req.setAttribute("password", password);
     }

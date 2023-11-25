@@ -38,9 +38,6 @@ public class CartServlet extends HttpServlet {
                 DetailProduct detailProduct = DetailProductDB.select(idDetail);
                 LineItem lineItem = new LineItem(detailProduct, quantity);
                 cart.addLineItem(lineItem);
-                String referer = req.getHeader("referer");
-                session.setAttribute("successMessage", "true");
-                resp.sendRedirect(referer);
             } else if (action.equals("remove")) {
                 String[] idLineItems = req.getParameterValues("idLineItem");
                 for (var id : idLineItems) {
@@ -52,6 +49,8 @@ public class CartServlet extends HttpServlet {
             CartDB.update(cart);
             cart = CartDB.select(cart.getId());
             session.setAttribute("cart",cart);
+            String referer = req.getHeader("referer");
+            resp.sendRedirect(referer);
         }
     }
 }

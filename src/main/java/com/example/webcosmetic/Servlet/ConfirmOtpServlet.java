@@ -29,7 +29,6 @@ public class ConfirmOtpServlet extends HttpServlet {
         String otp = generateOtp();
         HttpSession session = req.getSession();
         session.setAttribute("otpRegister",otp);
-        session.setMaxInactiveInterval(300);
         String body = "<!DOCTYPE html>"
                 + "<html lang=\"vi\">"
                 + "<head>"
@@ -100,6 +99,8 @@ public class ConfirmOtpServlet extends HttpServlet {
 
         try {
             MailUtil.sendMail(to, from, subject, body, true);
+            session.setMaxInactiveInterval(300);
+            resp.getWriter().write("Đã gửi, Vui lòng check mail của bạn");
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
