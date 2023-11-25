@@ -8,13 +8,13 @@
 }
 
 body {
-    background-color: #c9d6ff;
-    background: linear-gradient(to right, #e2e2e2, #c9d6ff);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     height: 100vh;
+    font-family: Arial, sans-serif;
+    margin: 0;
 }
 
 .container {
@@ -60,9 +60,17 @@ body {
     cursor: pointer;
 }
 
+button:hover {
+    background-color: rgb(167, 22, 121);
+}
+
 .container button.hidden {
     background-color: transparent;
     border-color: #fff;
+}
+
+button.hidden:hover {
+    background-color: rgb(228, 27, 214); /* Màu sáng khi rê chuột vào */
 }
 
 .container form{
@@ -182,9 +190,8 @@ body {
     display: flex;
     align-items: center;
     flex-direction: column;
-    padding: 0 80px;
+    padding: 0 40px;
     text-align: center;
-    top: 100;
     transform: translateX(0);
     transition: all 0.6s ease-in-out;
 }
@@ -336,4 +343,33 @@ body {
 
 .checkbox-text {
     cursor: pointer;
+}
+
+.toggle-password {
+    position: relative;
+    display: inline-block;
+    position: absolute;
+    right: 55px;
+    top: 53%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    user-select: none;
+}
+
+.toggle-confirm-password {
+    position: absolute;
+    right: 55px;
+    top: 61%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    user-select: none;
+}
+
+.toggle-sign-in-password{
+    position: absolute;
+    right: 10px;
+    top: 75%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    user-select: none;
 }
