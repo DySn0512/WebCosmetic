@@ -27,6 +27,8 @@ function sendOtp() {
     var confirmPasswordValue = document.querySelector('input[name="confirmPassword"]').value;
     if (nameValue === "" || phoneValue === "" || emailValue === "" || addressValue === "" || passwordValue === "" || confirmPasswordValue === "") {
         alert("Vui lòng điền đầy đủ thông tin vào các trường!");
+    } else if (passwordValue !== confirmPasswordValue) {
+        alert("Mật khẩu và xác nhận mật khẩu không khớp!");
     } else {
         $.ajax({
             type: 'POST',
@@ -35,9 +37,18 @@ function sendOtp() {
                 name: nameValue,
                 email: emailValue
             },
+            success: [
+                function (response) {
+                    var messageElement = document.getElementById('message');
+                    messageElement.innerHTML = response;
+
+                }
+            ]
         });
     }
+
 }
+
 function registerServlet() {
     var nameValue = document.querySelector('input[name="name"]').value;
     var phoneValue = document.querySelector('input[name="phone"]').value;
@@ -48,7 +59,9 @@ function registerServlet() {
     var otpValue = document.querySelector('input[name="otp"]').value;
     if (nameValue === "" || phoneValue === "" || emailValue === "" || addressValue === "" || passwordValue === "" || confirmPasswordValue === "") {
         alert("Vui lòng điền đầy đủ thông tin vào các trường!");
-    } else {it
+    } else if (passwordValue !== confirmPasswordValue) {
+        alert("Mật khẩu và xác nhận mật khẩu không khớp!");
+    } else {
         $.ajax({
             type: 'POST',
             url: 'register',
@@ -58,15 +71,13 @@ function registerServlet() {
                 email: emailValue,
                 address: addressValue,
                 password: passwordValue,
-                otp:otpValue
+                otp: otpValue
             },
-            success : [
-                function(response) {
-                    if(response==="login_customer.jsp")
-                    {
-                        window.location.href=response;
-                    }
-                    else {
+            success: [
+                function (response) {
+                    if (response === "login_customer.jsp") {
+                        window.location.href = response;
+                    } else {
                         var messageElement = document.getElementById('message');
                         messageElement.innerHTML = response;
                     }
