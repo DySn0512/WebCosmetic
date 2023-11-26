@@ -48,7 +48,6 @@ public class ProductInfoServlet extends HttpServlet {
 
         removeDetails(req);
 
-        //lấy các detail sau khi được chỉnh sửa
         String[] idDetails = req.getParameterValues("idDetail");
         String[] units = req.getParameterValues("unit");
         String[] isSaleValues = req.getParameterValues("isSale");

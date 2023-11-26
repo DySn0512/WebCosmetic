@@ -29,29 +29,26 @@ public class ProductServlet extends HttpServlet {
         String action = req.getParameter("action");
 
         if (action == null || action.equals("find")) {
-            List<Brand> brands = BrandDB.selectAll();
-            req.setAttribute("brands", brands);
-            List<ProductCategory> categories = ProductCategoryDB.selectAll();
-            req.setAttribute("categories", categories);
             findProduct(req, resp);
         } else if (action.equals("remove")) {
             deleteProducts(req);
             resp.sendRedirect("product");
+            return;
         } else {
             if (action.equals("add")) {
                 req.setAttribute("ariacurrent", "Thêm Sản Phẩm");
-            } else {
+            } else if (action.equals("update")) {
                 Long id = Long.parseLong(req.getParameter("id"));
                 Product product = ProductDB.select(id);
                 req.setAttribute("product", product);
                 req.setAttribute("ariacurrent", "Sửa Sản Phẩm");
             }
-            List<Brand> brands = BrandDB.selectAll();
-            req.setAttribute("brands", brands);
-            List<ProductCategory> categories = ProductCategoryDB.selectAll();
-            req.setAttribute("categories", categories);
-            getServletContext().getRequestDispatcher("/admin/product_info.jsp").forward(req, resp);
         }
+        List<Brand> brands = BrandDB.selectAll();
+        req.setAttribute("brands", brands);
+        List<ProductCategory> categories = ProductCategoryDB.selectAll();
+        req.setAttribute("categories", categories);
+        getServletContext().getRequestDispatcher("/admin/product_info.jsp").forward(req, resp);
     }
 
     private void findProduct(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
