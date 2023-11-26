@@ -19,12 +19,12 @@
     function updateSubCategories(selectElement) {
         var id = selectElement.value;
         var subSelect = document.getElementById("subCategorySelect");
-        <c:forEach items="${productCategories}" var="productCategory">
-        if (id === "${productCategory.id}") {
+        <c:forEach items="${categories}" var="category">
+        if (id === "${category.id}") {
             while (subSelect.options.length > 0) {
                 subSelect.remove(0);
             }
-            <c:forEach items="${productCategory.subCategories}" var="subCategory">
+            <c:forEach items="${category.subCategories}" var="subCategory">
             var newOption = new Option("${subCategory.name}", "${subCategory.id}");
             subSelect.add(newOption);
             </c:forEach>
@@ -98,13 +98,13 @@
                             </c:otherwise>
                         </c:choose>
                         <c:set var="matchedProductCategory" value="${null}"/>
-                        <c:forEach items="${productCategories}" var="productCategory">
+                        <c:forEach items="${categories}" var="category">
                             <c:choose>
-                                <c:when test="${productCategory.id == product.productCategory.id}">
-                                    <c:set var="matchedProductCategory" value="${productCategory}"/>
+                                <c:when test="${category.id == product.productCategory.id}">
+                                    <c:set var="matchedProductCategory" value="${category}"/>
                                 </c:when>
                                 <c:otherwise>
-                                    <option value="${productCategory.id}">${productCategory.name}</option>
+                                    <option value="${category.id}">${category.name}</option>
                                 </c:otherwise>
                             </c:choose>
                         </c:forEach>

@@ -65,7 +65,7 @@ function registerServlet() {
     } else {
         $('#spinner').css('display', 'inline-block');
         $.ajax({
-            type: 'POST',
+            type: 'GET',
             url: 'register',
             data: {
                 name: nameValue,

@@ -37,12 +37,12 @@
         </div>
         <button onclick="callForm('Tên danh mục','category','')">Thêm Danh Mục</button>
         <ul>
-            <c:forEach items="${productCategories}" var="productCategory">
+            <c:forEach items="${productCategories}" var="category">
                 <div class="category-div" onclick="toggleSubcategories(this)">
                     <span class="toggle-icon">▶</span>
                     <form action="category" class="nameForm">
-                        <input type="hidden" value="${productCategory.id}" name="id">
-                        <input type="text" value="${productCategory.name}" disabled required
+                        <input type="hidden" value="${category.id}" name="id">
+                        <input type="text" value="${category.name}" disabled required
                                style="pointer-events: none;" name="newName" class="name">
                         <div>
                             <input type="button" class="edit-input" onclick="editInput(this)" value="Chỉnh sửa">
@@ -50,20 +50,20 @@
                                     style="display: none">Lưu</button>
                             <button value="remove" name="action" class="delete-input">Xoá</button>
                             <input type="button" class="cancel-input"
-                                   onclick="cancelEdit(this,'${productCategory.name}')"
+                                   onclick="cancelEdit(this,'${category.name}')"
                                    style="display: none" value="Huỷ">
                         </div>
                     </form>
                 </div>
                 <div class="subcategories">
                     <div class="subcategory-item" id="addInput"
-                         onclick="callForm('Tên danh mục con','subcategory','${productCategory.id}')">
+                         onclick="callForm('Tên danh mục con','subcategory','${category.id}')">
                         +
                     </div>
-                    <c:forEach items="${productCategory.subCategories}" var="subCategory">
+                    <c:forEach items="${category.subCategories}" var="subCategory">
                         <div class="subcategory-item">
                             <form action="subcategory" class="nameForm">
-                                <input type="hidden" value="${productCategory.id}" name="idCategory">
+                                <input type="hidden" value="${category.id}" name="idCategory">
                                 <input type="hidden" value="${subCategory.id}" name="id">
                                 <input type="text" value="${subCategory.name}" name="newName" disabled required
                                        class="name">

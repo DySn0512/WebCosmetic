@@ -45,11 +45,11 @@
 </div>
 <nav>
     <a href="#">Home</a>
-    <c:forEach items="${productCategories}" var="productCategory">
+    <c:forEach items="${productCategories}" var="category">
         <div class="dropdown">
-            <a href="#">${productCategory.name}</a>
+            <a href="#">${category.name}</a>
             <div class="dropdown-content">
-                <c:forEach items="${productCategory.subCategories}" var="subCategory">
+                <c:forEach items="${category.subCategories}" var="subCategory">
                     <a href="#">${subCategory.name}</a>
                 </c:forEach>
             </div>

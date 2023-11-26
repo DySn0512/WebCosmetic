@@ -38,7 +38,6 @@ public class ProductServlet extends HttpServlet {
             deleteProducts(req);
             resp.sendRedirect("product");
         } else {
-
             if (action.equals("add")) {
                 req.setAttribute("ariacurrent", "Thêm Sản Phẩm");
             } else {
@@ -47,6 +46,10 @@ public class ProductServlet extends HttpServlet {
                 req.setAttribute("product", product);
                 req.setAttribute("ariacurrent", "Sửa Sản Phẩm");
             }
+            List<Brand> brands = BrandDB.selectAll();
+            req.setAttribute("brands", brands);
+            List<ProductCategory> categories = ProductCategoryDB.selectAll();
+            req.setAttribute("categories", categories);
             getServletContext().getRequestDispatcher("/admin/product_info.jsp").forward(req, resp);
         }
     }
@@ -62,10 +65,10 @@ public class ProductServlet extends HttpServlet {
             products = ProductDB.selectProductBySimilarName(search);
         } else if (findBy.equals("brand")) {
             products = ProductDB.selectProductByBrand(search, isSale);
-        } else if (findBy.equals("productCategory")) {
-            products = ProductDB.selectProductByCategory(search);
+        } else if (findBy.equals("category")) {
+            products = ProductDB.selectProductByCategory(search, isSale);
         } else if (findBy.equals("subCategory")) {
-            products = ProductDB.selectProductBySubCategory(search);
+            products = ProductDB.selectProductBySubCategory(search, isSale);
         }
         showProduct(req, resp, products);
     }

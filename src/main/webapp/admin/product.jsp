@@ -24,7 +24,7 @@
                 <div class="search-bar">
                     <div class="search-input-wrapper">
                         <input type="text" id="search-input" name="search" placeholder="Nhập từ khóa tìm kiếm"
-                               list="auto-complete" value="${search}">
+                               list="auto-complete" onkeydown="checkEnter()">
                         <datalist id="auto-complete">
                             <c:forEach items="${brands}" var="brand">
                             <option value="${brand.name}" class="brand">
@@ -36,10 +36,9 @@
                                 </c:forEach>
                                 </c:forEach>
                         </datalist>
-                        <button type="button" oninput="searchProduct()">🔍</button>
+                        <button type="button" onclick="searchProduct()" id="find">🔍</button>
                     </div>
                     <select class="search-type" name="findBy" onchange="changeAutoComplete(this.value)">
-                        <option value="">Tìm theo...</option>
                         <option value="name">Tên</option>
                         <option value="brand">Thương Hiệu</option>
                         <option value="category">Danh Mục</option>
@@ -65,7 +64,7 @@
             </div>
             <div>
 
-                <table id="productTable*9-">
+                <table id="productTable">
                     <thead>
                     <tr>
                         <th></th>

@@ -100,7 +100,7 @@ public class ProductDB {
                     .setParameter("productName", productName);
             return query.getSingleResult();
         } catch (NoResultException e) {
-            return null; // Trả về null nếu không tìm thấy sản phẩm có tên tương ứng
+            return null;
         } finally {
             em.close();
         }
@@ -108,35 +108,56 @@ public class ProductDB {
 
     public static List<Product> selectProductByBrand(String brandName, String isSale) {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        String jpqlQuery = "SELECT p FROM Product p WHERE p.brand.name = :brandName";
+        String jpqlQuery = "SELECT p FROM Product p WHERE LOWER(p.brand.name) LIKE LOWER(:brandName)";
         if (isSale.equals("true")) {
-            jpqlQuery = "SELECT DISTINCT p FROM Product p JOIN FETCH p.details d WHERE p.brand.name = :brandName AND d.isSale = true";
+            jpqlQuery = "SELECT DISTINCT p FROM Product p JOIN FETCH p.details d " +
+                    "WHERE LOWER(p.brand.name) LIKE LOWER(:brandName) AND d.isSale = true";
         } else if (isSale.equals("false")) {
-            jpqlQuery = "SELECT DISTINCT p FROM Product p JOIN FETCH p.details d WHERE p.brand.name = :brandName AND d.isSale = false ";
+            jpqlQuery = "SELECT DISTINCT p FROM Product p " +
+                    "WHERE LOWER(p.brand.name) LIKE LOWER(:brandName) AND NOT EXISTS (SELECT 1 FROM p.details d " +
+                    "WHERE d.isSale = true)";
         }
         TypedQuery<Product> query = em.createQuery(jpqlQuery, Product.class)
-                .setParameter("brandName", brandName);
+                .setParameter("brandName", "%" + brandName + "%");
         return query.getResultList();
     }
 
-    public static List<Product> selectProductByCategory(String categoryName) {
+    public static List<Product> selectProductByCategory(String categoryName, String isSale) {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        TypedQuery<Product> query = em.createQuery("SELECT p FROM Product p WHERE p.productCategory.name = :categoryName", Product.class)
-                .setParameter("categoryName", categoryName);
+        String jpqlQuery = "SELECT p FROM Product p WHERE LOWER(p.productCategory.name) LIKE LOWER(:categoryName)";
+        if (isSale.equals("true")) {
+            jpqlQuery = "SELECT DISTINCT p FROM Product p JOIN FETCH p.details d " +
+                    "WHERE LOWER(p.productCategory.name) LIKE LOWER(:categoryName) AND d.isSale = true";
+        } else if (isSale.equals("false")) {
+            jpqlQuery = "SELECT DISTINCT p FROM Product p " +
+                    "WHERE LOWER(p.productCategory.name) LIKE LOWER(:categoryName) AND NOT EXISTS (SELECT 1 FROM p.details d " +
+                    "WHERE d.isSale = true)";
+        }
+        TypedQuery<Product> query = em.createQuery(jpqlQuery, Product.class)
+                .setParameter("categoryName", "%" + categoryName + "%");
         return query.getResultList();
     }
 
-    public static List<Product> selectProductBySubCategory(String subCategoryName) {
+    public static List<Product> selectProductBySubCategory(String subCategoryName, String isSale) {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        TypedQuery<Product> query = em.createQuery("SELECT p FROM Product p WHERE p.subCategory.name = :subCategoryName", Product.class)
-                .setParameter("subCategoryName", subCategoryName);
+        String jpqlQuery = "SELECT p FROM Product p WHERE LOWER(p.subCategory.name) LIKE LOWER(:subCategoryName)";
+        if (isSale.equals("true")) {
+            jpqlQuery = "SELECT DISTINCT p FROM Product p JOIN FETCH p.details d " +
+                    "WHERE LOWER(p.subCategory.name) LIKE LOWER(:subCategoryName) AND d.isSale = true";
+        } else if (isSale.equals("false")) {
+            jpqlQuery = "SELECT DISTINCT p FROM Product p " +
+                    "WHERE LOWER(p.subCategory.name) LIKE LOWER(:subCategoryName) AND NOT EXISTS (SELECT 1 FROM p.details d " +
+                    "WHERE d.isSale = true)";
+        }
+        TypedQuery<Product> query = em.createQuery(jpqlQuery, Product.class)
+                .setParameter("subCategoryName", "%" + subCategoryName + "%");
         return query.getResultList();
     }
 
     public static List<Product> selectProductBySimilarName(String similarName) {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        TypedQuery<Product> query = em.createQuery("SELECT p FROM Product p WHERE p.name = :similarName", Product.class)
-                .setParameter("similarName", similarName);
+        TypedQuery<Product> query = em.createQuery("SELECT p FROM Product p WHERE LOWER(p.name) LIKE LOWER(:similarName)", Product.class)
+                .setParameter("similarName", "%" + similarName + "%");
         return query.getResultList();
     }
 

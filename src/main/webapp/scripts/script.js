@@ -362,7 +362,7 @@ function searchProduct(){
     var searchValue = document.querySelector('input[name="search"]').value;
     $.ajax({
         type: 'POST',
-        url: 'admin/product',
+        url: 'product',
         data: {
             action: 'find',
             findBy: findByValue,
@@ -370,10 +370,20 @@ function searchProduct(){
             isSale: isSaleValue
         },
         success: function (data) {
-            $("#productTable tbody").html(data);
+            var newTbody = $(data).find("#productTable tbody").html();
+            $("#productTable tbody").html(newTbody);
         }
     });
 }
+
+function checkEnter() {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        var button = document.getElementById("find");
+        button.click();
+    }
+}
+
 
 
 
