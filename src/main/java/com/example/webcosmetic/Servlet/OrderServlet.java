@@ -55,7 +55,7 @@ public class OrderServlet extends HttpServlet {
             List<LineItem> lineItemsOrder = (List<LineItem>) session.getAttribute("lineItems");
             Order order = new Order(phone,address,customer,lineItemsOrder);
             OrderDB.insert(order);
-            cart.getLineItems().removeIf(lineItemsOrder::contains);
+            cart.removeLineItems(lineItemsOrder);
             // Cập nhật lại Cart trong cơ sở dữ liệu
             CartDB.update(cart);
             // Xoá lineItems khỏi session

@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "cart", value = "/cart")
 public class CartServlet extends HttpServlet {
@@ -54,10 +55,9 @@ public class CartServlet extends HttpServlet {
 
     private void removeCart(HttpServletRequest req, Cart cart) {
         String[] idLineItems = req.getParameterValues("idLineItem");
-        for (var id : idLineItems) {
-            Long idLineItem = Long.parseLong(id);
-            LineItem lineItem = LineItemDB.select(idLineItem);
-            cart.removeLineItem(lineItem);
+        if(idLineItems != null){
+            List<String> ids= List.of(idLineItems);
+            cart.removeLineItemsById(ids);
         }
     }
 
