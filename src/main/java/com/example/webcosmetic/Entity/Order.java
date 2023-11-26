@@ -2,6 +2,7 @@ package com.example.webcosmetic.Entity;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -32,8 +33,8 @@ public class Order {
 
     }
 
-    public Order(Date timeOrder, String phone, String address ,User user, List<LineItem> lineItems) {
-        this.timeOrder = timeOrder;
+    public Order(String phone, String address ,User user, List<LineItem> lineItems) {
+        this.timeOrder = new Date();
         this.phone = phone;
         this.address = address;
         this.user = user;

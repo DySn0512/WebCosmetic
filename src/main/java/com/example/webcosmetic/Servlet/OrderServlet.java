@@ -27,33 +27,19 @@ public class OrderServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        Date timeOrder = new Date();
         String action = req.getParameter("action");
         String phone = req.getParameter("phone");
         String address = req.getParameter("address");
-        User user = (User) session.getAttribute("user");
+        User customer = (User) session.getAttribute("user");
         Cart cart = (Cart) session.getAttribute("cart");
         if (action.equals("create")) {
-            String[] idLineItems = req.getParameterValues("idLineItem");
-            List<Long> idList = new ArrayList<>();
-            if (idLineItems != null) {
-                for (String id : idLineItems) {
-                    Long idLong = Long.valueOf(id);
-                    idList.add(idLong);
-                }
-            }
-            List<LineItem> cartLineItems = cart.getLineItems();//này là  list line item của cart
-            List<LineItem> lineItems = new ArrayList<>(); //này là list chứa line item ng dùng chọn
-
-            for (LineItem item : cartLineItems) {
-                if (idList.contains(item.getId())) {
+            List<String> idLineItems = List.of(req.getParameterValues("idLineItem"));
+            List<LineItem> lineItems = new ArrayList<>();
+            for (LineItem item : cart.getLineItems()) {
+                if (idLineItems.contains(item.getId().toString())) {
                     lineItems.add(item);
                 }
             }
-            session.setAttribute("lineItems", lineItems);
-            Order order = new Order(timeOrder, phone, address, user, lineItems);
-            OrderDB.insert(order);
-            getServletContext().getRequestDispatcher("/order.jsp").forward(req, resp);
         } else {
             String referer = req.getHeader("referer");
             resp.sendRedirect(referer);
