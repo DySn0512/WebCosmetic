@@ -45,10 +45,12 @@
                     </td>
 
                     <td>
-                        <button type="button" onclick="decreaseQuanity(this,'${lineItem.id}')">-</button>
-                        <input id="quantity" type="text" value="${lineItem.quantity}" oninput="inputChange(this)"
-                               onblur="handleBlur(this,'${lineItem.id}')">
-                        <button type="button" onclick="increaseQuanity(this,'${lineItem.id}')">+</button>
+                        <div class="quantity-controls">
+                            <button type="button" onclick="decreaseQuanity(this,'${lineItem.id}')">-</button>
+                            <input id="quantity" type="text" value="${lineItem.quantity}" oninput="inputChange(this)"
+                                   onblur="handleBlur(this,'${lineItem.id}')">
+                            <button type="button" onclick="increaseQuanity(this,'${lineItem.id}')">+</button>
+                        </div>
                     </td>
                     <td>${lineItem.detailProduct.unit}</td>
                     <td>
