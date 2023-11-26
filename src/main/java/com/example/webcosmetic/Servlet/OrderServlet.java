@@ -29,7 +29,6 @@ public class OrderServlet extends HttpServlet {
         if (action.equals("create")) {
             String[] idLineItems = req.getParameterValues("idLineItem");
             List<Long> idList = new ArrayList<>();
-
             if (idLineItems != null) {
                 for (String id : idLineItems) {
                     Long idLong = Long.valueOf(id);
