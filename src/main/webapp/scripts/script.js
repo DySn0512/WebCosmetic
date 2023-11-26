@@ -362,7 +362,7 @@ function searchProduct(){
     var searchValue = document.querySelector('input[name="search"]').value;
     $.ajax({
         type: 'POST',
-        url: 'product',
+        url: 'admin/product',
         data: {
             action: 'find',
             findBy: findByValue,
@@ -370,7 +370,6 @@ function searchProduct(){
             isSale: isSaleValue
         },
         success: function (data) {
-            // Cập nhật HTML của bảng sản phẩm
             $("#productTable tbody").html(data);
         }
     });

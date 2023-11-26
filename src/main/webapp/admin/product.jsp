@@ -27,14 +27,14 @@
                                list="auto-complete" value="${search}">
                         <datalist id="auto-complete">
                             <c:forEach items="${brands}" var="brand">
-                                <option value="${brand.name}" class="brand">
-                            </c:forEach>
-                            <c:forEach items="${categories}" var="category">
-                                <option value="${category.name}" class="category">
-                                <c:forEach items="${category.subCategories}" var="subCategory">
-                                    <option value="${subCategory.name}" class="subCategory">
+                            <option value="${brand.name}" class="brand">
                                 </c:forEach>
-                            </c:forEach>
+                                <c:forEach items="${categories}" var="category">
+                            <option value="${category.name}" class="category">
+                                <c:forEach items="${category.subCategories}" var="subCategory">
+                            <option value="${subCategory.name}" class="subCategory">
+                                </c:forEach>
+                                </c:forEach>
                         </datalist>
                         <button type="button" oninput="searchProduct()">🔍</button>
                     </div>
@@ -65,7 +65,7 @@
             </div>
             <div>
 
-                <table>
+                <table id="productTable*9-">
                     <thead>
                     <tr>
                         <th></th>

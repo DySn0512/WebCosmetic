@@ -61,7 +61,7 @@ public class ProductServlet extends HttpServlet {
         } else if (findBy.equals("name")) {
             products = ProductDB.selectProductBySimilarName(search);
         } else if (findBy.equals("brand")) {
-            products = ProductDB.selectProductByBrand(search,isSale);
+            products = ProductDB.selectProductByBrand(search, isSale);
         } else if (findBy.equals("productCategory")) {
             products = ProductDB.selectProductByCategory(search);
         } else if (findBy.equals("subCategory")) {

@@ -14,7 +14,7 @@
         <form action="register" method="post">
             <h2>Thông tin người dùng</h2>
             <input type="text" class="inputs" name="name" placeholder="Name" required/>
-            <input type="text" name="phone" placeholder="Phone" required oninput="inputChange(this)"/>
+            <input type="text" name="phone" placeholder="Phone" required oninput="inputChange(this)"  maxlength="10"/>
             <input type="email" name="email" placeholder="Email" required/>
             <input type="text" name="address" placeholder="Address" required/>
 
@@ -39,7 +39,7 @@
             <input type="hidden" name="action" value="customer">
             <h1>Đăng nhập </h1>
             <div class="input-wrapper">
-                <input type="text" class="inputs" name="phone" placeholder="Please enter your Phone" value="${phone}">
+                <input type="text" class="inputs" name="phone" placeholder="Please enter your Phone" value="${phone}" oninput="inputChange(this)" maxlength="10">
                 <input type="password" name="password" placeholder="Please enter your Password" id="signInPassword"  value="${password}">
                 <span class="toggle-sign-in-password" onclick="toggleSignInPassword()">👁️</span>
             </div>
@@ -75,6 +75,7 @@
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="./scripts/script.js"></script>
 <script src="./scripts/login.js"></script>
 </body>
 </html>
