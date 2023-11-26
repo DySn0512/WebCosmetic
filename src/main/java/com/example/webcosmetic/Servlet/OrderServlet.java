@@ -1,7 +1,11 @@
 package com.example.webcosmetic.Servlet;
 
+import com.example.webcosmetic.Entity.Cart;
+import com.example.webcosmetic.Entity.Order;
+import com.example.webcosmetic.Entity.User;
 import com.example.webcosmetic.Entity.LineItem;
 import com.example.webcosmetic.EntityDB.LineItemDB;
+import com.example.webcosmetic.EntityDB.OrderDB;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -22,24 +26,38 @@ public class OrderServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        Date timeOrder = new Date();
         String action = req.getParameter("action");
+        String phone = req.getParameter("phone");
+        String address = req.getParameter("address");
+        User user = (User) session.getAttribute("user");
+        Cart cart = (Cart) session.getAttribute("cart");
         if (action.equals("create")) {
-            List<LineItem> lineItems = new ArrayList<>();
             String[] idLineItems = req.getParameterValues("idLineItem");
+            List<Long> idList = new ArrayList<>();
             if (idLineItems != null) {
-                for (var id : idLineItems) {
-                    long idLineItem = Long.parseLong(id);
-                    LineItem lineItem = LineItemDB.select(idLineItem);
-                    lineItems.add(lineItem);
+                for (String id : idLineItems) {
+                    Long idLong = Long.valueOf(id);
+                    idList.add(idLong);
                 }
-                req.setAttribute("lineItems", lineItems);
-                getServletContext().getRequestDispatcher("/order.jsp").forward(req, resp);
             }
-            else{
-                String referer = req.getHeader("referer");
-                resp.sendRedirect(referer);
-            }
+            List<LineItem> cartLineItems = cart.getLineItems();//này là  list line item của cart
+            List<LineItem> lineItems = new ArrayList<>(); //này là list chứa line item ng dùng chọn
 
+            for (LineItem item : cartLineItems) {
+                if (idList.contains(item.getId())) {
+                    lineItems.add(item);
+                }
+            }
+            session.setAttribute("lineItems", lineItems);
+            Order order = new Order(timeOrder, phone, address, user, lineItems);
+            OrderDB.insert(order);
+            getServletContext().getRequestDispatcher("/order.jsp").forward(req, resp);
+        } else {
+            String referer = req.getHeader("referer");
+            resp.sendRedirect(referer);
         }
+
     }
 }

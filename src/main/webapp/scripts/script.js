@@ -313,7 +313,7 @@ function inputChange(element) {
     element.value = value.replace(/[^0-9]/g, '');
 }
 
-function decreaseQuanity(button,id) {
+function decreaseQuanity(button, id) {
     let input = button.parentElement.querySelector('input[type="text"]');
     let numericValue = parseInt(input.value);
     if (numericValue > 1) {
@@ -322,16 +322,16 @@ function decreaseQuanity(button,id) {
     }
 }
 
-function increaseQuanity(button,id) {
+function increaseQuanity(button, id) {
     let input = button.parentElement.querySelector('input[type="text"]');
     let numericValue = parseInt(input.value);
     input.value = numericValue + 1;
     updateLineItem(id, input.value);
 }
 
-function handleBlur(element,id) {
-    if (element.value==="" || parseInt(element.value)<1){
-        element.value=1;
+function handleBlur(element, id) {
+    if (element.value === "" || parseInt(element.value) < 1) {
+        element.value = 1;
     }
     updateLineItem(id, element.value);
 }
@@ -343,20 +343,20 @@ function updateLineItem(id, quantity) {
         data: {
             action: 'update',
             idLineItem: id,
-            quantity:quantity
+            quantity: quantity
         }
     });
 }
 
-function changeAutoComplete(value){
+function changeAutoComplete(value) {
     var options = document.querySelectorAll('.brand, .category, .subCategory');
-    options.forEach(option => option.disabled=true);
-    options = document.querySelectorAll('.' +value);
-    options.forEach(option => option.disabled=false);
+    options.forEach(option => option.disabled = true);
+    options = document.querySelectorAll('.' + value);
+    options.forEach(option => option.disabled = false);
 
 }
 
-function searchProduct(){
+function searchProduct() {
     var isSaleValue = document.querySelector('input[name="isSale"]:checked').value;
     var findByValue = document.querySelector('select[name="findBy"]').value;
     var searchValue = document.querySelector('input[name="search"]').value;
@@ -385,6 +385,34 @@ function checkEnter() {
 }
 
 
+function selectDetail(sale, price, salePrice, id, button) {
+    var priceDisplay = document.getElementById('price-display');
+    if (sale) {
+        priceDisplay.innerHTML = "<del>" + price + "</del> " + salePrice;
+    } else {
+        priceDisplay.textContent = price;
+    }
+    document.getElementById('id-detail').value = id;
+    var buttons = document.querySelectorAll('.select-detail');
+    buttons.forEach(item => item.classList.remove('active'));
+    button.classList.add('active');
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    var breadcrumbLinks = document.querySelectorAll(".breadcrumb a:not(:last-child)");
+
+    breadcrumbLinks.forEach(function (link) {
+        link.style.opacity = "0.7"; // Làm mờ các mục ngoại trừ mục cuối cùng
+
+        link.addEventListener("mouseenter", function () {
+            this.style.opacity = "1"; // Loại bỏ hiệu ứng làm mờ khi rê chuột vào
+        });
+
+        link.addEventListener("mouseleave", function () {
+            this.style.opacity = "0.7"; // Áp dụng hiệu ứng làm mờ lại khi rời chuột ra
+        });
+    });
+});
 
 
 
