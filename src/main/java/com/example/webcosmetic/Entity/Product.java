@@ -133,4 +133,5 @@ public class Product {
         Long maxCurrentPrice = stats.getMax();
         return minCurrentPrice + " - " + maxCurrentPrice;
     }
+
 }

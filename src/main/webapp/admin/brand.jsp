@@ -30,7 +30,7 @@
         </div>
         <button onclick="callForm('Tên thương hiệu','','')">Thêm Thương Hiệu</button>
         <c:forEach items="${brands}" var="brand">
-            <div class="brand">
+            <div class="brand-div">
                 <form action="brand" class="nameForm">
                     <input type="hidden" value="${brand.id}" name="id">
                     <input type="text" value="${brand.name}" name="newName" disabled required

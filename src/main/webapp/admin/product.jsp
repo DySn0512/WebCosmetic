@@ -23,24 +23,37 @@
             <div class="tool-bar">
                 <div class="search-bar">
                     <div class="search-input-wrapper">
-                        <input type="text" id="search-input" name="search-input" placeholder="Nhập từ khóa tìm kiếm">
-                        <button value="find" name="action">🔍</button>
+                        <input type="text" id="search-input" name="search" placeholder="Nhập từ khóa tìm kiếm"
+                               list="auto-complete" onkeydown="checkEnter()">
+                        <datalist id="auto-complete">
+                            <c:forEach items="${brands}" var="brand">
+                            <option value="${brand.name}" class="brand">
+                                </c:forEach>
+                                <c:forEach items="${categories}" var="category">
+                            <option value="${category.name}" class="category">
+                                <c:forEach items="${category.subCategories}" var="subCategory">
+                            <option value="${subCategory.name}" class="subCategory">
+                                </c:forEach>
+                                </c:forEach>
+                        </datalist>
+                        <button type="button" onclick="searchProduct()" id="find">🔍</button>
                     </div>
-                    <select class="search-type">
-                        <option value="">Tìm theo...</option>
-                        <option value="search-by-name">id</option>
-                        <option value="search-by-location">Tên</option>
+                    <select class="search-type" name="findBy" onchange="changeAutoComplete(this.value)">
+                        <option value="name">Tên</option>
+                        <option value="brand">Thương Hiệu</option>
+                        <option value="category">Danh Mục</option>
+                        <option value="subCategory">Danh Mục Con</option>
                     </select>
                     <label class="radio-label">
-                        <input type="radio" name="discount-radio" value="all" id="discount-all">
+                        <input type="radio" name="isSale" value="all" id="discount-all" checked>
                         Tất cả
                     </label>
                     <label class="radio-label">
-                        <input type="radio" name="discount-radio" value="yes" id="discount-yes">
+                        <input type="radio" name="isSale" value="true" id="discount-yes">
                         Giảm giá
                     </label>
                     <label class="radio-label">
-                        <input type="radio" name="discount-radio" value="no" id="discount-no">
+                        <input type="radio" name="isSale" value="false" id="discount-no">
                         Không giảm giá
                     </label>
                 </div>
@@ -51,7 +64,7 @@
             </div>
             <div>
 
-                <table>
+                <table id="productTable">
                     <thead>
                     <tr>
                         <th></th>

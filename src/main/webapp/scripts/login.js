@@ -65,7 +65,7 @@ function registerServlet() {
     } else {
         $('#spinner').css('display', 'inline-block');
         $.ajax({
-            type: 'POST',
+            type: 'GET',
             url: 'register',
             data: {
                 name: nameValue,
@@ -75,7 +75,7 @@ function registerServlet() {
                 password: passwordValue,
                 otp: otpValue
             },
-            success: [
+            success:
                 function (response) {
                     if (response === "login_customer.jsp") {
                         window.location.href = response;
@@ -85,7 +85,6 @@ function registerServlet() {
                     }
                     $('#spinner').css('display', 'none');
                 }
-            ]
         });
     }
 }
