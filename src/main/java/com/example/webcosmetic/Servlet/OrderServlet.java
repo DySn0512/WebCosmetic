@@ -6,6 +6,7 @@ import com.example.webcosmetic.Entity.User;
 import com.example.webcosmetic.Entity.LineItem;
 import com.example.webcosmetic.EntityDB.LineItemDB;
 import com.example.webcosmetic.EntityDB.OrderDB;
+import com.example.webcosmetic.EntityDB.CartDB;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -30,13 +31,15 @@ public class OrderServlet extends HttpServlet {
         String action = req.getParameter("action");
         String phone = req.getParameter("phone");
         String address = req.getParameter("address");
-        User customer = (User) session.getAttribute("user");
+        User customer = (User) session.getAttribute("customer");
         Cart cart = (Cart) session.getAttribute("cart");
-        List<LineItem> lineItems = new ArrayList<>();
+
         if (action.equals("create")) {
             String[] idLineItems = req.getParameterValues("idLineItem");
+            List<LineItem> lineItems = new ArrayList<>();
             if (idLineItems != null) {
                 List<String> ids = List.of(idLineItems);
+
 
                 for (LineItem item : cart.getLineItems()) {
                     if (ids.contains(item.getId().toString())) {
@@ -49,9 +52,15 @@ public class OrderServlet extends HttpServlet {
             getServletContext().getRequestDispatcher("/order.jsp").forward(req, resp);
 
         } else if (action.equals("add")) {
-            Order order = new Order(phone,address,customer,lineItems);
+            List<LineItem> lineItemsOrder = (List<LineItem>) session.getAttribute("lineItems");
+            Order order = new Order(phone,address,customer,lineItemsOrder);
             OrderDB.insert(order);
-            resp.sendRedirect("/checkout.jsp");
+            cart.getLineItems().removeIf(lineItemsOrder::contains);
+            // Cập nhật lại Cart trong cơ sở dữ liệu
+            CartDB.update(cart);
+            // Xoá lineItems khỏi session
+            session.removeAttribute("lineItems");
+            getServletContext().getRequestDispatcher("/checkout.jsp").forward(req, resp);
         } else {
             String referer = req.getHeader("referer");
             resp.sendRedirect(referer);

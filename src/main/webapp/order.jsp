@@ -37,9 +37,9 @@
                 <tbody>
                 <tr>
                     <td>${customer.name}</td>
-                    <td>${customer.phone}</td>
+                    <td><input value="${customer.phone}" name="phone"></td>
                     <td>${customer.email}</td>
-                    <td><input value="${customer.address}"></td>
+                    <td><input value="${customer.address}" name="address"></td>
                 </tr>
                 </tbody>
             </table>
@@ -47,7 +47,6 @@
 
         <section class="shipping-info">
             <h2>Thông tin đơn hàng</h2>
-            <form>
                 <table>
                     <thead>
                     <tr>
@@ -72,7 +71,6 @@
                     </c:forEach>
                     </tbody>
                 </table>
-            </form>
             <div class="summary">
                 <p>Total: <span></span></p>
             </div>
