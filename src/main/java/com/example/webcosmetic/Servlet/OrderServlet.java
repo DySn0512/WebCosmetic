@@ -1,8 +1,11 @@
 package com.example.webcosmetic.Servlet;
 
 import com.example.webcosmetic.Entity.Cart;
+import com.example.webcosmetic.Entity.Order;
+import com.example.webcosmetic.Entity.User;
 import com.example.webcosmetic.Entity.LineItem;
 import com.example.webcosmetic.EntityDB.LineItemDB;
+import com.example.webcosmetic.EntityDB.OrderDB;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -23,8 +26,12 @@ public class OrderServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String action = req.getParameter("action");
         HttpSession session = req.getSession();
+        Date timeOrder = new Date();
+        String action = req.getParameter("action");
+        String phone = req.getParameter("phone");
+        String address = req.getParameter("address");
+        User user = (User) session.getAttribute("user");
         Cart cart = (Cart) session.getAttribute("cart");
         if (action.equals("create")) {
             String[] idLineItems = req.getParameterValues("idLineItem");
@@ -44,7 +51,9 @@ public class OrderServlet extends HttpServlet {
                     lineItems.add(item);
                 }
             }
-            req.setAttribute("lineItems", lineItems);
+            session.setAttribute("lineItems", lineItems);
+            Order order = new Order(timeOrder, phone, address, user, lineItems);
+            OrderDB.insert(order);
             getServletContext().getRequestDispatcher("/order.jsp").forward(req, resp);
         } else {
             String referer = req.getHeader("referer");
