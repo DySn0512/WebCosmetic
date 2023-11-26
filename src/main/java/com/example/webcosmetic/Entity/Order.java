@@ -76,9 +76,8 @@ public class Order {
             String unit = item.getDetailProduct().getUnit();
             int quantity = item.getQuantity();
             Long price = item.getDetailProduct().getCurrentPrice();
-            Product product = item.getDetailProduct().getProduct();
-            String nameProduct = product.getName();
-            this.details.add(new DetailOrder(nameProduct,quantity,unit,price,product));
+            String nameProduct = item.getDetailProduct().getProduct().getName();
+            this.details.add(new DetailOrder(nameProduct,quantity,unit,price));
         }
     }
 

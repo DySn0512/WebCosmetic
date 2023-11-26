@@ -78,7 +78,8 @@
             </div>
         </section>
         <br>
-        <button value="add" name="action">Check out</button>
+        <input type="submit">
+        <button value="add" name="action" type="submit">Check out</button>
     </form>
 </main>
 </body>

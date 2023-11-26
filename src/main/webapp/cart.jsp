@@ -37,7 +37,11 @@
             <tbody>
             <c:forEach items="${cart.lineItems}" var="lineItem">
                 <tr>
-                    <td><input type="checkbox" value="${lineItem.id}" name="idLineItem"></td>
+                    <td><input type="checkbox" value="${lineItem.id}" name="idLineItem"
+                    <c:if test="${lineItem.detailProduct.price==0}">
+                        disabled
+                    </c:if>>
+                    </td>
                     <td>
                         <a class="noUnderline" href="detail?name=${lineItem.detailProduct.product.name}">
                                 ${lineItem.detailProduct.product.name}
