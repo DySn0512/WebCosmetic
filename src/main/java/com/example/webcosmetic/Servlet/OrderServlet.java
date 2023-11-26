@@ -40,7 +40,6 @@ public class OrderServlet extends HttpServlet {
             if (idLineItems != null) {
                 List<String> ids = List.of(idLineItems);
 
-
                 for (LineItem item : cart.getLineItems()) {
                     if (ids.contains(item.getId().toString())) {
                         lineItems.add(item);
@@ -48,8 +47,14 @@ public class OrderServlet extends HttpServlet {
                 }
 
             }
-            session.setAttribute("lineItems", lineItems);
-            getServletContext().getRequestDispatcher("/order.jsp").forward(req, resp);
+            if(!lineItems.isEmpty())
+            {
+                session.setAttribute("lineItems", lineItems);
+                getServletContext().getRequestDispatcher("/order.jsp").forward(req, resp);
+            }else{
+                String referer = req.getHeader("referer");
+                resp.sendRedirect(referer);
+            }
 
         } else if (action.equals("add")) {
             List<LineItem> lineItemsOrder = (List<LineItem>) session.getAttribute("lineItems");

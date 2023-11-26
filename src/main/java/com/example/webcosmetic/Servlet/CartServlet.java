@@ -14,7 +14,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @WebServlet(name = "cart", value = "/cart")
 public class CartServlet extends HttpServlet {
@@ -31,9 +34,9 @@ public class CartServlet extends HttpServlet {
         Cart cart = (Cart) session.getAttribute("cart");
 
         if ("add".equals(action)) {
-            addCart(req, cart);
+            addToCart(req, cart);
         } else if ("remove".equals(action)) {
-            removeCart(req, cart);
+            removeLineItem(req, cart);
         } else if ("update".equals(action)) {
             updateCart(req, cart);
         }
@@ -45,7 +48,7 @@ public class CartServlet extends HttpServlet {
         resp.sendRedirect(referer);
     }
 
-    private void addCart(HttpServletRequest req, Cart cart) {
+    private void addToCart(HttpServletRequest req, Cart cart) {
         Long idDetail = Long.parseLong(req.getParameter("idDetail"));
         int quantity = Integer.parseInt(req.getParameter("quantity"));
         DetailProduct detailProduct = DetailProductDB.select(idDetail);
@@ -53,12 +56,16 @@ public class CartServlet extends HttpServlet {
         cart.addLineItem(lineItem);
     }
 
-    private void removeCart(HttpServletRequest req, Cart cart) {
+    private void removeLineItem(HttpServletRequest req, Cart cart) {
         String[] idLineItems = req.getParameterValues("idLineItem");
-        if(idLineItems != null){
-            List<String> ids= List.of(idLineItems);
-            cart.removeLineItemsById(ids);
-        }
+        List<LineItem> lineItems = idLineItems != null ? Arrays.stream(idLineItems)
+                .map(id -> {
+                    LineItem lineItem = new LineItem();
+                    lineItem.setId(Long.parseLong(id));
+                    return lineItem;
+                }).collect(Collectors.toList()) : Collections.emptyList();
+        cart.removeLineItems(lineItems);
+
     }
 
     private void updateCart(HttpServletRequest req, Cart cart) {
