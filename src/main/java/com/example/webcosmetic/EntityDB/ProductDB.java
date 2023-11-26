@@ -27,7 +27,7 @@ public class ProductDB {
     public static void delete(Product product) {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
-        for (var detail : product.getDetails()) {
+        for (var detail : DetailProductDB.select(product)) {
             detail.setNullProduct();
             DetailProductDB.delete(detail);
         }

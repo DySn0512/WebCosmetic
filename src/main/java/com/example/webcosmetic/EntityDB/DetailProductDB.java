@@ -4,6 +4,9 @@ import com.example.webcosmetic.Entity.DetailProduct;
 import com.example.webcosmetic.Entity.Product;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.TypedQuery;
+
+import java.util.List;
 
 public class DetailProductDB {
 
@@ -28,6 +31,13 @@ public class DetailProductDB {
         } finally {
             em.close();
         }
+    }
+
+    public static List<DetailProduct> select(Product product) {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        TypedQuery<DetailProduct> query = em.createQuery("SELECT d FROM DetailProduct d WHERE d.product.id=:id", DetailProduct.class)
+                .setParameter("id",product.getId());
+        return query.getResultList();
     }
 
     public static void delete(DetailProduct detailProduct) {
