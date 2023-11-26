@@ -32,14 +32,26 @@ public class OrderServlet extends HttpServlet {
         String address = req.getParameter("address");
         User customer = (User) session.getAttribute("user");
         Cart cart = (Cart) session.getAttribute("cart");
+        List<LineItem> lineItems = new ArrayList<>();
         if (action.equals("create")) {
-            List<String> idLineItems = List.of(req.getParameterValues("idLineItem"));
-            List<LineItem> lineItems = new ArrayList<>();
-            for (LineItem item : cart.getLineItems()) {
-                if (idLineItems.contains(item.getId().toString())) {
-                    lineItems.add(item);
+            String[] idLineItems = req.getParameterValues("idLineItem");
+            if (idLineItems != null) {
+                List<String> ids = List.of(idLineItems);
+
+                for (LineItem item : cart.getLineItems()) {
+                    if (ids.contains(item.getId().toString())) {
+                        lineItems.add(item);
+                    }
                 }
+
             }
+            session.setAttribute("lineItems", lineItems);
+            getServletContext().getRequestDispatcher("/order.jsp").forward(req, resp);
+
+        } else if (action.equals("add")) {
+            Order order = new Order(phone,address,customer,lineItems);
+            OrderDB.insert(order);
+            resp.sendRedirect("/checkout.jsp");
         } else {
             String referer = req.getHeader("referer");
             resp.sendRedirect(referer);

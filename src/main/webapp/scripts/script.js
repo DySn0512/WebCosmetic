@@ -307,7 +307,11 @@ function setAction(action) {
     form.action = action;
 
 }
+function setActionOrder(action) {
+    const form = document.getElementById('checkout-form');
+    form.action = action;
 
+}
 function inputChange(element) {
     let value = element.value;
     element.value = value.replace(/[^0-9]/g, '');

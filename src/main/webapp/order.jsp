@@ -16,10 +16,11 @@
 </head>
 
 <body>
-    <header>
-        <h1>Thông tin giao hàng</h1>
-    </header>
-    <main>
+<header>
+    <h1>Thông tin giao hàng</h1>
+</header>
+<main>
+    <form action="order" method="post">
         <section class="shipping-info">
             <h2>Thông tin khách hàng</h2>
             <table>
@@ -77,7 +78,8 @@
             </div>
         </section>
         <br>
-        <button type="submit">Check out</button>
-    </main>
+        <button value="add" name="action">Check out</button>
+    </form>
+</main>
 </body>
 </html>
