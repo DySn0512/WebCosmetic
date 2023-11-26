@@ -175,7 +175,7 @@ body {
     color: #333;
 }
 
-.category, .brand   {
+.category-div, .brand-div   {
     background-color: #f0f0f0;
     border: 1px solid #ddd;
     cursor: pointer;

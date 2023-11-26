@@ -8,11 +8,11 @@ import com.example.webcosmetic.EntityDB.BrandDB;
 import com.example.webcosmetic.EntityDB.ProductCategoryDB;
 import com.example.webcosmetic.EntityDB.ProductDB;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletResponse;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.List;
@@ -27,20 +27,17 @@ public class ProductServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
-        if (action == null || action.equals("null")) {
-            showProduct(req);
-            getServletContext().getRequestDispatcher("/admin/product.jsp").forward(req, resp);
-        } else if (action.equals("find")) {
 
+        if (action == null || action.equals("find")) {
+            List<Brand> brands = BrandDB.selectAll();
+            req.setAttribute("brands", brands);
+            List<ProductCategory> categories = ProductCategoryDB.selectAll();
+            req.setAttribute("categories", categories);
+            findProduct(req, resp);
         } else if (action.equals("remove")) {
             deleteProducts(req);
             resp.sendRedirect("product");
         } else {
-
-            List<Brand> brands = BrandDB.selectAll();
-            req.setAttribute("brands", brands);
-            List<ProductCategory> productCategories = ProductCategoryDB.selectAll();
-            req.setAttribute("productCategories", productCategories);
 
             if (action.equals("add")) {
                 req.setAttribute("ariacurrent", "Thêm Sản Phẩm");
@@ -54,9 +51,28 @@ public class ProductServlet extends HttpServlet {
         }
     }
 
-    private void showProduct(HttpServletRequest req) {
-        List<Product> products = ProductDB.selectAll();
+    private void findProduct(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String findBy = req.getParameter("findBy");
+        String search = req.getParameter("search");
+        String isSale = req.getParameter("isSale");
+        List<Product> products = null;
+        if (findBy == null) {
+            products = ProductDB.selectAll();
+        } else if (findBy.equals("name")) {
+            products = ProductDB.selectProductBySimilarName(search);
+        } else if (findBy.equals("brand")) {
+            products = ProductDB.selectProductByBrand(search,isSale);
+        } else if (findBy.equals("productCategory")) {
+            products = ProductDB.selectProductByCategory(search);
+        } else if (findBy.equals("subCategory")) {
+            products = ProductDB.selectProductBySubCategory(search);
+        }
+        showProduct(req, resp, products);
+    }
+
+    private void showProduct(HttpServletRequest req, HttpServletResponse resp, List<Product> products) throws ServletException, IOException {
         req.setAttribute("products", products);
+        req.getRequestDispatcher("/admin/product.jsp").forward(req, resp);
     }
 
     private void deleteProducts(HttpServletRequest req) {

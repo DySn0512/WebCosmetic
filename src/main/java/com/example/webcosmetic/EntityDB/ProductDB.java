@@ -106,4 +106,38 @@ public class ProductDB {
         }
     }
 
+    public static List<Product> selectProductByBrand(String brandName, String isSale) {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        String jpqlQuery = "SELECT p FROM Product p WHERE p.brand.name = :brandName";
+        if (isSale.equals("true")) {
+            jpqlQuery = "SELECT DISTINCT p FROM Product p JOIN FETCH p.details d WHERE p.brand.name = :brandName AND d.isSale = true";
+        } else if (isSale.equals("false")) {
+            jpqlQuery = "SELECT DISTINCT p FROM Product p JOIN FETCH p.details d WHERE p.brand.name = :brandName AND d.isSale = false ";
+        }
+        TypedQuery<Product> query = em.createQuery(jpqlQuery, Product.class)
+                .setParameter("brandName", brandName);
+        return query.getResultList();
+    }
+
+    public static List<Product> selectProductByCategory(String categoryName) {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        TypedQuery<Product> query = em.createQuery("SELECT p FROM Product p WHERE p.productCategory.name = :categoryName", Product.class)
+                .setParameter("categoryName", categoryName);
+        return query.getResultList();
+    }
+
+    public static List<Product> selectProductBySubCategory(String subCategoryName) {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        TypedQuery<Product> query = em.createQuery("SELECT p FROM Product p WHERE p.subCategory.name = :subCategoryName", Product.class)
+                .setParameter("subCategoryName", subCategoryName);
+        return query.getResultList();
+    }
+
+    public static List<Product> selectProductBySimilarName(String similarName) {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        TypedQuery<Product> query = em.createQuery("SELECT p FROM Product p WHERE p.name = :similarName", Product.class)
+                .setParameter("similarName", similarName);
+        return query.getResultList();
+    }
+
 }

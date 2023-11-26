@@ -38,7 +38,7 @@
         <button onclick="callForm('Tên danh mục','category','')">Thêm Danh Mục</button>
         <ul>
             <c:forEach items="${productCategories}" var="productCategory">
-                <div class="category" onclick="toggleSubcategories(this)">
+                <div class="category-div" onclick="toggleSubcategories(this)">
                     <span class="toggle-icon">▶</span>
                     <form action="category" class="nameForm">
                         <input type="hidden" value="${productCategory.id}" name="id">

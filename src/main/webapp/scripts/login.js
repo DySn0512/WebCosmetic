@@ -75,7 +75,7 @@ function registerServlet() {
                 password: passwordValue,
                 otp: otpValue
             },
-            success: [
+            success:
                 function (response) {
                     if (response === "login_customer.jsp") {
                         window.location.href = response;
@@ -85,7 +85,6 @@ function registerServlet() {
                     }
                     $('#spinner').css('display', 'none');
                 }
-            ]
         });
     }
 }

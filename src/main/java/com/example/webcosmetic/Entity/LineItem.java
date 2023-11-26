@@ -44,4 +44,5 @@ public class LineItem {
     public Long getTotal(){
         return detailProduct.getCurrentPrice()*quantity;
     }
+
 }

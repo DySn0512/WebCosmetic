@@ -348,7 +348,33 @@ function updateLineItem(id, quantity) {
     });
 }
 
+function changeAutoComplete(value){
+    var options = document.querySelectorAll('.brand, .category, .subCategory');
+    options.forEach(option => option.disabled=true);
+    options = document.querySelectorAll('.' +value);
+    options.forEach(option => option.disabled=false);
 
+}
+
+function searchProduct(){
+    var isSaleValue = document.querySelector('input[name="isSale"]:checked').value;
+    var findByValue = document.querySelector('select[name="findBy"]').value;
+    var searchValue = document.querySelector('input[name="search"]').value;
+    $.ajax({
+        type: 'POST',
+        url: 'product',
+        data: {
+            action: 'find',
+            findBy: findByValue,
+            search: searchValue,
+            isSale: isSaleValue
+        },
+        success: function (data) {
+            // Cập nhật HTML của bảng sản phẩm
+            $("#productTable tbody").html(data);
+        }
+    });
+}
 
 
 
