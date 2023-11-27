@@ -44,7 +44,7 @@ public class ProductCategoryServlet extends HttpServlet {
     private void showProductCategories(HttpServletRequest req, ServletResponse resp) throws ServletException, IOException {
         List<ProductCategory> productCategories = ProductCategoryDB.selectAll();
         req.setAttribute("productCategories", productCategories);
-        getServletContext().getRequestDispatcher("/admin/productcategory.jsp").forward(req, resp);
+        req.getRequestDispatcher("/admin/productcategory.jsp").forward(req, resp);
 
     }
 

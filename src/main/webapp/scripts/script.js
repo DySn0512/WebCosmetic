@@ -307,11 +307,7 @@ function setAction(action) {
     form.action = action;
 
 }
-function setActionOrder(action) {
-    const form = document.getElementById('checkout-form');
-    form.action = action;
 
-}
 function inputChange(element) {
     let value = element.value;
     element.value = value.replace(/[^0-9]/g, '');
@@ -341,12 +337,13 @@ function handleBlur(element, id) {
 }
 
 function updateLineItem(id, quantity) {
+    totalPrice()
     $.ajax({
         type: 'POST',
         url: 'cart',
         data: {
             action: 'update',
-            idLineItem: id,
+            idDetailProduct: id,
             quantity: quantity
         }
     });
@@ -418,7 +415,34 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+function updateOrder(id, status) {
+    $.ajax({
+        type: 'POST',
+        url: 'order',
+        data: {
+            action: 'update',
+            id: id,
+            status: status,
+        },
+    });
+}
 
+function totalPrice() {
+    var checkboxes = document.querySelectorAll('input[name="idLineItem"]:checked');
+    var priceTotalValue = BigInt(0);;
 
+    checkboxes.forEach(function(checkbox) {
+        const tr = checkbox.parentElement.parentElement;
+        const currentPrice = BigInt(tr.querySelector('input[name="currentPrice"]').value);
+        const quantity = BigInt(tr.querySelector('input[name="quantity"]').value);
+        console.log(quantity);
+        priceTotalValue += currentPrice * quantity;
+    });
+    document.getElementById("price-total").innerHTML=priceTotalValue;
+}
+
+function selectOrder(id){
+    window.location.href = "order?action=show&id="+id;
+}
 
 

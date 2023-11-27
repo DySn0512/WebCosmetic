@@ -45,7 +45,7 @@ public class BrandServlet extends HttpServlet {
     private void showBrandList(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Brand> brands = BrandDB.selectAll();
         req.setAttribute("brands", brands);
-        getServletContext().getRequestDispatcher("/admin/brand.jsp").forward(req, resp);
+        req.getRequestDispatcher("/admin/brand.jsp").forward(req, resp);
     }
 
     private void addBrand(HttpServletRequest req) {

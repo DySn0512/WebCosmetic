@@ -14,7 +14,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="admin">Trang Chủ</a></li>
-                <li class="breadcrumb-item active" aria-current="page">/Order</li>
+                <li class="breadcrumb-item active" aria-current="page">/Đơn Hàng</li>
             </ol>
         </nav>
     </header>
@@ -32,20 +32,20 @@
             </thead>
             <tbody>
             <c:forEach var="order" items="${orders}">
-                <tr>
+                <tr onclick="selectOrder('${order.id}')" class="order">
                     <td>${order.user.name}</td>
                     <td>${order.phone}</td>
                     <td>${order.address}</td>
                     <td>${order.timeOrder}</td>
                     <td>
-                        <select name="status">
+                        <select name="status" style="width: 100%; font-size: 20px" onchange="updateOrder('${order.id}',this.value)">
                             <option value="${order.status}">${order.status}</option>
+                            <c:forEach var="item" items="${status}">
+                                <c:if test="${item!=order.status}">
+                                    <option value="${item}">${item}</option>
+                                </c:if>
+                            </c:forEach>
                         </select>
-                        <c:forEach var="item" items="${status}">
-                            <c:if test="${item!=order.status}">
-                                <option value="${item}">${item}</option>
-                            </c:if>
-                        </c:forEach>
                     </td>
                 </tr>
             </c:forEach>

@@ -60,7 +60,7 @@
                 </table>
                 <table>
                     <tbody>
-                    <c:forEach items="${lineItems}" var="lineItem">
+                    <c:forEach items="${lineItemsOrder}" var="lineItem">
                         <tr>
                             <td>${lineItem.detailProduct.product.name}</td>
                             <td>${lineItem.quantity}</td>

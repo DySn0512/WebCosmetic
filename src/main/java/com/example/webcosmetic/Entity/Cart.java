@@ -53,18 +53,20 @@ public class Cart {
                 );
     }
 
-    public void removeLineItems(List<LineItem> itemRemoves) {
+    public void remove(List<LineItem> itemRemoves) {
         lineItems.removeIf(item -> itemRemoves.stream()
-                .anyMatch(itemRemove -> itemRemove.getId().equals(item.getId())));
+                .anyMatch(itemRemove -> itemRemove.getDetailProduct().getId().equals(item.getDetailProduct().getId())));
+    }
+    public void removeByDetailProduct(List<DetailProduct> detailProducts ) {
+        lineItems.removeIf(item -> detailProducts.stream()
+                .anyMatch(itemRemove -> itemRemove.getId().equals(item.getDetailProduct().getId())));
     }
 
-    public void updateLineItem(LineItem lineItem){
+    public void update(Long idDetailProduct, int quantity){
         lineItems.stream()
-                .filter(item -> item.getId().equals(lineItem.getId()))
+                .filter(item -> item.getDetailProduct().getId().equals(idDetailProduct))
                 .findFirst()
-                .ifPresent(item -> {
-                    item.setQuantity(lineItem.getQuantity());
-                });
+                .ifPresent(item -> item.setQuantity(quantity));
     }
 
 }

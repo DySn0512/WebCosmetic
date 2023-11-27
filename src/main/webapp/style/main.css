@@ -340,3 +340,6 @@ th, td {
 th {
     background-color: rgb(245, 253, 251);
 }
+.order:hover {
+    background-color: rgb(235, 243, 241);
+}

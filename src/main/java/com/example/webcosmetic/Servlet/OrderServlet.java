@@ -4,7 +4,6 @@ import com.example.webcosmetic.Entity.Cart;
 import com.example.webcosmetic.Entity.Order;
 import com.example.webcosmetic.Entity.User;
 import com.example.webcosmetic.Entity.LineItem;
-import com.example.webcosmetic.EntityDB.LineItemDB;
 import com.example.webcosmetic.EntityDB.OrderDB;
 import com.example.webcosmetic.EntityDB.CartDB;
 import jakarta.servlet.ServletException;
@@ -35,32 +34,21 @@ public class OrderServlet extends HttpServlet {
         Cart cart = (Cart) session.getAttribute("cart");
 
         if (action.equals("create")) {
-            String[] idLineItems = req.getParameterValues("idLineItem");
-            List<LineItem> lineItems = new ArrayList<>();
-            if (idLineItems != null) {
-                List<String> ids = List.of(idLineItems);
+            String[] idDetailProducts = req.getParameterValues("idDetailProduct");
+            List<LineItem> lineItemsOrder = getSelectedLineItems(cart, idDetailProducts);
 
-                for (LineItem item : cart.getLineItems()) {
-                    if (ids.contains(item.getId().toString())) {
-                        lineItems.add(item);
-                    }
-                }
-
-            }
-            if(!lineItems.isEmpty())
-            {
-                session.setAttribute("lineItems", lineItems);
+            if (!lineItemsOrder.isEmpty()) {
+                session.setAttribute("lineItemsOrder", lineItemsOrder);
                 getServletContext().getRequestDispatcher("/order.jsp").forward(req, resp);
-            }else{
-                String referer = req.getHeader("referer");
-                resp.sendRedirect(referer);
+            } else {
+                resp.sendRedirect(req.getHeader("referer"));
             }
 
         } else if (action.equals("add")) {
-            List<LineItem> lineItemsOrder = (List<LineItem>) session.getAttribute("lineItems");
-            Order order = new Order(phone,address,customer,lineItemsOrder);
+            List<LineItem> lineItemsOrder = (List<LineItem>) session.getAttribute("lineItemsOrder");
+            Order order = new Order(phone, address, customer, lineItemsOrder);
             OrderDB.insert(order);
-            cart.removeLineItems(lineItemsOrder);
+            cart.remove(lineItemsOrder);
             // Cập nhật lại Cart trong cơ sở dữ liệu
             CartDB.update(cart);
             // Xoá lineItems khỏi session
@@ -71,5 +59,19 @@ public class OrderServlet extends HttpServlet {
             resp.sendRedirect(referer);
         }
 
+    }
+
+    private List<LineItem> getSelectedLineItems(Cart cart, String[] selectedIds) {
+        List<LineItem> lineItems = new ArrayList<>();
+        if (selectedIds != null) {
+            List<String> ids = List.of(selectedIds);
+
+            for (LineItem item : cart.getLineItems()) {
+                if (ids.contains(item.getDetailProduct().getId().toString())) {
+                    lineItems.add(item);
+                }
+            }
+        }
+        return lineItems;
     }
 }

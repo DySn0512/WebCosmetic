@@ -154,9 +154,18 @@ public class ProductDB {
         return query.getResultList();
     }
 
-    public static List<Product> selectProductBySimilarName(String similarName) {
+    public static List<Product> selectProductBySimilarName(String similarName, String isSale) {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        TypedQuery<Product> query = em.createQuery("SELECT p FROM Product p WHERE LOWER(p.name) LIKE LOWER(:similarName)", Product.class)
+        String jpqlQuery = "SELECT p FROM Product p WHERE LOWER(p.name) LIKE LOWER(:similarName)";
+        if (isSale.equals("true")) {
+            jpqlQuery = "SELECT DISTINCT p FROM Product p JOIN FETCH p.details d " +
+                    "WHERE LOWER(p.name) LIKE LOWER(:similarName) AND d.isSale = true";
+        } else if (isSale.equals("false")) {
+            jpqlQuery = "SELECT DISTINCT p FROM Product p " +
+                    "WHERE LOWER(p.name) LIKE LOWER(:similarName) AND NOT EXISTS (SELECT 1 FROM p.details d " +
+                    "WHERE d.isSale = true)";
+        }
+        TypedQuery<Product> query = em.createQuery(jpqlQuery, Product.class)
                 .setParameter("similarName", "%" + similarName + "%");
         return query.getResultList();
     }

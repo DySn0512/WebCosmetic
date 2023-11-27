@@ -51,7 +51,7 @@
                 <input type="hidden" name="idDetail" id="id-detail">
                 <input type="button" onclick="decreaseNumber()" value="-"/>
                 <input type="text" id="number" name="quantity" value="1" oninput="inputChange(this)"
-                       onblur="if (this.value==='0'){this.value=1;}"/>
+                       onblur="if (parseInt(this.value)===0){this.value=1;}"/>
                 <input type="button" onclick="increaseNumber()" value="+"/>
                 <button value="add" name="action" onclick="checkSelect()">Thêm vào giỏ hàng</button>
             </form>

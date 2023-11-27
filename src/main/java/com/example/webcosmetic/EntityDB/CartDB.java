@@ -47,6 +47,7 @@ public class CartDB {
             em.close();
         }
     }
+
     public static void update(Cart cart) {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
@@ -74,4 +75,5 @@ public class CartDB {
             em.close();
         }
     }
+
 }

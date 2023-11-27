@@ -5,7 +5,6 @@ import com.example.webcosmetic.Entity.DetailProduct;
 import com.example.webcosmetic.Entity.LineItem;
 import com.example.webcosmetic.EntityDB.CartDB;
 import com.example.webcosmetic.EntityDB.DetailProductDB;
-import com.example.webcosmetic.EntityDB.LineItemDB;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -42,37 +41,32 @@ public class CartServlet extends HttpServlet {
         }
 
         CartDB.update(cart);
-        cart = CartDB.select(cart.getId());
-        session.setAttribute("cart", cart);
         String referer = req.getHeader("referer");
         resp.sendRedirect(referer);
     }
 
     private void addToCart(HttpServletRequest req, Cart cart) {
-        Long idDetail = Long.parseLong(req.getParameter("idDetail"));
+        Long idDetailProduct = Long.parseLong(req.getParameter("idDetail"));
         int quantity = Integer.parseInt(req.getParameter("quantity"));
-        DetailProduct detailProduct = DetailProductDB.select(idDetail);
+        DetailProduct detailProduct = DetailProductDB.select(idDetailProduct);
         LineItem lineItem = new LineItem(detailProduct, quantity);
         cart.addLineItem(lineItem);
     }
 
     private void removeLineItem(HttpServletRequest req, Cart cart) {
-        String[] idLineItems = req.getParameterValues("idLineItem");
-        List<LineItem> lineItems = idLineItems != null ? Arrays.stream(idLineItems)
+        String[] idDetailProducts = req.getParameterValues("idDetailProduct");
+        List<DetailProduct> detailProducts = idDetailProducts == null ? Collections.emptyList() : Arrays.stream(idDetailProducts)
                 .map(id -> {
-                    LineItem lineItem = new LineItem();
-                    lineItem.setId(Long.parseLong(id));
-                    return lineItem;
-                }).collect(Collectors.toList()) : Collections.emptyList();
-        cart.removeLineItems(lineItems);
-
+                    DetailProduct detailProduct = new DetailProduct();
+                    detailProduct.setId(Long.parseLong(id));
+                    return detailProduct;
+                }).collect(Collectors.toList());
+        cart.removeByDetailProduct(detailProducts);
     }
 
     private void updateCart(HttpServletRequest req, Cart cart) {
-        Long idLineItem = Long.parseLong(req.getParameter("idLineItem"));
+        Long idDetailProduct = Long.parseLong(req.getParameter("idDetailProduct"));
         int quantity = Integer.parseInt(req.getParameter("quantity"));
-        LineItem lineItem = LineItemDB.select(idLineItem);
-        lineItem.setQuantity(quantity);
-        cart.updateLineItem(lineItem);
+        cart.update(idDetailProduct, quantity);
     }
 }

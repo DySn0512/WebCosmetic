@@ -25,10 +25,23 @@ public class ConfirmOtpServlet extends HttpServlet {
         String from = "bananacosmeticweb@gmail.com";
         String subject = "Banana Cosmetic";
         String to = req.getParameter("email");
+        HttpSession session = req.getSession();
+        String body = createRegisterMail(req, session);
+        try {
+            MailUtil.sendMail(to, from, subject, body, true);
+            session.setMaxInactiveInterval(300);
+            resp.getWriter().write("Đã gửi, Vui lòng check mail của bạn");
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private String createRegisterMail(HttpServletRequest req, HttpSession session) {
+
+
         String name = req.getParameter("name");
         String otp = generateOtp();
-        HttpSession session = req.getSession();
-        session.setAttribute("otpRegister",otp);
+        session.setAttribute("otpRegister", otp);
         String body = "<!DOCTYPE html>"
                 + "<html lang=\"vi\">"
                 + "<head>"
@@ -85,7 +98,7 @@ public class ConfirmOtpServlet extends HttpServlet {
                 "        </div>\n" +
                 "        <div class=\"content\">\n" +
                 "            <h1>Banana Cosmetic</h1>\n" +
-                "            <p>Xin chào, " + name + " !</p>\n" +
+                "            <p>Xin chào, " + name + "!</p>\n" +
                 "            <p>Cảm ơn bạn đã đăng ký tại Banana Cosmetic. Đây là mã OTP của bạn để hoàn thành quá trình đăng ký:</p>\n" +
                 "            <p><strong style=\"color: rgb(226, 119, 137);\">" + otp + "</strong></p>\n" +
                 "            <p>Vui lòng nhập mã OTP này vào trang web của chúng tôi để xác nhận đăng ký của bạn.</p>\n" +
@@ -96,14 +109,7 @@ public class ConfirmOtpServlet extends HttpServlet {
                 "    </div>"
                 + "</body>"
                 + "</html>";
-
-        try {
-            MailUtil.sendMail(to, from, subject, body, true);
-            session.setMaxInactiveInterval(300);
-            resp.getWriter().write("Đã gửi, Vui lòng check mail của bạn");
-        } catch (MessagingException e) {
-            throw new RuntimeException(e);
-        }
+        return body;
     }
 
     private String generateOtp() {

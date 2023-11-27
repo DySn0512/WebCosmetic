@@ -20,6 +20,6 @@ public class AdminServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("ahihi", "ahihi");
-        getServletContext().getRequestDispatcher("/admin/admin.jsp").forward(req, resp);
+        req.getRequestDispatcher("/admin/admin.jsp").forward(req, resp);
     }
 }

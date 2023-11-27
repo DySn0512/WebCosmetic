@@ -8,7 +8,6 @@ import com.example.webcosmetic.EntityDB.BrandDB;
 import com.example.webcosmetic.EntityDB.ProductCategoryDB;
 import com.example.webcosmetic.EntityDB.ProductDB;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.ServletResponse;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -27,29 +26,36 @@ public class ProductServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
-        List<Brand> brands = BrandDB.selectAll();
-        req.setAttribute("brands", brands);
-        List<ProductCategory> categories = ProductCategoryDB.selectAll();
-        req.setAttribute("categories", categories);
+        String url = "/admin/product.jsp";
         if (action == null || action.equals("find")) {
-            findProduct(req, resp);
+            List<Brand> brands = BrandDB.selectAll();
+            req.setAttribute("brands", brands);
+            List<ProductCategory> categories = ProductCategoryDB.selectAll();
+            req.setAttribute("categories", categories);
+            findProduct(req);
         } else if (action.equals("remove")) {
             deleteProducts(req);
             resp.sendRedirect("product");
+            return;
         } else {
+            List<Brand> brands = BrandDB.selectAll();
+            req.setAttribute("brands", brands);
+            List<ProductCategory> categories = ProductCategoryDB.selectAll();
+            req.setAttribute("categories", categories);
             if (action.equals("add")) {
                 req.setAttribute("ariacurrent", "Thêm Sản Phẩm");
-            } else {
+            } else if (action.equals("update")) {
                 Long id = Long.parseLong(req.getParameter("id"));
                 Product product = ProductDB.select(id);
                 req.setAttribute("product", product);
                 req.setAttribute("ariacurrent", "Sửa Sản Phẩm");
             }
-            getServletContext().getRequestDispatcher("/admin/product_info.jsp").forward(req, resp);
+            url = "/admin/product_info.jsp";
         }
+        req.getRequestDispatcher(url).forward(req, resp);
     }
 
-    private void findProduct(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    private void findProduct(HttpServletRequest req) {
         String findBy = req.getParameter("findBy");
         String search = req.getParameter("search");
         String isSale = req.getParameter("isSale");
@@ -57,7 +63,7 @@ public class ProductServlet extends HttpServlet {
         if (findBy == null) {
             products = ProductDB.selectAll();
         } else if (findBy.equals("name")) {
-            products = ProductDB.selectProductBySimilarName(search);
+            products = ProductDB.selectProductBySimilarName(search, isSale);
         } else if (findBy.equals("brand")) {
             products = ProductDB.selectProductByBrand(search, isSale);
         } else if (findBy.equals("category")) {
@@ -65,12 +71,7 @@ public class ProductServlet extends HttpServlet {
         } else if (findBy.equals("subCategory")) {
             products = ProductDB.selectProductBySubCategory(search, isSale);
         }
-        showProduct(req, resp, products);
-    }
-
-    private void showProduct(HttpServletRequest req, HttpServletResponse resp, List<Product> products) throws ServletException, IOException {
         req.setAttribute("products", products);
-        req.getRequestDispatcher("/admin/product.jsp").forward(req, resp);
     }
 
     private void deleteProducts(HttpServletRequest req) {

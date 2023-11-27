@@ -29,4 +29,26 @@ public class OrderDB {
         return query.getResultList();
     }
 
+    public static Order select(Long id) {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        try {
+            return em.find(Order.class, id);
+        } finally {
+            em.close();
+        }
+    }
+
+    public static void update(Order order) {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        EntityTransaction trans = em.getTransaction();
+        trans.begin();
+        try {
+            em.merge(order);
+            trans.commit();
+        } catch (Exception e) {
+            trans.rollback();
+        } finally {
+            em.close();
+        }
+    }
 }
