@@ -376,7 +376,7 @@ function searchProduct() {
         success: function (data) {
             var newTbody = $(data).find("#productTable tbody").html();
             $("#productTable tbody").html(newTbody);
-        },
+        }
     });
 }
 
