@@ -27,7 +27,10 @@ public class ProductServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
-
+        List<Brand> brands = BrandDB.selectAll();
+        req.setAttribute("brands", brands);
+        List<ProductCategory> categories = ProductCategoryDB.selectAll();
+        req.setAttribute("categories", categories);
         if (action == null || action.equals("find")) {
             findProduct(req, resp);
         } else if (action.equals("remove")) {
@@ -44,10 +47,6 @@ public class ProductServlet extends HttpServlet {
                 req.setAttribute("ariacurrent", "Sửa Sản Phẩm");
             }
         }
-        List<Brand> brands = BrandDB.selectAll();
-        req.setAttribute("brands", brands);
-        List<ProductCategory> categories = ProductCategoryDB.selectAll();
-        req.setAttribute("categories", categories);
         getServletContext().getRequestDispatcher("/admin/product_info.jsp").forward(req, resp);
     }
 

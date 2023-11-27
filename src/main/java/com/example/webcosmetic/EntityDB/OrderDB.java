@@ -1,12 +1,11 @@
 package com.example.webcosmetic.EntityDB;
 
-import com.example.webcosmetic.Entity.Brand;
-import com.example.webcosmetic.Entity.Cart;
-import com.example.webcosmetic.Entity.DetailOrder;
-import com.example.webcosmetic.Entity.Order;
+import com.example.webcosmetic.Entity.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
+
+import java.util.List;
 
 public class OrderDB {
 
@@ -22,6 +21,12 @@ public class OrderDB {
         } finally {
             em.close();
         }
+    }
+
+    public static List<Order> selectAll() {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        TypedQuery<Order> query = em.createQuery("SELECT o FROM Order o", Order.class);
+        return query.getResultList();
     }
 
 }

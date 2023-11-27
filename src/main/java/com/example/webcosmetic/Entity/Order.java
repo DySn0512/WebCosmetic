@@ -2,10 +2,8 @@ package com.example.webcosmetic.Entity;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Entity
 @Table(name = "\"Order\"")
@@ -51,8 +49,10 @@ public class Order {
         this.id = id;
     }
 
-    public Date getTimeOrder() {
-        return timeOrder;
+    public String getTimeOrder() {
+        SimpleDateFormat desiredFormat = new SimpleDateFormat("EEEE, dd'/'MM'/'yyyy 'lúc' HH:mm:ss", new Locale("vi", "VN"));
+        desiredFormat.setTimeZone(TimeZone.getTimeZone("Asia/Ho_Chi_Minh"));
+        return desiredFormat.format(timeOrder);
     }
 
     public String getPhone() {
