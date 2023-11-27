@@ -6,6 +6,7 @@ import com.example.webcosmetic.Entity.User;
 import com.example.webcosmetic.Entity.LineItem;
 import com.example.webcosmetic.EntityDB.LineItemDB;
 import com.example.webcosmetic.EntityDB.OrderDB;
+import com.example.webcosmetic.EntityDB.CartDB;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -27,33 +28,44 @@ public class OrderServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        Date timeOrder = new Date();
         String action = req.getParameter("action");
         String phone = req.getParameter("phone");
         String address = req.getParameter("address");
-        User user = (User) session.getAttribute("user");
+        User customer = (User) session.getAttribute("customer");
         Cart cart = (Cart) session.getAttribute("cart");
+
         if (action.equals("create")) {
             String[] idLineItems = req.getParameterValues("idLineItem");
-            List<Long> idList = new ArrayList<>();
+            List<LineItem> lineItems = new ArrayList<>();
             if (idLineItems != null) {
-                for (String id : idLineItems) {
-                    Long idLong = Long.valueOf(id);
-                    idList.add(idLong);
-                }
-            }
-            List<LineItem> cartLineItems = cart.getLineItems();//này là  list line item của cart
-            List<LineItem> lineItems = new ArrayList<>(); //này là list chứa line item ng dùng chọn
+                List<String> ids = List.of(idLineItems);
 
-            for (LineItem item : cartLineItems) {
-                if (idList.contains(item.getId())) {
-                    lineItems.add(item);
+                for (LineItem item : cart.getLineItems()) {
+                    if (ids.contains(item.getId().toString())) {
+                        lineItems.add(item);
+                    }
                 }
+
             }
-            session.setAttribute("lineItems", lineItems);
-            Order order = new Order(timeOrder, phone, address, user, lineItems);
+            if(!lineItems.isEmpty())
+            {
+                session.setAttribute("lineItems", lineItems);
+                getServletContext().getRequestDispatcher("/order.jsp").forward(req, resp);
+            }else{
+                String referer = req.getHeader("referer");
+                resp.sendRedirect(referer);
+            }
+
+        } else if (action.equals("add")) {
+            List<LineItem> lineItemsOrder = (List<LineItem>) session.getAttribute("lineItems");
+            Order order = new Order(phone,address,customer,lineItemsOrder);
             OrderDB.insert(order);
-            getServletContext().getRequestDispatcher("/order.jsp").forward(req, resp);
+            cart.removeLineItems(lineItemsOrder);
+            // Cập nhật lại Cart trong cơ sở dữ liệu
+            CartDB.update(cart);
+            // Xoá lineItems khỏi session
+            session.removeAttribute("lineItems");
+            getServletContext().getRequestDispatcher("/checkout.jsp").forward(req, resp);
         } else {
             String referer = req.getHeader("referer");
             resp.sendRedirect(referer);

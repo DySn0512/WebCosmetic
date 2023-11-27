@@ -12,7 +12,9 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @WebServlet(name = "productInfo", value = "/admin/productInfo")
 public class ProductInfoServlet extends HttpServlet {
@@ -48,7 +50,6 @@ public class ProductInfoServlet extends HttpServlet {
 
         removeDetails(req);
 
-        //lấy các detail sau khi được chỉnh sửa
         String[] idDetails = req.getParameterValues("idDetail");
         String[] units = req.getParameterValues("unit");
         String[] isSaleValues = req.getParameterValues("isSale");
@@ -113,16 +114,12 @@ public class ProductInfoServlet extends HttpServlet {
 
         String[] strImages = req.getParameterValues("strImage");
 
-        List<ProductImage> images = new ArrayList<>();
-        for (String item : strImages) {
-            if (item.startsWith("http")) {
-                images.add(new ProductImage(item));
-            } else {
-                String url = CloudinaryUtil.uploadImageToCloudinary(item);
-                images.add(new ProductImage(url));
-            }
-        }
+        List<ProductImage> images = Arrays.stream(strImages)
+                .map(item -> item.startsWith("http") ? new ProductImage(item) : new ProductImage(CloudinaryUtil.uploadImageToCloudinary(item)))
+                .collect(Collectors.toList());
+
         product.setImages(images);
+
     }
 
     private void setProductAttributes(Product product, HttpServletRequest req) {

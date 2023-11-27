@@ -27,7 +27,18 @@ public class BrandServlet extends HttpServlet {
         if (action == null) {
             showBrandList(req, resp);
         } else {
-            processAction(action, req, resp);
+            if (action.equals("add")) {
+                addBrand(req);
+            } else {
+                Long id = Long.parseLong(req.getParameter("id"));
+                Brand brand = BrandDB.select(id);
+                if (action.equals("update")) {
+                    updateBrand(req, brand);
+                } else if (action.equals("remove")) {
+                    deleteBrand(brand);
+                }
+            }
+            resp.sendRedirect("brand");
         }
     }
 
@@ -35,21 +46,6 @@ public class BrandServlet extends HttpServlet {
         List<Brand> brands = BrandDB.selectAll();
         req.setAttribute("brands", brands);
         getServletContext().getRequestDispatcher("/admin/brand.jsp").forward(req, resp);
-    }
-
-    private void processAction(String action, HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        if (action.equals("add")) {
-            addBrand(req);
-        } else {
-            long id = Long.parseLong(req.getParameter("id"));
-            Brand brand = BrandDB.select(id);
-            if (action.equals("update")) {
-                updateBrand(req, brand);
-            } else if (action.equals("remove")) {
-                deleteBrand(brand);
-            }
-        }
-        resp.sendRedirect("brand");
     }
 
     private void addBrand(HttpServletRequest req) {

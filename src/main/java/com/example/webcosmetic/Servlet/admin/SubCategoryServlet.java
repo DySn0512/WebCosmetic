@@ -23,28 +23,43 @@ public class SubCategoryServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
+
         if (action.equals("update")) {
-            String newName = req.getParameter("newName");
-            Long id = Long.parseLong(req.getParameter("id"));
-            SubCategory subCategory = SubCategoryDB.select(id);
-            subCategory.setName(newName);
-            SubCategoryDB.update(subCategory);
+            updateSubCategory(req, resp);
         } else {
             Long idCategory = Long.parseLong(req.getParameter("idCategory"));
             ProductCategory productCategory = ProductCategoryDB.select(idCategory);
             if (action.equals("add")) {
-                String newName = req.getParameter("newName");
-                SubCategory subCategory = new SubCategory(newName);
-                productCategory.addSubCategory(subCategory);
+                addSubCategory(req, productCategory);
             } else if (action.equals("remove")) {
-                Long id = Long.parseLong(req.getParameter("id"));
-                SubCategory subCategory = SubCategoryDB.select(id);
-                productCategory.removeSubCategory(subCategory);
+                removeSubCategory(req, productCategory);
             }
             ProductCategoryDB.update(productCategory);
         }
+
         String url = "category";
         resp.sendRedirect(url);
     }
+
+    private void updateSubCategory(HttpServletRequest req, HttpServletResponse resp) {
+        String newName = req.getParameter("newName");
+        Long id = Long.parseLong(req.getParameter("id"));
+        SubCategory subCategory = SubCategoryDB.select(id);
+        subCategory.setName(newName);
+        SubCategoryDB.update(subCategory);
+    }
+
+    private void addSubCategory(HttpServletRequest req, ProductCategory productCategory) {
+        String newName = req.getParameter("newName");
+        SubCategory subCategory = new SubCategory(newName);
+        productCategory.addSubCategory(subCategory);
+    }
+
+    private void removeSubCategory(HttpServletRequest req, ProductCategory productCategory) {
+        Long id = Long.parseLong(req.getParameter("id"));
+        SubCategory subCategory = SubCategoryDB.select(id);
+        productCategory.removeSubCategory(subCategory);
+    }
+
 
 }

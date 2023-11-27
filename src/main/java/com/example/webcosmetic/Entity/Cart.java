@@ -53,8 +53,9 @@ public class Cart {
                 );
     }
 
-    public void removeLineItem(LineItem lineItem) {
-        lineItems.removeIf(item -> item.getId().equals(lineItem.getId()));
+    public void removeLineItems(List<LineItem> itemRemoves) {
+        lineItems.removeIf(item -> itemRemoves.stream()
+                .anyMatch(itemRemove -> itemRemove.getId().equals(item.getId())));
     }
 
     public void updateLineItem(LineItem lineItem){

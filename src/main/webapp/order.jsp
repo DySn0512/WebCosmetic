@@ -16,10 +16,11 @@
 </head>
 
 <body>
-    <header>
-        <h1>Thông tin giao hàng</h1>
-    </header>
-    <main>
+<header>
+    <h1>Thông tin giao hàng</h1>
+</header>
+<main>
+    <form action="order" method="post">
         <section class="shipping-info">
             <h2>Thông tin khách hàng</h2>
             <table>
@@ -36,9 +37,9 @@
                 <tbody>
                 <tr>
                     <td>${customer.name}</td>
-                    <td>${customer.phone}</td>
+                    <td><input value="${customer.phone}" name="phone"></td>
                     <td>${customer.email}</td>
-                    <td><input value="${customer.address}"></td>
+                    <td><input value="${customer.address}" name="address"></td>
                 </tr>
                 </tbody>
             </table>
@@ -46,7 +47,6 @@
 
         <section class="shipping-info">
             <h2>Thông tin đơn hàng</h2>
-            <form>
                 <table>
                     <thead>
                     <tr>
@@ -71,13 +71,14 @@
                     </c:forEach>
                     </tbody>
                 </table>
-            </form>
             <div class="summary">
                 <p>Total: <span></span></p>
             </div>
         </section>
         <br>
-        <button type="submit">Check out</button>
-    </main>
+        <input type="submit">
+        <button value="add" name="action" type="submit">Check out</button>
+    </form>
+</main>
 </body>
 </html>

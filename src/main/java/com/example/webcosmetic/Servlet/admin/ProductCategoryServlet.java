@@ -3,11 +3,11 @@ package com.example.webcosmetic.Servlet.admin;
 import com.example.webcosmetic.Entity.ProductCategory;
 import com.example.webcosmetic.EntityDB.ProductCategoryDB;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletResponse;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.List;
@@ -24,8 +24,7 @@ public class ProductCategoryServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
         if (action == null) {
-            showProductCategories(req);
-            getServletContext().getRequestDispatcher("/admin/productcategory.jsp").forward(req, resp);
+            showProductCategories(req, resp);
         } else {
             if (action.equals("add")) {
                 addProductCategory(req);
@@ -34,7 +33,7 @@ public class ProductCategoryServlet extends HttpServlet {
                 ProductCategory productCategory = ProductCategoryDB.select(id);
                 if (action.equals("update")) {
                     updateProductCategory(req, productCategory);
-                } else {
+                } else if(action.equals("remove")) {
                     removeProductCategory(productCategory);
                 }
             }
@@ -42,9 +41,11 @@ public class ProductCategoryServlet extends HttpServlet {
         }
     }
 
-    private void showProductCategories(HttpServletRequest req) {
+    private void showProductCategories(HttpServletRequest req, ServletResponse resp) throws ServletException, IOException {
         List<ProductCategory> productCategories = ProductCategoryDB.selectAll();
         req.setAttribute("productCategories", productCategories);
+        getServletContext().getRequestDispatcher("/admin/productcategory.jsp").forward(req, resp);
+
     }
 
     private void addProductCategory(HttpServletRequest req) {
