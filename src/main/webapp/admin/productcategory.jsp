@@ -19,12 +19,12 @@
         <div id="IconSidebar" onclick="expandSidebar()">&#9776;</div>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="">Trang Chủ</a></li>
+                <li class="breadcrumb-item"><a href="admin">Trang Chủ</a></li>
                 <li class="breadcrumb-item active" aria-current="page">/Danh Mục</li>
             </ol>
         </nav>
     </header>
-    <div>
+    <div style="margin: 10px">
         <div id="add-form" class="modal">
             <div class="modal-content">
                 <span class="close" onclick="x_function()">&times;</span>
