@@ -23,6 +23,8 @@ public class OrderServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Order> orders = OrderDB.selectAll();
         req.setAttribute("orders",orders);
+        String[] status = {"Chờ xác nhận", "Đang giao", "Đã giao"};
+        req.setAttribute("status", status);
         getServletContext().getRequestDispatcher("/admin/order.jsp").forward(req, resp);
     }
 }

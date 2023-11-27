@@ -63,7 +63,6 @@
                 </div>
             </div>
             <div>
-
                 <table id="productTable">
                     <thead>
                     <tr>

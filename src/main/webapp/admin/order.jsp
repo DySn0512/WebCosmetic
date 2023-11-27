@@ -37,7 +37,16 @@
                     <td>${order.phone}</td>
                     <td>${order.address}</td>
                     <td>${order.timeOrder}</td>
-                    <td>${order.status}</td>
+                    <td>
+                        <select name="status">
+                            <option value="${order.status}">${order.status}</option>
+                        </select>
+                        <c:forEach var="item" items="${status}">
+                            <c:if test="${item!=order.status}">
+                                <option value="${item}">${item}</option>
+                            </c:if>
+                        </c:forEach>
+                    </td>
                 </tr>
             </c:forEach>
             </tbody>

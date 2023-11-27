@@ -36,18 +36,17 @@ public class ProductServlet extends HttpServlet {
         } else if (action.equals("remove")) {
             deleteProducts(req);
             resp.sendRedirect("product");
-            return;
         } else {
             if (action.equals("add")) {
                 req.setAttribute("ariacurrent", "Thêm Sản Phẩm");
-            } else if (action.equals("update")) {
+            } else {
                 Long id = Long.parseLong(req.getParameter("id"));
                 Product product = ProductDB.select(id);
                 req.setAttribute("product", product);
                 req.setAttribute("ariacurrent", "Sửa Sản Phẩm");
             }
+            getServletContext().getRequestDispatcher("/admin/product_info.jsp").forward(req, resp);
         }
-        getServletContext().getRequestDispatcher("/admin/product_info.jsp").forward(req, resp);
     }
 
     private void findProduct(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
