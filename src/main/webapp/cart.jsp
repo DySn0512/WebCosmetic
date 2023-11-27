@@ -51,10 +51,15 @@
                     </td>
 
                     <td>
-                        <button type="button" onclick="decreaseQuanity(this,'${lineItem.detailProduct.id}')">-</button>
-                        <input id="quantity" type="text" value="${lineItem.quantity}" oninput="inputChange(this)"
-                               onblur="handleBlur(this,'${lineItem.detailProduct.id}')" name="quantity">
-                        <button type="button" onclick="increaseQuanity(this,'${lineItem.detailProduct.id}')">+</button>
+
+                        <div class="quantity-controls">
+                            <button type="button" onclick="decreaseQuanity(this,'${lineItem.detailProduct.id}')">-
+                            </button>
+                            <input id="quantity" type="text" value="${lineItem.quantity}" oninput="inputChange(this)"
+                                   onblur="handleBlur(this,'${lineItem.detailProduct.id}')" name="quantity">
+                            <button type="button" onclick="increaseQuanity(this,'${lineItem.detailProduct.id}')">+
+                            </button>
+                        </div>
                     </td>
                     <td>${lineItem.detailProduct.unit}</td>
                     <td>
@@ -68,7 +73,8 @@
                     </td>
                     <td>${lineItem.getTotal()} </td>
                     <td>
-                        <button type="button" onclick="removeLineItem('${lineItem.detailProduct.id}',this)"> xoá</button>
+                        <button type="button" onclick="removeLineItem('${lineItem.detailProduct.id}',this)"> xoá
+                        </button>
                     </td>
                 </tr>
             </c:forEach>
