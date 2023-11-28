@@ -37,7 +37,7 @@
                 <tbody>
                 <tr>
                     <td>${customer.name}</td>
-                    <td><input value="${customer.phone}" name="phone" oninput="inputChange()" maxlength="10"></td>
+                    <td><input value="${customer.phone}" name="phone" oninput="inputChange(this)" maxlength="10"></td>
                     <td>${customer.email}</td>
                     <td><input value="${customer.address}" name="address"></td>
                 </tr>

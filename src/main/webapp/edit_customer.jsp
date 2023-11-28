@@ -11,10 +11,11 @@
     <title>Sửa thông tin</title>
 </head>
 <body>
-    <input type="text" name="name" placeholder="Name" required/>
-    <input type="text" name="phone" placeholder="Phone" required/>
-    <input type="text" name="address" placeholder="Address" required/>
-
-    <button type="button" >Chỉnh sửa</button>
+    <form action="user" method="post">
+        <input type="text" name="name" placeholder="Name" value="${customer.name}" required/>
+        <input type="text" name="phone" placeholder="Phone" value="${customer.phone}" oninput="inputChange(this)" maxlength="10" required/>
+        <input type="text" name="address" placeholder="Address" value="${customer.address}" required/>
+        <button name="action" value="update" >Chỉnh sửa</button>
+    </form>
 </body>
 </html>

@@ -88,7 +88,7 @@
                 </nav>
             </div>
         </aside>
-        <button class="continue-application">
+        <button class="continue-application" onclick="window.location.href='edit_customer.jsp'">
             <div>
                 <div class="pencil"></div>
                 <div class="folder">

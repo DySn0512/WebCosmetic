@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
+
 @WebServlet(name = "user", value = "/user")
 public class UserServlet extends HttpServlet {
     @Override
@@ -22,19 +23,40 @@ public class UserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
         HttpSession session = req.getSession();
-        User user = null;
         if (action.equals("repassword")) {
-            String newPass = req.getParameter("password");
-            user = (User) session.getAttribute("userRePassword");
-            String otp = req.getParameter("otp");
-            String otpRePassword = (String) session.getAttribute("otpRePassword");
-            if (user != null && otp.equals(otpRePassword)) {
-                user.setPassword(newPass);
-                UserDB.update(user);
-                resp.getWriter().write("login_customer.jsp");
-            } else {
-                resp.getWriter().write("OTP Không Hợp Lệ");
-            }
+            rePassword(req, resp, session);
+        } else if (action.equals("update")) {
+            updateUser(req, resp, session);
+        }
+    }
+
+    private void updateUser(HttpServletRequest req, HttpServletResponse resp, HttpSession session) throws IOException {
+        User customer = (User) session.getAttribute("customer");
+        if (customer == null) {
+            resp.sendRedirect("login_customer.jsp");
+            return;
+        }
+        String name = req.getParameter("name");
+        String phone = req.getParameter("phone");
+        String address = req.getParameter("address");
+        customer.setName(name);
+        customer.setPhone(phone);
+        customer.setAddress(address);
+        UserDB.update(customer);
+        resp.sendRedirect("customer.jsp");
+    }
+
+    private void rePassword(HttpServletRequest req, HttpServletResponse resp, HttpSession session) throws IOException {
+        String newPass = req.getParameter("password");
+        User user = (User) session.getAttribute("userRePassword");
+        String otp = req.getParameter("otp");
+        String otpRePassword = (String) session.getAttribute("otpRePassword");
+        if (user != null && otp.equals(otpRePassword)) {
+            user.setPassword(newPass);
+            UserDB.update(user);
+            resp.getWriter().write("login_customer.jsp");
+        } else {
+            resp.getWriter().write("OTP Không Hợp Lệ");
         }
     }
 }
