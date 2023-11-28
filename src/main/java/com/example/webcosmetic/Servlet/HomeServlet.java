@@ -37,7 +37,7 @@ public class HomeServlet extends HttpServlet {
         setProductCategories(req);
 
         checkUser(req);
-
+        req.setAttribute("find","home?page=");
         getServletContext().getRequestDispatcher(url).forward(req, resp);
     }
 

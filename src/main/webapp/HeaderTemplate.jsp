@@ -47,10 +47,10 @@
     <a href="#">Home</a>
     <c:forEach items="${productCategories}" var="category">
         <div class="dropdown">
-            <a href="#">${category.name}</a>
+            <a href="home?${category.name}">${category.name}</a>
             <div class="dropdown-content">
                 <c:forEach items="${category.subCategories}" var="subCategory">
-                    <a href="#">${subCategory.name}</a>
+                    <a href="home?${subCategory.name}">${subCategory.name}</a>
                 </c:forEach>
             </div>
         </div>
