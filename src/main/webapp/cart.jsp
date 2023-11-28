@@ -49,9 +49,7 @@
                                 ${lineItem.detailProduct.product.name}
                         </a>
                     </td>
-
                     <td>
-
                         <div class="quantity-controls">
                             <button type="button" onclick="decreaseQuanity(this,'${lineItem.detailProduct.id}')">-
                             </button>

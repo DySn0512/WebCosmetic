@@ -336,9 +336,9 @@ function handleBlur(element, id) {
     updateLineItem(id, element.value);
 }
 
-function updateLineItem(id, quantity) {
+async function updateLineItem(id, quantity) {
     totalPrice()
-    $.ajax({
+    await $.ajax({
         type: 'POST',
         url: 'cart',
         data: {
