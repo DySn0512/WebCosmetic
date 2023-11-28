@@ -44,7 +44,7 @@
     </div>
 </div>
 <nav>
-    <a href="#">Home</a>
+    <a href="home">Home</a>
     <c:forEach items="${productCategories}" var="category">
         <div class="dropdown">
             <a href="home?category=${category.name}&page=1">${category.name}</a>

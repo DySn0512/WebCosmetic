@@ -37,7 +37,7 @@
             <tbody>
             <c:forEach items="${cart.lineItems}" var="lineItem">
                 <tr>
-                    <input type="hidden" value="${lineItem oh OK yeah yeah I'm heading in.detailProduct.currentPrice}" name="currentPrice">
+                    <input type="hidden" value="${lineItem.detailProduct.currentPrice}" name="currentPrice">
                     <td><input type="checkbox" value="${lineItem.detailProduct.id}" name="idDetailProduct"
                                onchange="totalPrice()"
                     <c:if test="${lineItem.detailProduct.price==0}">
