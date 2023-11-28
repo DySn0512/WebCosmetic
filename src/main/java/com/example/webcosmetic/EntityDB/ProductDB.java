@@ -195,4 +195,26 @@ public class ProductDB {
             em.close();
         }
     }
+
+    public static int getTotalProductsSubCategory(String subCategoryName) {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        try {
+            TypedQuery<Long> query = em.createQuery("SELECT COUNT(p) FROM Product p WHERE p.subCategory.name = :subCategoryName", Long.class)
+                    .setParameter("subCategoryName",subCategoryName);
+            return query.getSingleResult().intValue();
+        } finally {
+            em.close();
+        }
+    }
+
+    public static int getTotalProductsCategory(String categoryName) {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        try {
+            TypedQuery<Long> query = em.createQuery("SELECT COUNT(p) FROM Product p WHERE p.productCategory.name = :categoryName", Long.class)
+                    .setParameter("categoryName",categoryName);
+            return query.getSingleResult().intValue();
+        } finally {
+            em.close();
+        }
+    }
 }

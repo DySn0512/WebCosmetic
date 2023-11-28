@@ -28,37 +28,42 @@ public class HomeServlet extends HttpServlet {
         int currentPage = getCurrentPage(req);
         int recordsPerPage = 1;
         int offset = calculateOffset(currentPage, recordsPerPage);
-        int totalProducts = ProductDB.getTotalProducts();
-        int totalPages = calculateTotalPages(totalProducts, recordsPerPage);
+
+        int totalProducts;
+
         String categoryName = req.getParameter("category");
         String subCategoryName = req.getParameter("subCategory");
         List<Product> products;
         if (categoryName != null) {
             products = ProductDB.selectProductsByOffsetCategory(offset, recordsPerPage, categoryName);
+            totalProducts = ProductDB.getTotalProductsCategory(categoryName);
             req.setAttribute("find", "home?category="+categoryName+"&page=");
         } else if (subCategoryName != null) {
             products = ProductDB.selectProductsByOffsetSubCategory(offset, recordsPerPage,subCategoryName);
+            totalProducts = ProductDB.getTotalProductsSubCategory(subCategoryName);
             req.setAttribute("find", "home?subcategory="+subCategoryName+"&page=");
         } else {
             products = ProductDB.selectProductsByOffset(offset, recordsPerPage);
+            totalProducts = ProductDB.getTotalProducts();
             req.setAttribute("find", "home?page=");
         }
-
+        int totalPages = calculateTotalPages(totalProducts, recordsPerPage);
         setRequestAttributes(req, products, currentPage, totalPages);
-        setProductCategories(req);
         checkUser(req);
+
         getServletContext().getRequestDispatcher(url).forward(req, resp);
     }
 
     private void setRequestAttributes(HttpServletRequest req, List<Product> products, int currentPage, int totalPages) {
+        HttpSession session = req.getSession();
+        if (session.getAttribute("productCategories")==null)
+        {
+            List<ProductCategory> productCategories = ProductCategoryDB.selectAll();
+            session.setAttribute("productCategories", productCategories);
+        }
         req.setAttribute("products", products);
         req.setAttribute("currentPage", currentPage);
         req.setAttribute("totalPages", totalPages);
-    }
-
-    private void setProductCategories(HttpServletRequest req) {
-        List<ProductCategory> productCategories = ProductCategoryDB.selectAll();
-        req.setAttribute("productCategories", productCategories);
     }
 
     private int calculateTotalPages(int totalProducts, int recordsPerPage) {
