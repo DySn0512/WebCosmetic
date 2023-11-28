@@ -145,12 +145,19 @@ function userServlet() {
             type: 'GET',
             url: 'user',
             data: {
-                email: emailValue,
+                action: 'repassword',
                 password: passwordValue,
                 otp: otpValue
             },
             success:
                 function (response) {
+                    if (response === "login_customer.jsp") {
+                        window.location.href = response;
+                    } else {
+                        var messageElement = document.getElementById('message');
+                        messageElement.innerHTML = response;
+                    }
+                    $('#spinner').css('display', 'none');
                 }
         });
     }

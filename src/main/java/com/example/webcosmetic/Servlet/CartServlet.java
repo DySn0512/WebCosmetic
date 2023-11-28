@@ -28,7 +28,13 @@ public class CartServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         HttpSession session = req.getSession();
+        if (session == null || session.getAttribute("customer") == null) {
+            resp.sendRedirect("login_customer.jsp");
+            return;
+        }
+
         String action = req.getParameter("action");
         Cart cart = (Cart) session.getAttribute("cart");
 
