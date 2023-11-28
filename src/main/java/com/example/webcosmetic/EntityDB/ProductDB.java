@@ -186,7 +186,7 @@ public class ProductDB {
     public static List<Product> selectProductsByOffsetSubCategory(int offset, int limit, String subCategoryName) {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         try {
-            TypedQuery<Product> query = em.createQuery("SELECT p FROM Product p WHERE p.productCategory.name = :subCategoryName", Product.class)
+            TypedQuery<Product> query = em.createQuery("SELECT p FROM Product p WHERE p.subCategory.name = :subCategoryName", Product.class)
                     .setParameter("subCategoryName",subCategoryName)
                     .setFirstResult(offset)
                     .setMaxResults(limit);
