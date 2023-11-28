@@ -23,7 +23,7 @@ public class SubCategoryServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
-
+        String url = "category";
         if (action.equals("update")) {
             updateSubCategory(req, resp);
         } else {
@@ -34,10 +34,14 @@ public class SubCategoryServlet extends HttpServlet {
             } else if (action.equals("remove")) {
                 removeSubCategory(req, productCategory);
             }
-            ProductCategoryDB.update(productCategory);
+            try {
+                ProductCategoryDB.update(productCategory);
+            } catch (Exception e) {
+                url = "error.jsp";
+            }
         }
 
-        String url = "category";
+
         resp.sendRedirect(url);
     }
 

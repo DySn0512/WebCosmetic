@@ -3,6 +3,7 @@ package com.example.webcosmetic.Servlet.admin;
 
 import com.example.webcosmetic.Entity.Brand;
 import com.example.webcosmetic.EntityDB.BrandDB;
+import com.example.webcosmetic.EntityDB.ProductCategoryDB;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -15,6 +16,8 @@ import java.util.List;
 
 @WebServlet(name = "brand", value = "/admin/brand")
 public class BrandServlet extends HttpServlet {
+
+    private String url = "brand";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -38,7 +41,7 @@ public class BrandServlet extends HttpServlet {
                     deleteBrand(brand);
                 }
             }
-            resp.sendRedirect("brand");
+            resp.sendRedirect(url);
         }
     }
 
@@ -61,7 +64,12 @@ public class BrandServlet extends HttpServlet {
     }
 
     private void deleteBrand(Brand brand) {
-        BrandDB.delete(brand);
+        try {
+            BrandDB.delete(brand);
+        } catch (Exception e) {
+            url = "error.jsp";
+        }
+
     }
 
 
