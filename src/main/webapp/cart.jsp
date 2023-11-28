@@ -10,11 +10,12 @@
 
 <html>
 <link rel="stylesheet" href="style/cart.css">
+<link href="https://fonts.googleapis.com/css2?family=Inconsolata&display=swap" rel="stylesheet">
 <head>
     <title>Giỏ Hàng</title>
 </head>
 <body>
-<h1>Đơn hàng</h1>
+<h1>ORDER</h1>
 <div class="header">
     <table>
         <thead>
@@ -37,7 +38,7 @@
             <tbody>
             <c:forEach items="${cart.lineItems}" var="lineItem">
                 <tr>
-                    <input type="hidden" value="${lineItem oh OK yeah yeah I'm heading in.detailProduct.currentPrice}" name="currentPrice">
+                    <input type="hidden" value="${lineItem.detailProduct.currentPrice}" name="currentPrice">
                     <td><input type="checkbox" value="${lineItem.detailProduct.id}" name="idDetailProduct"
                                onchange="totalPrice()"
                     <c:if test="${lineItem.detailProduct.price==0}">
@@ -71,7 +72,7 @@
                     </td>
                     <td>${lineItem.getTotal()} </td>
                     <td>
-                        <button type="button" onclick="removeLineItem('${lineItem.detailProduct.id}',this)"> xoá
+                        <button type="button" onclick="removeLineItem('${lineItem.detailProduct.id}',this)"> Xoá
                         </button>
                     </td>
                 </tr>
