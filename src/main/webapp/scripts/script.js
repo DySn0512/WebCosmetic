@@ -295,7 +295,7 @@ function removeLineItem(id, button) {
         url: 'cart',
         data: {
             action: 'remove',
-            idLineItem: id,
+            idDetailProduct: id,
         }
     });
     var row = button.parentNode.parentNode;
