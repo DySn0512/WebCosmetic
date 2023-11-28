@@ -50,7 +50,7 @@
       <div id="pagination">
           <!-- Hiển thị các liên kết chuyển trang -->
           <c:forEach begin="1" end="${totalPages}" var="i">
-              <a href="${find}+${i}" onclick="selectPage(this)">${i}</a>
+              <a href="${find}${i}" onclick="selectPage(this)">${i}</a>
           </c:forEach>
       </div>
   </div>
