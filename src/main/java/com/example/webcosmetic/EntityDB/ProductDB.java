@@ -71,12 +71,12 @@ public class ProductDB {
         return query.getResultList();
     }
 
-    public static List<Product> selectProductsByOffset(int offset, int recordsPerPage) {
+    public static List<Product> selectProductsByOffset(int offset, int limit) {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         try {
             TypedQuery<Product> query = em.createQuery("SELECT p FROM Product p", Product.class)
                     .setFirstResult(offset)
-                    .setMaxResults(recordsPerPage);
+                    .setMaxResults(limit);
             return query.getResultList();
         } finally {
             em.close();
@@ -170,4 +170,29 @@ public class ProductDB {
         return query.getResultList();
     }
 
+    public static List<Product> selectProductsByOffsetCategory(int offset, int limit, String categoryName) {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        try {
+            TypedQuery<Product> query = em.createQuery("SELECT p FROM Product p WHERE p.productCategory.name = :categoryName", Product.class)
+                    .setParameter("categoryName",categoryName)
+                    .setFirstResult(offset)
+                    .setMaxResults(limit);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    public static List<Product> selectProductsByOffsetSubCategory(int offset, int limit, String subCategoryName) {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        try {
+            TypedQuery<Product> query = em.createQuery("SELECT p FROM Product p WHERE p.productCategory.name = :subCategoryName", Product.class)
+                    .setParameter("subCategoryName",subCategoryName)
+                    .setFirstResult(offset)
+                    .setMaxResults(limit);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
 }
