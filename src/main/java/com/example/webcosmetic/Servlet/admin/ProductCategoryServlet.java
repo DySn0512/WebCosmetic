@@ -15,6 +15,8 @@ import java.util.List;
 @WebServlet(name = "category", value = "/admin/category")
 public class ProductCategoryServlet extends HttpServlet {
 
+    private String url = "category";
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doPost(req, resp);
@@ -33,11 +35,11 @@ public class ProductCategoryServlet extends HttpServlet {
                 ProductCategory productCategory = ProductCategoryDB.select(id);
                 if (action.equals("update")) {
                     updateProductCategory(req, productCategory);
-                } else if(action.equals("remove")) {
-                    removeProductCategory(productCategory);
+                } else if (action.equals("remove")) {
+                    removeProductCategory(productCategory, resp);
                 }
             }
-            resp.sendRedirect("category");
+            resp.sendRedirect(url);
         }
     }
 
@@ -60,8 +62,12 @@ public class ProductCategoryServlet extends HttpServlet {
         ProductCategoryDB.update(productCategory);
     }
 
-    private void removeProductCategory(ProductCategory productCategory) {
-        ProductCategoryDB.delete(productCategory);
+    private void removeProductCategory(ProductCategory productCategory, HttpServletResponse resp) throws IOException {
+        try {
+            ProductCategoryDB.delete(productCategory);
+        } catch (Exception e) {
+            url = "error.jsp";
+        }
     }
 
 }

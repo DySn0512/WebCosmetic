@@ -13,9 +13,6 @@ public class ProductCategory {
 
     private String name;
 
-    @ManyToMany
-    private List<Brand> brands;
-
     @OneToMany(cascade = CascadeType.MERGE, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<SubCategory> subCategories;
 
@@ -26,7 +23,6 @@ public class ProductCategory {
     public ProductCategory(String name) {
         this.name = name;
         subCategories = new ArrayList<>();
-        brands = new ArrayList<>();
     }
 
     public void setId(Long id) {
@@ -45,18 +41,8 @@ public class ProductCategory {
         this.name = name;
     }
 
-    public List<Brand> getBrands() {
-        return brands;
-    }
-
     public List<SubCategory> getSubCategories() {
         return subCategories;
-    }
-
-    public void addBrand(Brand brand) {
-        if (brands.stream().noneMatch(sc -> sc.getName().equals(brand.getName()))) {
-            brands.add(brand);
-        }
     }
 
     public void addSubCategory(SubCategory subCategory){
