@@ -16,12 +16,12 @@
     <input type="password" name="confirmPassword" placeholder="Enter Password" id="confirmPassword" required/>
 
     <button type="button" onclick="sendOtpRepassword()">Gửi OTP</button>
-    <div id="spinner"></div>
+
 
     <input type="text" placeholder="EnterOTP" name="otp" id="otpInput" required>
     <button type="button" onclick="userServlet()">Đổi Mật Khẩu</button>
-
     <div id="message"></div>
+    <div id="spinner"></div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="./scripts/login.js"></script>

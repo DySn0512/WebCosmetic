@@ -447,3 +447,16 @@ nav a {
     max-width: 100%;
     height: auto;
 }
+
+#secondary-img {
+    margin-top:10px;
+    display: flex;
+    gap: 10px; /* Khoảng cách giữa các ảnh */
+    max-width: 400px; /* Độ cao tối đa */
+    overflow-x: auto; /* Hiển thị thanh cuộn nếu chiều cao vượt quá max-height */
+}
+
+#secondary-img img {
+    width: 80px;
+    height: 80px;
+}

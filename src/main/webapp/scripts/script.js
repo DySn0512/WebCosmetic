@@ -248,7 +248,6 @@ function closeModal() {
 // Đóng pop-up khi click ra ngoài
 window.onclick = function (event) {
     var modal = document.getElementById('myModal');
-    var overlay = document.getElementById('overlay');
     if (event.target == modal) {
         closeModal();
     }
@@ -446,7 +445,7 @@ function selectOrder(id) {
     window.location.href = "order?action=show&id=" + id;
 }
 
-function searchOrder(status){
+function searchOrder(status) {
     $.ajax({
         type: 'POST',
         url: 'order',
@@ -458,4 +457,11 @@ function searchOrder(status){
             $("table tbody").html(newTbody);
         }
     });
+}
+
+function changeImg(src) {
+    document.getElementById('main-img').src = src;
+}
+function showproduct(href){
+    window.location.href=href;
 }

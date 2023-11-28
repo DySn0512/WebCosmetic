@@ -17,9 +17,12 @@
     <div class="bottom">
         <div class="left">
             <div class="product-images">
-                <a href="detail?name=${product.name}">
-                    <img src="${product.images[0].link}" alt="">
-                </a>
+                <img src="${product.images[0].link}" alt="" width="400px" height="400px" id="main-img">
+                <div id="secondary-img">
+                    <c:forEach items="${product.images}" var="item">
+                        <img src="${item.link}" alt="" onclick="changeImg(this.src)">
+                    </c:forEach>
+                </div>
             </div>
         </div>
         <div class="right">

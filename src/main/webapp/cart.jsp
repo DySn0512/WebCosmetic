@@ -20,7 +20,8 @@
     <table>
         <thead>
         <tr>
-            <th>Checkbox</th>
+            <th></th>
+            <th>Ảnh</th>
             <th>Tên sản phẩm</th>
             <th>Số lượng</th>
             <th>Phân loại</th>
@@ -45,17 +46,15 @@
                                disabled
                     </c:if>>
                     </td>
-                    <td>
-                        <a class="noUnderline" href="detail?name=${lineItem.detailProduct.product.name}">
-                                ${lineItem.detailProduct.product.name}
-                        </a>
-                    </td>
+                    <td onclick="showproduct('detail?name=${lineItem.detailProduct.product.name}')"><img src="${lineItem.detailProduct.product.images[0].link}" alt="" width="80px" height="80px"></td>
+                    <td onclick="showproduct('detail?name=${lineItem.detailProduct.product.name}')">${lineItem.detailProduct.product.name}</td>
                     <td>
                         <div class="quantity-controls">
                             <button type="button" onclick="decreaseQuanity(this,'${lineItem.detailProduct.id}')">-
                             </button>
                             <input id="quantity" type="text" value="${lineItem.quantity}" oninput="inputChange(this)"
-                                   onblur="handleBlur(this,'${lineItem.detailProduct.id}')" name="quantity" class="transparent-input">
+                                   onblur="handleBlur(this,'${lineItem.detailProduct.id}')" name="quantity"
+                                   class="transparent-input">
                             <button type="button" onclick="increaseQuanity(this,'${lineItem.detailProduct.id}')">+
                             </button>
                         </div>

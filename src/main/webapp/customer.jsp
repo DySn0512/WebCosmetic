@@ -103,7 +103,7 @@
             Sửa thông tin cá nhân
         </button>
 
-        <button class="continue-application">
+        <button class="continue-application" onclick="window.location.href='forgot_password.jsp'">
             <div>
                 <div class="pencil"></div>
                 <div class="folder">

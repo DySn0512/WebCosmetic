@@ -387,3 +387,6 @@ button.hidden:hover {
     animation: spin 0.8s linear infinite;
     display: none;
 }
+#forgot-pass:hover {
+    color: pink;
+}
