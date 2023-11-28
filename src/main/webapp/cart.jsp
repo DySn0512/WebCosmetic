@@ -54,7 +54,7 @@
                             <button type="button" onclick="decreaseQuanity(this,'${lineItem.detailProduct.id}')">-
                             </button>
                             <input id="quantity" type="text" value="${lineItem.quantity}" oninput="inputChange(this)"
-                                   onblur="handleBlur(this,'${lineItem.detailProduct.id}')" name="quantity">
+                                   onblur="handleBlur(this,'${lineItem.detailProduct.id}')" name="quantity" class="transparent-input">
                             <button type="button" onclick="increaseQuanity(this,'${lineItem.detailProduct.id}')">+
                             </button>
                         </div>

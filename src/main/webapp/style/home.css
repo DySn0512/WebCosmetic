@@ -311,6 +311,12 @@ nav a {
 .container {
     display: flex;
     flex-direction: column;
+    margin-left: 150px;   /* Bỏ bên trái 5px */
+    margin-right: 150px;  /* Bỏ bên phải 5px */
+    margin-bottom: 20px; /* Bỏ dưới 10px */
+    border-radius: 5px;  /* Bo góc 5px */
+    overflow: hidden;
+    border: 2px solid #999;
 }
 
 .upper {
@@ -336,4 +342,108 @@ nav a {
 
 .select-detail.active {
     border: 2px solid #3498db;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+}
+
+.quantity-controls button {
+    border: none;
+    color: rgb(0, 0, 0); /* Màu chữ */
+    padding: 5px 5px;
+    margin: 0;
+    border-radius: 10px;
+}
+
+.quantity-controls input {
+    margin: 0;
+    padding: 6px;
+    width: 35px;
+    text-align: center;
+
+}
+
+.quantity-controls input:focus {
+    border-color: #555; /* Màu đường viền khi input được focus */
+}
+
+.quantity-controls button:active {
+    transform: scale(0.9); /* Giảm kích thước khi nút được nhấn */
+}
+
+.CartBtn {
+    width: 170px;
+    height: 50px;
+    border-radius: 12px;
+    border: none;
+    background-color: #ff85a2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition-duration: .5s;
+    overflow: hidden;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.103);
+    position: relative;
+}
+
+.IconContainer {
+    position: absolute;
+    left: -50px;
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 2;
+    transition-duration: .5s;
+}
+
+.icon {
+    border-radius: 1px;
+}
+
+.text {
+    height: 100%;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(17, 17, 17);
+    z-index: 1;
+    transition-duration: .5s;
+    font-size: 1.04em;
+    font-weight: 600;
+}
+
+.CartBtn:hover .IconContainer {
+    transform: translateX(58px);
+    border-radius: 40px;
+    transition-duration: .5s;
+}
+
+.CartBtn:hover .text {
+    transform: translate(10px,0px);
+    transition-duration: .5s;
+}
+
+.CartBtn:active {
+    transform: scale(0.95);
+    transition-duration: .5s;
+}
+
+
+.product-images {
+    margin: 10px;
+}
+
+.product-images img {
+
+    max-width: 100%;
+    height: auto;
 }
