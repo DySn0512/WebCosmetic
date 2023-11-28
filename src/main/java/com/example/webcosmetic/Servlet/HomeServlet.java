@@ -26,18 +26,27 @@ public class HomeServlet extends HttpServlet {
         String url = "/Home.jsp";
 
         int currentPage = getCurrentPage(req);
-        int recordsPerPage = 4;
-
+        int recordsPerPage = 1;
         int offset = calculateOffset(currentPage, recordsPerPage);
-        List<Product> products = ProductDB.selectProductsByOffset(offset, recordsPerPage);
         int totalProducts = ProductDB.getTotalProducts();
-
         int totalPages = calculateTotalPages(totalProducts, recordsPerPage);
+        String categoryName = req.getParameter("category");
+        String subCategoryName = req.getParameter("subCategory");
+        List<Product> products;
+        if (categoryName != null) {
+            products = ProductDB.selectProductsByOffsetCategory(offset, recordsPerPage, categoryName);
+            req.setAttribute("find", "home?category="+categoryName+"&page=");
+        } else if (subCategoryName != null) {
+            products = ProductDB.selectProductsByOffsetSubCategory(offset, recordsPerPage,subCategoryName);
+            req.setAttribute("find", "home?subcategory="+subCategoryName+"&page=");
+        } else {
+            products = ProductDB.selectProductsByOffset(offset, recordsPerPage);
+            req.setAttribute("find", "home?page=");
+        }
+
         setRequestAttributes(req, products, currentPage, totalPages);
         setProductCategories(req);
-
         checkUser(req);
-        req.setAttribute("find","home?page=");
         getServletContext().getRequestDispatcher(url).forward(req, resp);
     }
 
