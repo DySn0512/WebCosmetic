@@ -24,11 +24,22 @@ public class UserDB {
     }
 
 
-    public static User select(String phone, String password) {
+    public static User select(String email, String password) {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.phone = :phone AND u.password = :password", User.class);
-        query.setParameter("phone", phone);
+        TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.email = :email AND u.password = :password", User.class);
+        query.setParameter("email", email);
         query.setParameter("password", password);
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
+    public static User select(String email) {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE u.email = :email", User.class);
+        query.setParameter("email", email);
         try {
             return query.getSingleResult();
         } catch (NoResultException e) {

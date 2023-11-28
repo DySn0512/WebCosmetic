@@ -19,10 +19,9 @@
             <a class="login">Đăng nhập</a>
             <p>${message}</p>
             <div class="inputBox">
-                <input type="text" name="phone" value="${phone}" required>
-                <span class="user">Phone</span>
+                <input type="email" name="email" value="${email}" required>
+                <span class="user">Email</span>
             </div>
-
             <div class="inputBox">
                 <input type="password" name="password" value="${password}" required>
                 <span>Password</span>

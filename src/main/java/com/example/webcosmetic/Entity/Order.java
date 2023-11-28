@@ -21,6 +21,8 @@ public class Order {
 
     private String address;
 
+    private Long total;
+
     @ManyToOne
     private User user;
 
@@ -72,13 +74,24 @@ public class Order {
     }
 
     private void setDetails(List<LineItem> lineItems) {
+        Long total = 0L;
         for (var item :lineItems) {
             String unit = item.getDetailProduct().getUnit();
             int quantity = item.getQuantity();
             Long price = item.getDetailProduct().getCurrentPrice();
             String nameProduct = item.getDetailProduct().getProduct().getName();
             this.details.add(new DetailOrder(nameProduct,quantity,unit,price));
+            total += price*quantity;
         }
+        setTotal(total);
+    }
+
+    public Long getTotal() {
+        return total;
+    }
+
+    private void setTotal(Long total) {
+        this.total = total;
     }
 
     public String getStatus() {

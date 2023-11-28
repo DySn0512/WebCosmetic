@@ -39,8 +39,8 @@
             <input type="hidden" name="action" value="customer">
             <h1>Đăng nhập </h1>
             <div class="input-wrapper">
-                <input type="text" class="inputs" name="phone" placeholder="Please enter your Phone" value="${phone}" oninput="inputChange(this)" maxlength="10">
-                <input type="password" name="password" placeholder="Please enter your Password" id="signInPassword"  value="${password}">
+                <input type="email" class="inputs" name="email" placeholder="Please enter your Email" value="${email}" required>
+                <input type="password" name="password" placeholder="Please enter your Password" id="signInPassword"  value="${password}" required>
                 <span class="toggle-sign-in-password" onclick="toggleSignInPassword()">👁️</span>
             </div>
 
@@ -50,6 +50,7 @@
                 </label>
                 <label for="checkbox" class="checkbox-text">Nhớ mật khẩu</label>
             </div>
+            <a href="forgot_password.jsp">Quên mật khẩu?</a>
             <button type="submit">Đăng nhập</button>
             <p>${message}</p>
         </form>

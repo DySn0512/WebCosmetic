@@ -35,16 +35,16 @@ function sendOtp() {
             type: 'POST',
             url: 'otp',
             data: {
+                action:'register',
                 name: nameValue,
                 email: emailValue
             },
-            success: [
-                function (response) {
-                    var messageElement = document.getElementById('message');
-                    messageElement.innerHTML = response;
-                    $('#spinner').css('display', 'none');
-                }
-            ]
+            success: function (response) {
+                var messageElement = document.getElementById('message');
+                messageElement.innerHTML = response;
+                $('#spinner').css('display', 'none');
+            }
+
         });
     }
 
@@ -126,4 +126,60 @@ function toggleSignInPassword() {
         signInPasswordInput.type = "password";
         eyeIcon.textContent = "👁️";
     }
+}
+
+
+function userServlet() {
+
+    var emailValue = document.querySelector('input[name="email"]').value;
+    var passwordValue = document.querySelector('input[name="password"]').value;
+    var confirmPasswordValue = document.querySelector('input[name="confirmPassword"]').value;
+    var otpValue = document.querySelector('input[name="otp"]').value;
+    if (emailValue === "" || passwordValue === "" || confirmPasswordValue === "") {
+        alert("Vui lòng điền đầy đủ thông tin vào các trường!");
+    } else if (passwordValue !== confirmPasswordValue) {
+        alert("Mật khẩu và xác nhận mật khẩu không khớp!");
+    } else {
+        $('#spinner').css('display', 'inline-block');
+        $.ajax({
+            type: 'GET',
+            url: 'user',
+            data: {
+                email: emailValue,
+                password: passwordValue,
+                otp: otpValue
+            },
+            success:
+                function (response) {
+                }
+        });
+    }
+}
+
+function sendOtpRepassword() {
+    var emailValue = document.querySelector('input[name="email"]').value;
+    var passwordValue = document.querySelector('input[name="password"]').value;
+    var confirmPasswordValue = document.querySelector('input[name="confirmPassword"]').value;
+    if (emailValue === "" || passwordValue === "" || confirmPasswordValue === "") {
+        alert("Vui lòng điền đầy đủ thông tin vào các trường!");
+    } else if (passwordValue !== confirmPasswordValue) {
+        alert("Mật khẩu và xác nhận mật khẩu không khớp!");
+    } else {
+        $('#spinner').css('display', 'inline-block');
+        $.ajax({
+            type: 'POST',
+            url: 'otp',
+            data: {
+                action:'repassword',
+                email: emailValue
+            },
+            success: function (response) {
+                var messageElement = document.getElementById('message');
+                messageElement.innerHTML = response;
+                $('#spinner').css('display', 'none');
+            }
+
+        });
+    }
+
 }

@@ -20,29 +20,29 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
-        String phone = req.getParameter("phone");
+        String email = req.getParameter("email");
         String password = req.getParameter("password");
-        User user = UserDB.select(phone, password);
+        User user = UserDB.select(email, password);
         HttpSession session = req.getSession();
 
         if ("admin".equals(action)) {
-            AdminLogin(user, phone, password, session, resp, req);
+            AdminLogin(user, email, password, session, resp, req);
         } else {
-            CustomerLogin(user, phone, password, session, resp, req);
+            CustomerLogin(user, email, password, session, resp, req);
         }
     }
 
-    private void AdminLogin(User user, String phone, String password, HttpSession session, HttpServletResponse resp, HttpServletRequest req) throws ServletException, IOException {
+    private void AdminLogin(User user, String email, String password, HttpSession session, HttpServletResponse resp, HttpServletRequest req) throws ServletException, IOException {
         if (user != null && "admin".equals(user.getRole())) {
             session.setAttribute("admin", user);
             resp.sendRedirect("admin/admin");
         } else {
-            setLoginErrorAttributes(req, phone, password);
+            setLoginErrorAttributes(req, email, password);
             getServletContext().getRequestDispatcher("/login.jsp").forward(req, resp);
         }
     }
 
-    private void CustomerLogin(User user, String phone, String password, HttpSession session, HttpServletResponse resp, HttpServletRequest req) throws ServletException, IOException {
+    private void CustomerLogin(User user, String email, String password, HttpSession session, HttpServletResponse resp, HttpServletRequest req) throws ServletException, IOException {
         if (user != null && "customer".equals(user.getRole())) {
             String savedPassword = req.getParameter("savedPassword");
             if (savedPassword != null) {
@@ -53,14 +53,14 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("cart", cart);
             resp.sendRedirect("home");
         } else {
-            setLoginErrorAttributes(req, phone, password);
+            setLoginErrorAttributes(req, email, password);
             getServletContext().getRequestDispatcher("/login_customer.jsp").forward(req, resp);
         }
     }
 
-    private void setLoginErrorAttributes(HttpServletRequest req, String phone, String password) {
+    private void setLoginErrorAttributes(HttpServletRequest req, String email, String password) {
         req.setAttribute("message", "Tài Khoản Không Hợp Lệ");
-        req.setAttribute("phone", phone);
+        req.setAttribute("email", email);
         req.setAttribute("password", password);
     }
 

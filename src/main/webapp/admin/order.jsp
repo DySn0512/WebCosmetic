@@ -27,18 +27,21 @@
                 <th>Số Điện Thoại</th>
                 <th>Địa chỉ</th>
                 <th>Ngày mua hàng</th>
+                <th>Thành tiền</th>
                 <th>Trạng thái</th>
             </tr>
             </thead>
             <tbody>
             <c:forEach var="order" items="${orders}">
-                <tr onclick="selectOrder('${order.id}')" class="order">
-                    <td>${order.user.name}</td>
-                    <td>${order.phone}</td>
-                    <td>${order.address}</td>
-                    <td>${order.timeOrder}</td>
+                <tr class="order">
+                    <td onclick="selectOrder('${order.id}')">${order.user.name}</td>
+                    <td onclick="selectOrder('${order.id}')">${order.phone}</td>
+                    <td onclick="selectOrder('${order.id}')">${order.address}</td>
+                    <td onclick="selectOrder('${order.id}')">${order.timeOrder}</td>
+                    <td onclick="selectOrder('${order.id}')">${order.total}</td>
                     <td>
-                        <select name="status" style="width: 100%; font-size: 20px" onchange="updateOrder('${order.id}',this.value)">
+                        <select name="status" style="width: 100%; font-size: 20px"
+                                onchange="updateOrder('${order.id}',this.value)">
                             <option value="${order.status}">${order.status}</option>
                             <c:forEach var="item" items="${status}">
                                 <c:if test="${item!=order.status}">
