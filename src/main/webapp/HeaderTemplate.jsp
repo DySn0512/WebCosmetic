@@ -44,13 +44,13 @@
     </div>
 </div>
 <nav>
-    <a href="#">Home</a>
+    <a href="home">Home</a>
     <c:forEach items="${productCategories}" var="category">
         <div class="dropdown">
-            <a href="#">${category.name}</a>
+            <a href="home?category=${category.name}&page=1">${category.name}</a>
             <div class="dropdown-content">
                 <c:forEach items="${category.subCategories}" var="subCategory">
-                    <a href="#">${subCategory.name}</a>
+                    <a href="home?subcategory=${subCategory.name}&page=1">${subCategory.name}</a>
                 </c:forEach>
             </div>
         </div>

@@ -139,7 +139,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color:rgb(245, 253, 251);
+    background-color:rgb(248, 232, 238);
     border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
@@ -201,7 +201,7 @@ th {
     padding: 20px 15px;
     text-align: left;
     font-weight: 700;
-    font-size: 12px;
+    font-size: 18px;
     text-transform: uppercase;
 }
 
@@ -216,18 +216,18 @@ td{
 }
 
 h1 {
-    color: rgb(64, 164, 231);
+    color: #000000;
     text-align: center;
-    background-color: #f0f0f0;
+    background-color: rgb(253, 206, 223);
     border-radius: 10px;
 }
 
 body{
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Inconsolata', monospace;
     font-weight: 300;
     line-height: 1.7;
     color: rgb(0, 0, 0);
-    background-color:  #ff96af;
+    background-color:  rgb(248, 232, 238);
 }
 
 a:hover {
@@ -331,7 +331,7 @@ h6 span{
     letter-spacing: 0.5px;
     outline: none;
     color: #c4c3ca;
-    background-color: #1f2029;
+    background-color: rgb(248, 232, 238);
     border: none;
     -webkit-transition: all 200ms linear;
     transition: all 200ms linear;
@@ -383,12 +383,12 @@ h6 span{
 }
 
 .header{
-    background-color: #ffffff4d;
+    background-color: rgb(253, 206, 223);
 }
 
 .content{
     height: 400px;
-    border: 3px solid #ffffff4d;
+    border: 3px solid rgb(242, 190, 209);
     overflow-x: auto;
 }
 .content table tbody tr td:nth-child(2) a.noUnderline {
@@ -456,6 +456,6 @@ button:hover {
     background-color: #f4d1ff;
 }
 .transparent-input {
-    background-color: transparent;
+    background-color: rgb(255, 209, 218);
     opacity: 0.5;
 }

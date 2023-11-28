@@ -20,35 +20,13 @@ public class DetailServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
     }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         String productName = request.getParameter("name");
-
-        // Gọi phương thức để lấy thông tin sản phẩm dựa trên tên
         Product product = ProductDB.selectProductByName(productName);
-
-        // Gửi thông tin sản phẩm lên trang detail.jsp
         request.setAttribute("product", product);
-        List<ProductCategory> productCategories = ProductCategoryDB.selectAll();
-        request.setAttribute("productCategories", productCategories);
-
-
-
-        // Gọi phương thức để lấy thông tin sản phẩm dựa trên tên
-        Product productBread = ProductDB.selectProductByName(productName);
-
-        // Truy cập ProductCategory và SubCategories của sản phẩm
-        ProductCategory productCategoryBread = productBread.getProductCategory();
-        SubCategory productSubBread = productBread.getSubCategory();
-
-        // Gửi thông tin breadcrumb lên trang detail.jsp
-        request.setAttribute("productBread", productBread);
-        request.setAttribute("productCategoryBread", productCategoryBread);
-        request.setAttribute("productSubBread", productSubBread);
-
         request.getRequestDispatcher("detail.jsp").forward(request, response);
-
     }
 
 }

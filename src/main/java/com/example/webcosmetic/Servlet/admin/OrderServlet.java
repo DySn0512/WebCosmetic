@@ -25,19 +25,22 @@ public class OrderServlet extends HttpServlet {
         String[] listStatus = {"Chờ xác nhận", "Đang giao", "Đã giao"};
         req.setAttribute("status", listStatus);
         String url = "/admin/order.jsp";
+        String status = req.getParameter("status");
         if (action == null) {
-            List<Order> orders = OrderDB.selectAll();
+            if (status == null) {
+                status = "Chờ xác nhận";
+            }
+            List<Order> orders = OrderDB.selectAll(status);
             req.setAttribute("orders", orders);
         } else {
             Long id = Long.parseLong(req.getParameter("id"));
             Order order = OrderDB.select(id);
             if (action.equals("update")) {
-                String status = req.getParameter("status");
                 order.setStatus(status);
                 OrderDB.update(order);
             } else if (action.equals("show")) {
                 req.setAttribute("order", order);
-                url="/admin/order_info.jsp";
+                url = "/admin/order_info.jsp";
             }
         }
         req.getRequestDispatcher(url).forward(req, resp);

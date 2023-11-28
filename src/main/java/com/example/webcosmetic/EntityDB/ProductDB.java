@@ -71,12 +71,12 @@ public class ProductDB {
         return query.getResultList();
     }
 
-    public static List<Product> selectProductsByOffset(int offset, int recordsPerPage) {
+    public static List<Product> selectProductsByOffset(int offset, int limit) {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         try {
             TypedQuery<Product> query = em.createQuery("SELECT p FROM Product p", Product.class)
                     .setFirstResult(offset)
-                    .setMaxResults(recordsPerPage);
+                    .setMaxResults(limit);
             return query.getResultList();
         } finally {
             em.close();
@@ -170,4 +170,51 @@ public class ProductDB {
         return query.getResultList();
     }
 
+    public static List<Product> selectProductsByOffsetCategory(int offset, int limit, String categoryName) {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        try {
+            TypedQuery<Product> query = em.createQuery("SELECT p FROM Product p WHERE p.productCategory.name = :categoryName", Product.class)
+                    .setParameter("categoryName",categoryName)
+                    .setFirstResult(offset)
+                    .setMaxResults(limit);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    public static List<Product> selectProductsByOffsetSubCategory(int offset, int limit, String subCategoryName) {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        try {
+            TypedQuery<Product> query = em.createQuery("SELECT p FROM Product p WHERE p.subCategory.name = :subCategoryName", Product.class)
+                    .setParameter("subCategoryName",subCategoryName)
+                    .setFirstResult(offset)
+                    .setMaxResults(limit);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    public static int getTotalProductsSubCategory(String subCategoryName) {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        try {
+            TypedQuery<Long> query = em.createQuery("SELECT COUNT(p) FROM Product p WHERE p.subCategory.name = :subCategoryName", Long.class)
+                    .setParameter("subCategoryName",subCategoryName);
+            return query.getSingleResult().intValue();
+        } finally {
+            em.close();
+        }
+    }
+
+    public static int getTotalProductsCategory(String categoryName) {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        try {
+            TypedQuery<Long> query = em.createQuery("SELECT COUNT(p) FROM Product p WHERE p.productCategory.name = :categoryName", Long.class)
+                    .setParameter("categoryName",categoryName);
+            return query.getSingleResult().intValue();
+        } finally {
+            em.close();
+        }
+    }
 }

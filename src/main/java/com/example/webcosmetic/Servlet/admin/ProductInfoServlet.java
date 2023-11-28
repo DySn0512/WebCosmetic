@@ -28,21 +28,31 @@ public class ProductInfoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
         Product product;
+        String url = "product";
         if (action.equals("add")) {
             product = new Product();
             setProductAttributes(product, req);
             setProductImages(product, req);
             addDetailProduct(product, req);
-            ProductDB.insert(product);
+            try {
+                ProductDB.insert(product);
+            } catch (Exception e) {
+                url = "duplicate_error.jsp";
+            }
         } else {
             Long idProduct = Long.parseLong(req.getParameter("idProduct"));
             product = ProductDB.select(idProduct);
             setProductAttributes(product, req);
             setProductImages(product, req);
             editDetailProduct(product, req);
-            ProductDB.update(product);
+            try {
+                ProductDB.update(product);
+            } catch (Exception e) {
+                url = "duplicate_error.jsp";
+
+            }
         }
-        resp.sendRedirect("product");
+        resp.sendRedirect(url);
     }
 
 
