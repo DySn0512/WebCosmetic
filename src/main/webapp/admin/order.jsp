@@ -20,6 +20,13 @@
     </header>
     <div style="margin: 10px">
         <h1>Quản lý đơn hàng</h1>
+        <label>
+            <select onchange="searchOrder(this.value)">
+                <c:forEach var="item" items="${status}">
+                    <option value="${item}">${item}</option>
+                </c:forEach>
+            </select>
+        </label>
         <table>
             <thead>
             <tr>

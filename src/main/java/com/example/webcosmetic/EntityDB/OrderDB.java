@@ -23,9 +23,10 @@ public class OrderDB {
         }
     }
 
-    public static List<Order> selectAll() {
+    public static List<Order> selectAll(String status) {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        TypedQuery<Order> query = em.createQuery("SELECT o FROM Order o", Order.class);
+        TypedQuery<Order> query = em.createQuery("SELECT o FROM Order o WHERE o.status = :status", Order.class)
+                .setParameter("status",status);
         return query.getResultList();
     }
 

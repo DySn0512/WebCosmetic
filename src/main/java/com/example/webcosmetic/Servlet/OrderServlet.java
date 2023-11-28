@@ -28,37 +28,41 @@ public class OrderServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         String action = req.getParameter("action");
-        String phone = req.getParameter("phone");
-        String address = req.getParameter("address");
         User customer = (User) session.getAttribute("customer");
         Cart cart = (Cart) session.getAttribute("cart");
 
         if (action.equals("create")) {
+
             String[] idDetailProducts = req.getParameterValues("idDetailProduct");
             List<LineItem> lineItemsOrder = getSelectedLineItems(cart, idDetailProducts);
 
             if (!lineItemsOrder.isEmpty()) {
                 session.setAttribute("lineItemsOrder", lineItemsOrder);
-                getServletContext().getRequestDispatcher("/order.jsp").forward(req, resp);
+                req.getRequestDispatcher("/order.jsp").forward(req, resp);
             } else {
                 resp.sendRedirect(req.getHeader("referer"));
             }
 
         } else if (action.equals("add")) {
-            List<LineItem> lineItemsOrder = (List<LineItem>) session.getAttribute("lineItemsOrder");
-            Order order = new Order(phone, address, customer, lineItemsOrder);
-            OrderDB.insert(order);
-            cart.remove(lineItemsOrder);
-            // Cập nhật lại Cart trong cơ sở dữ liệu
-            CartDB.update(cart);
-            // Xoá lineItems khỏi session
-            session.removeAttribute("lineItems");
-            getServletContext().getRequestDispatcher("/checkout.jsp").forward(req, resp);
-        } else {
-            String referer = req.getHeader("referer");
-            resp.sendRedirect(referer);
+            addOrder(req, resp, session, customer, cart);
         }
 
+    }
+
+    private void addOrder(HttpServletRequest req, HttpServletResponse resp, HttpSession session, User customer, Cart cart) throws ServletException, IOException {
+
+        List<LineItem> lineItemsOrder = (List<LineItem>) session.getAttribute("lineItemsOrder");
+        String phone = req.getParameter("phone");
+        String address = req.getParameter("address");
+        Order order = new Order(phone, address, customer, lineItemsOrder);
+        OrderDB.insert(order);
+        cart.remove(lineItemsOrder);
+        // Cập nhật lại Cart trong cơ sở dữ liệu
+        CartDB.update(cart);
+
+        // Xoá lineItems khỏi session
+        session.removeAttribute("lineItems");
+        req.getRequestDispatcher("/checkout.jsp").forward(req, resp);
     }
 
     private List<LineItem> getSelectedLineItems(Cart cart, String[] selectedIds) {

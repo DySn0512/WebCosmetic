@@ -446,4 +446,16 @@ function selectOrder(id) {
     window.location.href = "order?action=show&id=" + id;
 }
 
-
+function searchOrder(status){
+    $.ajax({
+        type: 'POST',
+        url: 'order',
+        data: {
+            status: status
+        },
+        success: function (data) {
+            var newTbody = $(data).find("table tbody").html();
+            $("table tbody").html(newTbody);
+        }
+    });
+}
