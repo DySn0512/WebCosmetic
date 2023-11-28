@@ -3,47 +3,44 @@ main {
     margin: 0 auto;
     padding: 20px;
     border: 1px solid #ccc;
-<<<<<<< HEAD
-=======
     border-radius: 10px;
->>>>>>> d415828a87feee85c607ea07c88da79932279251
     box-shadow: 0px 4px 5px rgba(72, 58, 58, 0.2);
 }
 
 /* Form */
-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+/*form {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    align-items: center;*/
+/*}*/
 
-/* Table */
-table{
-    width: 100%;
-    table-layout: fixed;
-}
+/*!* Table *!*/
+/*table{*/
+/*    width: 100%;*/
+/*    table-layout: fixed;*/
+/*}*/
 
-/* Table body */
-tbody {
-    height: 100%;
-}
+/*!* Table body *!*/
+/*tbody {*/
+/*    height: 100%;*/
+/*}*/
 
-th {
-    background-color: #f2f2f2;
-    padding: 10px;
-    text-align: center;
-    font-weight: bold;
-}
+/*th {*/
+/*    background-color: #f2f2f2;*/
+/*    padding: 10px;*/
+/*    text-align: center;*/
+/*    font-weight: bold;*/
+/*}*/
 
-/* Table body */
-td {
-    padding: 10px;
-    text-align: center;
-}
+/*!* Table body *!*/
+/*td {*/
+/*    padding: 10px;*/
+/*    text-align: center;*/
+/*}*/
 
-tr {
-    background-color: #f2f2f2;
-}
+/*tr {*/
+/*    background-color: #f2f2f2;*/
+/*}*/
 
 
 
@@ -83,8 +80,49 @@ h1{
     color: #ffb6c1;
 }
 
-input{
+
+input {
     border-style: none;
     background-color: transparent;
     text-align: center;
+    width: 100%; /* Set width to 100% to match the table cell */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+/* Form styling */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse; /* Collapse borders to ensure consistent spacing */
+}
+
+/* Table header styling */
+th {
+    background-color: #f2f2f2;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Table body styling */
+td {
+    padding: 10px;
+    text-align: center;
+}
+
+tr {
+    background-color: #f2f2f2;
+}
+
+/* Ensure the input fields in the table have the same height as the table cells */
+table input {
+    height: 100%;
+    padding: 10px;
 }
