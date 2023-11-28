@@ -10,11 +10,12 @@
 
 <html>
 <link rel="stylesheet" href="style/cart.css">
+<link href="https://fonts.googleapis.com/css2?family=Inconsolata&display=swap" rel="stylesheet">
 <head>
     <title>Giỏ Hàng</title>
 </head>
 <body>
-<h1>Đơn hàng</h1>
+<h1>ORDER</h1>
 <div class="header">
     <table>
         <thead>
@@ -71,7 +72,7 @@
                     </td>
                     <td>${lineItem.getTotal()} </td>
                     <td>
-                        <button type="button" onclick="removeLineItem('${lineItem.detailProduct.id}',this)"> xoá
+                        <button type="button" onclick="removeLineItem('${lineItem.detailProduct.id}',this)"> Xoá
                         </button>
                     </td>
                 </tr>
