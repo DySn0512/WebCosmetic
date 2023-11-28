@@ -32,7 +32,7 @@ public class HomeServlet extends HttpServlet {
         int totalProducts;
 
         String categoryName = req.getParameter("category");
-        String subCategoryName = req.getParameter("subCategory");
+        String subCategoryName = req.getParameter("subcategory");
         List<Product> products;
         if (categoryName != null) {
             products = ProductDB.selectProductsByOffsetCategory(offset, recordsPerPage, categoryName);
