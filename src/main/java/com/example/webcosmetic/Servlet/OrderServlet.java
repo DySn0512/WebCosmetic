@@ -45,6 +45,11 @@ public class OrderServlet extends HttpServlet {
 
         } else if (action.equals("add")) {
             addOrder(req, resp, session, customer, cart);
+        } else if (action.equals("view")) {
+            String status = req.getParameter("status");
+            List<Order> userOrders = OrderDB.selectByStatusAndUser("status", customer);
+            req.setAttribute("userOrders",userOrders);
+            req.getRequestDispatcher("/view_order.jsp").forward(req, resp);
         }
 
     }
