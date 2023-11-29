@@ -25,8 +25,13 @@ public class DetailServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String productName = request.getParameter("name");
         Product product = ProductDB.selectProductByName(productName);
-        request.setAttribute("product", product);
-        request.getRequestDispatcher("detail.jsp").forward(request, response);
+        String url = "detail.jsp";
+        if (product == null) {
+            url = "not_sale.html";
+        } else {
+            request.setAttribute("product", product);
+        }
+        request.getRequestDispatcher(url).forward(request, response);
     }
 
 }
