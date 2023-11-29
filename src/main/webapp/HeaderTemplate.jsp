@@ -31,16 +31,22 @@
     <div class="icons">
         <div class="cart-icon">
             <div class="cart-number">${cart.Count()}</div>
-            <button onclick="isLogin('${customer.name}','cart.jsp')">
+            <button onclick="isLogin('${customer.name}','cart.jsp')" id="cart-button">
                 <img src="image/cart1.jpeg" alt="Giỏ hàng"/>
             </button>
         </div>
-        <div id="account-icon">
-            <button onclick="isLogin('${customer.name}','customer.jsp')" id="login-button">
-                <img src="image/account.png" alt="Tài khoản cá nhân"/>
-            </button>
+        <div class="dropdown">
+
+            <div id="account-icon">
+                <button onclick="isLogin('${customer.name}','customer.jsp')" id="login-button">
+                    <img src="image/account.png" alt="Tài khoản cá nhân"/>
+                </button>
+                <div class="customer-select">
+                    <div onclick="isLogin('${customer.name}','customer.jsp')">Thông Tin Cá Nhân</div>
+                    <div onclick="isLogin('${customer.name}','view_order.jsp')">Thông Tin Đơn Hàng</div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
 </div>
 <nav>
