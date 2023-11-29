@@ -74,11 +74,10 @@
                 </tbody>
             </table>
             <div class="summary">
-                <p>Total:${total} <span></span></p>
+                <p>Thành Tiền:${total} <span></span></p>
             </div>
         </section>
         <br>
-        <input type="submit">
         <button value="add" name="action" type="submit">Check out</button>
     </form>
 </main>
