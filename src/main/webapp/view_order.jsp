@@ -62,15 +62,10 @@
 </style>
 <head>
     <title>Your Order History </title>
-
-
 </head>
 <body>
-<<<<<<< HEAD
-<div class ="button-row" id ="button_click">
-=======
-<div class="button-row">
->>>>>>> fd45ab45ee80677f09dade2f8d8eeddc2bcddc35
+
+<div class ="button-row" id ="button_click">SS
     <div class="button" onclick="searchUserOrder('Chờ xác nhận')">Chờ xác nhận </div>
     <div class="button" onclick="searchUserOrder('Đang giao')">Đang giao</div>
     <div class="button" onclick="searchUserOrder('Đã giao')">Đã giao</div>
@@ -78,37 +73,35 @@
 <div id = "order_history">
     <table border="1">
         <thead>
-        <tr>
-            <th>Tên sản phẩm</th>
-            <th>Phân loại</th>
-            <th>Số lượng</th>
-            <th>Giá</th>
-        </tr>
+            <tr>
+                <th>Tên sản phẩm</th>
+                <th>Phân loại</th>
+                <th>Số lượng</th>
+                <th>Giá</th>
+            </tr>
         </thead>
         <tbody>
-        <c:forEach items="${userOrders}" var="order">
-
+            <c:forEach items="${userOrders}" var="order">
                 <c:forEach items="${order.details}" var="detail">
-                        <tr>
-                            <td>${detail.nameProduct}</td>
-                            <td>${detail.unit}</td>
-                            <td>x${detail.quantity}</td>
-                            <td>${detail.price}</td>
-                        </tr>
+                    <tr>
+                        <td>${detail.nameProduct}</td>
+                        <td>${detail.unit}</td>
+                        <td>x${detail.quantity}</td>
+                        <td>${detail.price}</td>
+                    </tr>
                 </c:forEach>
                 <tr>
                     <td colspan="3">Tổng tiền:</td>
                     <td>${order.getTotal()}</td>
                 </tr>
-            <tr>
-                <td colspan="4"><hr></td> <!-- Dòng gạch ngang sau tổng tiền -->
-            </tr>
-        </c:forEach>
+                <tr>
+                    <td colspan="4"><hr></td> <!-- Dòng gạch ngang sau tổng tiền -->
+                </tr>
+            </c:forEach>
         </tbody>
     </table>
 </div>
-<<<<<<< HEAD
-=======
+
 <c:forEach items="${userOrders}" var="order">
     <c:forEach items="${order.details}" var="detail">
         <p>Tên sản phẩm: ${detail.nameProduct} </p>
@@ -118,7 +111,7 @@
     </c:forEach>
     Tổng tiền: ${order.getTotal()}
 </c:forEach>
->>>>>>> fd45ab45ee80677f09dade2f8d8eeddc2bcddc35
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="scripts/script.js"></script>
 </body>

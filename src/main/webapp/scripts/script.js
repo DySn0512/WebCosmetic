@@ -476,15 +476,12 @@ function searchUserOrder(status) {
             status: status
         },
         success: function (data) {
-<<<<<<< HEAD
             var newbody = $(data).find("#button_click").html();
             $("#button_click").html(newbody);
-=======
             var parser = new DOMParser();
             var doc = parser.parseFromString(data, 'text/html');
             var orderHistoryElement = doc.getElementById('order_history');
             $("#order_history").html(orderHistoryElement.innerHTML);
->>>>>>> fd45ab45ee80677f09dade2f8d8eeddc2bcddc35
         }
     });
 }
