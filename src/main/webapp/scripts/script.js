@@ -467,7 +467,7 @@ function showproduct(href){
     window.location.href=href;
 }
 
-function searchUserOrder(status) {
+function searchUserOrder(status, element) {
     $.ajax({
         type: 'GET',
         url: 'order',
@@ -476,12 +476,13 @@ function searchUserOrder(status) {
             status: status
         },
         success: function (data) {
-            var newbody = $(data).find("#button_click").html();
-            $("#button_click").html(newbody);
             var parser = new DOMParser();
             var doc = parser.parseFromString(data, 'text/html');
             var orderHistoryElement = doc.getElementById('order_history');
             $("#order_history").html(orderHistoryElement.innerHTML);
+            var buttons = document.querySelectorAll('.filter-order');
+            buttons.forEach(item => item.classList.remove('active'));
+            element.classList.add('active');
         }
     });
 }
