@@ -75,4 +75,5 @@ public class CartServlet extends HttpServlet {
         int quantity = Integer.parseInt(req.getParameter("quantity"));
         cart.update(idDetailProduct, quantity);
     }
+
 }

@@ -96,10 +96,23 @@ nav a {
     min-width: 160px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     z-index: 1;
-    text-align: left; /* Căn trái */
+    left:-40px;
     padding: 10px; /* Khoảng cách bên trong */
 }
+.customer-select{
+    display: none;
+    position: absolute;
+    background-color: rgb(242, 190, 209); /* Màu hồng */
+    min-width: 160px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    left:-40px;
+    cursor: pointer;
+}
 
+.customer-select div:hover{
+    background-color: #ddd;
+}
 /* Style for the dropdown links */
 .dropdown-content a {
     color: white; /* Chữ trắng */
@@ -116,24 +129,24 @@ nav a {
 }
 
 /* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
+.dropdown:hover div {
     display: block;
 }
 
-#login-button {
+#login-button, #cart-button {
     background-color: transparent;
     border: none;
 }
 
-#login-button img {
+#login-button img, #cart-button img {
     transition: transform 0.3s ease;
 }
 
-#login-button:hover img {
+#login-button:hover img, #cart-button:hover img{
     transform: scale(1.3);
 }
 
-#login-button:active img {
+#login-button:active img, #cart-button:active img {
     transform: scale(0.9);
 }
 

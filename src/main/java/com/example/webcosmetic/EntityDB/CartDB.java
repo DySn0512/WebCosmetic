@@ -39,15 +39,6 @@ public class CartDB {
         }
     }
 
-    public static Cart select(Long id) {
-        EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        try {
-            return em.find(Cart.class, id);
-        } finally {
-            em.close();
-        }
-    }
-
     public static void update(Cart cart) {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();

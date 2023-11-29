@@ -5,11 +5,11 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 
 public class SubCategoryDB {
+
     public static SubCategory select(Long id) {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         try {
-            SubCategory subCategory = em.find(SubCategory.class, id);
-            return subCategory;
+            return em.find(SubCategory.class, id);
         } finally {
             em.close();
         }
