@@ -30,9 +30,9 @@ public class OrderServlet extends HttpServlet {
             if (status == null) {
                 status = "Chờ xác nhận";
             }
-            List<Order> orders = OrderDB.selectAll(status);
+            List<Order> orders = OrderDB.selectByStatus(status);
             req.setAttribute("orders", orders);
-        } else {
+        } else{
             Long id = Long.parseLong(req.getParameter("id"));
             Order order = OrderDB.select(id);
             if (action.equals("update")) {

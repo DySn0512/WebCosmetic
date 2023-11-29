@@ -69,7 +69,6 @@ public class BrandServlet extends HttpServlet {
         } catch (Exception e) {
             url = "error.jsp";
         }
-
     }
 
 
