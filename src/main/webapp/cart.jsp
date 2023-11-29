@@ -20,8 +20,8 @@
     <table>
         <thead>
         <tr>
-            <th></th>
-            <th>Ảnh</th>
+            <th style="width: 30px"></th>
+            <th style="width: 80px">Ảnh</th>
             <th>Tên sản phẩm</th>
             <th>Số lượng</th>
             <th>Phân loại</th>
@@ -40,13 +40,13 @@
             <c:forEach items="${cart.lineItems}" var="lineItem">
                 <tr>
                     <input type="hidden" value="${lineItem.detailProduct.currentPrice}" name="currentPrice">
-                    <td><input type="checkbox" value="${lineItem.detailProduct.id}" name="idDetailProduct"
+                    <td style="width: 30px"><input type="checkbox" value="${lineItem.detailProduct.id}" name="idDetailProduct"
                                onchange="totalPrice()"
                     <c:if test="${lineItem.detailProduct.price==0}">
                                disabled
                     </c:if>>
                     </td>
-                    <td onclick="showproduct('detail?name=${lineItem.detailProduct.product.name}')"><img src="${lineItem.detailProduct.product.images[0].link}" alt="" width="80px" height="80px"></td>
+                    <td style="width: 80px" onclick="showproduct('detail?name=${lineItem.detailProduct.product.name}')"><img src="${lineItem.detailProduct.product.images[0].link}" alt="" width="80px" height="80px"></td>
                     <td onclick="showproduct('detail?name=${lineItem.detailProduct.product.name}')">${lineItem.detailProduct.product.name}</td>
                     <td>
                         <div class="quantity-controls">
@@ -78,9 +78,12 @@
             </c:forEach>
             </tbody>
         </table>
-        <button name="action" value="remove" onclick="setAction('cart')">Xoá tất cả</button>
-        <button name="action" value="create" onclick="setAction('order')">Mua hàng</button>
-        <div id="price-total">0</div>
+        <div class="total">
+            <button name="action" value="remove" onclick="setAction('cart')">Xoá tất cả</button>
+            <button name="action" value="create" onclick="setAction('order')">Mua hàng</button>
+            <label>Tổng tiền:</label>
+            <div id="price-total">0</div>
+        </div>
     </form>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

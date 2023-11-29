@@ -43,7 +43,7 @@
                 </button>
                 <div class="customer-select">
                     <div onclick="isLogin('${customer.name}','customer.jsp')">Thông Tin Cá Nhân</div>
-                    <div onclick="isLogin('${customer.name}','view_order.jsp')">Thông Tin Đơn Hàng</div>
+                    <div onclick="isLogin('${customer.name}','order?action=view')">Thông Tin Đơn Hàng</div>
                 </div>
             </div>
         </div>
