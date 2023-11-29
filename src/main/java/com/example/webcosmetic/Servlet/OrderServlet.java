@@ -67,7 +67,7 @@ public class OrderServlet extends HttpServlet {
 
         // Xoá lineItems khỏi session
         session.removeAttribute("lineItems");
-        req.getRequestDispatcher("/checkout.jsp").forward(req, resp);
+        req.getRequestDispatcher("/view_order.jsp").forward(req, resp);
     }
 
     private List<LineItem> getSelectedLineItems(Cart cart, String[] selectedIds) {
