@@ -47,36 +47,37 @@
 
         <section class="shipping-info">
             <h2>Thông tin đơn hàng</h2>
-                <table>
-                    <thead>
+            <table>
+                <thead>
+                <tr>
+                    <th>Tên sản phẩm</th>
+                    <th>Số lượng</th>
+                    <th>Phân loại</th>
+                    <th>Đơn giá</th>
+                    <th>Số tiền</th>
+                </tr>
+                </thead>
+            </table>
+            <table>
+                <tbody>
+                <c:set var="total" value="0"/>
+                <c:forEach items="${lineItemsOrder}" var="lineItem">
                     <tr>
-                        <th>Tên sản phẩm</th>
-                        <th>Số lượng</th>
-                        <th>Phân loại</th>
-                        <th>Đơn giá</th>
-                        <th>Số tiền</th>
+                        <td>${lineItem.detailProduct.product.name}</td>
+                        <td>${lineItem.quantity}</td>
+                        <td>${lineItem.detailProduct.unit}</td>
+                        <td>${lineItem.detailProduct.currentPrice}</td>
+                        <td>${lineItem.getTotal()}</td>
                     </tr>
-                    </thead>
-                </table>
-                <table>
-                    <tbody>
-                    <c:forEach items="${lineItemsOrder}" var="lineItem">
-                        <tr>
-                            <td>${lineItem.detailProduct.product.name}</td>
-                            <td>${lineItem.quantity}</td>
-                            <td>${lineItem.detailProduct.unit}</td>
-                            <td>${lineItem.detailProduct.currentPrice}</td>
-                            <td>${lineItem.getTotal()} </td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
+                    <c:set var="total" value="${total + lineItem.getTotal()}"/>
+                </c:forEach>
+                </tbody>
+            </table>
             <div class="summary">
-                <p>Total: <span></span></p>
+                <p>Thành Tiền:${total} <span></span></p>
             </div>
         </section>
         <br>
-        <input type="submit">
         <button value="add" name="action" type="submit">Check out</button>
     </form>
 </main>

@@ -47,7 +47,7 @@ public class OrderServlet extends HttpServlet {
             addOrder(req, resp, session, customer, cart);
         } else if (action.equals("view")) {
             String status = req.getParameter("status");
-            List<Order> userOrders = OrderDB.selectByStatusAndUser("status", customer);
+            List<Order> userOrders = OrderDB.selectByStatusAndUser(status, customer);
             req.setAttribute("userOrders",userOrders);
             req.getRequestDispatcher("/view_order.jsp").forward(req, resp);
         }

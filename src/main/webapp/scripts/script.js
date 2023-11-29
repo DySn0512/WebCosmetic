@@ -299,12 +299,13 @@ function removeLineItem(id, button) {
     });
     var row = button.parentNode.parentNode;
     row.parentNode.removeChild(row);
+    totalPrice();
 }
 
 function setAction(action) {
     const form = document.getElementById('cart-form');
     form.action = action;
-
+    totalPrice();
 }
 
 function inputChange(element) {
@@ -464,4 +465,19 @@ function changeImg(src) {
 }
 function showproduct(href){
     window.location.href=href;
+}
+
+function searchUserOrder(status) {
+    $.ajax({
+        type: 'GET',
+        url: 'order',
+        data: {
+            action:"view",
+            status: status
+        },
+        success: function (data) {
+            var newbody = $(data).find("#order_history").html();
+            $("#order_history").html(newbody);
+        }
+    });
 }
