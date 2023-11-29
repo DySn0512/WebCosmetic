@@ -466,3 +466,18 @@ function changeImg(src) {
 function showproduct(href){
     window.location.href=href;
 }
+
+function searchUserOrder(status) {
+    $.ajax({
+        type: 'GET',
+        url: 'order',
+        data: {
+            action:"view",
+            status: status
+        },
+        success: function (data) {
+            var newbody = $(data).find("#order_history").html();
+            $("#order_history").html(newbody);
+        }
+    });
+}

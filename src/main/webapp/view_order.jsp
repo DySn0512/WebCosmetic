@@ -23,6 +23,5 @@
     </c:forEach>
     Tổng tiền: ${order.getTotal()}
 </c:forEach>
-
 </body>
 </html>
