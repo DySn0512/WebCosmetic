@@ -9,29 +9,56 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <style>
+    body{
+        background-color: rgb(248, 232, 238);
+    }
     table {
         width: 95%; /* Chiều rộng bảng */
         margin-left: auto; /* Canh lề trái tự động */
         margin-right: auto; /* Canh lề phải tự động */
-        border-collapse: collapse;
+        border-collapse: separate;
     }
 
     th, td {
-        border: 1px solid #000; /* Đường viền của ô */
+        border: none; /* Đường viền của ô */
         padding: 8px; /* Khoảng cách giữa nội dung và đường viền */
         text-align: left; /* Căn lề văn bản */
     }
     .button-row {
-        display: flex; /* Sử dụng flexbox để xếp các ô theo hàng ngang */
-        justify-content: space-around; /* Canh lề đều cho các ô trong hàng ngang */
-        align-items: center; /* Canh chiều cao của ô theo trục dọc */
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        background-color: rgb(253, 206, 223); /* Màu nền của thanh ngang */
+        padding: 10px 0; /* Khoảng cách đệm */
     }
 
     .button {
-        padding: 10px 20px; /* Kích thước của từng ô */
-        border: 1px solid #ccc; /* Đường viền của ô */
-        cursor: pointer; /* Biến con trỏ thành dấu nhấn khi di chuột vào */
+        position: relative;
+        color: #000; /* Màu chữ mặc định */
+        cursor: pointer;
+        transition: color 0.3s; /* Hiệu ứng chuyển màu chữ */
     }
+
+    .button:hover {
+        color: red; /* Màu chữ khi di chuột vào */
+    }
+
+    .button::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -5px; /* Độ cao của đường gạch chân */
+        width: 100%;
+        height: 2px; /* Chiều dài của đường gạch chân */
+        background-color: red; /* Màu của đường gạch chân */
+        visibility: hidden; /* Ẩn đường gạch chân ban đầu */
+        transition: all 0.3s ease; /* Hiệu ứng xuất hiện đường gạch chân */
+    }
+
+    .button:hover::after {
+        visibility: visible; /* Hiển thị đường gạch chân khi di chuột vào */
+    }
+
 </style>
 <head>
     <title>Your Order History </title>
@@ -39,8 +66,7 @@
 
 </head>
 <body>
-<<<<<<< HEAD
-<div class="button-row">
+<div class ="button-row" id ="button_click">
     <div class="button" onclick="searchUserOrder('Chờ xác nhận')">Chờ xác nhận </div>
     <div class="button" onclick="searchUserOrder('Đang giao')">Đang giao</div>
     <div class="button" onclick="searchUserOrder('Đã giao')">Đã giao</div>
@@ -57,35 +83,29 @@
         </thead>
         <tbody>
         <c:forEach items="${userOrders}" var="order">
-            <c:forEach items="${order.details}" var="detail">
+
+                <c:forEach items="${order.details}" var="detail">
+                        <tr>
+                            <td>${detail.nameProduct}</td>
+                            <td>${detail.unit}</td>
+                            <td>x${detail.quantity}</td>
+                            <td>${detail.price}</td>
+                        </tr>
+                </c:forEach>
                 <tr>
-                    <td>${detail.nameProduct}</td>
-                    <td>${detail.unit}</td>
-                    <td>x${detail.quantity}</td>
-                    <td>${detail.price}</td>
+                    <td colspan="3">Tổng tiền:</td>
+                    <td>${order.getTotal()}</td>
                 </tr>
-            </c:forEach>
             <tr>
-                <td colspan="3">Tổng tiền:</td>
-                <td>${order.getTotal()}</td>
+                <td colspan="4"><hr></td> <!-- Dòng gạch ngang sau tổng tiền -->
             </tr>
         </c:forEach>
         </tbody>
     </table>
 
 </div>
-
-=======
-<c:forEach items="${userOrders}" var="order">
-    <c:forEach items="${order.details}" var="detail">
-        <p>Tên sản phẩm: ${detail.nameProduct} </p>
-        Phân loại: ${detail.unit}
-        Số lượng: x${detail.quantity}
-        Giá: ${detail.price}
-    </c:forEach>
-    Tổng tiền: ${order.getTotal()}
-</c:forEach>
->>>>>>> 717b64674deb0d0de1e720850ce9005fd7912d54
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="scripts/script.js"></script>
 </body>
 
 </html>

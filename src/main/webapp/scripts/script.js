@@ -476,8 +476,8 @@ function searchUserOrder(status) {
             status: status
         },
         success: function (data) {
-            var newbody = $(data).find("#order_history").html();
-            $("#order_history").html(newbody);
+            var newbody = $(data).find("#button_click").html();
+            $("#button_click").html(newbody);
         }
     });
 }
