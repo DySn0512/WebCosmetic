@@ -14,7 +14,7 @@
         </header>
 
         <section class="box_info">
-            <img src="image/customer.png" alt="logo" width="100px" height="100px">
+            <img src="image/customer.png" alt="logo" width="150px" height="150px">
         </section>
 
         <aside class="box_content">
@@ -118,7 +118,6 @@
         </form>
     </div>
 </div>
-
 <script src="./scripts/customer.js"></script>
 </body>
 </html>

@@ -66,7 +66,7 @@ public class ProductCategoryServlet extends HttpServlet {
         try {
             ProductCategoryDB.delete(productCategory);
         } catch (Exception e) {
-            url = "error.jsp";
+            url = "error.html";
         }
     }
 
