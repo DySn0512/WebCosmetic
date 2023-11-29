@@ -7,9 +7,11 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<link href="https://fonts.googleapis.com/css2?family=Inconsolata&display=swap" rel="stylesheet">
 <html>
 <style>
     body{
+        font-family: 'Inconsolata', monospace;
         background-color: rgb(248, 232, 238);
     }
     table {
@@ -33,6 +35,7 @@
     }
 
     .button {
+        margin: 0 60px; /* Khoảng cách ở mỗi bên của nút */
         position: relative;
         color: #000; /* Màu chữ mặc định */
         cursor: pointer;
@@ -59,6 +62,7 @@
         visibility: visible; /* Hiển thị đường gạch chân khi di chuột vào */
     }
 
+
 </style>
 <head>
     <title>Your Order History </title>
@@ -66,14 +70,12 @@
 
 </head>
 <body>
-<<<<<<< HEAD
 <div class ="button-row" id ="button_click">
-=======
 <div class="button-row">
->>>>>>> fd45ab45ee80677f09dade2f8d8eeddc2bcddc35
     <div class="button" onclick="searchUserOrder('Chờ xác nhận')">Chờ xác nhận </div>
     <div class="button" onclick="searchUserOrder('Đang giao')">Đang giao</div>
     <div class="button" onclick="searchUserOrder('Đã giao')">Đã giao</div>
+</div>
 </div>
 <div id = "order_history">
     <table border="1">
@@ -90,7 +92,7 @@
 
                 <c:forEach items="${order.details}" var="detail">
                         <tr>
-                            <td>${detail.nameProduct}</td>
+                            <td onclick="showproduct('detail?name=${detail.nameProduct}')">${detail.nameProduct}</td>
                             <td>${detail.unit}</td>
                             <td>x${detail.quantity}</td>
                             <td>${detail.price}</td>
@@ -100,25 +102,14 @@
                     <td colspan="3">Tổng tiền:</td>
                     <td>${order.getTotal()}</td>
                 </tr>
-            <tr>
-                <td colspan="4"><hr></td> <!-- Dòng gạch ngang sau tổng tiền -->
+            <tr style="background-color: rgb(249, 245, 246);">
+                <td colspan="4">&nbsp;</td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
 </div>
-<<<<<<< HEAD
-=======
-<c:forEach items="${userOrders}" var="order">
-    <c:forEach items="${order.details}" var="detail">
-        <p>Tên sản phẩm: ${detail.nameProduct} </p>
-        Phân loại: ${detail.unit}
-        Số lượng: x${detail.quantity}
-        Giá: ${detail.price}
-    </c:forEach>
-    Tổng tiền: ${order.getTotal()}
-</c:forEach>
->>>>>>> fd45ab45ee80677f09dade2f8d8eeddc2bcddc35
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="scripts/script.js"></script>
 </body>

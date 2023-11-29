@@ -49,8 +49,8 @@
   <div id="pagination-container">
       <div id="pagination">
           <!-- Hiển thị các liên kết chuyển trang -->
-          <c:forEach begin="1" end="${totalPages}" var="i">
-              <a href="${find}${i}" onclick="selectPage(this)">${i}</a>
+          <c:forEach begin="${startPage}" end="${endPage}" var="i">
+              <a href="${find}${i}" onclick="selectPage(this)" class="${i eq currentPage ? 'current-page' : ''}">${i}</a>
           </c:forEach>
       </div>
   </div>

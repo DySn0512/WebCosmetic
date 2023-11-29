@@ -48,8 +48,19 @@ public class HomeServlet extends HttpServlet {
             req.setAttribute("find", "home?page=");
         }
         int totalPages = calculateTotalPages(totalProducts, recordsPerPage);
+        int startPage = 1;
+        int endPage = totalPages;
+
+        if (totalPages > 5) {
+            int midPoint = 3; // Giữa 5 trang để hiển thị ở giữa
+            startPage = currentPage - midPoint > 0 ? currentPage - midPoint : 1;
+            endPage = Math.min(startPage + 4, totalPages);
+        }
         setRequestAttributes(req, products, currentPage, totalPages);
         checkUser(req);
+        req.setAttribute("startPage", startPage);
+        req.setAttribute("endPage", endPage);
+        req.setAttribute("currentPage", currentPage);
 
         getServletContext().getRequestDispatcher(url).forward(req, resp);
     }
@@ -62,7 +73,6 @@ public class HomeServlet extends HttpServlet {
             session.setAttribute("productCategories", productCategories);
         }
         req.setAttribute("products", products);
-        req.setAttribute("currentPage", currentPage);
         req.setAttribute("totalPages", totalPages);
     }
 

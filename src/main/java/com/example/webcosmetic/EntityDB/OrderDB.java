@@ -25,14 +25,14 @@ public class OrderDB {
 
     public static List<Order> selectByStatus(String status) {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        TypedQuery<Order> query = em.createQuery("SELECT o FROM Order o WHERE o.status = :status", Order.class)
+        TypedQuery<Order> query = em.createQuery("SELECT o FROM Order o WHERE o.status = :status ORDER BY o.id DESC", Order.class)
                 .setParameter("status",status);
         return query.getResultList();
     }
     public static List<Order> selectByStatusAndUser(String status, User user) {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         TypedQuery<Order> query = em.createQuery(
-                        "SELECT o FROM Order o WHERE o.status = :status AND o.user.id = :userId", Order.class)
+                        "SELECT o FROM Order o WHERE o.status = :status AND o.user.id = :userId ORDER BY o.id DESC", Order.class)
                 .setParameter("status", status)
                 .setParameter("userId", user.getId());
         return query.getResultList();
