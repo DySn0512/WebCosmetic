@@ -299,12 +299,13 @@ function removeLineItem(id, button) {
     });
     var row = button.parentNode.parentNode;
     row.parentNode.removeChild(row);
+    totalPrice();
 }
 
 function setAction(action) {
     const form = document.getElementById('cart-form');
     form.action = action;
-
+    totalPrice();
 }
 
 function inputChange(element) {
