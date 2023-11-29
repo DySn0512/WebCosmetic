@@ -37,7 +37,7 @@ public class ProductInfoServlet extends HttpServlet {
             try {
                 ProductDB.insert(product);
             } catch (Exception e) {
-                url = "duplicate_error.jsp";
+                url = "duplicate_error.html";
             }
         } else {
             Long idProduct = Long.parseLong(req.getParameter("idProduct"));
@@ -48,7 +48,7 @@ public class ProductInfoServlet extends HttpServlet {
             try {
                 ProductDB.update(product);
             } catch (Exception e) {
-                url = "duplicate_error.jsp";
+                url = "duplicate_error.html";
 
             }
         }

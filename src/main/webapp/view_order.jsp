@@ -39,7 +39,6 @@
 
 </head>
 <body>
-<<<<<<< HEAD
 <div class="button-row">
     <div class="button" onclick="searchUserOrder('Chờ xác nhận')">Chờ xác nhận </div>
     <div class="button" onclick="searchUserOrder('Đang giao')">Đang giao</div>
@@ -72,10 +71,7 @@
         </c:forEach>
         </tbody>
     </table>
-
 </div>
-
-=======
 <c:forEach items="${userOrders}" var="order">
     <c:forEach items="${order.details}" var="detail">
         <p>Tên sản phẩm: ${detail.nameProduct} </p>
@@ -85,7 +81,7 @@
     </c:forEach>
     Tổng tiền: ${order.getTotal()}
 </c:forEach>
->>>>>>> 717b64674deb0d0de1e720850ce9005fd7912d54
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="scripts/script.js"></script>
 </body>
-
 </html>
