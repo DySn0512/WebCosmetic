@@ -8,26 +8,14 @@
 <div class="container">
     <div class="box">
         <header class="box_header">
-            <div class="icon">
-                <i class="fa-solid fa-angle-left"></i>
-            </div>
             <div class="yourFile">
                 <p>Thông tin cá nhân</p>
             </div>
         </header>
 
         <section class="box_info">
-            <div class="avatar">
-                <img src="https://i.pinimg.com/originals/89/9d/ba/899dbae8d1a12e57a17feabced8ebe61.jpg" alt="">
-                <input type="file" name="" id="form_file">
-            </div>
-
-
-            <label for="form_file" class="edit">
-                <i class="fa-solid fa-pen-to-square"></i>
-            </label>
+            <img src="image/customer.png" alt="logo" width="100px" height="100px">
         </section>
-
 
         <aside class="box_content">
             <div class="idea">
