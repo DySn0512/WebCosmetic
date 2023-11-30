@@ -31,9 +31,8 @@ public class HomeServlet extends HttpServlet {
 
     private void paginate(HttpServletRequest req) {
         int currentPage = getCurrentPage(req);
-        int recordsPerPage = 1;
+        int recordsPerPage = 4;
         int offset = calculateOffset(currentPage, recordsPerPage);
-
         int totalProducts;
         List<Product> products;
         String categoryName = req.getParameter("category");
@@ -65,18 +64,19 @@ public class HomeServlet extends HttpServlet {
             startPage = currentPage - midPoint > 0 ? currentPage - midPoint : 1;
             endPage = Math.min(startPage + 4, totalPages);
         }
-        req.setAttribute("startPage", startPage);
-        req.setAttribute("endPage", endPage);
-        req.setAttribute("currentPage", currentPage);
-        setRequestAttributes(req, products, currentPage, totalPages);
+
+        setRequestAttributes(req, products, currentPage, totalPages,startPage,endPage);
     }
 
-    private void setRequestAttributes(HttpServletRequest req, List<Product> products, int currentPage, int totalPages) {
+    private void setRequestAttributes(HttpServletRequest req, List<Product> products, int currentPage, int totalPages, int startPage, int endPage) {
         HttpSession session = req.getSession();
         if (session.getAttribute("productCategories") == null) {
             List<ProductCategory> productCategories = ProductCategoryDB.selectAll();
             session.setAttribute("productCategories", productCategories);
         }
+        req.setAttribute("startPage", startPage);
+        req.setAttribute("endPage", endPage);
+        req.setAttribute("currentPage", currentPage);
         req.setAttribute("products", products);
         req.setAttribute("totalPages", totalPages);
     }
