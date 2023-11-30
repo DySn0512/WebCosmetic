@@ -73,7 +73,7 @@ h1{
     border-color: rgb(150, 150, 200);
 }
 
-.button {
+.filter-order {
     width: 220px;
     padding: 15px;
     border-radius: .5rem;
@@ -86,7 +86,7 @@ h1{
     text-align: center;
 }
 
-.button::before {
+.filter-order::before {
     content: "";
     display: block;
     position: absolute;
@@ -101,7 +101,7 @@ h1{
 
 }
 
-.button::after {
+.filter-order::after {
     content: "";
     text-align: center;
     display: block;
@@ -117,7 +117,7 @@ h1{
     transition: all .3s ease-in;
 }
 
-.button:hover::after {
+.filter-order:hover::after {
     opacity: 1;
     text-align: center;
 }

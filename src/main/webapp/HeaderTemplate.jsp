@@ -21,13 +21,13 @@
     <div class="logo">
         <img src="image/logo.png" alt="Logo"/>
     </div>
-
-    <div class="search-bar">
-        <input type="text" placeholder="Tìm kiếm..."/>
+    <form class="search-bar" action="home">
+        <input type="text" placeholder="Tìm kiếm..." name="search"/>
+        <input type="hidden" value="1" name="page">
         <button id="search_button"><img src="image/search-icon 2.png" alt="" width="35px"
                                         height="35px">
         </button>
-    </div>
+    </form>
     <div class="icons">
         <div class="cart-icon">
             <div class="cart-number">${cart.Count()}</div>
@@ -43,7 +43,9 @@
                 </button>
                 <div class="customer-select">
                     <div onclick="isLogin('${customer.name}','customer.jsp')">Thông Tin Cá Nhân</div>
-                    <div onclick="isLogin('${customer.name}','order?action=view&status=Chờ xác nhận')">Thông Tin Đơn Hàng</div>
+                    <div onclick="isLogin('${customer.name}','order?action=view&status=Chờ xác nhận')">Thông Tin Đơn
+                        Hàng
+                    </div>
                 </div>
             </div>
         </div>

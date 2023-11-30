@@ -288,6 +288,11 @@ nav a {
     border: 1px solid #ccc;
     border-radius: 5px;
 }
+#pagination a.current-page {
+    background-color: rgb(242, 190, 209); /* Thay đổi màu nền tùy ý */
+    color: #000000; /* Chọn màu chữ phù hợp với màu nền để tạo độ tương phản */
+    /* Các thuộc tính khác để tùy chỉnh kiểu giao diện */
+}
 
 #pagination a.selected {
     /*    !* Định dạng cho trang được chọn */

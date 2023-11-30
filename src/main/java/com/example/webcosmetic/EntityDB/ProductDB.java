@@ -217,4 +217,28 @@ public class ProductDB {
             em.close();
         }
     }
+
+    public static List<Product> selectProductsByOffsetSimilarName(int offset, int limit, String similarName) {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        try {
+            TypedQuery<Product> query = em.createQuery("SELECT p FROM Product p WHERE LOWER(p.name) LIKE LOWER(:similarName)", Product.class)
+                    .setParameter("similarName", "%" + similarName + "%")
+                    .setFirstResult(offset)
+                    .setMaxResults(limit);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    public static int getTotalSimilarName(String similarName) {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        try {
+            TypedQuery<Long> query = em.createQuery("SELECT COUNT(p) FROM Product p WHERE LOWER(p.name) LIKE LOWER(:similarName)", Long.class)
+                    .setParameter("similarName", "%" + similarName + "%");
+            return query.getSingleResult().intValue();
+        } finally {
+            em.close();
+        }
+    }
 }

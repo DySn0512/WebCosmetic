@@ -66,7 +66,7 @@ public class LoginServlet extends HttpServlet {
 
     private void addUserIdCookie(User user, HttpServletResponse resp) {
         Cookie userIdCookie = new Cookie("userIdWebCosmetic", user.getId().toString());
-        userIdCookie.setMaxAge(60000);
+        userIdCookie.setMaxAge(60*60*24*7);
         userIdCookie.setPath("/");
         resp.addCookie(userIdCookie);
     }

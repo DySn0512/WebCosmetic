@@ -1,8 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<link rel="stylesheet" href="style/customer.css">
 <html>
 <head>
     <title>Thông tin cá nhân</title>
+    <link rel="stylesheet" href="style/customer.css">
 </head>
 <body>
 <div class="container">

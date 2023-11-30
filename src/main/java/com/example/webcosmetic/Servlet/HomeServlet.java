@@ -24,45 +24,60 @@ public class HomeServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String url = "/Home.jsp";
+        checkUser(req);
+        paginate(req);
+        getServletContext().getRequestDispatcher(url).forward(req, resp);
+    }
 
+    private void paginate(HttpServletRequest req) {
         int currentPage = getCurrentPage(req);
-        int recordsPerPage = 1;
+        int recordsPerPage = 4;
         int offset = calculateOffset(currentPage, recordsPerPage);
-
         int totalProducts;
-
+        List<Product> products;
         String categoryName = req.getParameter("category");
         String subCategoryName = req.getParameter("subcategory");
-        List<Product> products;
+        String search = req.getParameter("search");
         if (categoryName != null) {
             products = ProductDB.selectProductsByOffsetCategory(offset, recordsPerPage, categoryName);
             totalProducts = ProductDB.getTotalProductsCategory(categoryName);
-            req.setAttribute("find", "home?category="+categoryName+"&page=");
+            req.setAttribute("find", "home?category=" + categoryName + "&page=");
         } else if (subCategoryName != null) {
-            products = ProductDB.selectProductsByOffsetSubCategory(offset, recordsPerPage,subCategoryName);
+            products = ProductDB.selectProductsByOffsetSubCategory(offset, recordsPerPage, subCategoryName);
             totalProducts = ProductDB.getTotalProductsSubCategory(subCategoryName);
-            req.setAttribute("find", "home?subcategory="+subCategoryName+"&page=");
+            req.setAttribute("find", "home?subcategory=" + subCategoryName + "&page=");
+        } else if (search != null) {
+            products = ProductDB.selectProductsByOffsetSimilarName(offset, recordsPerPage, search);
+            totalProducts = ProductDB.getTotalSimilarName(search);
+            req.setAttribute("find", "home?search=" + search + "&page=");
         } else {
             products = ProductDB.selectProductsByOffset(offset, recordsPerPage);
             totalProducts = ProductDB.getTotalProducts();
             req.setAttribute("find", "home?page=");
         }
         int totalPages = calculateTotalPages(totalProducts, recordsPerPage);
-        setRequestAttributes(req, products, currentPage, totalPages);
-        checkUser(req);
+        int startPage = 1;
+        int endPage = totalPages;
 
-        getServletContext().getRequestDispatcher(url).forward(req, resp);
+        if (totalPages > 5) {
+            int midPoint = 3; // Giữa 5 trang để hiển thị ở giữa
+            startPage = currentPage - midPoint > 0 ? currentPage - midPoint : 1;
+            endPage = Math.min(startPage + 4, totalPages);
+        }
+
+        setRequestAttributes(req, products, currentPage, totalPages,startPage,endPage);
     }
 
-    private void setRequestAttributes(HttpServletRequest req, List<Product> products, int currentPage, int totalPages) {
+    private void setRequestAttributes(HttpServletRequest req, List<Product> products, int currentPage, int totalPages, int startPage, int endPage) {
         HttpSession session = req.getSession();
-        if (session.getAttribute("productCategories")==null)
-        {
+        if (session.getAttribute("productCategories") == null) {
             List<ProductCategory> productCategories = ProductCategoryDB.selectAll();
             session.setAttribute("productCategories", productCategories);
         }
-        req.setAttribute("products", products);
+        req.setAttribute("startPage", startPage);
+        req.setAttribute("endPage", endPage);
         req.setAttribute("currentPage", currentPage);
+        req.setAttribute("products", products);
         req.setAttribute("totalPages", totalPages);
     }
 
