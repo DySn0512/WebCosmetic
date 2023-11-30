@@ -52,5 +52,5 @@ th, td {
     visibility: visible; /* Hiển thị đường gạch chân khi di chuột vào */
 }
 .filter-order.active {
-    border: 1px solid rgb(249, 245, 246);
+    background-color: rgb(249, 245, 246);
 }

@@ -67,6 +67,8 @@ public class OrderServlet extends HttpServlet {
 
         // Xoá lineItems khỏi session
         session.removeAttribute("lineItems");
+        List<Order> userOrders = OrderDB.selectByStatusAndUser("Chờ xác nhận", customer);
+        req.setAttribute("userOrders",userOrders);
         req.getRequestDispatcher("/view_order.jsp").forward(req, resp);
     }
 
