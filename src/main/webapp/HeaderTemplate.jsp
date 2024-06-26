@@ -22,7 +22,7 @@
         <img src="image/logo.png" alt="Logo"/>
     </div>
     <form class="search-bar" action="home">
-        <input type="text" placeholder="Tìm kiếm..." name="search"/>
+        <input type="text" placeholder="Tìm kiếm..." name="search" value="${search}"/>
         <input type="hidden" value="1" name="page">
         <button id="search_button"><img src="image/search-icon 2.png" alt="" width="35px"
                                         height="35px">

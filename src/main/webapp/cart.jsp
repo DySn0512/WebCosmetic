@@ -26,7 +26,7 @@
             <th>Số lượng</th>
             <th>Phân loại</th>
             <th>Đơn giá</th>
-            <th>Số tiền</th>
+<%--            <th>Số tiền</th>--%>
             <th>Thao tác</th>
         </tr>
         </thead>
@@ -53,7 +53,7 @@
                             <button type="button" onclick="decreaseQuanity(this,'${lineItem.detailProduct.id}')">-
                             </button>
                             <input id="quantity" type="text" value="${lineItem.quantity}" oninput="inputChange(this)"
-                                   onblur="handleBlur(this,'${lineItem.detailProduct.id}')" name="quantity"
+                                   onblur="handleBlur(this,'${lineItem.detailProduct.id}')" name="quantity" onkeydown="return (event.keyCode !== 13);"
                                    class="transparent-input">
                             <button type="button" onclick="increaseQuanity(this,'${lineItem.detailProduct.id}')">+
                             </button>
@@ -69,7 +69,7 @@
                             ${lineItem.detailProduct.price}
                         </c:if>
                     </td>
-                    <td>${lineItem.getTotal()} </td>
+<%--                    <td>${lineItem.getTotal()} </td>--%>
                     <td>
                         <button type="button" onclick="removeLineItem('${lineItem.detailProduct.id}',this)"> Xoá
                         </button>

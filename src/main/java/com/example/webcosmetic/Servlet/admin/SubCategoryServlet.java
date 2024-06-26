@@ -37,7 +37,7 @@ public class SubCategoryServlet extends HttpServlet {
             try {
                 ProductCategoryDB.update(productCategory);
             } catch (Exception e) {
-                url = "error.html";
+                url = "error.jsp";
             }
         }
 

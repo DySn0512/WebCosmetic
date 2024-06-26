@@ -78,7 +78,7 @@ public class ConfirmOtpServlet extends HttpServlet {
                 "        }\n" +
                 "    \n" +
                 "        .header {\n" +
-                "            background-image: url('https://res.cloudinary.com/drncbsuo5/image/upload/v1700805848/mhfsicbdk8ctybygcs0h.jpg');\n" +
+                "            background-image: url('https://res.cloudinary.com/bananacosmetic/image/upload/v1715560717/vpnbxs2jxhkq9zfkh8nn.jpg');\n" +
                 "            padding: 20px;\n" +
                 "            text-align: center;\n" +
                 "        }\n" +
@@ -106,7 +106,7 @@ public class ConfirmOtpServlet extends HttpServlet {
                 + "  <div class=\"container\">\n" +
                 "        <div class=\"header\">\n" +
                 "            <!-- Thêm ảnh của web của bạn vào đây -->\n" +
-                "            <img src=\"https://res.cloudinary.com/drncbsuo5/image/upload/v1700805347/axghphnd5zngzniggcvx.jpg\" alt=\"Logo của web của bạn\" width=\"200\" height=\"200\">\n" +
+                "            <img src=\"https://res.cloudinary.com/bananacosmetic/image/upload/v1715560717/vpnbxs2jxhkq9zfkh8nn.jpg\" alt=\"Logo của web của bạn\" width=\"200\" height=\"200\">\n" +
                 "        </div>\n" +
                 "        <div class=\"content\">\n" +
                 "            <h1>Banana Cosmetic</h1>\n" +
@@ -151,7 +151,7 @@ public class ConfirmOtpServlet extends HttpServlet {
                 "        }\n" +
                 "    \n" +
                 "        .header {\n" +
-                "            background-image: url('https://res.cloudinary.com/drncbsuo5/image/upload/v1700805848/mhfsicbdk8ctybygcs0h.jpg');\n" +
+                "            background-image: url('https://res.cloudinary.com/bananacosmetic/image/upload/v1715560717/vpnbxs2jxhkq9zfkh8nn.jpg');\n" +
                 "            padding: 20px;\n" +
                 "            text-align: center;\n" +
                 "        }\n" +
@@ -179,7 +179,7 @@ public class ConfirmOtpServlet extends HttpServlet {
                 + "  <div class=\"container\">\n" +
                 "        <div class=\"header\">\n" +
                 "            <!-- Thêm ảnh của web của bạn vào đây -->\n" +
-                "            <img src=\"https://res.cloudinary.com/drncbsuo5/image/upload/v1700805347/axghphnd5zngzniggcvx.jpg\" alt=\"Logo của web của bạn\" width=\"200\" height=\"200\">\n" +
+                "            <img src=\"https://res.cloudinary.com/bananacosmetic/image/upload/v1715560717/vpnbxs2jxhkq9zfkh8nn.jpg\" alt=\"Logo của web của bạn\" width=\"200\" height=\"200\">\n" +
                 "        </div>\n" +
                 "        <div class=\"content\">\n" +
                 "            <h1>Banana Cosmetic</h1>\n" +

@@ -53,7 +53,11 @@ public class CartServlet extends HttpServlet {
 
     private void addToCart(HttpServletRequest req, Cart cart) {
         Long idDetailProduct = Long.parseLong(req.getParameter("idDetail"));
-        int quantity = Integer.parseInt(req.getParameter("quantity"));
+        String quantityStr = req.getParameter("quantity");
+        if (quantityStr == null || quantityStr.isEmpty()) {
+            quantityStr = "1";
+        }
+        int quantity = Integer.parseInt(quantityStr);
         DetailProduct detailProduct = DetailProductDB.select(idDetailProduct);
         LineItem lineItem = new LineItem(detailProduct, quantity);
         cart.addLineItem(lineItem);
@@ -77,3 +81,5 @@ public class CartServlet extends HttpServlet {
     }
 
 }
+///
+

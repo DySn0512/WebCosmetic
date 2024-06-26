@@ -43,7 +43,7 @@
     <div class="sidebar-link" onclick="loadContent('order')">
         <img class="sidebar-icon" src="../image/order.png" alt="order">
         <span class="link" style="color: rgb(136,219,126);">
-             Order
+            Đơn hàng
         </span>
     </div>
 </div>

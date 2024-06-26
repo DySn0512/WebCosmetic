@@ -7,10 +7,10 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
-      <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://dpg-ckmvliav7m0s73986pr0-a.oregon-postgres.render.com/web231"/>
-      <property name="jakarta.persistence.jdbc.user" value="admin2k3"/>
+      <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/cosmetic"/>
+      <property name="jakarta.persistence.jdbc.user" value="postgres"/>
       <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-      <property name="jakarta.persistence.jdbc.password" value="r60jwZVo9mbHMVquAL0Lz3loZ3HDtwcO"/>
+      <property name="jakarta.persistence.jdbc.password" value="1234567890"/>
       <property name="jakarta.persistence.schema-generation.database.action" value="create"/>
     </properties>
   </persistence-unit>

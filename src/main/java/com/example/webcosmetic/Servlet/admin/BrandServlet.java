@@ -65,7 +65,7 @@ public class BrandServlet extends HttpServlet {
         try {
             BrandDB.delete(brand);
         } catch (Exception e) {
-            url = "error.html";
+            url = "error.jsp";
         }
     }
 

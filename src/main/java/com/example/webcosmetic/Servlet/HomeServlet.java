@@ -38,6 +38,7 @@ public class HomeServlet extends HttpServlet {
         String categoryName = req.getParameter("category");
         String subCategoryName = req.getParameter("subcategory");
         String search = req.getParameter("search");
+        req.setAttribute("search", search);
         if (categoryName != null) {
             products = ProductDB.selectProductsByOffsetCategory(offset, recordsPerPage, categoryName);
             totalProducts = ProductDB.getTotalProductsCategory(categoryName);
